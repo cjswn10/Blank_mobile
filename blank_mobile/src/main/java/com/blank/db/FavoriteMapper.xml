@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="favorite">
+
+  <select id="listFavorite" resultType="favoriteVo" parameterType="java.lang.Integer">
+   	SELECT m.id,f.fno, f.mno, f.fmno FROM favorites f, member m WHERE f.mno=#{mno} AND f.fmno = m.mno
+  </select>
+   
+  <select id="listFavorite2" resultType="favoriteVo" parameterType="java.lang.Integer">
+   	SELECT f.mno,fno FROM favorites f, member m WHERE f.fmno=#{mno} AND f.fmno = m.mno
+  </select> 
+   
+  <delete id="deleteFavorite">
+  	DELETE FROM favorites WHERE fmno=#{fmno} and mno=#{mno}
+  </delete>
+
+	<insert id="insertFavorite">
+		INSERT INTO favorites VALUES(seq_favorites.nextval, #{mno}, #{fmno})
+	</insert> 
+</mapper>

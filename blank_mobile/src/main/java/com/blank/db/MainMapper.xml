@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main">
+	<!--  secret = 0 :전체공개 -->
+	<select id="mainList" resultType="diaryvo">
+		select dno,dtitle,ddate,dweather,dfont,dtype,dfile,dcontent,dphoto,secret,wdate,d.mno,bno,id from diary d,member m where d.mno=m.mno AND secret = 0 order by dno desc
+	</select>
+	
+</mapper>

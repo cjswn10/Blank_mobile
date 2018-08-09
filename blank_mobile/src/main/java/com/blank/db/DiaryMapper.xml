@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="diary">	
+
+	<!-- 전체공개인 일기만 보여주기 -->
+	<select id="othersDiary" resultType="diaryvo">
+		SELECT * FROM diary WHERE mno=#{othermno} AND secret=0
+	</select>
+
+	<delete id="deleteDiary">
+		delete diary where dno=#{dno}
+	</delete>
+
+	<update id="updateDiary">
+		update diary set dtitle=#{dtitle}, ddate=#{ddate}, dweather=#{dweather}, dfont=#{dfont}, dtype=#{dtype}, 
+		<if test="dfile != null">
+			dfile=#{dfile}, 
+		</if>
+		<if test="dphoto != null">
+			dphoto=#{dphoto},
+		</if>
+		
+		dcontent=#{dcontent},  secret=#{secret}
+		where dno=#{dno} 
+	</update>
+
+	<select id="detailDiary" resultType="diaryvo">
+		select * from diary where dno = #{dno}
+	</select>
+
+	<insert id="insertDiary">
+		insert into diary values(#{dno},#{dtitle}, #{ddate}, #{dweather}, #{dfont}, #{dtype}, #{dfile}, #{dcontent}, #{dphoto}, #{secret}, sysdate, #{mno}, #{bno})
+	</insert>
+	
+	<select id="diaryNextNo" resultType="java.lang.Integer">
+  		select nvl(max(dno),0)+1 from diary
+  	</select>
+	
+	<select id="selectAll" resultType="diaryvo">
+		SELECT *
+		FROM diary
+		WHERE mno=#{mno} AND bno=#{bno}
+		ORDER BY ddate DESC
+	</select>
+</mapper>

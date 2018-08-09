@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book">
+	
+  <select id="listBook" resultType="bookVo" parameterType="java.lang.Integer">
+    select distinct(b.bno),btitle,bcolor,b.mno from book b,member m where b.mno=m.mno and b.mno=#{mno} order by b.bno
+  </select>
+  
+  <select id="detailBook" resultType="bookVo">
+  	select * from book where bno = #{bno}
+  </select>
+  
+  <select id="bookNextBno" resultType="java.lang.Integer">
+  	select nvl(max(bno),0)+1 from book
+  </select>
+  
+  <insert id="insertBook">
+  	insert into book values(#{bno},#{btitle},#{bcolor},#{mno})
+  </insert>
+  
+  <update id="updateBook">
+  	update book set btitle=#{btitle},bcolor=#{bcolor} where bno=#{bno}
+  </update>
+  
+  <delete id="deleteBook">
+  	delete book where bno=#{bno}
+  </delete>
+  
+  <delete id="deleteDiary">
+	delete diary where bno=#{bno}
+  </delete>
+	
+</mapper>
