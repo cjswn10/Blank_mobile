@@ -52,7 +52,6 @@
 		margin: 50px;
 		padding: 10px;
 		font-size: 30px;
-		
 	}
 	
 	.dcontent{
