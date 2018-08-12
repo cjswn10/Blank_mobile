@@ -31,7 +31,7 @@ public class BookManager {
 	
 	
 	
-	//?뜝?떦源띿삕?뜝?룞?삕 ?뜝?룞?삕?뜝占?
+	//일기장목록
 	public static List<BookVo> listBook(Map map)
 	{
 		List<BookVo> list = null;
@@ -40,16 +40,18 @@ public class BookManager {
 		session.close();
 		return list;
 	}
-	//?뜝?떦源띿삕?뜝?룞?삕 ?뜝?룫?꽭釉앹삕?뜝?룞?삕
+	
+	//일기장 상세
 	public static BookVo detailBook(Map map)
 	{
 		BookVo b = null;
 		SqlSession session = factory.openSession();
-		b = session.selectOne("book.detailBook", map);
+		b = session.selectOne("book.detailBook",map);
 		session.close();
 		return b;
 	}
-	//?뜝?떦源띿삕?뜝?룞?삕 ?뜝?룞?삕?뜝?룞?삕
+	
+	//일기장 생성
 	public static int insertBook(BookVo b)
 	{
 		int re = -1;
@@ -67,7 +69,7 @@ public class BookManager {
 		session.close();
 		return re;
 	}
-	//?뜝?떦源띿삕?뜝?룞?삕 ?뜝?룞?삕?뜝?룞?삕
+	//일기장 수정
 	public static int updateBook(BookVo b)
 	{
 		int re = -1;
@@ -84,7 +86,7 @@ public class BookManager {
 		session.close();
 		return re;
 	}
-	//?뜝?떦源띿삕?뜝?룞?삕 ?뜝?룞?삕?뜝?룞?삕
+	//일기장 삭제
 	public static int deleteBook(Map map)
 	{
 		int re = -1;
@@ -108,7 +110,7 @@ public class BookManager {
 		session.close();
 		return re;
 	}
-	//?뜝?떦源띿삕?뜝?룞?삕 ?뜝?룞?삕?샇?뜝?뙓?벝?삕?뜝?룞?삕?뜝?룞?삕
+	//일기장 번호 자동증가
 	public static int bookNextBno()
 	{
 		int no = 0;

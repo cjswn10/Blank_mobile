@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -16,8 +16,95 @@
 <link rel="stylesheet" href="../resources/css/blank.css">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 
+<style type="text/css">
+	.today_weather
+	{
+		position: relative;
+		top: -450px;
+		width:400px;
+		left: 650px;
+	}
+	.city_weather
+	{
+		position: relative;
+		left: 120px;
+		
+	}
+	#citySelect
+	{
+		width: 70px;
+		height: 26px;
+	}
+	#today
+	{
+		font-size: 20px;
+	}
+	#location
+	{
+		font-size: 10px;
+		position: relative;
+		left: 30px;
+	}
+	#tmef_img
+	{
+		position: relative;
+		left: 50px;
+	}
+	#test > li
+	{
+		list-style: none;
+	}
+	#weather_icon
+	{
+		position: relative;
+		top: 30px;
+		left: -40px;
+	}
+	.status
+	{
+		position: relative;
+		font-size:20px;
+		left: 90px;
+	}
+</style>
+
 <script type="text/javascript">
 $(function() {
+	
+	$.ajax({url:"http://203.236.209.108:4997/weather.do",success:function(data){}})
+	
+	$("#weather").hide()	
+	
+	var cityName = location.search.substr(1,8)
+	
+	if(cityName == '')
+	{
+		$("#tmef_img").hide()
+		$("#city").hide()
+		$("#dweather").val("")
+	}	
+	else
+	{
+		$("#tmef_img").show()
+		$("#dweather").val($("[name='tmef'] > v").html())
+		$("#city").html("현재 "+$("[name='city'] > v").html()+"의 날씨")
+		
+	}		
+	//$("#city").val($("[name='city'] > v").html())
+	
+	$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
+	
+	$("#search").click(function() {
+		location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
+			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()
+	})
+	
+	$("#citySelect").change(function(){
+		
+		$("#cityName").val($("#citySelect").val())
+		
+				
+	})
 	
 	//선택한 폰트 dfont, dcontent에 적용
 	$("#dfont").change(function() {
@@ -141,8 +228,7 @@ function openGrimpan() {
 	<div class="content" style="margin-top: 100px">
 		<h2>빈칸을 채우다</h2>
 		<hr>
-	
-
+	 
 		<form action="insertDiary.do" method="post" enctype="multipart/form-data">
 		
 			<input type="hidden" name="bno" id="bno" value="${bno }"><br> 
@@ -153,14 +239,14 @@ function openGrimpan() {
 				<tr>
 					<td colspan="2">
 						<label for="dtitle">제목 </label>
-						<input type="text" name="dtitle" id="dtitle" required="required">
+						<input type="text" name="dtitle" id="dtitle" required="required" value="${dtitle }">
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
 						<label for="ddate">날짜</label>
-						<input type="date" name="ddate" id="ddate" required="required">
+						<input type="date" name="ddate" id="ddate" value="${ddate }" required="required">
 					</td>
 					<td>
 						<label for="dweather">날씨</label>
@@ -172,7 +258,7 @@ function openGrimpan() {
 					<td colspan="2">
 						<label for="dfont">글씨체</label>
 						<select name="dfont" id="dfont">
-							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script" selected="selected" >Nanum Brush Script</option>
+							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script">Nanum Brush Script</option>
 							<option value="Nanum Gothic Coding" style="font-family:Nanum Gothic Coding">Nanum Gothic Coding</option>
 							<option value="Nanum Myeongjo" style="font-family:Nanum Myeongjo">Nanum Myeongjo</option>
 							<option value="Nanum Pen Script" style="font-family:Nanum Pen Script">Nanum Pen Script</option>
@@ -204,7 +290,7 @@ function openGrimpan() {
 						<!-- 사진 -->
 						<img id="photo" width="300">
 						<!-- 글 -->
-						<textarea class="form-control" rows="10" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script"></textarea>
+						<textarea class="form-control" rows="10" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script">${dcontent }</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -222,6 +308,52 @@ function openGrimpan() {
 					</td>
 				</tr>
 			</table>
+			
+			<div class="today_weather">
+				<ul id="test">
+					<img id="weather_icon" src="../resources/img/weather.png" width="30" height="30">
+					<li id="today">오늘의 날씨가 궁금하신가요?</li>
+					<li id="location">현재 지역을 선택 후 검색버튼을 눌러주세요.</li>
+				</ul>
+				<br>
+				<div class="city_weather">
+					<select id="citySelect">
+							<option>지역</option>
+							<option>서울</option>
+							<option>인천</option>
+							<option>수원</option>
+							<option>파주</option>
+							<option>춘천</option>
+							<option>백령도</option>
+							<option>강릉</option>
+							<option>속초</option>
+							<option>청주</option>
+							<option>안동</option>
+							<option>대전</option>
+							<option>홍성</option>
+							<option>전주</option>
+							<option>대구</option>
+							<option>울산</option>
+							<option>포항</option>
+							<option>부산</option>
+							<option>창원</option>
+							<option>광주</option>
+							<option>목포</option>
+							<option>여수</option>
+							<option>흑산도</option>
+							<option>제주</option>
+						</select>
+						<input type="hidden" name="cityName" id="cityName">
+						<span id="weather"> ${weather } </span>
+						<button id="search" type="button">검색</button>
+				</div>
+				<br><br>
+				<div class="status">
+					<span id="city"></span><br><br>
+					<img id="tmef_img" src="" width="60" height="60">
+				</div>
+			</div>
+			
 		</form>
 		
 	</div>

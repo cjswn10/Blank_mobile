@@ -14,32 +14,31 @@ public class BookDao {
 	
 	
 
-	//?뜝?떦源띿삕?뜝?룞?삕 ?뜝?룞?삕?뜝占?
+	//일기장목록
 	public List<BookVo> listBook(Map map)
 	{
 		return BookManager.listBook(map);
 	}
-	//?뜝?떦源띿삕?뜝?룞?삕 ?뜝?룫?꽭釉앹삕?뜝?룞?삕
 	public BookVo detailBook(Map map)
 	{
 		return BookManager.detailBook(map);
 	}
-	//?뜝?떦源띿삕?뜝?룞?삕 ?뜝?룞?삕?뜝?룞?삕
+	//일기장 생성
 	public int insertBook(BookVo b)
 	{
 		return BookManager.insertBook(b);
 	}
-	//?뜝?떦源띿삕?뜝?룞?삕 ?뜝?룞?삕?뜝?룞?삕
+	//일기장 수정
 	public int updateBook(BookVo b)
 	{
 		return BookManager.updateBook(b);
 	}
-	//?뜝?떦源띿삕?뜝?룞?삕 ?뜝?룞?삕?뜝?룞?삕
+	//일기장 삭제
 	public int deleteBook(Map map)
 	{
 		return BookManager.deleteBook(map);
 	}
-	//?뜝?떦源띿삕?뜝?룞?삕 ?뜝?룞?삕?샇?뜝?뙓?벝?삕?뜝?룞?삕?뜝?룞?삕
+	//일기장 번호 자동증가
 	public int bookNextBno()
 	{
 		return BookManager.bookNextBno();
