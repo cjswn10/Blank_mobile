@@ -4,15 +4,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.blank.dao.BookDao;
 import com.blank.vo.BookVo;
+import com.blank.vo.MemberVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -68,7 +73,7 @@ public class BookController {
 		int re = dao.insertBook(b);
 		if(re<1)
 		{
-			mav.addObject("msg", "ì¼ê¸°ìž¥ ìƒì„±ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			mav.addObject("msg", "ÀÏ±âÀå »ý¼º¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.");
 			mav.setViewName("/member/error");
 		}
 		return mav;
@@ -93,7 +98,7 @@ public class BookController {
 		int re = dao.updateBook(b);
 		if(re<1)
 		{
-			mav.addObject("msg", "ì¼ê¸°ìž¥ ìˆ˜ì •ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			mav.addObject("msg", "ÀÏ±âÀå ¼öÁ¤¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.");
 			mav.setViewName("/member/error");
 		}
 		return mav;
@@ -109,7 +114,7 @@ public class BookController {
 		int re = dao.deleteBook(map);
 		if(re<1)
 		{
-			mav.addObject("msg", "ì¼ê¸°ìž¥ ì‚­ì œì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			mav.addObject("msg", "ÀÏ±âÀå »èÁ¦¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.");
 			mav.setViewName("/member/error");
 		}
 		return mav;

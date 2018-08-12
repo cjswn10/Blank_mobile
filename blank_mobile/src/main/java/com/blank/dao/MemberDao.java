@@ -13,52 +13,53 @@ import com.blank.vo.MemberVo;
 @Repository
 public class MemberDao {
 
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//È¸¿ø°¡ÀÔ
 	public int memberInsert(MemberVo m) {
 		return MemberManager.memberInsert(m);
 	}
-	//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½Ã¼Å©
+	//¾ÆÀÌµðÁßº¹Ã¼Å©
 	public int memberCheckId(Map map) {
 
 		return MemberManager.checkId(map);
 		
 	}
-	//ï¿½Î±ï¿½ï¿½ï¿½
+	//·Î±×ÀÎ
 	public Boolean login(Map map) {
 		return MemberManager.login(map);
 	}
-	//È¸ï¿½ï¿½ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//È¸¿ø¹øÈ£(¼¼¼ÇÀ¯Áö ¶§¹®)
 	public int mno(Map map)
 	{
 		return MemberManager.mno(map);
 	}
-	//È¸ï¿½ï¿½ï¿½ï¿½È£ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
+	//È¸¿ø¹øÈ£ ÀÚµ¿Áõ°¡
 	public int memberNextMno()
 	{
 		return MemberManager.memberNextMno();
 	}
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//È¸¿øÁ¤º¸¼öÁ¤
 	public int updateMember(MemberVo mv) {
 		// TODO Auto-generated method stub
 		return MemberManager.updateMember(mv);
 	}
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
+	//È¸¿ø Á¤º¸ °¡Á®¿À±â
 	public MemberVo getMember(Map map) {
 		// TODO Auto-generated method stub
 		return MemberManager.getMember(map);
 	}
 	
+	//¸ÞÀÎ ¾ÆÀÌµð°Ë»ö
 	public List<MemberVo> mainSearchId(Map map)
 	{
 		return MemberManager.mainSearchId(map);
 	}
 	
-	//È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
+	//¾ÆÀÌµð Ã£±â
 	public String searchId(Map map)
 	{
 		return MemberManager.searchId(map);
 	}
-	//È¸ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È? Ã£ï¿½ï¿½
+	//ºñ¹Ð¹øÈ£Ã£±â
 	public String searchPwd(Map map)
 	{
 		return MemberManager.searchPwd(map);

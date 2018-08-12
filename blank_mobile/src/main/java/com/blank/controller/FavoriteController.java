@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,10 +36,10 @@ public class FavoriteController {
 		
 		ModelAndView mav = new ModelAndView("redirect:/member/favorite.do");
 		int re = dao.insertFavorite(map);
-		if (re > 0) {
+		if (re> 0) {
 			mav.addObject("re", re);
 		}else {
-			mav.addObject("msg","ì¦ê²¨ì°¾ê¸° ì¶”ê°€ ì‹¤íŒ¨");
+			mav.addObject("msg","Áñ°ÜÃ£±âÃß°¡½ÇÆĞ");
 			mav.setViewName("/member/error");		
 		}		
 		return mav;
@@ -98,7 +97,7 @@ public class FavoriteController {
 		int re = dao.delete(map);
 		if(re<1)
 		{
-			mav.addObject("msg", "ì‚­ì œí•˜ì˜€ìŠµë‹ˆë‹¤");
+			mav.addObject("msg", "»èÁ¦ÇÏ¿´½À´Ï´Ù");
 			mav.setViewName("/member/error");
 		}
 		return mav;

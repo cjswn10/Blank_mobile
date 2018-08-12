@@ -29,7 +29,7 @@ public class MemberManager {
 			System.out.println(e.getMessage());
 		}
 	}
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//È¸¿ø°¡ÀÔ
 	public static int memberInsert(MemberVo m)
 	{
 		int re = -1;
@@ -38,7 +38,7 @@ public class MemberManager {
 		session.close();
 		return re;
 	}
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½È£ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
+	//È¸¿ø¹øÈ£ ÀÚµ¿Áõ°¡
 	public static int memberNextMno()
 	{
 		int no = 0;
@@ -47,7 +47,7 @@ public class MemberManager {
 		session.close();
 		return no;
 	}
-	//ï¿½Î±ï¿½ï¿½ï¿½
+	//·Î±×ÀÎ
 	public static boolean login(Map map) {
 		boolean b = false;
 		SqlSession session = factory.openSession();
@@ -58,7 +58,7 @@ public class MemberManager {
 		return b;
 	}
 	
-	//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½Ã¼Å©
+	//¾ÆÀÌµð Áßº¹Ã¼Å©
 	public static int checkId(Map map)
 	{
 		int re = 0;
@@ -68,7 +68,7 @@ public class MemberManager {
 		return re;
 	}
 	
-	//È¸ï¿½ï¿½ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
+	//È¸¿ø¹øÈ£(¼¼¼ÇÀ¯Áö¸¦ À§ÇØ)
 	public static int mno(Map map)
 	{
 		int mno = 0;
@@ -78,7 +78,7 @@ public class MemberManager {
 		return mno;
 	}
 	
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	//È¸¿øÁ¤º¸ °¡Á®¿À±â
 	public static MemberVo getMember(Map map) {
 		// TODO Auto-generated method stub
 		MemberVo mv = new MemberVo();
@@ -87,7 +87,7 @@ public class MemberManager {
 		return mv;
 	}
 	
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿?
+	//È¸¿øÁ¤º¸ ¼öÁ¤
 	public static int updateMember(MemberVo mv) {
 		// TODO Auto-generated method stub
 		int re = -1;
@@ -96,7 +96,7 @@ public class MemberManager {
 		session.close();
 		return re;
 	}
-	
+	//¸ÞÀÎÆäÀÌÁö ¾ÆÀÌµð°Ë»ö
 	public static List<MemberVo> mainSearchId(Map map)
 	{
 		SqlSession session = factory.openSession();
@@ -105,7 +105,7 @@ public class MemberManager {
 		return list;
 	}
 	
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
+	//¾ÆÀÌµð Ã£±â
 	public static String searchId(Map map)
 	{
 		String id = "";
@@ -115,7 +115,7 @@ public class MemberManager {
 		return id;
 	}
 	
-	//È¸ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½È? Ã£ï¿½ï¿½
+	//ºñ¹Ð¹øÈ£ Ã£±â
 		public static String searchPwd(Map map)
 		{
 			String pwd = "";
