@@ -2,6 +2,7 @@ package com.blank.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -274,20 +275,34 @@ public class DiaryController {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		Calendar today = Calendar.getInstance();
+		int years = today.get(Calendar.YEAR);
+		int months = (today.get(Calendar.MONTH))+1;
+		int tdate = today.get(Calendar.DATE);
+		
+		String todays = years+"-"+months+"-"+tdate;
 		
 		String cityName = request.getParameter("cityName");
 		String dtitle = request.getParameter("dtitle");
 		String ddate = request.getParameter("ddate");
 		String dcontent = request.getParameter("dcontent");
+		String dates = request.getParameter("date");
+		String year = request.getParameter("year");
+		String month = request.getParameter("month");
 		
 //		System.out.println("cityName:"+cityName);
+//		System.out.println("date:"+dates);
 //		System.out.println("dtitle:"+dtitle);
 //		System.out.println("ddate:"+ddate);
 //		System.out.println("dcontent:"+dcontent);
 		
+		session.setAttribute("cityName", cityName);
 		session.setAttribute("dtitle", dtitle);
 		session.setAttribute("ddate", ddate);
 		session.setAttribute("dcontent", dcontent);
+		session.setAttribute("date", dates);
+		session.setAttribute("year", year);
+		session.setAttribute("month", month);
 		
 		try {
 			
@@ -301,8 +316,8 @@ public class DiaryController {
 			code.addRCode("setwd('c:/r_temp')");
 			code.addRCode("data = read.csv('weather.csv')");
 			code.addRCode("data2 = data.frame(data)");
-			code.addRCode("weather = subset(data2,city=='"+cityName+"')");
-			code.addRCode("city = as.character(weather[1,1])");
+			code.addRCode("weather = subset(data2,date=='"+dates+"')");
+			code.addRCode("date = as.character(weather[1,1])");
 	        code.addRCode("img = as.character(weather[1,2])");
 	        code.addRCode("tmef = as.character(weather[1,3])");
 	        code.addRCode("allvars <- as.list(globalenv())");
@@ -311,7 +326,7 @@ public class DiaryController {
 
 	        caller.runAndReturnResult("allvars");
 			
-	        String city = caller.getParser().getAsStringArray("city")[0];
+	        String date = caller.getParser().getAsStringArray("date")[0];
 	        String img = caller.getParser().getAsStringArray("img")[0];
 	        String tmef = caller.getParser().getAsStringArray("tmef")[0];
 	        
@@ -323,6 +338,7 @@ public class DiaryController {
 	        //System.out.println(weather);
 	        
 			mav.addObject("weather", weather);
+			mav.addObject("todays", todays);
 			
 		}catch (Exception e) {
 			// TODO: handle exception

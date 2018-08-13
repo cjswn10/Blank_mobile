@@ -66,12 +66,11 @@
 		font-size:20px;
 		left: 90px;
 	}
+
 </style>
 
 <script type="text/javascript">
 $(function() {
-	
-	$.ajax({url:"http://203.236.209.108:4997/weather.do",success:function(data){}})
 	
 	$("#weather").hide()	
 	
@@ -87,23 +86,110 @@ $(function() {
 	{
 		$("#tmef_img").show()
 		$("#dweather").val($("[name='tmef'] > v").html())
-		$("#city").html("현재 "+$("[name='city'] > v").html()+"의 날씨")
+		$("#city").html($("#citys").val()+"의 날씨")
 		
 	}		
-	//$("#city").val($("[name='city'] > v").html())
+	
+	var today = $("#today_date").val();
+	var today_year = today.substring(0,4);
+	var today_month = today.substring(5,6);
+	var today_date = today.substring(7,9);
+	
+	var months = "";
+	var date = "";
+	var year = "";
+	var month = "";
+	
+	$("#ddate").change(function(){
+		
+		var ddate = $(this).val()
+		
+		year = ddate.substring(0,4);
+		month = ddate.substring(5,7);
+		months = ddate.substring(6,7);
+		
+		$("#year").val(year)
+		$("#month").val(month)
+		
+		if(ddate.charAt(8) == '0')
+		{
+			date = ddate.charAt(9)
+			$("#date").val(date)
+		}
+		else
+		{
+			date = ddate.substring(8,10)
+			$("#date").val(date)
+		}
+			
+		
+	})
+
+	var area = "";
+	var cityName = $("#citys").val();
+	
+	if(cityName == '서울'){area = "09680";}
+	else if(cityName == '인천'){area = "11200";}
+	else if(cityName == '수원'){area = "02111";}
+	else if(cityName == '파주'){area = "02480";}
+	else if(cityName == '춘천'){area = "01110";}
+	else if(cityName == '백령도'){area = "11720";}
+	else if(cityName == '강릉'){area = "01150";}
+	else if(cityName == '속초'){area = "01210";}
+	else if(cityName == '청주'){area = "16111";}
+	else if(cityName == '안동'){area = "04170";}
+	else if(cityName == '대전'){area = "07110";}
+	else if(cityName == '홍성'){area = "15800";}
+	else if(cityName == '전주'){area = "13113";}
+	else if(cityName == '대구'){area = "06290";}
+	else if(cityName == '울산'){area = "10140";}
+	else if(cityName == '포항'){area = "04111";}
+	else if(cityName == '부산'){area = "08710";}
+	else if(cityName == '창원'){area = "03123";}
+	else if(cityName == '광주'){area = "05200";}
+	else if(cityName == '목포'){area = "12110";}
+	else if(cityName == '여수'){area = "12130";}
+	else if(cityName == '흑산도'){area = "12910";}
+	else if(cityName == '제주'){area = "14100";}
+	else
+	{
+		area = "09680";
+	}
+
+	$.ajax({url:"http://203.236.209.108:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
 	
 	$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
 	
-	$("#search").click(function() {
-		location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
-			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()
+	$("#search").click(function() {	
+
+		alert(date)
+		alert(today_date)
+		
+		if($("#date").val() == '')
+		{
+			confirm("날짜를 입력 해주세요.")
+		}
+		else if($("#cityName").val() == '')
+		{
+			confirm("지역을 입력 해주세요.")
+		}
+		else if(date > today_date || months > today_month || year > today_year)
+		{
+			confirm("지난 날씨의 달력만 볼수 있습니다.")
+		}
+		else
+		{
+			location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
+			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
+			+"&year="+$("#year").val()+"&month="+$("#month").val();
+		}
+		
 	})
 	
 	$("#citySelect").change(function(){
 		
 		$("#cityName").val($("#citySelect").val())
-		
-				
+	
 	})
 	
 	//선택한 폰트 dfont, dcontent에 적용
@@ -312,8 +398,8 @@ function openGrimpan() {
 			<div class="today_weather">
 				<ul id="test">
 					<img id="weather_icon" src="../resources/img/weather.png" width="30" height="30">
-					<li id="today">오늘의 날씨가 궁금하신가요?</li>
-					<li id="location">현재 지역을 선택 후 검색버튼을 눌러주세요.</li>
+					<li id="today">날씨가 궁금하신가요?</li>
+					<li id="location">지역과 날씨를 선택 후 검색버튼을 눌러주세요.</li>
 				</ul>
 				<br>
 				<div class="city_weather">
@@ -344,6 +430,12 @@ function openGrimpan() {
 							<option>제주</option>
 						</select>
 						<input type="hidden" name="cityName" id="cityName">
+						<input type="hidden" id="citys" value="${cityName }">
+						<input type="hidden" id="day" value="${ddate }">
+						<input type="hidden" name="date" id="date" value="${date }">
+						<input type="hidden" id="today_date" value="${todays }">
+						<input type="hidden" name="year" id="year" value="${year }">
+						<input type="hidden" name="month" id="month" value="${month }">
 						<span id="weather"> ${weather } </span>
 						<button id="search" type="button">검색</button>
 				</div>
