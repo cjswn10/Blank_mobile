@@ -65,9 +65,6 @@
     width: 70%;
     height: 600px;
     margin: auto;
-    
-    background-image: url("../resources/img/mainlogo.jpg");
-    
     background-size: cover;
     background-position: center center;
 }
@@ -103,8 +100,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
 
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=10">
-<script type="text/javascript" src="../resources/js/menu.js?ver=1" ></script>
+<link rel="stylesheet" href="../resources/css/blank.css">
+<script type="text/javascript" src="../resources/js/menu.js" ></script>
 
 <script type="text/javascript">
 $(function () {
@@ -360,6 +357,7 @@ $(function () {
 	
 	
 		<div class="landing">
+			<img src="../resources/img/mainlogo.jpg" width="100%">
 			<div class="container">
 	
 			</div>
