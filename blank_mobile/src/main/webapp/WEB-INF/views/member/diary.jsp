@@ -24,6 +24,7 @@
 /*insert 아이콘*/
 
 
+
 .gi-5x{
 	font-size: 50px;
 	position: relative;
