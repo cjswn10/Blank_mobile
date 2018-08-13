@@ -6,13 +6,13 @@ var drawBackup = new Array();
 
 context.strokeStyle = myColor.value;
 context.lineWidth = document.getElementById("Lwidth").value;
-canvas.addEventListener("mousedown", function(e) {
+canvas.addEventListener("touchstart", function(e) {
 	down(e)
 }, false);
-canvas.addEventListener("mouseup", function(e) {
+canvas.addEventListener("touchend", function(e) {
 	up(e)
 }, false);
-canvas.addEventListener("mousemove", function(e) {
+canvas.addEventListener("touchmove", function(e) {
 	move(e)
 }, false);
 canvas.addEventListener("mouseout", function(e) {
