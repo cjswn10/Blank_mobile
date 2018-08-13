@@ -74,9 +74,9 @@ $(function() {
 	
 	$("#weather").hide()	
 	
-	var cityName = location.search.substr(1,8)
+	var cityName = location.search.substr(1,1)
 	
-	if(cityName == '')
+	if(cityName == '' || cityName == 'd')
 	{
 		$("#tmef_img").hide()
 		$("#city").hide()
@@ -91,34 +91,56 @@ $(function() {
 	}		
 	
 	var today = $("#today_date").val();
-	var today_year = today.substring(0,4);
-	var today_month = today.substring(5,6);
-	var today_date = today.substring(7,9);
+	var today_year = parseInt(today.substring(0,4));
+	var today_month = parseInt(today.substring(5,6));
+	var today_date = parseInt(today.substring(7,9));
+	
+	var todays = "";
+	var arr2 = today.split("-");
+	
+	for(i=0;i<arr2.length;i++)
+	{
+		todays += arr2[i]
+	}
+	
+	var today_now = parseInt(todays);
 	
 	var months = "";
-	var date = "";
 	var year = "";
 	var month = "";
+	var select_day = "";
+	var day = "";
+	
 	
 	$("#ddate").change(function(){
 		
 		var ddate = $(this).val()
 		
-		year = ddate.substring(0,4);
+		year = parseInt(ddate.substring(0,4));
 		month = ddate.substring(5,7);
-		months = ddate.substring(6,7);
+		
+		var arr = ddate.split("-")
+		
+		for(i=0;i<arr.length;i++)
+		{
+			day += arr[i]
+		}
+		
+		select_day = parseInt(day)
+		
+		months = parseInt(ddate.substring(5,7));
 		
 		$("#year").val(year)
 		$("#month").val(month)
 		
 		if(ddate.charAt(8) == '0')
 		{
-			date = ddate.charAt(9)
+			date = parseInt(ddate.charAt(9))
 			$("#date").val(date)
 		}
 		else
 		{
-			date = ddate.substring(8,10)
+			date = parseInt(ddate.substring(8,10))
 			$("#date").val(date)
 		}
 			
@@ -161,9 +183,7 @@ $(function() {
 	$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
 	
 	$("#search").click(function() {	
-
-		alert(date)
-		alert(today_date)
+		
 		
 		if($("#date").val() == '')
 		{
@@ -173,9 +193,17 @@ $(function() {
 		{
 			confirm("지역을 입력 해주세요.")
 		}
-		else if(date > today_date || months > today_month || year > today_year)
+		else if(select_day > today_now)
 		{
-			confirm("지난 날씨의 달력만 볼수 있습니다.")
+			var re = confirm("지난 날씨의 달력만 볼수 있습니다.")
+			if(re)
+			{
+				location.href="insertDiary.do?dtitle="+$("#dtitle").val()+"&dcontent="+$("#dcontent").val()
+			}	
+			else
+			{
+				location.href="insertDiary.do?dtitle="+$("#dtitle").val()+"&dcontent="+$("#dcontent").val()
+			}	
 		}
 		else
 		{
