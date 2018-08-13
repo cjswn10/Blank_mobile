@@ -15,7 +15,7 @@ canvas.addEventListener("touchend", function(e) {
 canvas.addEventListener("touchmove", function(e) {
 	move(e)
 }, false);
-canvas.addEventListener("mouseout", function(e) {
+canvas.addEventListener("touchcancel", function(e) {
 	out(e)
 }, false);
 
