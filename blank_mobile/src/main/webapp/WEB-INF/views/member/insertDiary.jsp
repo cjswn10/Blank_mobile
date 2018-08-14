@@ -38,6 +38,8 @@
 	#today
 	{
 		font-size: 20px;
+		position: relative;
+		left: 40px;
 	}
 	#location
 	{
@@ -48,7 +50,7 @@
 	#tmef_img
 	{
 		position: relative;
-		left: 50px;
+		left: 30px;
 	}
 	#test > li
 	{
@@ -58,13 +60,13 @@
 	{
 		position: relative;
 		top: 30px;
-		left: -40px;
+		left: 0px;
 	}
 	.status
 	{
 		position: relative;
 		font-size:20px;
-		left: 90px;
+		left: 120px;
 	}
 
 </style>
@@ -81,6 +83,12 @@ $(function() {
 		$("#tmef_img").hide()
 		$("#city").hide()
 		$("#dweather").val("")
+	}	
+	else if($("[name='tmef'] > v").html().substring(1,2) == 's')
+	{
+		$("#tmef_img").show()
+		$("#dweather").val($("[name='tmef2'] > v").html())
+		$("#city").html($("#citys").val()+"의 날씨")
 	}	
 	else
 	{
@@ -153,11 +161,12 @@ $(function() {
 	if(cityName == '서울'){area = "09680";}
 	else if(cityName == '인천'){area = "11200";}
 	else if(cityName == '수원'){area = "02111";}
-	else if(cityName == '파주'){area = "02480";}
+	//else if(cityName == '파주'){area = "02480";}
 	else if(cityName == '춘천'){area = "01110";}
 	else if(cityName == '백령도'){area = "11720";}
 	else if(cityName == '강릉'){area = "01150";}
-	else if(cityName == '속초'){area = "01210";}
+	else if(cityName == '독도'){area = "04940";}
+	//else if(cityName == '속초'){area = "01210";}
 	else if(cityName == '청주'){area = "16111";}
 	else if(cityName == '안동'){area = "04170";}
 	else if(cityName == '대전'){area = "07110";}
@@ -166,6 +175,7 @@ $(function() {
 	else if(cityName == '대구'){area = "06290";}
 	else if(cityName == '울산'){area = "10140";}
 	else if(cityName == '포항'){area = "04111";}
+	else if(cityName == '울진'){area = "04930";}
 	else if(cityName == '부산'){area = "08710";}
 	else if(cityName == '창원'){area = "03123";}
 	else if(cityName == '광주'){area = "05200";}
@@ -179,6 +189,8 @@ $(function() {
 	}
 
 	$.ajax({url:"http://203.236.209.108:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
+	
+	$.ajax({url:"http://203.236.209.108:4997/weather2.do",success:function(data){}})
 	
 	$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
 	
@@ -204,6 +216,12 @@ $(function() {
 			{
 				location.href="insertDiary.do?dtitle="+$("#dtitle").val()+"&dcontent="+$("#dcontent").val()
 			}	
+		}
+		else if(select_day == today_now)
+		{
+			location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
+			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
+			+"&year="+$("#year").val()+"&month="+$("#month").val();
 		}
 		else
 		{

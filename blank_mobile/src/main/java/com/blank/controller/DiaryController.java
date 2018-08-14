@@ -268,19 +268,18 @@ public class DiaryController {
 		return mav;
 	}
 
+	
 	// 일기 추가(get)
 	@RequestMapping(value = "/member/insertDiary.do", method = RequestMethod.GET)
 	public ModelAndView diaryInsertForm(HttpSession session,HttpServletRequest request) {
 		
-ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
 		Calendar today = Calendar.getInstance();
 		
 		String todays = sdf.format(today.getTime());
-
-
 		
 		String cityName = request.getParameter("cityName");
 		String dtitle = request.getParameter("dtitle");
@@ -320,6 +319,16 @@ ModelAndView mav = new ModelAndView();
 			code.addRCode("date = as.character(weather[1,1])");
 	        code.addRCode("img = as.character(weather[1,2])");
 	        code.addRCode("tmef = as.character(weather[1,3])");
+	        
+	        code.addRCode("setwd('c:/r_temp')");
+			code.addRCode("data3 = read.csv('weather2.csv')");
+			code.addRCode("data4 = data.frame(data3)");
+			code.addRCode("weather2 = subset(data4,city=='"+cityName+"')");
+			code.addRCode("city = as.character(weather2[1,1])");
+	        code.addRCode("img2 = as.character(weather2[1,2])");
+	        code.addRCode("tmef2 = as.character(weather2[1,3])");
+	        //code.addRCode("city2 = as.character(data4[,1])");
+	        
 	        code.addRCode("allvars <- as.list(globalenv())");
 
 	        caller.setRCode(code);
@@ -330,16 +339,20 @@ ModelAndView mav = new ModelAndView();
 	        String img = caller.getParser().getAsStringArray("img")[0];
 	        String tmef = caller.getParser().getAsStringArray("tmef")[0];
 	        
+	        String city = caller.getParser().getAsStringArray("city")[0];
+	        String img2 = caller.getParser().getAsStringArray("img2")[0];
+	        String tmef2 = caller.getParser().getAsStringArray("tmef2")[0];
+	        //String city2 = caller.getParser().getAsStringArray("city2")[0];
+	        
 //	        System.out.println(city.toString());
 //	        System.out.println(img.toString());
 //	        System.out.println(tmef.toString());
 	        
 	        String weather = caller.getParser().getXMLFileAsString();
-	        //System.out.println(weather);
 	        
 			mav.addObject("weather", weather);
 			mav.addObject("todays", todays);
-			
+		
 		}catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
