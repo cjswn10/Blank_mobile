@@ -187,7 +187,7 @@ $(function() {
 	{
 		area = "09680";
 	}
-
+	
 	$.ajax({url:"http://203.236.209.108:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
 	
 	$.ajax({url:"http://203.236.209.108:4997/weather2.do",success:function(data){}})
@@ -211,10 +211,12 @@ $(function() {
 			if(re)
 			{
 				location.href="insertDiary.do?dtitle="+$("#dtitle").val()+"&dcontent="+$("#dcontent").val()
+				
 			}	
 			else
 			{
 				location.href="insertDiary.do?dtitle="+$("#dtitle").val()+"&dcontent="+$("#dcontent").val()
+				
 			}	
 		}
 		else if(select_day == today_now)
@@ -331,7 +333,7 @@ function openGrimpan() {
 	<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 	<h5>회원정보</h5>
 	<a href="pwdCheck.do?id=${id }">Edit</a>
-	<a href="logOut.do">logout</a>
+	<a href="logOut.do?id=${id }">logout</a>
 	<br>
 	<h5>고객센터</h5>
 	<a href="qNa.do">Contact</a>

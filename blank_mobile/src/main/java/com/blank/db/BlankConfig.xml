@@ -9,6 +9,7 @@
 		<typeAlias type="com.blank.vo.DiaryVo" alias="diaryvo"/>
 		<typeAlias type="com.blank.vo.BookVo" alias="bookVo"/>
 		<typeAlias type="com.blank.vo.FavoriteVo" alias="favoriteVo"/>
+		<typeAlias type="com.blank.vo.LogVo" alias="logVo"/>
 	</typeAliases>
   <environments default="development">
     <environment id="development">
