@@ -42,4 +42,13 @@
   	<select id="memberNextMno" resultType="java.lang.Integer">
   		select nvl(max(mno),0)+1 from member
   	</select>
+  	
+  	<insert id="logRecod">
+  		insert into log values(#{lno},#{ip},#{ldate},#{id})
+  	</insert>
+  	
+  	<select id="logNextLno" resultType="java.lang.Integer">
+  		select nvl(max(lno),0)+1 from log
+  	</select>
+  	
 </mapper>

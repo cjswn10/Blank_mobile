@@ -1,6 +1,9 @@
 
 package com.blank.controller;
 
+import java.net.InetAddress;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.blank.dao.MemberDao;
+import com.blank.vo.LogVo;
 import com.blank.vo.MemberVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -120,9 +124,45 @@ public class MemberController {
 
 	//로그아웃
 	@RequestMapping(value="/member/logOut.do")
-	public ModelAndView logOut(HttpSession session) {
+	public ModelAndView logOut(HttpSession session,LogVo l,HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
+		
+		try {
+			
+			InetAddress addr = InetAddress.getLocalHost();
+			String ip = addr.getHostAddress();
+			
+			l.setIp(ip);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		
+		String id = request.getParameter("id");
+		
+		l.setId("["+id+"] 님이 로그아웃 하였습니다.");
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+
+		Calendar today = Calendar.getInstance();
+		
+		String todays = format.format(today.getTime());
+		
+		l.setLdate(todays);
+		
+		int re = dao.logRecord(l);
+		if(re > 0)
+		{
+			mav.addObject("msg", "성공");
+			mav.setViewName("redirect:/member/main.do");
+		}
+		else
+		{
+			mav.addObject("msg", "실패");
+			mav.setViewName("error");
+		}
 		session.invalidate();
 		mav.setViewName("redirect:/login.do");
 		return mav;
@@ -183,7 +223,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public ModelAndView login(String id, String pwd, HttpSession session) {
+	public ModelAndView login(String id, String pwd, HttpSession session,LogVo l) {
 		ModelAndView mav = new ModelAndView();
 		
 		Map map = new HashMap();
@@ -198,7 +238,40 @@ public class MemberController {
 			session.setAttribute("mno", dao.mno(map));
 			mav.setViewName("redirect:/member/main.do");
 		}
+		try {
+			
+			InetAddress addr = InetAddress.getLocalHost();
+			String ip = addr.getHostAddress();
+			
+			l.setIp(ip);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		
+		l.setId("["+id+"] 님이 로그인 하였습니다.");
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 
+		Calendar today = Calendar.getInstance();
+		
+		String todays = format.format(today.getTime());
+		
+		l.setLdate(todays);
+		
+		int re = dao.logRecord(l);
+		if(re > 0)
+		{
+			mav.addObject("msg", "성공");
+			mav.setViewName("redirect:/member/main.do");
+		}
+		else
+		{
+			mav.addObject("msg", "실패");
+			mav.setViewName("error");
+		}
+		
 		//mav.setViewName("redirect:/member/main.do");
 		return mav;
 	}

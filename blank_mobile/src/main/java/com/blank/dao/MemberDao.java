@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.blank.db.MemberManager;
+import com.blank.vo.LogVo;
 import com.blank.vo.MemberVo;
 
 @Repository
@@ -65,4 +66,9 @@ public class MemberDao {
 		return MemberManager.searchPwd(map);
 	}
 
+	//로그인 기록
+	public int logRecord(LogVo l)
+	{
+		return MemberManager.logRecord(l);
+	}
 }
