@@ -38,6 +38,13 @@
 <script type="text/javascript">
 	
 	$(function() {		
+		
+		setTimeout(function () {
+			
+			location.href = "logOut.do?id=${id}&autoOut=out";
+			
+		},10800*1000);
+		
 		$(document).on("pageload", function(){
 			window.location.reload(true);
 		})

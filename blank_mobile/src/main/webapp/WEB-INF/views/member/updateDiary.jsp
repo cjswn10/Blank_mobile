@@ -16,6 +16,13 @@
 <script src="//code.jquery.com/jquery-3.2.1.js"></script>
 <script type="text/javascript">
 $(function() {
+	
+	setTimeout(function () {
+		
+		location.href = "logOut.do?id=${id}&autoOut=out";
+		
+	},10800*1000);
+	
 	var oldFont="${d.dfont}"
 	var oldSecret=${d.secret}
 	var oldDfile="${d.dfile}"

@@ -15,6 +15,15 @@
 
 <link rel="stylesheet" href="../resources/css/blank.css">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
+<script type="text/javascript">
+	$(function() {
+		setTimeout(function () {
+			
+			location.href = "logOut.do?id=${id}&autoOut=out";
+			
+		},10800*1000);
+	})
+</script>
 </head>
 <body>
 <!-- side-menu -->

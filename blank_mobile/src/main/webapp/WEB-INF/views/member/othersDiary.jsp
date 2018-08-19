@@ -77,6 +77,12 @@
 
 	$(function () {				
 		
+		setTimeout(function () {
+			
+			location.href = "logOut.do?id=${id}&autoOut=out";
+			
+		},10800*1000);
+		
 		var id = location.search.substring(4, location.search.indexOf("&"));
 		var mno = ${mno}
 		var fno = location.search.substring(location.search.indexOf("&")+5, location.search.lastIndexOf("&"));

@@ -71,4 +71,5 @@ public class MemberDao {
 	{
 		return MemberManager.logRecord(l);
 	}
+	
 }

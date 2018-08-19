@@ -1,3 +1,8 @@
+<%@page import="com.blank.dao.MemberDao"%>
+<%@page import="com.blank.vo.LogVo"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.net.InetAddress"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -105,6 +110,15 @@
 
 <script type="text/javascript">
 $(function () {
+	
+	setTimeout(function () {
+		
+		location.href = "logOut.do?id=${id}&autoOut=out";
+		
+	},10800*1000);
+	
+	
+	
 	var mno = ${mno}
 	
 	$.ajax({

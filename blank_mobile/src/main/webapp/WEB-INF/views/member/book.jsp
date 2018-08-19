@@ -112,6 +112,13 @@
 <script type="text/javascript">
 
 	$(function() {
+		
+		setTimeout(function () {
+			
+			location.href = "logOut.do?id=${id}&autoOut=out";
+			
+		},10800*1000);
+		
 		var mno = ${mno}
 		
 		//일기장 목록 불러오기위한 기능 
