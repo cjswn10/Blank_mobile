@@ -44,7 +44,7 @@
   	</select>
   	
   	<insert id="logRecod">
-  		insert into log values(#{lno},#{ip},#{ldate},#{id})
+  		insert into log values(#{lno},#{ip},#{ldate},#{id},#{record})
   	</insert>
   	
   	<select id="logNextLno" resultType="java.lang.Integer">

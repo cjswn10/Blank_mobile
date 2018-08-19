@@ -91,6 +91,13 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	$(function () {
+		
+		setTimeout(function () {
+			
+			location.href = "logOut.do?id=${id}&autoOut=out";
+			
+		},10800*1000);
+		
 		var mno = ${mno}		
 		var bno = document.location.search.substr(14);
 

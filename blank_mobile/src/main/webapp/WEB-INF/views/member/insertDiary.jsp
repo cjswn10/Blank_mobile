@@ -74,6 +74,12 @@
 <script type="text/javascript">
 $(function() {
 	
+	setTimeout(function () {
+		
+		location.href = "logOut.do?id=${id}&autoOut=out";
+		
+	},10800*1000);
+	
 	$("#weather").hide()	
 	
 	var cityName = location.search.substr(1,1)

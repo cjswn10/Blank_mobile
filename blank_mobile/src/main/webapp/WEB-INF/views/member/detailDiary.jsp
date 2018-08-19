@@ -34,6 +34,13 @@
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript">
 	$(function () {
+		
+		setTimeout(function () {
+			
+			location.href = "logOut.do?id=${id}&autoOut=out";
+			
+		},10800*1000);
+		
 		$('#delete').click(function() {
 			re = confirm("정말 삭제하시겠습니다?");
 			if (re == true) {

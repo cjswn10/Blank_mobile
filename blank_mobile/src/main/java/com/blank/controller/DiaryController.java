@@ -289,7 +289,7 @@ public class DiaryController {
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
 		
-		System.out.println("cityName:"+cityName);
+		//System.out.println("cityName:"+cityName);
 //		System.out.println("date:"+dates);
 //		System.out.println("dtitle:"+dtitle);
 //		System.out.println("ddate:"+ddate);
@@ -346,7 +346,7 @@ public class DiaryController {
 	        
 	        
 	        String weather = caller.getParser().getXMLFileAsString();
-	        System.out.println(weather);
+	        //System.out.println(weather);
 	        
 			mav.addObject("weather", weather);
 			mav.addObject("todays", todays);

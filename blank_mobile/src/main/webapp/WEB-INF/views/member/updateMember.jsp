@@ -80,6 +80,12 @@
 <script type="text/javascript">
 	$(function() {
 		
+		setTimeout(function () {
+			
+			location.href = "logOut.do?id=${id}&autoOut=out";
+			
+		},10800*1000);
+		
 		$("#phone").keyup(function() {
 			var textinput = $("#phone").val();
 			textinput = textinput.replace(/[^0-9]/g, '');

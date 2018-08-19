@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -124,14 +125,48 @@ public class MemberController {
 
 	//로그아웃
 	@RequestMapping(value="/member/logOut.do")
-	public ModelAndView logOut(HttpSession session,LogVo l,HttpServletRequest request) {
+	public ModelAndView logOut(HttpSession session,LogVo l,HttpServletRequest request,String autoOut) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		try {
 			
-			InetAddress addr = InetAddress.getLocalHost();
-			String ip = addr.getHostAddress();
+			String ip = request.getHeader("X-FORWARDED-FOR");
+			//System.out.println("TEST : X-FORWARDED-FOR : "+ip);
+
+			if (ip == null) {
+
+				ip = request.getHeader("Proxy-Client-IP");
+				//System.out.println("TEST : Proxy-Client-IP : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getHeader("WL-Proxy-Client-IP");
+				//System.out.println("TEST : WL-Proxy-Client-IP : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getHeader("HTTP_CLIENT_IP");
+				//System.out.println("TEST : HTTP_CLIENT_IP : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+				//System.out.println("TEST : HTTP_X_FORWARDED_FOR : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getRemoteAddr();
+
+			}
 			
 			l.setIp(ip);
 			
@@ -142,7 +177,8 @@ public class MemberController {
 		
 		String id = request.getParameter("id");
 		
-		l.setId("["+id+"] 님이 로그아웃 하였습니다.");
+		l.setId(id);
+		l.setRecord("로그아웃");
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 
@@ -163,6 +199,7 @@ public class MemberController {
 			mav.addObject("msg", "실패");
 			mav.setViewName("error");
 		}
+		mav.addObject("autoOut", autoOut);
 		session.invalidate();
 		mav.setViewName("redirect:/login.do");
 		return mav;
@@ -218,12 +255,12 @@ public class MemberController {
 
 	//로그인
 	@RequestMapping(value="login.do", method=RequestMethod.GET)
-	public void loginForm() {
+	public void loginForm() {	
 		
 	}
 	
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public ModelAndView login(String id, String pwd, HttpSession session,LogVo l) {
+	public ModelAndView login(String id, String pwd, HttpSession session,LogVo l,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		
 		Map map = new HashMap();
@@ -240,17 +277,52 @@ public class MemberController {
 		}
 		try {
 			
-			InetAddress addr = InetAddress.getLocalHost();
-			String ip = addr.getHostAddress();
+			String ip = request.getHeader("X-FORWARDED-FOR");
+			//System.out.println("TEST : X-FORWARDED-FOR : "+ip);
+
+			if (ip == null) {
+
+				ip = request.getHeader("Proxy-Client-IP");
+				//System.out.println("TEST : Proxy-Client-IP : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getHeader("WL-Proxy-Client-IP");
+				//System.out.println("TEST : WL-Proxy-Client-IP : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getHeader("HTTP_CLIENT_IP");
+				//System.out.println("TEST : HTTP_CLIENT_IP : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+				//System.out.println("TEST : HTTP_X_FORWARDED_FOR : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getRemoteAddr();
+
+			}
 			
 			l.setIp(ip);
-			
+			     
 		}catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
 		
-		l.setId("["+id+"] 님이 로그인 하였습니다.");
+		l.setId(id);
+		l.setRecord("로그인");
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 
@@ -272,7 +344,9 @@ public class MemberController {
 			mav.setViewName("error");
 		}
 		
-		//mav.setViewName("redirect:/member/main.do");
+		//로그인 하고 3시간5분 동안 페이지를 이동하지않으면 세션 삭제(즉, 자동 로그아웃)
+		session.setMaxInactiveInterval(185*60);
+		
 		return mav;
 	}
 

@@ -6,12 +6,14 @@ public class LogVo {
 	private String ip;
 	private String ldate;
 	private String id;
-	public LogVo(int lno, String ip, String ldate, String id) {
+	private String record;
+	public LogVo(int lno, String ip, String ldate, String id, String record) {
 		super();
 		this.lno = lno;
 		this.ip = ip;
 		this.ldate = ldate;
 		this.id = id;
+		this.record = record;
 	}
 	public LogVo() {
 		super();
@@ -41,5 +43,12 @@ public class LogVo {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public String getRecord() {
+		return record;
+	}
+	public void setRecord(String record) {
+		this.record = record;
+	}
+	
 	
 }
