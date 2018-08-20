@@ -7,8 +7,8 @@ for (var i = 0; i < 27; i++) {
 	if(i==14){
 		document.write("<br>");
 	}
-	document.write("<input type='button' id='" + colorName[i]
-			+ "' onclick='cg_color(this.id)'>");
+	document.write("<button type='button' data-inline='true' style='margin:0px auto;' id='" + colorName[i]
+			+ "' onclick='cg_color(this.id)'></button>");
 }
 for (var i = 0; i < 27; i++) {
 	var inputColor = document.getElementById(colorName[i]);
