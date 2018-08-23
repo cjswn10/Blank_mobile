@@ -5,6 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+		content="width=device-width,
+		initial-scale=1.0,
+		maximum-scale=1.0,
+		minimum-scale=1.0,
+		user-scalable=no">
+		
 <title>빈칸을 채우다.</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -178,126 +185,141 @@ function openGrimpan() {
 </section>
 
 <div id="wrapper">
+	<div class="mainSearchId" id="mainSearchId">
+		<div class="mainSearchId_inner" id="mainSearchId_inner">
+			<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; 
 
-	<!-- main-menu -->
+border: none;">
+			<span id="btnMove" class="glyphicon glyphicon-search" ></span>
+			<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
+			
+			<div id="searchid"></div>
+		</div>
+	</div>
+
+		
+	<!------ main-menu ------>
 	<nav class="clearfix">
-	    <a href="main.do"><img src="../resources/img/blank.png" class="logo left"></a>
-	    <span style="cursor:pointer" onclick="openNav()">&#9776; </span>
-	    <ul>
+		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
+	    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
+	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
+	    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+	    <ul id="main_menu">
 	        <li><a href="book.do">DIARY</a></li>
 	        <li><a href="favorite.do">FAVORITES</a></li>
-	        <li><a href="myPage.do">MYPAGE</a></li>
+	        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
 	    </ul>
-	</nav>
+	</nav>	
 
-<div class="content" style="margin-top: 100px">
-	<h2>일기 수정</h2>
-	<hr>
-	<form action="updateDiary.do" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="dno" id="dno" value="${d.dno}">
-
-		<table>
-			<tr>
-				<td colspan="2">
-					<label for="dtitle">제목 </label>
-					<input type="text" name="dtitle" id="dtitle" required="required" value="${d.dtitle }">
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<label for="ddate">날짜</label>
-					<input type="date" name="ddate" id="ddate" required="required" value="${d.ddate }">
-				</td>
-				<td>
-					<label for="dweather">날씨</label>
-					<input type="text" name="dweather" id="dweather" value="${d.dweather }">
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan="2">
-					<label for="dfont">글씨체</label>
-					<select name="dfont" id="dfont">
-						<option value="Nanum Brush Script" style="font-family: Nanum Brush Script" selected="selected" >Nanum Brush Script</option>
-						<option value="Nanum Gothic Coding" style="font-family:Nanum Gothic Coding">Nanum Gothic Coding</option>
-						<option value="Nanum Myeongjo" style="font-family:Nanum Myeongjo">Nanum Myeongjo</option>
-						<option value="Nanum Pen Script" style="font-family:Nanum Pen Script">Nanum Pen Script</option>
-						<option value="Stylish" style="font-family:Stylish">Stylish</option>
-						<option value="Jua" style="font-family:Jua">Jua</option>
-						<option value="Gamja Flower" style="font-family:Gamja Flower">Gamja Flower</option>
-						<option value="Black Han Sans" style="font-family:Black Han Sans">Black Han Sans</option>
-						<option value="Sunflower" style="font-family:Sunflower">Sunflower</option>
-						<option value="Do Hyeon" style="font-family:Do Hyeon">Do Hyeon</option>
-						<option value="Source Sans Pro" style="font-family:Source Sans Pro">Source Sans Pro</option>
-						<option value="Gaegu" style="font-family:Gaegu">Gaegu</option>
-					</select>
-					<!-- 그림판 버튼 -->
-					<button type="button" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px"></button>
+	<div class="content" style="margin-top: 100px">
+		<h2>일기 수정</h2>
+		<hr>
+		<form action="updateDiary.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="dno" id="dno" value="${d.dno}">
 	
-					<label for="uploadG"><img alt="사진첨부" src="../resources/img/icon/draw.png" width="40px"></label>
-					<input type="file" name="uploadG" id="uploadG" style="display: none;">
-					
-					<!-- 사진첨부 버튼 -->
-					<label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="25px"></label>
-					<input type="file" name="upload" id="upload" style="display: none;">
-				</td>
-			</tr>
-			
-			<!-- 그림, 사진 첨에 띄어주기-->
-			<tr>
-				<td colspan="2">
-					<!-- 그림 -->
-					<img id="grim" width="300">
-					<br>
-					<!-- 사진 -->
-					<img width="300" id="photo">
-
-					<br>
-					<br>
-					<!-- 글 -->
-					<textarea rows="8" cols="40" name="dcontent" id="dcontent" style="font-family: ${d.dfont};">${d.dcontent }</textarea>
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan="2">
-					<input type="radio" name="secret" class="secret" value=1> 나만보기
-					<input type="radio" name="secret" class="secret" value=0> 전체공개<br>
-				</td>
-			</tr>
-			
-		</table>
-		<button type="submit">수정</button>
-	</form>
+			<table>
+				<tr>
+					<td colspan="2">
+						<label for="dtitle">제목 </label>
+						<input type="text" name="dtitle" id="dtitle" required="required" value="${d.dtitle }">
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<label for="ddate">날짜</label>
+						<input type="date" name="ddate" id="ddate" required="required" value="${d.ddate }">
+					</td>
+					<td>
+						<label for="dweather">날씨</label>
+						<input type="text" name="dweather" id="dweather" value="${d.dweather }">
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+						<label for="dfont">글씨체</label>
+						<select name="dfont" id="dfont">
+							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script" selected="selected" >Nanum Brush Script</option>
+							<option value="Nanum Gothic Coding" style="font-family:Nanum Gothic Coding">Nanum Gothic Coding</option>
+							<option value="Nanum Myeongjo" style="font-family:Nanum Myeongjo">Nanum Myeongjo</option>
+							<option value="Nanum Pen Script" style="font-family:Nanum Pen Script">Nanum Pen Script</option>
+							<option value="Stylish" style="font-family:Stylish">Stylish</option>
+							<option value="Jua" style="font-family:Jua">Jua</option>
+							<option value="Gamja Flower" style="font-family:Gamja Flower">Gamja Flower</option>
+							<option value="Black Han Sans" style="font-family:Black Han Sans">Black Han Sans</option>
+							<option value="Sunflower" style="font-family:Sunflower">Sunflower</option>
+							<option value="Do Hyeon" style="font-family:Do Hyeon">Do Hyeon</option>
+							<option value="Source Sans Pro" style="font-family:Source Sans Pro">Source Sans Pro</option>
+							<option value="Gaegu" style="font-family:Gaegu">Gaegu</option>
+						</select>
+						<!-- 그림판 버튼 -->
+						<button type="button" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px"></button>
+		
+						<label for="uploadG"><img alt="사진첨부" src="../resources/img/icon/draw.png" width="40px"></label>
+						<input type="file" name="uploadG" id="uploadG" style="display: none;">
+						
+						<!-- 사진첨부 버튼 -->
+						<label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="25px"></label>
+						<input type="file" name="upload" id="upload" style="display: none;">
+					</td>
+				</tr>
+				
+				<!-- 그림, 사진 첨에 띄어주기-->
+				<tr>
+					<td colspan="2">
+						<!-- 그림 -->
+						<img id="grim" width="300">
+						<br>
+						<!-- 사진 -->
+						<img width="300" id="photo">
+	
+						<br>
+						<br>
+						<!-- 글 -->
+						<textarea rows="8" cols="40" name="dcontent" id="dcontent" style="font-family: ${d.dfont};">${d.dcontent }</textarea>
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+						<input type="radio" name="secret" class="secret" value=1> 나만보기
+						<input type="radio" name="secret" class="secret" value=0> 전체공개<br>
+					</td>
+				</tr>
+				
+			</table>
+			<button type="submit">수정</button>
+		</form>
 	</div>
-</div>
 
-<!-- 푸터 -->
-<footer class="footer">
-	<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
-	<ul class="list-inline">
-       <li>
-           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
-           <br><h5>김영호</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
-           <br><h5>변성인</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
-           <br><h5>성민규</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
-           <br><h5>임연주</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
-           <br><h5>차건우</h5>
-       </li>
-    </ul>
-</footer>
+	
+	<!-- 푸터 -->
+	<footer class="footer">
+		<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+		<ul class="list-inline">
+	       <li>
+	           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+	           <br><h5>김영호</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+	           <br><h5>변성인</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+	           <br><h5>성민규</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+	           <br><h5>임연주</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+	           <br><h5>차건우</h5>
+	       </li>
+	    </ul>
+	</footer>
+</div>
 </body>
 </html>
