@@ -219,7 +219,7 @@ public class MemberController {
 		int re = dao.memberInsert(mv);
 		if (re < 1) {
 
-			mav.addObject("msg", "占쎌돳占쎌뜚 揶쏉옙占쎌뿯 占쎈뼄占쎈솭");
+			mav.addObject("msg", "회원가입에 실패하였습니다.");
 			mav.setViewName("/member/error");
 		}
 		return mav;
@@ -270,7 +270,7 @@ public class MemberController {
 		Boolean r = dao.login(map);
 		if (r == true) {
 
-			//id, 占쎌돳占쎌뜚甕곕뜇�깈 占쎄쉭占쎈�� 占쎄문占쎄쉐
+			//id, mno 세션생성
 			session.setAttribute("id", id);
 			session.setAttribute("mno", dao.mno(map));
 			mav.setViewName("redirect:/member/main.do");

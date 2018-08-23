@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi" />
 <title>빈칸을 채우다.</title>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
@@ -12,66 +12,50 @@
 	.book
 	{
 		position: relative;
-		top: 100px;
-		left:-100px;
-		background-color:pink;
-		width: 500px;
-		height: 570px;
+		top: 130px;
+		left:50px;
+		background-color:#ffc0cb;
+		width: 100%;
+		height: 300px;
+
 	}
-	.aa
+	#btitle
 	{
-		position: absolute;
-		left: 120px;
-		top: 100px;
+		position: relative;
+		top:-140px;
+		width:75%;
+		left: 75px;
+		font-size: 15px;
 		text-align: center;
-		font-size: 20px;
-		
 	}
+
 	#s1
 	{
 		position: relative;
-		left: 170px;
-		top: 500px;
+		width:50px;
+		left: 90px;
+		top: 80px;
 	}
 	#false
 	{
 		position: relative;
-		left: 220px;
-		top: 500px;
+		left: 110px;
+		width:50px;
+		top: 80px;
 	}
 	.containe
 	{
 		position: relative;
-		width: 600px;
-		height: 800px;
+		width: 50%;
 		top: -30px;
-		margin: 0 auto;
+		left: 20px;
 	}
 	.containerr
 	{
 		position: relative;
-		top: 50px;
-		left: 600px;	
-		width: 400px;
-	}
-	
-	.custom-size .colorpicker-saturation 
-	{
-		width: 250px;
-		height: 250px;
-	}
- 
-	.custom-size .colorpicker-hue,
-	.custom-size .colorpicker-alpha 
-	{
-		width: 40px;
-		height: 250px;
-	}
- 
-	.custom-size .colorpicker-color,
-	.custom-size .colorpicker-color div 
-	{
-		height: 40px;
+		top: -250px;
+		left: 60px;	
+		width: 90%;
 	}
 	
 	body 
@@ -79,54 +63,33 @@
     	-webkit-text-size-adjust: none;
 	}
 	
+	
 </style>
 
-<!-- 색상구현 css -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<link href="../resources/dist/css/bootstrap-colorpicker.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-<!-- 색상구현 자바스크립트 -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-3.2.1.js"></script>
-<script src="../resources/dist/js/bootstrap-colorpicker.min.js"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="../resources/css/blank.css">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 
 <script type="text/javascript">
 	$(function() {
-		
+
 		setTimeout(function () {
 			
 			location.href = "logOut.do?id=${id}&autoOut=out";
 			
 		},10800*1000);
 		
-		$('#color-picker-size').colorpicker(
-			{
-				customClass: 'custom-size',
-				sliders: {
-				  saturation: {
-					maxLeft: 250,
-					maxTop: 250
-				  },
-				  hue: {
-					maxTop: 250
-				  },
-				  alpha: {
-					maxTop: 250
-				}
-			}
-			 
-		});
-		
-		$(".colorpicker-saturation").click(function() {
+		$("#color-picker-size").change(function() {
 			
 			var color = $("#color-picker-size").val();
 			
@@ -147,10 +110,20 @@
 				return;
 			}	 
 		})
-		
 		$("#s1").click(function() {
-			console.log("일기장이 생성되었습니다.")
+			if($("#btitle").val() == "")
+			{
+				confirm("제목을 입력해주세요.")
+				return false;
+			}
+			console.log("일기장이 수정되었습니다.")
 		})
+		
+		$( '#btitle') .on ("input ", function () {     
+		    if (this.value.length> 10)         
+		        this.value = this.value.slice (0,10); 
+		});
+		
 	})
 </script>
 </head>
@@ -174,33 +147,31 @@
 	
 </section>
 
-<div id="wrapper">
+<div id="wrapper" data-role="none">
 
 	<!-- main-menu -->
 	<nav class="clearfix">
-	    <a href="main.do"><img src="../resources/img/blank.png" class="logo left"></a>
+	    <a href="main.do" data-ajax="false"><img src="../resources/img/blank.png" class="logo left"></a>
 	    <span style="cursor:pointer" onclick="openNav()">&#9776; </span>
 	    <ul>
-	        <li><a href="book.do">DIARY</a></li>
-	        <li><a href="favorite.do">FAVORITES</a></li>
-	        <li><a href="myPage.do">MYPAGE</a></li>
+	        <li><a href="book.do" data-ajax="false">DIARY</a></li>
+	        <li><a href="favorite.do" data-ajax="false">FAVORITES</a></li>
+	        <li><a href="myPage.do" data-ajax="false">MYPAGE</a></li>
 	    </ul>
 	</nav>
 	
 	<div class="containe">
-		<div class="book">
-			<form action="insertBook.do" method="post" id="f">
-				<input type="hidden" name="mno" id="mno" value="${mno }">
-				<input type="text" name="btitle" id="btitle" class="aa" maxlength="10" height="50" width="30" placeholder="제목">
-				<div class="containerr">
-					<div class="example-content well">
-			       		<input id="color-picker-size" type="text" name="bcolor" class="form-control" placeholder="색상 선택" autocomplete="off"/>
-			       </div>
-				</div>
-				<input class="btn btn-default" id="s1" type="submit" value="등록">
-				<input class="btn btn-default" id="false" type="reset" value="취소">
-			</form>
+		<div class="book" data-role="none">
 		</div>
+		<form action="insertBook.do" method="post" id="f" data-ajax="false">
+			<input type="hidden" name="mno" id="mno" value="${mno }">
+			<input data-role="none" type="text" name="btitle" id="btitle" class="aa" maxlength="8" placeholder="제목">
+			<div class="containerr">
+				<input data-role="none" id="color-picker-size" type="color" name="bcolor" class="form-control" placeholder="색상 선택" autocomplete="off" value="#ffc0cb"/>
+			</div>
+			<input data-role="none" class="btn btn-default" id="s1" type="submit" value="등록">
+			<input data-role="none" class="btn btn-default" id="false" type="reset" value="취소">
+		</form>
 	</div>
 </div>	
 

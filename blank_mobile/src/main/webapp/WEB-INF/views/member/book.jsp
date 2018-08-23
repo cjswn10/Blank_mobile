@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport"content="width-device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
 <title>빈칸을 채우다.</title>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
@@ -14,54 +14,53 @@
 	/* 새일기장 만들기 */
 	.insertBook
 	{
-		
 		border: 1px solid black;
-		width: 960px;
-		margin: 0 auto;
+		width: 93%;
 		text-align: center;
-
+		position:relative;
+		left: 10px;
+		margin-left: 0 auto;
 	}
 
 	/* remove 아이콘위치 */
 	#remove_location
 	{
-		position: relative;
-		left: 302px;
-		top: -90px;
+		font-family: 'Nanum Pen Script', serif;
+		position:relative;
+		display:table;
+		font-size: 10px;
+		top:140.5px;
+		left: 50px;
 	}
 
 	/* plus 아이콘 */
 	.glyphicon-plus
 	{
-		font-size: 50px;
-		
+		font-size: 40px;
 	}
-	/* remove 아이콘 */
-	.glyphicon-remove
-	{
-		font-size: 250%;
-		
-	}
+
 	/* 일기장 목록 컨테이너 */
 	#main_container
 	{
-		width: 960px;
+		width: 100%;
 		margin: 0 auto;
 	}
 	
 	#main
 	{
+		width:100%;
 		overflow: hidden;
+		margin: 0 auto;
 	}
 	
 	/* 서브컨테이너의 자식 div들 */
 	#main_container > div
 	{
 		position:relative;
-		width: 350px;
-		height: 400px;
+		width: 150px;
+		height: 180px;
 		float: left;
-		margin: 50px;
+		margin: 25px;
 		padding: 30px;
 		background-color: pink;
 	}
@@ -71,15 +70,15 @@
 		font-family: 'Nanum Pen Script', serif;
 		position:relative;
 		display:table;
-		font-size: 30px;
+		font-size: 10px;
 		color:black;
-		top:30px;
+		top:-10px;
 		margin-left: auto;
 		margin-right: auto;
 		background-color: white;
-		width: 200px;
-		height: 30px;
+		width: 100%;
 		text-align: center;
+		
 		
 	}
 	/*일기장 수정*/
@@ -88,10 +87,10 @@
 		font-family: 'Nanum Pen Script', serif;
 		position:relative;
 		display:table;
-		font-size: 25px;
+		font-size: 10px;
 		color:black;
-		top:295px;
-		left: 90px;
+		top:122px;
+		left: 5px;
 
 	}
 	
@@ -107,12 +106,16 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 <link rel="stylesheet" href="../resources/css/blank.css">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript">
 
 	$(function() {
-		
+
 		setTimeout(function () {
 			
 			location.href = "logOut.do?id=${id}&autoOut=out";
@@ -143,13 +146,14 @@
 						var title = $("<span ></span>").html(d.btitle);
 						
 						//일기장수정 문구
-						var Update = $("<button></button>").html("일기장 수정")
+						var Update = $("<button></button>").html("수정")
+						var Delete = $("<button></button>").html("삭제")
 						
 						//일기장 수정a태그
-						var aUpdate = $("<a class='update' href='updateBook.do?bno="+d.bno+"'></a>")
+						var aUpdate = $("<a class='update' data-ajax='false' href='updateBook.do?bno="+d.bno+"' ></a>")
 						
 						//일기장 삭제a태그
-						var aRemove = $("<a id='remove_location'></a>")
+						var aRemove = $("<a id='remove_location' data-ajax='false'></a>")
 						
 						
 						//remove 아이콘을 누르면 발생하여 선택한 일기장 삭제
@@ -167,7 +171,7 @@
 						})
 						
 						//일기장 삭제 아이콘
-						var remove = $("<span class='glyphicon glyphicon-remove'></span>")
+						//var remove = $("<span class='glyphicon glyphicon-remove'></span>")
 						
 						//일기장 색상
 						var color = $(div).attr({
@@ -178,7 +182,7 @@
 						$(aUpdate).append(Update)
 						
 						//일기장 삭제a태그에 삭제아이콘 추가
-						$(aRemove).append(remove)
+						$(aRemove).append(Delete)
 						
 						//일기장 목록 --> 일기목록
 						$(aList).append(title)
@@ -208,7 +212,7 @@
 	<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 	<h5>회원정보</h5>
 	<a href="pwdCheck.do?id=${id }">Edit</a>
-	<a href="logOut.do?id=${id }">logout</a>
+	<a href="logOut.do?id=${id }" data-ajax="false">logout</a>
 	<br>
 	<h5>고객센터</h5>
 	<a href="qNa.do">Contact</a>
@@ -220,11 +224,11 @@
 	
 </section>
 
-	<div id="wrapper">
+	<div id="wrapper" data-role="none">
 
 	<!-- main-menu -->
 	<nav class="clearfix">
-	    <a href="main.do"><img src="../resources/img/blank.png" class="logo left"></a>
+	    <a href="main.do" data-ajax="false"><img src="../resources/img/blank.png" class="logo left"></a>
 	    <span style="cursor:pointer" onclick="openNav()" class="glyphicon glyphicon-menu-hamburger"> </span>
 
 	    
@@ -235,21 +239,21 @@
 	    </ul>
 	</nav>
 	
-	<div class="content" style="margin-top: 100px">
+	
 		<div id="main">
 			
 			  <div class="insertBook">
-			  	<a href="insertBook.do" id="test"><span class="glyphicon glyphicon-plus" id="plus_location"></span></a>
+			  	<a href="insertBook.do" id="test" data-ajax="false"><span class="glyphicon glyphicon-plus" id="plus_location"></span></a>
 			  </div>
 		
 			<div id="main_container"></div>
 	
 		</div>  
-	</div>
+	
 </div>
     
 <!-- 푸터  -->
-<footer class="footer" >
+<footer class="footer">
 	<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
 	<ul class="list-inline">	
        <li>
