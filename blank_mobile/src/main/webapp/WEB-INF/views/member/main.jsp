@@ -1,8 +1,3 @@
-<%@page import="com.blank.dao.MemberDao"%>
-<%@page import="com.blank.vo.LogVo"%>
-<%@page import="java.util.Calendar"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.net.InetAddress"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -94,8 +89,6 @@ $(function () {
 		location.href = "logOut.do?id=${id}&autoOut=out";
 		
 	},10800*1000);
-	
-	
 	
 	var mno = ${mno}
 	
@@ -314,6 +307,7 @@ $(function () {
 		
 	</section>
 	
+
 	<div id="wrapper">	
 	
 		<div class="mainSearchId" id="mainSearchId">
@@ -334,7 +328,7 @@ $(function () {
 		    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-menu-hamburger"> </span>
 		    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
 		    <ul id="main_menu">
-		        <li><a href="book.do">DIARY</a></li>
+		        <li><a href="book.do" data-ajax="false">DIARY</a></li>
 		        <li><a href="favorite.do">FAVORITES</a></li>
 		        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
 		    </ul>
