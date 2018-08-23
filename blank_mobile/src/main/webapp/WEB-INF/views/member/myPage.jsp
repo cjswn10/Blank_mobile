@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>빈칸을 채우다.</title>
 <style type="text/css">
 	
@@ -31,7 +32,7 @@
 </script>
 </head>
 <body>
-
+<div class="container">
 <!-- side-menu -->
 <section id="mySidenav" class="sidenav">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -65,7 +66,7 @@
 	</nav>
 
 	
-	<div class="content" style="margin-top: 180px">
+	<div id="content" style="margin-top: 180px">
 		<h2><a href="pwdCheck.do?id=${id }">MANAGE ACCOUNT</a></h2>
 		<br><br>
 		<h2><a href="qNa.do">CONTACT US</a></h2>
@@ -98,5 +99,6 @@
        </li>
     </ul>
 </footer>
+</div>
 </body>
 </html>

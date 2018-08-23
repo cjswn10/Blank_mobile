@@ -270,7 +270,7 @@ function openGrimpan() {
 	// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
 	
 	window.name = "insertDiary";
-	openG = window.open("grimpan.do","grimpan",'status=no, height=700, width=840, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+	openG = window.open("grimpan.do","grimpan",'status=no, height=600px, width=600px, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
 }
 
 </script>
