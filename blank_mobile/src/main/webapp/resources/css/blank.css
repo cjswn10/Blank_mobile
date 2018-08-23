@@ -1,5 +1,8 @@
 /*************	common	************/
  /*float clearfix*/
+ @media (min-width: @screen-sm-min) { ... }
+ 
+ 
 .clearfix::after {
 	content: '';
 	display: block;
@@ -52,8 +55,10 @@ body  {
 }
 
 nav {
+
 	width:100%;
 	background:#ffffff;
+
     margin: 0 auto;
     padding-right: 5px;
     padding-left: 5px;
@@ -198,7 +203,9 @@ nav span {
 .content {
 	position: relative;
 	margin:0px auto;
+
 	width: 90%;
+
 }
 	<!--mypage-->
 .content a{
