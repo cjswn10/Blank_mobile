@@ -1,5 +1,8 @@
 /*************	common	************/
  /*float clearfix*/
+ @media (min-width: @screen-sm-min) { ... }
+ 
+ 
 .clearfix::after {
 	content: '';
 	display: block;
@@ -44,7 +47,7 @@ body  {
 }
 
 nav {
-    width:1100px;
+    
     background:#ffffff;
     margin: 0 auto;
     padding-top: 10px;
@@ -175,7 +178,7 @@ nav span {
 .content {
 	position: relative;
 	margin:0px auto;
-	width: 960px;
+	
 }
 	<!--mypage-->
 .content a{
@@ -221,8 +224,8 @@ h2 {
 }
 .btn-social {
   display: inline-block;
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   border: 2px solid white;
   border-radius: 100%;
   text-align: center;
