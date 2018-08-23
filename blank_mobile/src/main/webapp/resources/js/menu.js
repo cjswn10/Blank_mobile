@@ -3,12 +3,14 @@
  */
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("wrapper").style.marginRight = "250px";
+    document.getElementById("wrapper").style.left = "-250px";
+    document.getElementById("wrapper").style.position = "relative";
 }
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("wrapper").style.marginRight= "0";
+    document.getElementById("wrapper").style.left= "0";
+    document.getElementById("wrapper").style.position = "static";
 }
 
 function openSearch() {
@@ -21,3 +23,18 @@ function closeSearch() {
 	document.getElementById("mainSearchId_inner").style.display = "none";
 }
 
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("wrapper").style.left = "-250px";
+    document.getElementById("wrapper").style.position = "relative";
+}
+
+function openMenu() {
+	
+    var x = document.getElementById("main_menu");
+    if (x.style.height == 0 || x.style.height === "0px") {
+        x.style.height = "auto";
+    } else {
+        x.style.height = "0";
+    }
+}

@@ -11,27 +11,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+		content="width=device-width,
+		initial-scale=1.0,
+		maximum-scale=1.0,
+		minimum-scale=1.0,
+		user-scalable=no">
+
+
 <style type="text/css">
 
 .modalContent{
 	white-space: pre-line;
 }
 
+
 .diaryimg{
-/*
-	position: relative;    
-    width: 300px;
-    height: 300px;
-    background-size: contain;
-	background-repeat: no-repeat;
-    vertical-align: middle;
-  */  
-    
     max-height: 100%;
     max-width: 100%;
     width: 300px;
     height: 300px;
-     
 }
 
 .dform {
@@ -42,12 +41,7 @@
     margin: 4px;
     cursor: pointer;
 }
-/*
-.dform:last-child {
-    margin-right: 0;
-    
-}
-*/
+
 .contents{	
 	width: 300px;
 	height: 300px;
@@ -60,30 +54,12 @@
 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
-<!-- 랜딩 컨테이너 작업  -->
-.container {
-    width: 960px;
-    margin: 0 auto;
-}
-
 .landing {
-    width: 70%;
-    height: 600px;
+    width: 100%;
     margin: auto;
     background-size: cover;
     background-position: center center;
 }
-.landing > .container {
-    padding-top: 200px;
-}
-
-.blog {
-	position: relative;
- 	margin: 0 auto;
-    padding: 100px 0;
-    width: 1240px;
-}
-
 
 #searchid
 	{
@@ -101,12 +77,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- Jquery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
 
 
-<link rel="stylesheet" href="../resources/css/blank.css">
-<script type="text/javascript" src="../resources/js/menu.js" ></script>
+<link rel="stylesheet" href="../resources/css/blank.css?ver=16">
+<script type="text/javascript" src="../resources/js/menu.js?ver=6" ></script>
 
 <script type="text/javascript">
 $(function () {
@@ -131,14 +109,8 @@ $(function () {
 				var contents = $('<div class="contents"></div>').html(d.dcontent);
 				$(font).append(contents);
 				
-				/*
-				var diaryDiv = $('<div class="dform"></div>').attr({
-					onclick: "location.href='mainDetailDiary.do?dno="+d.dno+"'"
-				})
-				*/
 				var diaryDiv = $('<div class="dform"></div>');
 				
-
 				var div = $("<img class='diaryimg'></img>").attr({
 					src : "../resources/upload2/"+d.dfile
 				})
@@ -155,7 +127,8 @@ $(function () {
 				
 				//fancybox를 위한 a태그와 div
 				var a = $('<a data-fancybox="gallery" data-src="#modal'+ d.dno +'" href="javascript:;"></a>');
-				var modalBox = $('<div style="display: none;max-width:800px;" id="modal'+d.dno+'"></div>');
+				//var modalBox = $('<div style="display: none;max-width:800px;" id="modal'+d.dno+'"></div>');
+				var modalBox = $('<div style="display: none;" id="modal'+d.dno+'"></div>');
 				var contentsDiv = $('<div></div>');
 
 				var otherid = d.id;
@@ -304,7 +277,6 @@ $(function () {
 								})//ajax
 
 					          })
-									
 						
 							});
 						}
@@ -323,101 +295,91 @@ $(function () {
 <title>빈칸을 채우다.</title>
 </head>
 <body>
-<!-- side-menu -->
-<section id="mySidenav" class="sidenav">
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	
-	<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
-	<h5>회원정보</h5>
-	<a href="pwdCheck.do?id=${id }">Edit</a>
-	<a href="logOut.do?id=${id }">logout</a>
-	<br>
-	<h5>고객센터</h5>
-	<a href="qNa.do">Contact</a>
-	<br>
-	<div class="side_icon_set">
-		<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
-		<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
-	</div>
-	
-</section>
 
-
-<div class="mainSearchId" id="mainSearchId">
-	<div class="mainSearchId_inner" id="mainSearchId_inner">
-		<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="width:940px; color:#818181; background-color:#000000; border: none;">
-		<span id="btnMove" class="glyphicon glyphicon-search" ></span>
-		<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
+	<!-- side-menu -->
+	<section id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
+		<h5>회원정보</h5>
+		<a href="pwdCheck.do?id=${id }">Edit</a>
+		<a href="logOut.do">logout</a>
+		<br>
+		<h5>고객센터</h5>
+		<a href="qNa.do">Contact</a>
+		<br>
+		<div class="side_icon_set">
+			<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+			<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
+		</div>
 		
-		<div id="searchid"></div>
-	</div>
-</div>
-
-<div id="wrapper">
+	</section>
 	
+	<div id="wrapper">	
 	
-	<!-- main-menu -->
-	<nav class="clearfix">
-	    <a href="main.do"><img src="../resources/img/blank.png" class="logo left"></a>
-	    <span style="cursor:pointer;padding: 20px 20px;" onclick="openNav()" class="glyphicon glyphicon-menu-hamburger"> </span>
-	    <span style="cursor:pointer;padding: 20px 20px;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
-	    <ul>
-	        <li><a href="book.do">DIARY</a></li>
-	        <li><a href="favorite.do">FAVORITES</a></li>
-	        <li><a href="myPage.do">MYPAGE</a></li>
-	    </ul>
-	</nav>
-
+		<div class="mainSearchId" id="mainSearchId">
+			<div class="mainSearchId_inner" id="mainSearchId_inner">
+				<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+				<span id="btnMove" class="glyphicon glyphicon-search" ></span>
+				<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
+				
+				<div id="searchid"></div>
+			</div>
+		</div>
 	
-	
+		
+		<!-- main-menu -->
+		<nav class="clearfix">
+			<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
+		    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
+		    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-menu-hamburger"> </span>
+		    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+		    <ul id="main_menu">
+		        <li><a href="book.do">DIARY</a></li>
+		        <li><a href="favorite.do">FAVORITES</a></li>
+		        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
+		    </ul>
+		</nav>
 		<div class="landing">
 			<img src="../resources/img/mainlogo.jpg" width="100%">
-			<div class="container">
-	
-			</div>
-			
 		</div>
-
-</div>
-	
-<div class="container">
-	   <div class="blog" align="center">
-	   		<div class="clearfix" id="mainList"></div>
-	   </div> 	    
-</div>
-	
-
-<!-- modal들을 넣을 div -->
-<div id="modal"></div>
 		
+		
+		
+		<div class="clearfix" id="mainList"></div>
+		
+		<!-- modal들을 넣을 div -->
+		<div id="modal"></div>
+			
 
-
-<!-- 푸터입니다.  -->
-<footer class="footer">
-	<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
-	<ul class="list-inline" style="margin-bottom: 0;">
-       <li>
-           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
-           <br><h5>김영호</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
-           <br><h5>변성인</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
-           <br><h5>성민규</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
-           <br><h5>임연주</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
-           <br><h5>차건우</h5>
-       </li>
-    </ul>
-</footer>
-
+	
+		<div class="footer">
+				<!-- 푸터입니다.  -->
+			<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+			<ul class="list-inline">
+		       <li>
+		           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+		           <br><h5>김영호</h5>
+		       </li>
+		       <li>
+		           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+		           <br><h5>변성인</h5>
+		       </li>
+		       <li>
+		           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+		           <br><h5>성민규</h5>
+		       </li>
+		       <li>
+		           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+		           <br><h5>임연주</h5>
+		       </li>
+		       <li>
+		           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+		           <br><h5>차건우</h5>
+		       </li>
+		    </ul>
+		</div>
+	
+	</div>
+	
 </body>
 </html>

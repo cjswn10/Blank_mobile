@@ -9,9 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.codec.language.bm.Rule.Phoneme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -138,6 +136,7 @@ public class DiaryController {
 		int bno = (Integer) session.getAttribute("bno");
 		ModelAndView mav = new ModelAndView();
 
+
 		// 이전 파일을 가져오기 위한 map
 		Map map = new HashMap();
 		map.put("dno", d.getDno());
@@ -154,6 +153,7 @@ public class DiaryController {
 
 		MultipartFile upload = d.getUpload();
 		MultipartFile uploadG = d.getUploadG();
+
 
 		// 사진 이름 바꾸는 코드 및 서버에 들어감
 		String orgname = upload.getOriginalFilename();
@@ -230,10 +230,10 @@ public class DiaryController {
 			}
 		}
 		
-		System.out.println("이전사진 "+oldDphoto);
-		System.out.println("이전그림 "+oldDfile);
-		System.out.println("업데이트 사진 "+d.getDphoto());
-		System.out.println("업데이트 그림 "+d.getDfile());
+		System.out.println("oldDphoto "+oldDphoto);
+		System.out.println("oldDfile "+oldDfile);
+		System.out.println("newDphoto "+d.getDphoto());
+		System.out.println("newDfile "+d.getDfile());
 
 		int re = dao.updateDiary(d);
 
@@ -370,6 +370,7 @@ public class DiaryController {
 		d.setDno(no);
 
 		d.setDtype("000");
+    
 		// 파일이 unll이 아니면 타입 설정
 		if (d.getDfile() != null) {
 			d.setDtype("100");
@@ -383,7 +384,7 @@ public class DiaryController {
 		d.setDphoto("");
 		d.setDfile("");
 
-		// 사진,그림 path 설정
+		// path
 		String path = request.getRealPath("resources/upload");
 		String pathG = request.getRealPath("resources/upload2");
 
@@ -399,9 +400,9 @@ public class DiaryController {
 		String dphoto = "x";
 
 		if (orgname != null && !orgname.equals("")) {
-
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
-			// 사진이름을 설정
+
+      // 사진이름을 설정
 			dphoto = bno + "b" + no + "." + exc;
 			// 설정한 사진이름을 파일로 만든다
 			File saveFile = new File(path + "/" + dphoto);
@@ -429,12 +430,12 @@ public class DiaryController {
 				e.printStackTrace();
 			}
 		}
-
+		
+		/************** �׸� ***************/
 		String orgnameG = uploadG.getOriginalFilename();
 		String dfile = "x";
 
 		if (orgnameG != null && !orgnameG.equals("")) {
-
 			String excG = orgnameG.substring(orgnameG.lastIndexOf(".") + 1, orgnameG.length());
 			// 그림이름을 설정
 			dfile = bno + "b" + no + "grim." + excG;
