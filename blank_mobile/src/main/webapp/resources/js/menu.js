@@ -32,9 +32,18 @@ function openNav() {
 function openMenu() {
 	
     var x = document.getElementById("main_menu");
+    
     if (x.style.height == 0 || x.style.height === "0px") {
         x.style.height = "auto";
     } else {
         x.style.height = "0";
     }
+    /*
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+    */
+    
 }

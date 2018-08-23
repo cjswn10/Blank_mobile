@@ -15,6 +15,9 @@
 
 
 <style type="text/css">
+#mainList{
+	text-align: center;
+}
 
 .modalContent{
 	white-space: pre-line;
@@ -29,13 +32,13 @@
 }
 
 .dform {
-
-    float: left;
     width: 300px;
     height: 300px;
-    margin: 4px;
+    display: inline-block;
     cursor: pointer;
 }
+
+
 
 .contents{	
 	width: 300px;
@@ -120,7 +123,6 @@ $(function () {
 				
 				//fancybox를 위한 a태그와 div
 				var a = $('<a data-fancybox="gallery" data-src="#modal'+ d.dno +'" href="javascript:;"></a>');
-				//var modalBox = $('<div style="display: none;max-width:800px;" id="modal'+d.dno+'"></div>');
 				var modalBox = $('<div style="display: none;" id="modal'+d.dno+'"></div>');
 				var contentsDiv = $('<div></div>');
 
@@ -173,12 +175,11 @@ $(function () {
 				$("#modal").append(modalBox);
 				
 				
-				
 				$(diaryDiv).append(div);
 				
 				$(a).append(diaryDiv);
 				$('#mainList').append(a);
-				
+				/*
 				$(diaryDiv).hover(function() {
 					$(div).detach();
 					$(this).append(contents);
@@ -187,6 +188,8 @@ $(function () {
 					$(contents).detach();
 					$(font).detach();
 				})
+				
+				*/
 			})
 		}
 	})
@@ -304,7 +307,6 @@ $(function () {
 			<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
 			<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 		</div>
-		
 	</section>
 	
 
@@ -321,11 +323,11 @@ $(function () {
 		</div>
 	
 		
-		<!-- main-menu -->
+		<!------ main-menu ------>
 		<nav class="clearfix">
 			<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 		    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
-		    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-menu-hamburger"> </span>
+		    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
 		    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
 		    <ul id="main_menu">
 		        <li><a href="book.do" data-ajax="false">DIARY</a></li>
@@ -337,7 +339,7 @@ $(function () {
 			<img src="../resources/img/mainlogo.jpg" width="100%">
 		</div>
 		
-		
+		<!----------- 내용 -------------->
 		
 		<div class="clearfix" id="mainList"></div>
 		
@@ -346,8 +348,8 @@ $(function () {
 			
 
 	
+			<!--------- 푸터 ---------->
 		<div class="footer">
-				<!-- 푸터입니다.  -->
 			<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
 			<ul class="list-inline">
 		       <li>

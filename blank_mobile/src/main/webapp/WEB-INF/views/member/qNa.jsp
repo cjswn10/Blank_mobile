@@ -4,6 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+		content="width=device-width,
+		initial-scale=1.0,
+		maximum-scale=1.0,
+		minimum-scale=1.0,
+		user-scalable=no">
+		
 <title>빈칸을 채우다.</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -13,8 +20,8 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=TJJZXTuJHDxAWrWZPEdS&submodules=geocoder"></script>
 
-<link rel="stylesheet" href="../resources/css/blank.css">
-<script type="text/javascript" src="../resources/js/menu.js" ></script>
+<link rel="stylesheet" href="../resources/css/blank.css?ver=1">
+<script type="text/javascript" src="../resources/js/menu.js?ver=1" ></script>
 <script type="text/javascript">
 	$(function() {
 		setTimeout(function () {
@@ -47,17 +54,30 @@
 
 <div id="wrapper">
 
-	<!-- main-menu -->
+	<!------ main-menu ------>
+	<div class="mainSearchId" id="mainSearchId">
+		<div class="mainSearchId_inner" id="mainSearchId_inner">
+			<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+			<span id="btnMove" class="glyphicon glyphicon-search" ></span>
+			<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
+			
+			<div id="searchid"></div>
+		</div>
+	</div>
+	
+		
 	<nav class="clearfix">
-	    <a href="main.do"><img src="../resources/img/blank.png" class="logo left"></a>
-	    <span style="cursor:pointer" onclick="openNav()">&#9776; </span>
-	    <ul>
+		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
+	    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
+	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
+	    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+	    <ul id="main_menu">
 	        <li><a href="book.do">DIARY</a></li>
 	        <li><a href="favorite.do">FAVORITES</a></li>
-	        <li><a href="myPage.do">MYPAGE</a></li>
+	        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
 	    </ul>
 	</nav>
-
+		
 	
 	<div class="content">
 			<div class="row">
@@ -81,7 +101,7 @@
 
 			</div>
 	</div>
-</div>
+
 
 	
 	<script>
@@ -102,32 +122,33 @@
       });
 	</script>
 	
-<!-- 푸터 -->
-<footer class="footer">
-	<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
-	<ul class="list-inline">
-       <li>
-           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
-           <br><h5>김영호</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
-           <br><h5>변성인</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
-           <br><h5>성민규</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
-           <br><h5>임연주</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
-           <br><h5>차건우</h5>
-       </li>
-    </ul>
-</footer>
+	<!-- 푸터 -->
+	<footer class="footer">
+		<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+		<ul class="list-inline">
+	       <li>
+	           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+	           <br><h5>김영호</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+	           <br><h5>변성인</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+	           <br><h5>성민규</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+	           <br><h5>임연주</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+	           <br><h5>차건우</h5>
+	       </li>
+	    </ul>
+	</footer>
+</div>
 </body>
 
 </html>
