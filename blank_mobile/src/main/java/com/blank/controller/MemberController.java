@@ -4,12 +4,10 @@ package com.blank.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,8 +29,7 @@ public class MemberController {
 	}
 
 
-
-	//ë§ˆì´í˜ì´ì§€ ë·°
+	//¸¶ÀÌÆäÀÌÁö
 	@RequestMapping(value="/member/myPage.do")
 	public ModelAndView myPage() {
 		
@@ -41,7 +38,7 @@ public class MemberController {
 	}
 	
 
-	//ì•„ì´ë””,ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ë·°
+	//°èÁ¤Ã£±â
 	@RequestMapping(value="search.do")
 	public ModelAndView search() {
 			
@@ -51,7 +48,7 @@ public class MemberController {
 	
 
 
-	//idì°¾ê¸° ë·° 
+	//idÃ£±â ÆäÀÌÁö
 	@RequestMapping(value="searchIdPage.do")
 	public ModelAndView searchId() {
 				
@@ -59,7 +56,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//pwdì°¾ê¸° ë·°
+	//passwordÃ£±â ÆäÀÌÁö
 	@RequestMapping(value="searchPwdPage.do")
 	public ModelAndView searchPwd() {
 					
@@ -67,7 +64,7 @@ public class MemberController {
 		return mav;
 	}
 
-	//ì•„ì´ë””ì°¾ê¸°
+	//idÃ£±â
 	@RequestMapping(value="searchId.do")
 	@ResponseBody
 	public String searchId(String name,String phone)
@@ -88,7 +85,7 @@ public class MemberController {
 		return str;
 	}
 	
-	//ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
+	//passwordÃ£±â 
 	@RequestMapping(value="searchPwd.do")
 	@ResponseBody
 	public String searchPwd(String id,String phone)
@@ -117,8 +114,7 @@ public class MemberController {
 		return mav;
 	}
 
-
-	//ë¡œê·¸ì•„ì›ƒ
+	//Logout
 	@RequestMapping(value="/member/logOut.do")
 	public ModelAndView logOut(HttpSession session) {
 		
@@ -128,13 +124,13 @@ public class MemberController {
 		return mav;
 	}
 	
-
-	//íšŒì›ê°€ì…(GET)
+	//È¸¿ø°¡ÀÔ(GET)
 	@RequestMapping(value="join.do", method=RequestMethod.GET)	
 	public void joinForm() {
 		
 	}
-	//íšŒì›ê°€ì…(POST)
+	
+	//È¸¿ø°¡ÀÔ(POST)
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
 	public ModelAndView joinSubmit(MemberVo mv) {
 		ModelAndView mav = new ModelAndView("redirect:/login.do");
@@ -142,14 +138,14 @@ public class MemberController {
 		int re = dao.memberInsert(mv);
 		if (re < 1) {
 
-			mav.addObject("msg", "å ìŒë³å ìŒëœš æ¶ì‰ì˜™å ìŒë¿¯ å ìˆë¼„å ìˆì†­");
+			mav.addObject("msg", "Failed to join");
 			mav.setViewName("/member/error");
 		}
 		return mav;
 	}
 	
 
-	//ì¤‘ë³µí™•ì¸
+	//id Áßº¹È®ÀÎ
 	@RequestMapping(value="checkId.do")
 	@ResponseBody
 	public String checkId(@RequestParam("id")String id) {
@@ -162,7 +158,7 @@ public class MemberController {
 	
 	}
 	
-	//ë©”ì¸ í˜ì´ì§€ ì•„ì´ë””ê²€ìƒ‰(idì¤‘ë³µì²´í¬)
+	//¾ÆÀÌµğ °Ë»ö½Ã Á¸ÀçÀ¯¹« È®ÀÎ
 	@RequestMapping(value="/member/checkId2.do")
 	@ResponseBody
 	public String checkId2(@RequestParam("id")String id,HttpSession session) {
@@ -176,12 +172,13 @@ public class MemberController {
 	}
 	
 
-	//ë¡œê·¸ì¸
+	//Login Form
 	@RequestMapping(value="login.do", method=RequestMethod.GET)
 	public void loginForm() {
 		
 	}
 	
+	//Login & SessionÀ¯Áö
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public ModelAndView login(String id, String pwd, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -193,7 +190,7 @@ public class MemberController {
 		Boolean r = dao.login(map);
 		if (r == true) {
 
-			//id, å ìŒë³å ìŒëœšç”•ê³•ëœ‡ï¿½ê¹ˆ å ì„ì‰­å ìˆï¿½ï¿½ å ì„ë¬¸å ì„ì‰
+			//id, session À¯Áö
 			session.setAttribute("id", id);
 			session.setAttribute("mno", dao.mno(map));
 			mav.setViewName("redirect:/member/main.do");
@@ -203,13 +200,13 @@ public class MemberController {
 		return mav;
 	}
 
-	//ë¹„ë°€ë²ˆí˜¸ì°¾ê¸°
+	//È¸¿øÁ¤º¸ ¼öÁ¤ ½Ã password È®ÀÎ form
   @RequestMapping(value="/member/pwdCheck.do", method=RequestMethod.GET)
 	public void pwdCheckForm() {
 		
 	}
 	
-	
+	////È¸¿øÁ¤º¸ ¼öÁ¤ ½Ã password È®ÀÎ
 	@RequestMapping(value="/member/pwdCheck.do", method=RequestMethod.POST)
 	public ModelAndView pwdCheck(String id, String pwd,int mno) {
 		ModelAndView mav = new ModelAndView();
@@ -226,14 +223,14 @@ public class MemberController {
 		else
 		{
 
-			mav.addObject("msg", "ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+			mav.addObject("msg", "Wrong Password");
 		}	
 		
 		return mav;
 	}
 	
 
-	//íšŒì›ì •ë³´ ìˆ˜ì •
+	//È¸¿øÁ¤º¸ ¼öÁ¤
 	@RequestMapping(value="/member/updateMember.do", method=RequestMethod.GET)
 	public void memberUpdateForm() {
 		
@@ -246,14 +243,14 @@ public class MemberController {
 		
 		int re = dao.updateMember(mv);
 		if (re < 1) {
-			mav.addObject("msg", "íšŒì›ìˆ˜ì •ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			mav.addObject("msg", "Failed to update Information");
 			mav.setViewName("/member/error");
 		}
 		
 		return mav;
 	}
 	
-	//ë©”ì¸ ì•„ì´ë””ê²€ìƒ‰
+	//¸ŞÀÎ¿¡¼­ id°Ë»ö
 	@RequestMapping(value="/member/mainSearchId.do",produces="text/plain;charset=utf-8")
 	@ResponseBody
 	public String mainSearchId(String id,HttpSession session)
@@ -281,7 +278,6 @@ public class MemberController {
 		return str;
 	}
 	
-	//ì•„ì´ë”” ê°€ì ¸ì˜¤ê¸°
 	@RequestMapping(value="/member/getId.do", produces="text/plain;charset=utf-8")
 	@ResponseBody
 	public String getIdByMno(int mno) {

@@ -37,32 +37,49 @@ body  {
 }
 
 
+
+
 /**************	  menu	*************/
+	
+	/********** mobile *********/
+
+
+
 .logo {
 	width: 105px;
-	margin-left: 10px;
+	display: inline-block;
+	margin: 10px auto;
 }
 
 nav {
-    width:1100px;
-    background:#ffffff;
+	width:100%;
+	background:#ffffff;
     margin: 0 auto;
-    padding-top: 10px;
-}
-nav ul {
-    margin:10px auto;
-    /*margin:10px auto;*/
-    float: right;
-}
-nav ul li {
-    list-style:none;
-    display: inline-block;
-    padding:20px;
+    padding-right: 5px;
+    padding-left: 5px;
+    text-align: center;
 }
 
-nav ul li a {
-    color: #000000;
-    font-weight: 600;
+#main_menu {
+	padding: 0;
+	margin: 0 2px;
+	height: 0px;
+	transition: 0.5s;
+	font-size: 13px;
+}
+
+#main_menu li {
+    list-style:none;
+    display: block;
+    width: 94%;
+    border-bottom : solid #818181 1px;
+    padding: 8px 1px;
+    margin: 0 auto;
+}
+
+#main_menu li a {
+    color: #818181;
+    background-color: #ffffff;
     text-decoration:none;
 }
 
@@ -70,9 +87,13 @@ nav span {
 	display: inline-block;
 	font-weight: 600;
 	color: #000000;
-	padding:20px 45px;
+	padding:20px;
 	margin:10px auto;
 	float: right;
+}
+
+#menu {
+	float:left;
 }
 
 .mainSearchId {
@@ -90,10 +111,13 @@ nav span {
 
 .mainSearchId_inner {
 	margin: auto;
-	width: 1000px;
+	width: 90%;
 	display: none;
 	padding: 10px;
 }
+
+
+
 /**************	side-menu	*************/
 
 .sidenav {
@@ -140,14 +164,13 @@ nav span {
     transition: margin-left .5s;
     min-height: calc(100vh - 160px);
     margin: 0;
-    padding-bottom: 60px;
 }
-/*
-@media screen and (max-height: 450px) {
+
+@media screen and (max-height: 575px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-*/
+
 .side_icon_set {
 	padding: 8px 8px 8px 32px;
 }
@@ -175,7 +198,7 @@ nav span {
 .content {
 	position: relative;
 	margin:0px auto;
-	width: 960px;
+	width: 90%;
 }
 	<!--mypage-->
 .content a{
@@ -201,28 +224,29 @@ h2 {
 /*************	footer	************/
 .footer {
     font-family: 'Nanum Pen Script', serif;
-    font-size: 30px;
     text-align: center;
     color: #818181;
     background-color: #151515;
-    height : 156px;
-
+	padding: 5px;
 }
 
-.footer h3{
-	color: #818181;
-	padding-top: 20px;
-	margin-top: 0;
+@media screen and (min-width: 576px) {
+	.footer h3{
+		color: #818181;
+		padding-top: 20px;
+		margin-top: 0;
+	}
+
+	.footer ul {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
 }
 
-.footer ul {
-	margin-top: 0;
-	margin-bottom: 0;
-}
 .btn-social {
   display: inline-block;
-  height: 50px;
-  width: 50px;
+  height: 30px;
+  width: 30px;
   border: 2px solid white;
   border-radius: 100%;
   text-align: center;
@@ -243,4 +267,81 @@ margin-top:15px
 color:#fff;
 background:#fff;
 border:2px solid #fff;
+}
+
+
+
+
+
+	/********** web *********/
+	
+	
+	
+	
+
+@media screen and (min-width: 576px) {	
+	.logo {
+		width: 105px;
+		margin-left: 10px;
+	}
+	
+	nav {
+		width:100%;
+		background:#ffffff;
+	    margin: 0 auto;
+	    padding-top: 10px;
+	    text-align: left;
+	}	
+	
+	#main_menu {
+	    margin:10px auto;
+	    float: right;
+	}
+	
+	#main_menu li {
+	    list-style:none;
+	    display: inline-block;
+	    padding:20px;
+	    border: none;
+	    width: auto;
+	}
+	
+	#main_menu li a {
+	    color: #000000;
+	    font-weight: 600;
+	    text-decoration:none;
+	}
+	
+	nav span {
+		display: inline-block;
+		font-weight: 600;
+		color: #000000;
+		padding:20px;
+		margin:10px auto;
+		float: right;
+	}
+	
+	#menu {
+		display: none;
+	}
+	
+	.mainSearchId {
+		background: #262626;
+	    color: #fff;
+	    margin: 0;
+	    width: 100%;
+	    top: 0;
+	    left: 0;
+	    height: 50px;
+	    transition: height .5s;
+	    display: none;
+	}
+	
+	.mainSearchId_inner {
+		margin: auto;
+		width: 1000px;
+		display: none;
+		padding: 10px;
+	}
+
 }

@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.codec.language.bm.Rule.Phoneme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +32,6 @@ public class DiaryController {
 		this.dao = dao;
 	}
 
-	// ï¿½ï¿½ï¿½ï¿½ ï¿½ó¼¼ºï¿½ï¿½ï¿½
 	@RequestMapping("/member/mainDetailDiary.do")
 	public ModelAndView mainDetailDiary(int dno) {
 		Map map = new HashMap();
@@ -44,7 +41,7 @@ public class DiaryController {
 		return mav;
 	}
 
-	// Ä£ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ó¼¼ºï¿½ï¿½ï¿½
+	// Ä£±¸ÀÏ±âÀå »ó¼¼
 	@RequestMapping("/member/detailFavoriteDiary.do")
 	public ModelAndView detailFavoriteDiary(int dno) {
 		Map map = new HashMap();
@@ -78,7 +75,6 @@ public class DiaryController {
 		return str;
 	}
 
-	// ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/member/deleteDiary.do")
 	public ModelAndView deleteDiary(int dno, HttpSession session, HttpServletRequest request) {
 
@@ -105,7 +101,6 @@ public class DiaryController {
 		return mav;
 	}
 
-	// ï¿½Ï±ï¿½ update(get)
 	@RequestMapping(value = "/member/updateDiary.do", method = RequestMethod.GET)
 	public ModelAndView diaryUpdateForm(int dno) {
 		Map map = new HashMap();
@@ -115,7 +110,6 @@ public class DiaryController {
 		return mav;
 	}
 
-	// ï¿½Ï±ï¿½ update(post)
 	@RequestMapping(value = "/member/updateDiary.do", method = RequestMethod.POST)
 	public ModelAndView diaryUpdateSubmit(DiaryVo d, HttpSession session, HttpServletRequest request) {
 
@@ -136,11 +130,10 @@ public class DiaryController {
 		int bno = (Integer) session.getAttribute("bno");
 		ModelAndView mav = new ModelAndView();
 
-		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ map
 		Map map = new HashMap();
 		map.put("dno", d.getDno());
 
-		// ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ù²Ü°ï¿½ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//ÀÌÀü ÀÌ¸§ ÀúÀå
 		String oldDphoto = (dao.detailDiary(map)).getDphoto();
 		String oldDfile = (dao.detailDiary(map)).getDfile();
 
@@ -155,18 +148,18 @@ public class DiaryController {
 		MultipartFile upload = d.getUpload();
 		MultipartFile uploadG = d.getUploadG();
 
-		// ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ù²Ù´ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¨
+		// ¾÷·Îµå µÇ¾îÀÖ´Â ¿øº» ÀÌ¸§
 		String orgname = upload.getOriginalFilename();
 		String dphoto = "x";
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Ù²Ù±ï¿½
+		// »çÁøÀÌ ¾øÀ¸¸é
 		if (orgname != null && !orgname.equals("")) {
 
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
-			// bnoï¿½ï¿½ dnoï¿½ï¿½ È®ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½
+			// bno¿Í diaryno¿Í ÀÌÀü È®ÀåÀÚ¸¦ Á¶ÇÕÇÑ »õ·Î¿î ÀÌ¸§
 			dphoto = bno + "b" + no + "." + exc;
 
-			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(saveFile)ï¿½ï¿½ uploadï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½
+			// ÆÄÀÏ »ý¼º
 			File saveFile = new File(path + "/" + dphoto);
 			try {
 				upload.transferTo(saveFile);
@@ -177,7 +170,7 @@ public class DiaryController {
 
 		}
 
-		// ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// »çÁøÀÌ ¹Ù²î¾úÀ¸¸é
 		if (!dphoto.equals("x")) {
 			d.setDphoto(dphoto);
 			d.setDtype(d.getDtype().substring(0, 2) + "1");
@@ -192,20 +185,16 @@ public class DiaryController {
 			}
 		}
 
-		/************** ï¿½×¸ï¿½ *****************/
+		/************** ±×¸² (upload2Æú´õ) *****************/
 
-		// ï¿½×¸ï¿½ ï¿½Ì¸ï¿½ ï¿½Ù²Ù´ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¨
 		String orgnameG = uploadG.getOriginalFilename();
 		String dfile = "x";
 
-		// ï¿½×¸ï¿½ï¿½Ì¸ï¿½ ï¿½Ù²Ù±ï¿½
 		if (orgnameG != null && !orgnameG.equals("")) {
 
 			String excG = orgnameG.substring(orgnameG.lastIndexOf(".") + 1, orgnameG.length());
-			// bnoï¿½ï¿½ dnoï¿½ï¿½ È®ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½
 			dfile = bno + "b" + no + "grim." + excG;
 
-			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(saveFile)ï¿½ï¿½ uploadï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½
 			File saveFile = new File(pathG + "/" + dfile);
 			try {
 				uploadG.transferTo(saveFile);
@@ -215,7 +204,6 @@ public class DiaryController {
 			}
 		}
 
-		// ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (!dfile.equals("x")) {
 			d.setDfile(dfile);
 			d.setDtype(d.getDtype().substring(0, 2) + "1");
@@ -230,22 +218,20 @@ public class DiaryController {
 			}
 		}
 		
-		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ "+oldDphoto);
-		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½ "+oldDfile);
-		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ "+d.getDphoto());
-		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½×¸ï¿½ "+d.getDfile());
+		System.out.println("oldDphoto "+oldDphoto);
+		System.out.println("oldDfile "+oldDfile);
+		System.out.println("newDphoto "+d.getDphoto());
+		System.out.println("newDfile "+d.getDfile());
 
 		int re = dao.updateDiary(d);
 
 		if (re > 0) {
 			mav.setViewName("redirect:/member/diary.do?mno=" + mno + "&bno=" + bno);
 			if (oldDphoto != null && !oldDphoto.equals(dphoto) && !dphoto.equals("x")) {
-				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 				File file = new File(path + "/" + oldDphoto);
 				file.delete();
 			}
 			if (oldDfile != null && !oldDfile.equals(dfile) && !dfile.equals("x")) {
-				System.out.println("ï¿½×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 				File fileG = new File(pathG + "/" + oldDfile);
 				fileG.delete();
 			}
@@ -258,7 +244,6 @@ public class DiaryController {
 		return mav;
 	}
 
-	// ï¿½ó¼¼ºï¿½ï¿½ï¿½
 	@RequestMapping("/member/detailDiary.do")
 	public ModelAndView detailDiary(int dno) {
 		Map map = new HashMap();
@@ -268,7 +253,6 @@ public class DiaryController {
 		return mav;
 	}
 
-	// ï¿½Ï±ï¿½ ï¿½ß°ï¿½(get)
 	@RequestMapping(value = "/member/insertDiary.do", method = RequestMethod.GET)
 	public ModelAndView diaryInsertForm(HttpSession session,HttpServletRequest request) {
 		
@@ -333,7 +317,6 @@ public class DiaryController {
 		return mav;
 	}
 
-	// ï¿½Ï±ï¿½ ï¿½ß°ï¿½(post)
 	@RequestMapping(value = "/member/insertDiary.do", method = RequestMethod.POST)
 	public ModelAndView diaryInsertSubmit(DiaryVo d, HttpServletRequest request, HttpSession session) {
 		int mno = (Integer) session.getAttribute("mno");
@@ -343,12 +326,13 @@ public class DiaryController {
 		d.setDno(no);
 
 		d.setDtype("000");
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ unllï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		
+		// ÆÄÀÏÀÌ ÀÖÀ¸¸é
 		if (d.getDfile() != null) {
 			d.setDtype("100");
 		}
 
-		// contentï¿½ï¿½ nullï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		
 		if (d.getDcontent() != null) {
 			d.setDtype(d.getDtype().substring(0, 1) + "1" + d.getDtype().substring(2));
 		}
@@ -356,7 +340,7 @@ public class DiaryController {
 		d.setDphoto("");
 		d.setDfile("");
 
-		// ï¿½ï¿½ï¿½ï¿½,ï¿½×¸ï¿½ path ï¿½ï¿½ï¿½ï¿½
+		// path
 		String path = request.getRealPath("resources/upload");
 		String pathG = request.getRealPath("resources/upload2");
 		
@@ -368,20 +352,19 @@ public class DiaryController {
 		Boolean success = false;
 		ModelAndView view = new ModelAndView();
 
-		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+		// ¿øº» ÆÄÀÏ ÀÌ¸§À» ´ã°í dphoto¿¡ ÃÊ±â°ª x ³ÖÀ½
 		String orgname = upload.getOriginalFilename();
 		String dphoto = "x";
 
+		// ¾÷·ÎµåÇÑ ÆÄÀÏÀÌ ÀÖÀ¸¸é
 		if (orgname != null && !orgname.equals("")) {
-
+			//bno¿Í dno·Î ¸¸µç »õ ÀÌ¸§À¸·Î ÆÄÀÏ »ý¼º
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
-			// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			dphoto = bno + "b" + no + "." + exc;
-			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 			File saveFile = new File(path + "/" + dphoto);
 
 			try {
-				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(saveFile)ï¿½ï¿½ uploadï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½
+				// ÆÄÀÏ³»¿ëÀ» saveFile¿¡ º¹»ç
 				upload.transferTo(saveFile);
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -389,7 +372,7 @@ public class DiaryController {
 			}
 
 		}
-		// ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// ¾÷·ÎµåÇÑ ÆÄÀÏÀÌ ÀÖÀ¸¸é dphoto¿¡ Ãâ·Â
 		if (!dphoto.equals("x")) {
 			d.setDphoto(dphoto);
 			d.setDtype(d.getDtype().substring(0, 2) + "1");
@@ -403,20 +386,18 @@ public class DiaryController {
 				e.printStackTrace();
 			}
 		}
-
+		
+		/************** ±×¸² ***************/
 		String orgnameG = uploadG.getOriginalFilename();
 		String dfile = "x";
 
 		if (orgnameG != null && !orgnameG.equals("")) {
 
 			String excG = orgnameG.substring(orgnameG.lastIndexOf(".") + 1, orgnameG.length());
-			// ï¿½×¸ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			dfile = bno + "b" + no + "grim." + excG;
-			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 			File saveFileG = new File(pathG + "/" + dfile);
 
 			try {
-				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(saveFileG)ï¿½ï¿½ uploadï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½
 				upload.transferTo(saveFileG);
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -425,7 +406,6 @@ public class DiaryController {
 
 		}
 		
-		// ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (!dfile.equals("x")) {
 			d.setDfile(dfile);
 			d.setDtype(d.getDtype().substring(0, 2) + "1");
