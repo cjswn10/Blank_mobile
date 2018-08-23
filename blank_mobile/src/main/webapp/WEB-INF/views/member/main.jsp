@@ -1,3 +1,8 @@
+<%@page import="com.blank.dao.MemberDao"%>
+<%@page import="com.blank.vo.LogVo"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.net.InetAddress"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -83,6 +88,15 @@
 
 <script type="text/javascript">
 $(function () {
+	
+	setTimeout(function () {
+		
+		location.href = "logOut.do?id=${id}&autoOut=out";
+		
+	},10800*1000);
+	
+	
+	
 	var mno = ${mno}
 	
 	$.ajax({
@@ -281,10 +295,10 @@ $(function () {
 <title>빈칸을 채우다.</title>
 </head>
 <body>
+
 	<!-- side-menu -->
 	<section id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		
 		<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 		<h5>회원정보</h5>
 		<a href="pwdCheck.do?id=${id }">Edit</a>

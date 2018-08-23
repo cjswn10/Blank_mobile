@@ -55,6 +55,12 @@
 	$(function() {
 		
 		setTimeout(function () {
+			
+			location.href = "logOut.do?id=${id}&autoOut=out";
+			
+		},10800*1000);
+		
+		setTimeout(function () {
 			$("#d").html("");
 		},5000);
 		
@@ -74,7 +80,7 @@
 	<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 	<h5>회원정보</h5>
 	<a href="pwdCheck.do?id=${id }">Edit</a>
-	<a href="logOut.do">logout</a>
+	<a href="logOut.do?id=${id }">logout</a>
 	<br>
 	<h5>고객센터</h5>
 	<a href="qNa.do">Contact</a>

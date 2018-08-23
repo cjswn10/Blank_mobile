@@ -17,6 +17,18 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/login.css">
 <!--===============================================================================================-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		
+		if(location.search.substring(location.search.indexOf("&")+1,location.search.lastIndexOf("&")+2) == 'a')
+		{
+			alert("오랫동안 입력이 없어 로그아웃 되었습니다.")
+		}
+
+	})
+	
+</script>
 
 </head>
 <body>

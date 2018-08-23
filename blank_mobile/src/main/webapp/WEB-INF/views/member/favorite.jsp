@@ -5,16 +5,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+   content="with=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+minimum-scale=1.0,
+user-scalable=no">
+
 <title>빈칸을 채우다.</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+
 <style type="text/css">
+ul{
+   list-style:none;
+   }
 .content h2{
 	text-align: center;
 }
 #favolist{
 	display: table;
-	margin-left: auto;
-	
-	
+	margin-left: auto;	
 }
 #favolist > li{
 	list-style: none;
@@ -33,11 +43,19 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <link rel="stylesheet" href="../resources/css/blank.css">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript">
 	
 	$(function() {		
+		
+		setTimeout(function () {
+			
+			location.href = "logOut.do?id=${id}&autoOut=out";
+			
+		},10800*1000);
+		
 		$(document).on("pageload", function(){
 			window.location.reload(true);
 		})
@@ -54,9 +72,9 @@
 					var a = $("<a href='othersDiary.do?id="+f.id+"&fno="+f.fno+"&fmno="+f.fmno+"'></a>").html(f.id+"님");		
 					var li = $("<li></li>");
 					var removeimg = $("<a href='deleteFavorite.do?mno=" + ${mno} + "&fmno="+f.fmno+"' class='glyphicon glyphicon-remove' id='plus_location'></a>");
-					
+					 
 					$(li).append(img,a,removeimg);
-					$("#favolist").append(li);
+					$("#list").append(li);
 				});
 			}});
 		};
@@ -66,14 +84,51 @@
 </head>
 <body>
 
+	<div data-role="page">
+		<div data-role="header">헤더</div>
+				
+		<div data-role="content">
+			<ul data-role="listview" id="list"></ul>
+
+		</div>
+			
+		<div data-role="footer">
+			<footer class="footer">
+				<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+					<ul class="list-inline">
+				       <li>
+				           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+				           <br><h5>김영호</h5>
+				       </li>
+				       <li>
+				           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+				           <br><h5>변성인</h5>
+				       </li>
+				       <li>
+				           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+				           <br><h5>성민규</h5>
+				       </li>
+				       <li>
+				           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+				           <br><h5>임연주</h5>
+				       </li>
+				       <li>
+				           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+				           <br><h5>차건우</h5>
+				       </li>
+				    </ul>
+		    </footer>
+		</div>
+	</div>
+
 <!-- side-menu -->
-<section id="mySidenav" class="sidenav">
+<%-- <section id="mySidenav" class="sidenav">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 	
 	<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 	<h5>회원정보</h5>
 	<a href="pwdCheck.do?id=${id }">Edit</a>
-	<a href="logOut.do">logout</a>
+	<a href="logOut.do?id=${id }">logout</a>
 	<br>
 	<h5>고객센터</h5>
 	<a href="qNa.do">Contact</a>
@@ -101,11 +156,11 @@
 		<h2># 당신의 픽</h2><br><br>
 		<ul id="favolist" style="margin-right: auto;"></ul>
 	</div>
-</div>
+</div> --%>
 
 <!-- 푸터 -->
-<footer class="footer">
-	<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+<!-- <footer class="footer">
+ 	<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
 	<ul class="list-inline">
        <li>
            <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
@@ -128,6 +183,6 @@
            <br><h5>차건우</h5>
        </li>
     </ul>
-</footer>	
+</footer> -->	
 </body>
 </html>

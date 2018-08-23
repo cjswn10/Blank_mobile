@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.blank.vo.LogVo;
 import com.blank.vo.MemberVo;
 
 public class MemberManager {
@@ -116,14 +117,38 @@ public class MemberManager {
 	}
 	
 	//비밀번호 찾기
-		public static String searchPwd(Map map)
-		{
-			String pwd = "";
-			SqlSession session = factory.openSession();
-			pwd = session.selectOne("member.searchPwd", map);
-			session.close();
-			return pwd;
-		}
+	public static String searchPwd(Map map)
+	{
+		String pwd = "";
+		SqlSession session = factory.openSession();
+		pwd = session.selectOne("member.searchPwd", map);
+		session.close();
+		return pwd;
+	}
+	
+	//로그인 기록
+	public static int logRecord(LogVo l)
+	{
+		int re = -1;
+		SqlSession session = factory.openSession();
+		l.setLno(logNextLno());
+		re = session.insert("logRecod", l);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	//로그인 기록 번호자동증가
+	public static int logNextLno()
+	{
+		int lno = 0;
+		SqlSession session = factory.openSession();
+		lno = session.selectOne("member.logNextLno");
+		session.close();
+		return lno;
+	}	
+		
+	
 }
 
 

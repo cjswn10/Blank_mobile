@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
 <title>빈칸을 채우다.</title>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
@@ -73,6 +74,11 @@
 		height: 40px;
 	}
 	
+	body 
+	{
+    	-webkit-text-size-adjust: none;
+	}
+	
 </style>
 
 <!-- 색상구현 css -->
@@ -95,6 +101,12 @@
 
 <script type="text/javascript">
 	$(function() {
+		
+		setTimeout(function () {
+			
+			location.href = "logOut.do?id=${id}&autoOut=out";
+			
+		},10800*1000);
 		
 		$('#color-picker-size').colorpicker(
 			{
@@ -150,7 +162,7 @@
 	<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 	<h5>회원정보</h5>
 	<a href="pwdCheck.do?id=${id }">Edit</a>
-	<a href="logOut.do">logout</a>
+	<a href="logOut.do?id=${id }">logout</a>
 	<br>
 	<h5>고객센터</h5>
 	<a href="qNa.do">Contact</a>

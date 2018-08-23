@@ -1,18 +1,20 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
-<html>
+<html manifest="resources/conf/bit.manifest">
 <head>
 <meta charset="UTF-8">
-<title>Blank Grimpan</title>
-<style type="text/css">
-canvas {
-	border: 1px solid black
-}
-</style>
-</head>
+<meta name="viewport"
+	content="with=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+minimum-scale=1.0,
+user-scalable=no">
+<link rel="shortcut-touch-icon" href="resources/img/bit.png">
+<link rel="apple-touch-icon" href="resources/img/bit.png">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
@@ -39,38 +41,24 @@ canvas {
 	}
 </script>
 <body>
+<div data-role="content">
 	<div>
-		<canvas id="canvas" width="450" height="500" style="didsplay:inline-block;"></canvas>
-		<div style="float:right;">
-		<br><br><br><br><br><br><br><br><br>
-		●CANVAS안에 원하는 그림을 그려주세요<br>
-		●선 SIZE를 조절할 수 있습니다<br>
-		●그림을 모두 지우고 싶으면<img src="../resources/img/icon/newpage.png" width="15px">를 눌러주세요 <br>
-		●그림을 살짝 되돌리고 싶으면<img src="../resources/img/icon/prev.png" width="15px">를 눌러주세요 <br>
-		●그림을 다 그렸으면<img src="../resources/img/icon/download.png" width="15px">를 눌러주세요 <br>
-		●CANVAS 사용을 끝내려면<img src="../resources/img/icon/exit.png" width="15px">를 눌러주세요 <br>
-		</div>
+		<canvas id="canvas" width="400px" height="400px" style=" display:inline-block;"></canvas>
 	</div>
+</div>
 	
-	<script type="text/javascript" src="../resources/js/drawingColor.js"></script>
+	<script type="text/javascript" src="../resources/js/drawingColor.js?ver=18"></script>
 	
-	<input type="button" id="selectColor">
-	<input id="myColor" type="color" onchange="cg_color(this.value)">
-
+	<input type="hidden" id="selectColor">
+	<input type="color" id="myColor" onchange="cg_color(this.value)">
+	
 	Size:<input type="range" min="1" max="5" id="Lwidth" value="1" onchange="cg_line(this.value)">
 
-	<div>
-		<button id="delete"><img src="../resources/img/icon/newpage.png" width="15px">전체지우기</button>
-		<button id="prev"><img src="../resources/img/icon/prev.png" width="15px">되돌리기</button>
-	</div>
+		<button data-inline='true' style='margin:0px auto;' id="delete"><img src="../resources/img/icon/newpage.png" width="15px"></button>
+		<button data-inline='true' style='margin:0px auto;' id="prev"><img src="../resources/img/icon/prev.png" width="15px"></button>
+		<a id="download"><button data-inline='true' style='margin:0px auto;'><img src="../resources/img/icon/download.png" width="15px"></button></a>
+		<button data-inline='true' style='margin:0px auto;' id="btnOk"><img src="../resources/img/icon/exit.png" width="15px"></button>
 	
-	<div>
-		<a id="download"><button type="button"><img src="../resources/img/icon/download.png" width="15px">download</button></a>
-	</div>
-	
-	<div>
-		<button id="btnOk"><img src="../resources/img/icon/exit.png" width="15px">닫기</button>
-	</div>
 	
 	<img id="myImage">
 

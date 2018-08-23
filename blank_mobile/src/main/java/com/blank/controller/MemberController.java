@@ -1,8 +1,14 @@
 
 package com.blank.controller;
 
+import java.net.InetAddress;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.blank.dao.MemberDao;
+import com.blank.vo.LogVo;
 import com.blank.vo.MemberVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,7 +36,7 @@ public class MemberController {
 	}
 
 
-	//¸¶ÀÌÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value="/member/myPage.do")
 	public ModelAndView myPage() {
 		
@@ -38,7 +45,7 @@ public class MemberController {
 	}
 	
 
-	//°èÁ¤Ã£±â
+	//ï¿½ï¿½ï¿½Ã£ï¿½ï¿½
 	@RequestMapping(value="search.do")
 	public ModelAndView search() {
 			
@@ -48,7 +55,7 @@ public class MemberController {
 	
 
 
-	//idÃ£±â ÆäÀÌÁö
+	//idÃ£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value="searchIdPage.do")
 	public ModelAndView searchId() {
 				
@@ -56,7 +63,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//passwordÃ£±â ÆäÀÌÁö
+	//passwordÃ£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value="searchPwdPage.do")
 	public ModelAndView searchPwd() {
 					
@@ -64,7 +71,7 @@ public class MemberController {
 		return mav;
 	}
 
-	//idÃ£±â
+	//idÃ£ï¿½ï¿½
 	@RequestMapping(value="searchId.do")
 	@ResponseBody
 	public String searchId(String name,String phone)
@@ -85,7 +92,7 @@ public class MemberController {
 		return str;
 	}
 	
-	//passwordÃ£±â 
+	//passwordÃ£ï¿½ï¿½ 
 	@RequestMapping(value="searchPwd.do")
 	@ResponseBody
 	public String searchPwd(String id,String phone)
@@ -116,21 +123,93 @@ public class MemberController {
 
 	//Logout
 	@RequestMapping(value="/member/logOut.do")
-	public ModelAndView logOut(HttpSession session) {
+	public ModelAndView logOut(HttpSession session,LogVo l,HttpServletRequest request,String autoOut) {
 		
 		ModelAndView mav = new ModelAndView();
+		
+		try {
+			
+			String ip = request.getHeader("X-FORWARDED-FOR");
+			//System.out.println("TEST : X-FORWARDED-FOR : "+ip);
+
+			if (ip == null) {
+
+				ip = request.getHeader("Proxy-Client-IP");
+				//System.out.println("TEST : Proxy-Client-IP : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getHeader("WL-Proxy-Client-IP");
+				//System.out.println("TEST : WL-Proxy-Client-IP : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getHeader("HTTP_CLIENT_IP");
+				//System.out.println("TEST : HTTP_CLIENT_IP : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+				//System.out.println("TEST : HTTP_X_FORWARDED_FOR : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getRemoteAddr();
+
+			}
+			
+			l.setIp(ip);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		
+		String id = request.getParameter("id");
+		
+		l.setId(id);
+		l.setRecord("ë¡œê·¸ì•„ì›ƒ");
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+
+		Calendar today = Calendar.getInstance();
+		
+		String todays = format.format(today.getTime());
+		
+		l.setLdate(todays);
+		
+		int re = dao.logRecord(l);
+		if(re > 0)
+		{
+			mav.addObject("msg", "ì„±ê³µ");
+			mav.setViewName("redirect:/member/main.do");
+		}
+		else
+		{
+			mav.addObject("msg", "ì‹¤íŒ¨");
+			mav.setViewName("error");
+		}
+		mav.addObject("autoOut", autoOut);
 		session.invalidate();
 		mav.setViewName("redirect:/login.do");
 		return mav;
 	}
 	
-	//È¸¿ø°¡ÀÔ(GET)
+	//È¸ï¿½ï¿½ï¿½ï¿½(GET)
 	@RequestMapping(value="join.do", method=RequestMethod.GET)	
 	public void joinForm() {
 		
 	}
 	
-	//È¸¿ø°¡ÀÔ(POST)
+	//È¸ï¿½ï¿½ï¿½ï¿½(POST)
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
 	public ModelAndView joinSubmit(MemberVo mv) {
 		ModelAndView mav = new ModelAndView("redirect:/login.do");
@@ -145,7 +224,7 @@ public class MemberController {
 	}
 	
 
-	//id Áßº¹È®ÀÎ
+	//id ï¿½ßºï¿½È®ï¿½ï¿½
 	@RequestMapping(value="checkId.do")
 	@ResponseBody
 	public String checkId(@RequestParam("id")String id) {
@@ -158,7 +237,7 @@ public class MemberController {
 	
 	}
 	
-	//¾ÆÀÌµğ °Ë»ö½Ã Á¸ÀçÀ¯¹« È®ÀÎ
+	//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ë»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	@RequestMapping(value="/member/checkId2.do")
 	@ResponseBody
 	public String checkId2(@RequestParam("id")String id,HttpSession session) {
@@ -174,13 +253,13 @@ public class MemberController {
 
 	//Login Form
 	@RequestMapping(value="login.do", method=RequestMethod.GET)
-	public void loginForm() {
+	public void loginForm() {	
 		
 	}
 	
-	//Login & SessionÀ¯Áö
+	//Login & Sessionï¿½ï¿½ï¿½
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public ModelAndView login(String id, String pwd, HttpSession session) {
+	public ModelAndView login(String id, String pwd, HttpSession session,LogVo l,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		
 		Map map = new HashMap();
@@ -190,23 +269,93 @@ public class MemberController {
 		Boolean r = dao.login(map);
 		if (r == true) {
 
-			//id, session À¯Áö
+			//id, session ï¿½ï¿½ï¿½
 			session.setAttribute("id", id);
 			session.setAttribute("mno", dao.mno(map));
 			mav.setViewName("redirect:/member/main.do");
 		}
+		try {
+			
+			String ip = request.getHeader("X-FORWARDED-FOR");
+			//System.out.println("TEST : X-FORWARDED-FOR : "+ip);
 
-		//mav.setViewName("redirect:/member/main.do");
+			if (ip == null) {
+
+				ip = request.getHeader("Proxy-Client-IP");
+				//System.out.println("TEST : Proxy-Client-IP : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getHeader("WL-Proxy-Client-IP");
+				//System.out.println("TEST : WL-Proxy-Client-IP : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getHeader("HTTP_CLIENT_IP");
+				//System.out.println("TEST : HTTP_CLIENT_IP : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+				//System.out.println("TEST : HTTP_X_FORWARDED_FOR : "+ip);
+
+			}
+
+			if (ip == null) {
+
+				ip = request.getRemoteAddr();
+
+			}
+			
+			l.setIp(ip);
+			     
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		
+		l.setId(id);
+		l.setRecord("ë¡œê·¸ì¸");
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+
+		Calendar today = Calendar.getInstance();
+		
+		String todays = format.format(today.getTime());
+		
+		l.setLdate(todays);
+		
+		int re = dao.logRecord(l);
+		if(re > 0)
+		{
+			mav.addObject("msg", "ì„±ê³µ");
+			mav.setViewName("redirect:/member/main.do");
+		}
+		else
+		{
+			mav.addObject("msg", "ì‹¤íŒ¨");
+			mav.setViewName("error");
+		}
+		
+		//ë¡œê·¸ì¸ í•˜ê³  3ì‹œê°„5ë¶„ ë™ì•ˆ í˜ì´ì§€ë¥¼ ì´ë™í•˜ì§€ì•Šìœ¼ë©´ ì„¸ì…˜ ì‚­ì œ(ì¦‰, ìë™ ë¡œê·¸ì•„ì›ƒ)
+		session.setMaxInactiveInterval(185*60);
+		
 		return mav;
 	}
 
-	//È¸¿øÁ¤º¸ ¼öÁ¤ ½Ã password È®ÀÎ form
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ password È®ï¿½ï¿½ form
   @RequestMapping(value="/member/pwdCheck.do", method=RequestMethod.GET)
 	public void pwdCheckForm() {
 		
 	}
 	
-	////È¸¿øÁ¤º¸ ¼öÁ¤ ½Ã password È®ÀÎ
+	////È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ password È®ï¿½ï¿½
 	@RequestMapping(value="/member/pwdCheck.do", method=RequestMethod.POST)
 	public ModelAndView pwdCheck(String id, String pwd,int mno) {
 		ModelAndView mav = new ModelAndView();
@@ -230,7 +379,7 @@ public class MemberController {
 	}
 	
 
-	//È¸¿øÁ¤º¸ ¼öÁ¤
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@RequestMapping(value="/member/updateMember.do", method=RequestMethod.GET)
 	public void memberUpdateForm() {
 		
@@ -250,7 +399,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//¸ŞÀÎ¿¡¼­ id°Ë»ö
+	//ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ idï¿½Ë»ï¿½
 	@RequestMapping(value="/member/mainSearchId.do",produces="text/plain;charset=utf-8")
 	@ResponseBody
 	public String mainSearchId(String id,HttpSession session)

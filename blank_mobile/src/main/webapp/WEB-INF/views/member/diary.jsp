@@ -4,15 +4,53 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+   content="with=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+minimum-scale=1.0,
+user-scalable=no">
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gaegu|Gamja+Flower|Jua|Nanum+Brush+Script|Nanum+Gothic+Coding|Nanum+Myeongjo|Nanum+Pen+Script|Source+Sans+Pro|Stylish|Sunflower:300" rel="stylesheet">
 
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
+.deleteDiary{
+	background-color: orange;
+	padding: 15px;	
+	opacity: 0.8;	
+}
+
+.updateDiary{
+	background-color: blue;
+	padding: 15px;	
+	opacity: 0.8;
+}
+
+.insertDiary{
+	background-color: pink;
+	padding: 15px;	
+	opacity: 0.8;
+}
+
+#diaryImg{
+	width: 100%;
+	height: 100%;
+}
+
+.ddate{	
+	text-align: right;	
+}
+
+.listdiary{
+	width: 100%;
+	height: 100%;
+}
 .selectBook
 {
-	width: 960px;
+	width: 400px;
 	margin: 0 auto;
+	text-align: left;
 }
 
 .insertForm{
@@ -22,9 +60,6 @@
 	text-align: center;
 }
 /*insert 아이콘*/
-
-
-
 .gi-5x{
 	font-size: 50px;
 	position: relative;
@@ -48,49 +83,51 @@
 	#main_container > div
 	{
 		position:relative;
-		width: 350px;
+		width: 20%;
 		float: left;
 		margin: 50px;
 		padding: 10px;
-		font-size: 30px;
+		font-size: 15px;
 	}
 	
 	.dcontent{
 		border: 1px solid black;
 		border-radius: 10px;
-		width: 353px;
-		height: 250px;
+		width: 50%;
+		height: 100%;		
+		/* width: 353px;
+		height: 250px; */
 		overflow: auto;
 	}
 	
-	.diarytitle{
+	.diarytitle{	
 		font-family: 'Nanum Pen Script', cursive;
 		border: 1px solid black;
-		border-radius: 10px;
-		
+		border-radius: 10px;		
 	}
 	
 	.footer{
 		margin-top: 5%;
 	}
 
-	
-
 </style>
-
 <title>빈칸을 채우다.</title>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
 <link rel="stylesheet" href="../resources/css/blank.css?ver=1">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
-
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-	$(function () {
+	 $(function () {
+		
+		setTimeout(function () {
+			
+			location.href = "logOut.do?id=${id}&autoOut=out";
+			
+		},10800*1000);
+		
 		var mno = ${mno}		
 		var bno = document.location.search.substr(14);
 
@@ -123,8 +160,67 @@
 				data: {"bno":bno,"mno":mno},
 				success:function(data){				
 					var list = eval("("+data+")");
-					$.each(list, function(i, d) {
-						//날짜 날씨 제목 그림 사진 글
+					$.each(list, function(idx, d) {
+						var li = $('<li></li>');
+						$(li).attr("idx",idx);
+						var a = $('<a href="#detailDiary"></a>');
+						
+						$(li).click(function() {							
+							var i = $(this).attr("idx");							
+							var selG = list[i];							
+							 
+							$('#diaryImg').attr("src", "../resources/upload2/"+ selG.dfile);							
+							$('#ddate').html(selG.ddate);
+							$('#dweather').html(selG.dweather);
+							$('#dtitle').html(selG.dtitle);
+							$('#dcontent').html(selG.dcontent);
+						})
+						
+						/* var img = $('<img></img>').attr({
+							src: "../resources/upload2/" + d.dfile,
+							width: "100",
+							height: "100"
+						}) */
+						
+						
+						var title = $('<span></span>').html(d.dtitle);
+						var content = $('<p></p>').html(d.dcontent);				
+						var ddate = $('<p class="ddate" style="font-size: 8px;"></p>').html(d.ddate);
+						
+						if (d.dphoto != null) {							
+							var img = $('<img></img>').attr({
+								src: "../resources/upload/" + d.dphoto,
+								width: "100%",
+								height: "100%"					
+							});
+							$(a).append(img, title, content, ddate);
+							$(li).append(a);
+							$('#list').append(li);
+						}else {
+							$(a).append(title, content, ddate);
+							$(li).append(a);
+							$('#list').append(li);					
+						}		            
+						
+						if (d.dfile != null) {							
+							var img = $('<img></img>').attr({
+								src: "../resources/upload2/" + d.dfile,
+								width: "100%",
+								height: "100%"					
+							});
+							$(a).append(img, title, content, ddate);
+							$(li).append(a);
+							$('#list').append(li);
+						}else {
+							$(a).append(title, content, ddate);
+							$(li).append(a);
+							$('#list').append(li);					
+						}						
+						/* $(a).append(img, title, content, ddate);
+						$(li).append(a);
+						$('#list').append(li); */	
+						
+						/* //날짜 날씨 제목 그림 사진 글
 						var div = $('<div class="listdiary"></div>');
 						var title = $('<div class="diarytitle">제목:'+d.dtitle+'</div>');
 						
@@ -141,8 +237,8 @@
 						if (d.dphoto != null) {							
 							var img = $('<img></img>').attr({
 								src: "../resources/upload/" + d.dphoto,
-								width: "353",
-								height: "250"					
+								width: "50%",
+								height: "50%"					
 							});
 							$(a).append(img);
 							$(div).append(title,a,br,p);
@@ -156,8 +252,8 @@
 						if (d.dfile != null) {							
 							var img = $('<img></img>').attr({
 								src: "../resources/upload2/" + d.dfile,
-								width: "353",
-								height: "250"					
+								width: "50%",
+								height: "50%"					
 							});
 							$(a).append(img);
 							$(div).append(title,a,br,p);
@@ -167,101 +263,97 @@
 							$(div).append(title,a);
 							$("#main_container").append(div);					
 						}		            
-
-					})				
+ */
+					})
+					$('#list').listview("refresh");
 			}});		
 		};
 		selectBook();
 		listDiary();
 	});
-	
+	 
 </script>
 </head>
 <body>
-
-<!-- side-menu -->
-<section id="mySidenav" class="sidenav">
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	
-	<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
-	<h5>회원정보</h5>
-	<a href="pwdCheck.do?id=${id }">Edit</a>
-	<a href="logOut.do">logout</a>
-	<br>
-	<h5>고객센터</h5>
-	<a href="qNa.do">Contact</a>
-	<br>
-	<div class="side_icon_set">
-		<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
-		<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
-	</div>
-	
-</section>
-
-<div id="wrapper">
-
-	<!-- main-menu -->
-	<nav class="clearfix">
-	    <a href="main.do"><img src="../resources/img/blank.png" class="logo left"></a>
-	    <span style="cursor:pointer" onclick="openNav()">&#9776; </span>
-	    <ul>
-	        <li><a href="book.do">DIARY</a></li>
-	        <li><a href="favorite.do">FAVORITES</a></li>
-	        <li><a href="myPage.do">MYPAGE</a></li>
-	    </ul>
-	</nav>
-
-	
-	<div class="content" style="margin-top: 100px">
-		<div class="selectBook">
-			<select class="btitle">
-				<option value="">이동하고싶은 일기장을 선택하세요</option>
-			</select>
-		</div>
-		<a href="insertDiary.do">
-			<div class="insertForm">
-				<span class="glyphicon glyphicon-plus gi-5x"></span>
-			</div>
-		</a>
-	
-		<div id="main">
-			<div id="main_container">
+	<div data-role="page">
+		<div data-role="header">헤더</div>
 				
-			</div>
+		<div data-role="content">
+			<ul data-role="listview" id="list"></ul>			
 		</div>
 			
-	</div>
+		<div data-role="footer" data-position="fixed">
+			<div onclick="location.href='insertDiary.do'" class="insertDiary" style="position:fixed; right: 0; bottom: 0; cursor: pointer;">일기 등록</div>
+		
+			<footer class="footer">
+				<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+					<ul class="list-inline">
+				       <li>
+				           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+				           <br><h5>김영호</h5>
+				       </li>
+				       <li>
+				           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+				           <br><h5>변성인</h5>
+				       </li>
+				       <li>
+				           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+				           <br><h5>성민규</h5>
+				       </li>
+				       <li>
+				           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+				           <br><h5>임연주</h5>
+				       </li>
+				       <li>
+				           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+				           <br><h5>차건우</h5>
+				       </li>
+				    </ul>
+		    </footer>
+		</div>
+	</div>	
 	
-	
-</div>
-
-<!-- 푸터 -->
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
-<footer class="footer">
-	<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
-	<ul class="list-inline">
-       <li>
-           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
-           <br><h5>김영호</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
-           <br><h5>변성인</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
-           <br><h5>성민규</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
-           <br><h5>임연주</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
-           <br><h5>차건우</h5>
-       </li>
-    </ul>
-</footer>
+	<div data-role="page" id="detailDiary">
+		<div data-role="header">헤더</div>
+				
+		<div data-role="content">
+			<img id="diaryImg">
+			<span id="ddate" style="font-size: 12px;"></span>
+			<span id="dweather" style="font-size: 12px;"></span>
+			<p id="dtitle" style="font-size: 20px;"></p>
+			<p id="dcontent" style="font-size: 15px;"></p>			
+		</div>
+			
+		<div data-role="footer" data-position="fixed">
+			<font color="white"><span onclick="location.href='updateDiary.do'" class="updateDiary" style="position:fixed; right: 92px; bottom: 0; cursor: pointer;">일기 수정</span></font>
+			<font color="white"><span onclick="location.href='deleteDiary.do'" class="deleteDiary" style="position:fixed; right: 0px; bottom: 0; cursor: pointer;">일기 삭제</span></font>
+			<footer class="footer">
+				<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+					<ul class="list-inline">
+				       <li>
+				           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+				           <br><h5>김영호</h5>
+				       </li>
+				       <li>
+				           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+				           <br><h5>변성인</h5>
+				       </li>
+				       <li>
+				           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+				           <br><h5>성민규</h5>
+				       </li>
+				       <li>
+				           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+				           <br><h5>임연주</h5>
+				       </li>
+				       <li>
+				           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+				           <br><h5>차건우</h5>
+				       </li>
+				    </ul>
+		    </footer>
+		</div>
+	</div>	
 </body>
 </html>
 

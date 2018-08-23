@@ -38,6 +38,8 @@
 	#today
 	{
 		font-size: 20px;
+		position: relative;
+		left: 40px;
 	}
 	#location
 	{
@@ -48,7 +50,7 @@
 	#tmef_img
 	{
 		position: relative;
-		left: 50px;
+		left: 30px;
 	}
 	#test > li
 	{
@@ -58,52 +60,190 @@
 	{
 		position: relative;
 		top: 30px;
-		left: -40px;
+		left: 0px;
 	}
 	.status
 	{
 		position: relative;
 		font-size:20px;
-		left: 90px;
+		left: 120px;
 	}
+
 </style>
 
 <script type="text/javascript">
 $(function() {
 	
-	$.ajax({url:"http://203.236.209.108:4997/weather.do",success:function(data){}})
+	setTimeout(function () {
+		
+		location.href = "logOut.do?id=${id}&autoOut=out";
+		
+	},10800*1000);
 	
 	$("#weather").hide()	
 	
-	var cityName = location.search.substr(1,8)
+	var cityName = location.search.substr(1,1)
 	
-	if(cityName == '')
+	if(cityName == '' || cityName == 'd')
 	{
 		$("#tmef_img").hide()
 		$("#city").hide()
 		$("#dweather").val("")
 	}	
+	else if($("[name='tmef'] > v").html().substring(1,2) == 's')
+	{
+		$("#tmef_img").show()
+		$("#dweather").val($("[name='tmef2'] > v").html())
+		$("#city").html($("#citys").val()+"의 날씨")
+	}	
 	else
 	{
 		$("#tmef_img").show()
 		$("#dweather").val($("[name='tmef'] > v").html())
-		$("#city").html("현재 "+$("[name='city'] > v").html()+"의 날씨")
+		$("#city").html($("#citys").val()+"의 날씨")
 		
 	}		
-	//$("#city").val($("[name='city'] > v").html())
+	
+	var today = $("#today_date").val();
+	var today_year = parseInt(today.substring(0,4));
+	var today_month = parseInt(today.substring(5,6));
+	var today_date = parseInt(today.substring(7,9));
+	
+	var todays = "";
+	var arr2 = today.split("-");
+	
+	for(i=0;i<arr2.length;i++)
+	{
+		todays += arr2[i]
+	}
+	
+	var today_now = parseInt(todays);
+	
+	var months = "";
+	var year = "";
+	var month = "";
+	var select_day = "";
+	var day = "";
+	
+	
+	$("#ddate").change(function(){
+		
+		var ddate = $(this).val()
+		
+		year = parseInt(ddate.substring(0,4));
+		month = ddate.substring(5,7);
+		
+		var arr = ddate.split("-")
+		
+		for(i=0;i<arr.length;i++)
+		{
+			day += arr[i]
+		}
+		
+		select_day = parseInt(day)
+		
+		months = parseInt(ddate.substring(5,7));
+		
+		$("#year").val(year)
+		$("#month").val(month)
+		
+		if(ddate.charAt(8) == '0')
+		{
+			date = parseInt(ddate.charAt(9))
+			$("#date").val(date)
+		}
+		else
+		{
+			date = parseInt(ddate.substring(8,10))
+			$("#date").val(date)
+		}
+			
+		
+	})
+
+	var area = "";
+	var cityName = $("#citys").val();
+	
+	if(cityName == '서울'){area = "09680";}
+	else if(cityName == '인천'){area = "11200";}
+	else if(cityName == '수원'){area = "02111";}
+	//else if(cityName == '파주'){area = "02480";}
+	else if(cityName == '춘천'){area = "01110";}
+	else if(cityName == '백령도'){area = "11720";}
+	else if(cityName == '강릉'){area = "01150";}
+	else if(cityName == '독도'){area = "04940";}
+	//else if(cityName == '속초'){area = "01210";}
+	else if(cityName == '청주'){area = "16111";}
+	else if(cityName == '안동'){area = "04170";}
+	else if(cityName == '대전'){area = "07110";}
+	else if(cityName == '홍성'){area = "15800";}
+	else if(cityName == '전주'){area = "13113";}
+	else if(cityName == '대구'){area = "06290";}
+	else if(cityName == '울산'){area = "10140";}
+	else if(cityName == '포항'){area = "04111";}
+	else if(cityName == '울진'){area = "04930";}
+	else if(cityName == '부산'){area = "08710";}
+	else if(cityName == '창원'){area = "03123";}
+	else if(cityName == '광주'){area = "05200";}
+	else if(cityName == '목포'){area = "12110";}
+	else if(cityName == '여수'){area = "12130";}
+	else if(cityName == '흑산도'){area = "12910";}
+	else if(cityName == '제주'){area = "14100";}
+	else
+	{
+		area = "09680";
+	}
+	
+	$.ajax({url:"http://203.236.209.108:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
+	
+	$.ajax({url:"http://203.236.209.108:4997/weather2.do",success:function(data){}})
 	
 	$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
 	
-	$("#search").click(function() {
-		location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
-			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()
+	$("#search").click(function() {	
+		
+		
+		if($("#date").val() == '')
+		{
+			confirm("날짜를 입력 해주세요.")
+		}
+		else if($("#cityName").val() == '')
+		{
+			confirm("지역을 입력 해주세요.")
+		}
+		else if(select_day > today_now)
+		{
+			var re = confirm("지난 날씨의 달력만 볼수 있습니다.")
+			if(re)
+			{
+				location.href="insertDiary.do?dtitle="+$("#dtitle").val()+"&dcontent="+$("#dcontent").val()
+				
+			}	
+			else
+			{
+				location.href="insertDiary.do?dtitle="+$("#dtitle").val()+"&dcontent="+$("#dcontent").val()
+				
+			}	
+		}
+		else if(select_day == today_now)
+		{
+			location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
+			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
+			+"&year="+$("#year").val()+"&month="+$("#month").val();
+		}
+		else
+		{
+			location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
+			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
+			+"&year="+$("#year").val()+"&month="+$("#month").val();
+		}
+		
 	})
 	
 	$("#citySelect").change(function(){
 		
 		$("#cityName").val($("#citySelect").val())
-		
-				
+	
 	})
 	
 	//선택한 폰트 dfont, dcontent에 적용
@@ -130,7 +270,7 @@ function openGrimpan() {
 	// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
 	
 	window.name = "insertDiary";
-	openG = window.open("grimpan.do","grimpan",'status=no, height=700, width=840, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+	openG = window.open("grimpan.do","grimpan",'status=no, height=600px, width=600px, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
 }
 
 </script>
@@ -199,7 +339,7 @@ function openGrimpan() {
 	<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 	<h5>회원정보</h5>
 	<a href="pwdCheck.do?id=${id }">Edit</a>
-	<a href="logOut.do">logout</a>
+	<a href="logOut.do?id=${id }">logout</a>
 	<br>
 	<h5>고객센터</h5>
 	<a href="qNa.do">Contact</a>
@@ -312,8 +452,8 @@ function openGrimpan() {
 			<div class="today_weather">
 				<ul id="test">
 					<img id="weather_icon" src="../resources/img/weather.png" width="30" height="30">
-					<li id="today">오늘의 날씨가 궁금하신가요?</li>
-					<li id="location">현재 지역을 선택 후 검색버튼을 눌러주세요.</li>
+					<li id="today">날씨가 궁금하신가요?</li>
+					<li id="location">지역과 날씨를 선택 후 검색버튼을 눌러주세요.</li>
 				</ul>
 				<br>
 				<div class="city_weather">
@@ -344,6 +484,12 @@ function openGrimpan() {
 							<option>제주</option>
 						</select>
 						<input type="hidden" name="cityName" id="cityName">
+						<input type="hidden" id="citys" value="${cityName }">
+						<input type="hidden" id="day" value="${ddate }">
+						<input type="hidden" name="date" id="date" value="${date }">
+						<input type="hidden" id="today_date" value="${todays }">
+						<input type="hidden" name="year" id="year" value="${year }">
+						<input type="hidden" name="month" id="month" value="${month }">
 						<span id="weather"> ${weather } </span>
 						<button id="search" type="button">검색</button>
 				</div>
