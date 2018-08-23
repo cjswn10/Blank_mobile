@@ -361,9 +361,7 @@ function openGrimpan() {
 
 	<div class="mainSearchId" id="mainSearchId">
 		<div class="mainSearchId_inner" id="mainSearchId_inner">
-			<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; 
-
-border: none;">
+			<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
 			<span id="btnMove" class="glyphicon glyphicon-search" ></span>
 			<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
 			
