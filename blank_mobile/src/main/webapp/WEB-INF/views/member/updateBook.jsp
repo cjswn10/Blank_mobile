@@ -15,89 +15,68 @@
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 	.book
-	{ 
-		position: relative;
-		top: 100px;
-		left:-100px;
-		width: 500px;
-		height: 570px;
-	}
-	.aa
 	{
-		position: absolute;
-		left: 120px;
-		top: 100px;
-		text-align: center;
-		font-size: 20px;
-		
+		position: relative;
+		top: 130px;
+		left:50px;
+		width: 100%;
+		height: 300px;
+
 	}
+	#btitle
+	{
+		position: relative;
+		top:-140px;
+		width:75%;
+		left: 75px;
+		font-size: 15px;
+		text-align: center;
+	}
+
 	#s1
 	{
 		position: relative;
-		left: 170px;
-		top: 500px;
+		width:50px;
+		left: 90px;
+		top: 80px;
 	}
 	#false
 	{
 		position: relative;
-		left: 220px;
-		top: 500px;
+		left: 110px;
+		width:50px;
+		top: 80px;
 	}
 	.containe
 	{
 		position: relative;
-		width: 600px;
-		height: 800px;
+		width: 50%;
 		top: -30px;
-		margin: 0 auto;
+		left: 20px;
 	}
 	.containerr
 	{
 		position: relative;
-		top: 50px;
-		left: 600px;	
-		width: 400px;
-		
-	}
-	
-	.custom-size .colorpicker-saturation 
-	{
-		width: 250px;
-		height: 250px;
-	}
- 
-	.custom-size .colorpicker-hue,
-	.custom-size .colorpicker-alpha 
-	{
-		width: 40px;
-		height: 250px;
-	}
- 
-	.custom-size .colorpicker-color,
-	.custom-size .colorpicker-color div 
-	{
-		height: 40px;
+		top: -250px;
+		left: 60px;	
+		width: 90%;
 	}
 	
 </style>
 
-<!-- 색상구현 css -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<link href="../resources/dist/css/bootstrap-colorpicker.css" rel="stylesheet">
-
-<!-- 색상구현 자바스크립트 -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-3.2.1.js"></script>
-<script src="../resources/dist/js/bootstrap-colorpicker.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
 <link rel="stylesheet" href="../resources/css/blank.css">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
+
 <script type="text/javascript">
 	$(function() {
 		
@@ -107,25 +86,8 @@
 			
 		},10800*1000);
 		
-		$('#color-picker-size').colorpicker(
-				{
-					customClass: 'custom-size',
-					sliders: {
-					  saturation: {
-						maxLeft: 250,
-						maxTop: 250
-					  },
-					  hue: {
-						maxTop: 250
-					  },
-					  alpha: {
-						maxTop: 250
-					}
-				}
-				 
-			});
 		
-		$(".colorpicker-saturation").click(function() {
+		$("#color-picker-size").change(function() {
 			
 			var color = $("#color-picker-size").val();
 			
@@ -149,6 +111,12 @@
 		$("#s1").click(function() {
 			console.log("일기장이 수정되었습니다.")
 		})
+		
+		$( '#btitle') .on ("input ", function () {     
+		    if (this.value.length> 8)         
+		        this.value = this.value.slice (0,8); 
+		});
+		
 	})
 </script>
 </head>
@@ -172,7 +140,7 @@
 	
 </section>	
 
-<div id="wrapper">
+<div id="wrapper" data-role="none">
 	
 	<div class="mainSearchId" id="mainSearchId">
 		<div class="mainSearchId_inner" id="mainSearchId_inner">
@@ -187,6 +155,7 @@
 		
 	<!------ main-menu ------>
 	<nav class="clearfix">
+
 		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 	    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
@@ -195,25 +164,28 @@
 	        <li><a href="book.do">DIARY</a></li>
 	        <li><a href="favorite.do">FAVORITES</a></li>
 	        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
+
 	    </ul>
 	</nav>
 	
 	<!----------- 내용 -------------->
 	
 	<div class="containe">
-		<div class="book" style="background-color: ${b.bcolor}">
-			<form action="updateBook.do" method="post" id="f">
-				<input type="hidden" name="bno" value="${b.bno }">
-				<input type="text" name="btitle" class="aa" value="${b.btitle }" height="50" width="30">
-				<div class="containerr">
-			    	<div class="example-content well">
-			          	<input id="color-picker-size" type="text" name="bcolor" value="${b.bcolor }" class="form-control" autocomplete="off"/>
-			   		</div>
-				</div>
-				<input class="btn btn-default" id="s1" type="submit" value="수정">
-				<input class="btn btn-default" id="false" type="reset" value="취소">				
-			</form>
+		
+		<div class="book" style="background-color: ${b.bcolor}" data-role="none">
+			
 		</div>
+		
+		<form action="updateBook.do" method="post" id="f" data-ajax="false">
+			<input type="hidden" name="bno" value="${b.bno }">
+			<input data-role="none" type="text" id="btitle" maxlength="8" name="btitle" class="aa" value="${b.btitle }">
+			<div class="containerr">
+			    <input data-role="none" id="color-picker-size" type="color" name="bcolor" value="${b.bcolor }" class="form-control" autocomplete="off"/>	
+			</div>
+			<input data-role="none" class="btn btn-default" id="s1" type="submit" value="수정">
+			<input data-role="none" class="btn btn-default" id="false" type="reset" value="취소">				
+		</form>
+		
 	</div>
 
 
