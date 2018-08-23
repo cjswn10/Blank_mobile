@@ -55,7 +55,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <link rel="stylesheet" href="../resources/css/blank.css">
-<script type="text/javascript" src="../resources/js/menu.js?ver=1" ></script>
+<script type="text/javascript" src="../resources/js/menu.js?ver=2" ></script>
 
 <script type="text/javascript">
 	$(function() {
@@ -121,28 +121,29 @@
 	    </ul>
 	</nav>	
 
-	<div class="content" style="margin-top: 180px">
+	<div class="content" style="margin-top: 100px">
 		<div class="container2">
-		<div class="check">
-			<h2><span>본인확인</span></h2><br>
-			<h2><span>고객님의 소중한 개인정보보호를 위해서 본인확인을 진행합니다.</span></h2>
+			<div class="check">
+				<h2><span>본인확인</span></h2><br>
+				<h4><span>고객님의 소중한 개인정보보호를 위해서 본인확인을 진행합니다.</span></h4>
+	
+	      
+			</div>
+			
+			<div id="d"><font color="red">${msg }</font></div>
+			
+			<div>
+				<form action="pwdCheck.do" method="post" class="f">
+					<input type="hidden" name="id" id="id" value="${id }"><br>
+					<input type="hidden" name="mno" id="mno" value="${mno }"><br>
+					<label for="pwd">비밀번호 : </label><input type="password" name="pwd" id="pwd"><br>
+					<input class="btn btn-default" type="submit" value="확인" id="sub">
+				</form>
+			</div>
 
-      
 		</div>
-		
-		<div id="d"><font color="red">${msg }</font></div>
-		
-		<div>
-			<form action="pwdCheck.do" method="post" class="f">
-				<input type="hidden" name="id" id="id" value="${id }"><br>
-				<input type="hidden" name="mno" id="mno" value="${mno }"><br>
-				<label for="pwd">비밀번호 : </label><input type="password" name="pwd" id="pwd"><br>
-				<input class="btn btn-default" type="submit" value="확인" id="sub">
-			</form>
-		</div>
+	</div>
 
-	</div>
-	</div>
 
 	<footer class="footer">
 		<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>

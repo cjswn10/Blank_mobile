@@ -68,7 +68,8 @@ nav {
 #main_menu {
 	padding: 0;
 	margin: 0 2px;
-	height: 0px;
+	/*height: 0px;*/
+	display: none;
 	transition: 0.5s;
 	font-size: 13px;
 	text-align: left;
@@ -169,7 +170,7 @@ nav span {
     transition: margin-left .5s;
     min-height: calc(100vh - 160px);
     margin: 0;
-    margin-bottom: 0;
+    bottom: 0;
 }
 
 @media screen and (max-height: 575px) {
@@ -204,9 +205,8 @@ nav span {
 .content {
 	position: relative;
 	margin:0px auto;
-
+	margin-bottom: 20px;
 	width: 90%;
-
 }
 	<!--mypage-->
 .content a{
@@ -224,7 +224,7 @@ h2 {
 	color :  #818181;
 }
 
-.content h3 {
+.content .row h3 {
 	text-align: left;
 	margin: 10px auto;	
 }
@@ -236,8 +236,14 @@ h2 {
     color: #818181;
     background-color: #151515;
 	padding: 5px;
+	bottom: 0;
 }
 
+
+.footer ul {
+	margin-bottom: 0;
+}
+	
 @media screen and (min-width: 576px) {
 	.footer h3{
 		color: #818181;
@@ -304,6 +310,7 @@ border:2px solid #fff;
 	#main_menu {
 	    margin:10px auto;
 	    float: right;
+	    display: inline-block;
 	}
 	
 	#main_menu li {
