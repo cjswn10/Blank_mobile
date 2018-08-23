@@ -9,9 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.codec.language.bm.Rule.Phoneme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +34,7 @@ public class DiaryController {
 		this.dao = dao;
 	}
 
-	// ÇÑ±Û±úÁü??
+	// ï¿½Ñ±Û±ï¿½ï¿½ï¿½??
 	@RequestMapping("/member/mainDetailDiary.do")
 	public ModelAndView mainDetailDiary(int dno) {
 		Map map = new HashMap();
@@ -46,7 +44,7 @@ public class DiaryController {
 		return mav;
 	}
 
-	// ÇÑ±Û±úÁü??
+	// ï¿½Ñ±Û±ï¿½ï¿½ï¿½??
 	@RequestMapping("/member/detailFavoriteDiary.do")
 	public ModelAndView detailFavoriteDiary(int dno) {
 		Map map = new HashMap();
@@ -149,6 +147,7 @@ public class DiaryController {
 
 		MultipartFile upload = d.getUpload();
 		MultipartFile uploadG = d.getUploadG();
+
 
 		String orgname = upload.getOriginalFilename();
 		String dphoto = "x";
@@ -337,6 +336,7 @@ public class DiaryController {
 		d.setDno(no);
 
 		d.setDtype("000");
+
 		if (d.getDfile() != null) {
 			d.setDtype("100");
 		}
@@ -347,6 +347,7 @@ public class DiaryController {
 
 		d.setDphoto("");
 		d.setDfile("");
+
 
 		String path = request.getRealPath("resources/upload");
 		String pathG = request.getRealPath("resources/upload2");
@@ -362,8 +363,8 @@ public class DiaryController {
 		String dphoto = "x";
 
 		if (orgname != null && !orgname.equals("")) {
-
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
+
 			dphoto = bno + "b" + no + "." + exc;
 			File saveFile = new File(path + "/" + dphoto);
 
@@ -388,12 +389,12 @@ public class DiaryController {
 				e.printStackTrace();
 			}
 		}
-
+		
+		/************** ï¿½×¸ï¿½ ***************/
 		String orgnameG = uploadG.getOriginalFilename();
 		String dfile = "x";
 
 		if (orgnameG != null && !orgnameG.equals("")) {
-
 			String excG = orgnameG.substring(orgnameG.lastIndexOf(".") + 1, orgnameG.length());
 			dfile = bno + "b" + no + "grim." + excG;
 			File saveFileG = new File(pathG + "/" + dfile);
