@@ -120,8 +120,8 @@ user-scalable=no">
 <link rel="stylesheet" href="../resources/css/blank.css?ver=1">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript">
-	 $(function () {
-		
+	 $(function () {	 
+		 
 		setTimeout(function () {
 			
 			location.href = "logOut.do?id=${id}&autoOut=out";
@@ -162,10 +162,11 @@ user-scalable=no">
 					var list = eval("("+data+")");
 					$.each(list, function(idx, d) {
 						var li = $('<li></li>');
-						$(li).attr("idx",idx);
-						var a = $('<a href="#detailDiary"></a>');
+						$(li).attr("idx",idx);									
+						var a = $('<a href=#detailDiary></a>');						
 						
-						$(li).click(function() {							
+						$(li).click(function() {
+							
 							var i = $(this).attr("idx");							
 							var selG = list[i];							
 							 
@@ -275,6 +276,7 @@ user-scalable=no">
 </script>
 </head>
 <body>
+	
 	<div data-role="page">
 		<div data-role="header">헤더</div>
 				
