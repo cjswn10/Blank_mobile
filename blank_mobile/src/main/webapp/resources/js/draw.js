@@ -6,6 +6,7 @@ var drawBackup = new Array();
 
 context.strokeStyle = myColor.value;
 context.lineWidth = document.getElementById("Lwidth").value;
+
 canvas.addEventListener("touchstart", function(e) {
 	down(e)
 }, false);
@@ -15,9 +16,8 @@ canvas.addEventListener("touchend", function(e) {
 canvas.addEventListener("touchmove", function(e) {
 	move(e)
 }, false);
-canvas.addEventListener("touchcancel", function(e) {
-	out(e)
-}, false);
+
+
 
 function changeColor(color) {
 	switch (color) {
@@ -99,20 +99,25 @@ var drawing = false;
 
 
 function down(e) {
+
 	drawBackup.push(context.getImageData(0, 0, canvas.width, canvas.height));
-	startX = e.offsetX;
-	startY = e.offsetY;
+	startX = e.pageX;
+	startY = e.pageY;
 	drawing = true;
 }
 
 function move(e) {
 	if (!drawing)
 		return;
-	var curX = e.offsetX;
-	var curY = e.offsetY;
+	
+	e.preventDefault();
+	
+	var curX = e.pageX;
+	var curY = e.pageY;
 	draw(curX, curY);
 	startX = curX;
 	startY = curY;
+	
 }
 
 function draw(curX, curY) {
@@ -121,17 +126,11 @@ function draw(curX, curY) {
 	context.moveTo(startX, startY);
 	context.lineTo(curX, curY);
 	context.stroke();
-	
 }
 
 function up(e) {
 	drawing = false;
 }
-
-function out(e) {
-	drawing = false;
-}
-
 
 // 지우기
 document.getElementById("delete").addEventListener("click", function(e) {
@@ -141,11 +140,3 @@ document.getElementById("delete").addEventListener("click", function(e) {
 document.getElementById("prev").addEventListener("click", function(e) {
 	context.putImageData(drawBackup.pop(), 0, 0);
 },false);
-
-
-
-
-
-
-
-
