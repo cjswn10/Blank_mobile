@@ -4,7 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport"
+		content="width=device-width,
+		initial-scale=1.0,
+		maximum-scale=1.0,
+		minimum-scale=1.0,
+		user-scalable=no">
 <title>빈칸을 채우다.</title>
 <style type="text/css">
 	
@@ -17,8 +22,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=1">
-<script type="text/javascript" src="../resources/js/menu.js" ></script>
+<link rel="stylesheet" href="../resources/css/blank.css?ver=2">
+<script type="text/javascript" src="../resources/js/menu.js?ver=1" ></script>
 <script type="text/javascript">
 	$(function() {
 		
@@ -52,18 +57,31 @@
 	
 </section>
 
+<!-- main-menu -->
 <div id="wrapper">
-
-	<!-- main-menu -->
-	<nav class="clearfix">
-	    <a href="main.do"><img src="../resources/img/blank.png" class="logo left"></a>
-	    <span style="cursor:pointer" onclick="openNav()">&#9776; </span>
-	    <ul>
-	        <li><a href="book.do">DIARY</a></li>
-	        <li><a href="favorite.do">FAVORITES</a></li>
-	        <li><a href="myPage.do">MYPAGE</a></li>
-	    </ul>
-	</nav>
+	<div class="mainSearchId" id="mainSearchId">
+		<div class="mainSearchId_inner" id="mainSearchId_inner">
+			<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+			<span id="btnMove" class="glyphicon glyphicon-search" ></span>
+			<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
+			
+			<div id="searchid"></div>
+		</div>
+	</div>
+	
+		
+		<!-- main-menu -->
+		<nav class="clearfix">
+			<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
+		    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
+		    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
+		    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+		    <ul id="main_menu">
+		        <li><a href="book.do">DIARY</a></li>
+		        <li><a href="favorite.do">FAVORITES</a></li>
+		        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
+		    </ul>
+		</nav>
 
 	
 	<div id="content" style="margin-top: 180px">
@@ -71,7 +89,7 @@
 		<br><br>
 		<h2><a href="qNa.do">CONTACT US</a></h2>
 	</div>
-</div>
+
 
 <!-- 푸터 -->
 <footer class="footer">
@@ -99,6 +117,7 @@
        </li>
     </ul>
 </footer>
+</div>
 </div>
 </body>
 </html>
