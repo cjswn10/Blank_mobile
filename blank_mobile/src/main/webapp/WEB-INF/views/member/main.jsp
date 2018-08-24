@@ -330,7 +330,7 @@ $(function () {
 		    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
 		    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
 		    <ul id="main_menu">
-		        <li><a href="book.do" data-ajax="false">DIARY</a></li>
+		        <li><a href="book.do">DIARY</a></li>
 		        <li><a href="favorite.do">FAVORITES</a></li>
 		        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
 		    </ul>

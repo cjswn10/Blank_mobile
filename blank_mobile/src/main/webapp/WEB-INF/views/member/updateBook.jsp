@@ -51,7 +51,6 @@
 	{
 		position: relative;
 		width: 50%;
-		top: -30px;
 		left: 20px;
 	}
 	.containerr
@@ -65,17 +64,16 @@
 </style>
 
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 
 
-<link rel="stylesheet" href="../resources/css/blank.css">
-<script type="text/javascript" src="../resources/js/menu.js" ></script>
+<link rel="stylesheet" href="../resources/css/blank.css?ver=1">
+<script type="text/javascript" src="../resources/js/menu.js?ver=6" ></script>
 
 <script type="text/javascript">
 	$(function() {
@@ -140,7 +138,7 @@
 	
 </section>	
 
-<div id="wrapper" data-role="none">
+<div id="wrapper">
 	
 	<div class="mainSearchId" id="mainSearchId">
 		<div class="mainSearchId_inner" id="mainSearchId_inner">
@@ -172,20 +170,20 @@
 	
 	<div class="containe">
 		
-		<div class="book" style="background-color: ${b.bcolor}" data-role="none">
+		<div class="book" style="background-color: ${b.bcolor}">
 			
 		</div>
 		
-		<form action="updateBook.do" method="post" id="f" data-ajax="false">
+		<form action="updateBook.do" method="post" id="f">
 			<input type="hidden" name="bno" value="${b.bno }">
-			<input data-role="none" type="text" id="btitle" maxlength="8" name="btitle" class="aa" value="${b.btitle }">
+			<input type="text" id="btitle" maxlength="8" name="btitle" class="aa" value="${b.btitle }">
 			<div class="containerr">
-			    <input data-role="none" id="color-picker-size" type="color" name="bcolor" value="${b.bcolor }" class="form-control" autocomplete="off"/>	
+			    <input id="color-picker-size" type="color" name="bcolor" value="${b.bcolor }" class="form-control" autocomplete="off"/>	
 			</div>
-			<input data-role="none" class="btn btn-default" id="s1" type="submit" value="수정">
-			<input data-role="none" class="btn btn-default" id="false" type="reset" value="취소">				
+			<input class="btn btn-default" id="s1" type="submit" value="수정">
+			<input class="btn btn-default" id="false" type="reset" value="취소">				
 		</form>
-		
+		</div>
 	</div>
 
 
