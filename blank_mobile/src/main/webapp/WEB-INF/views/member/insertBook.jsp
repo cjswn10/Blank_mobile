@@ -47,7 +47,6 @@
 	{
 		position: relative;
 		width: 50%;
-		top: -30px;
 		left: 20px;
 	}
 	.containerr
@@ -67,18 +66,19 @@
 </style>
 
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 
-<link rel="stylesheet" href="../resources/css/blank.css">
-<script type="text/javascript" src="../resources/js/menu.js" ></script>
+<link rel="stylesheet" href="../resources/css/blank.css?ver=1">
+<script type="text/javascript" src="../resources/js/menu.js?ver=6" ></script>
 
 <script type="text/javascript">
 	$(function() {
@@ -129,7 +129,7 @@
 </head>
 <body>
 <!-- side-menu -->
-<section id="mySidenav" class="sidenav">
+<section id="mySidenav" class="sidenav" data-role="none">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 	
 	<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
@@ -147,30 +147,42 @@
 	
 </section>
 
-<div id="wrapper" data-role="none">
+<div id="wrapper" >
 
+	<div class="mainSearchId" id="mainSearchId">
+		<div class="mainSearchId_inner" id="mainSearchId_inner">
+			<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+			<span id="btnMove" class="glyphicon glyphicon-search" ></span>
+			<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
+			
+			<div id="searchid"></div>
+		</div>
+	</div>
+	
 	<!-- main-menu -->
 	<nav class="clearfix">
-	    <a href="main.do" data-ajax="false"><img src="../resources/img/blank.png" class="logo left"></a>
-	    <span style="cursor:pointer" onclick="openNav()">&#9776; </span>
-	    <ul>
-	        <li><a href="book.do" data-ajax="false">DIARY</a></li>
-	        <li><a href="favorite.do" data-ajax="false">FAVORITES</a></li>
-	        <li><a href="myPage.do" data-ajax="false">MYPAGE</a></li>
+		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
+	    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
+	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
+	    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+	    <ul id="main_menu">
+	        <li><a href="book.do">DIARY</a></li>
+	        <li><a href="favorite.do">FAVORITES</a></li>
+	        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
 	    </ul>
-	</nav>
+	</nav>	
 	
 	<div class="containe">
-		<div class="book" data-role="none">
+		<div class="book">
 		</div>
-		<form action="insertBook.do" method="post" id="f" data-ajax="false">
+		<form action="insertBook.do" method="post" id="f">
 			<input type="hidden" name="mno" id="mno" value="${mno }">
-			<input data-role="none" type="text" name="btitle" id="btitle" class="aa" maxlength="8" placeholder="제목">
+			<input type="text" name="btitle" id="btitle" class="aa" maxlength="8" placeholder="제목">
 			<div class="containerr">
-				<input data-role="none" id="color-picker-size" type="color" name="bcolor" class="form-control" placeholder="색상 선택" autocomplete="off" value="#ffc0cb"/>
+				<input id="color-picker-size" type="color" name="bcolor" class="form-control" placeholder="색상 선택" autocomplete="off" value="#ffc0cb"/>
 			</div>
-			<input data-role="none" class="btn btn-default" id="s1" type="submit" value="등록">
-			<input data-role="none" class="btn btn-default" id="false" type="reset" value="취소">
+			<input class="btn btn-default" id="s1" type="submit" value="등록">
+			<input class="btn btn-default" id="false" type="reset" value="취소">
 		</form>
 	</div>
 </div>	

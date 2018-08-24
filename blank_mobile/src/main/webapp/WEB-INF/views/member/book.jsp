@@ -30,6 +30,7 @@
 		display:table;
 		font-size: 10px;
 		top:140.5px;
+		color:black;
 		left: 50px;
 	}
 
@@ -37,6 +38,7 @@
 	.glyphicon-plus
 	{
 		font-size: 40px;
+		color:black;
 	}
 
 	/* 일기장 목록 컨테이너 */
@@ -49,8 +51,10 @@
 	#main
 	{
 		width:100%;
+		height:100%;
 		overflow: hidden;
 		margin: 0 auto;
+		
 	}
 	
 	/* 서브컨테이너의 자식 div들 */
@@ -98,20 +102,20 @@
 	{
     	-webkit-text-size-adjust: none;
 	}
-
+	
+	
 	
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-<link rel="stylesheet" href="../resources/css/blank.css">
-<script type="text/javascript" src="../resources/js/menu.js" ></script>
+<link rel="stylesheet" href="../resources/css/blank.css?ver=16">
+<script type="text/javascript" src="../resources/js/menu.js?ver=6" ></script>
+
 <script type="text/javascript">
 
 	$(function() {
@@ -140,7 +144,7 @@
 						
 						
 						//일기장 -->> 일기목록
-						var aList = $("<a class='btitle' href='diary.do?mno="+d.mno+"&bno="+d.bno+"'></a>")
+						var aList = $("<a class='btitle' data-ajax='false' href='diary.do?mno="+d.mno+"&bno="+d.bno+"'></a>")
 						
 						//일기장 제목
 						var title = $("<span ></span>").html(d.btitle);
@@ -150,10 +154,10 @@
 						var Delete = $("<button></button>").html("삭제")
 						
 						//일기장 수정a태그
-						var aUpdate = $("<a class='update' data-ajax='false' href='updateBook.do?bno="+d.bno+"' ></a>")
+						var aUpdate = $("<a class='update' href='updateBook.do?bno="+d.bno+"' ></a>")
 						
 						//일기장 삭제a태그
-						var aRemove = $("<a id='remove_location' data-ajax='false'></a>")
+						var aRemove = $("<a id='remove_location'></a>")
 						
 						
 						//remove 아이콘을 누르면 발생하여 선택한 일기장 삭제
@@ -211,11 +215,11 @@
 	
 	<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 	<h5>회원정보</h5>
-	<a href="pwdCheck.do?id=${id }">Edit</a>
-	<a href="logOut.do?id=${id }" data-ajax="false">logout</a>
+	<a href="pwdCheck.do?id=${id }" >Edit</a>
+	<a href="logOut.do?id=${id }" >logout</a>
 	<br>
 	<h5>고객센터</h5>
-	<a href="qNa.do">Contact</a>
+	<a href="qNa.do"  data-ajax="false">Contact</a>
 	<br>
 	<div class="side_icon_set">
 		<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
@@ -224,33 +228,44 @@
 	
 </section>
 
-	<div id="wrapper" data-role="none">
+	<div id="wrapper">
 
-	<!-- main-menu -->
+	<div class="mainSearchId" id="mainSearchId" >
+		<div class="mainSearchId_inner" id="mainSearchId_inner">
+			<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+			<span id="btnMove" class="glyphicon glyphicon-search" ></span>
+			<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
+			
+			<div id="searchid"></div>
+		</div>
+	</div>
+
+		
+	<!------ main-menu ------>
 	<nav class="clearfix">
-	    <a href="main.do" data-ajax="false"><img src="../resources/img/blank.png" class="logo left"></a>
-	    <span style="cursor:pointer" onclick="openNav()" class="glyphicon glyphicon-menu-hamburger"> </span>
-
-	    
-	    <ul>
+		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
+	    <a href="main.do" ><img src="../resources/img/blank.png" class="logo"></a>
+	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
+	    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+	    <ul id="main_menu">
 	        <li><a href="book.do">DIARY</a></li>
 	        <li><a href="favorite.do">FAVORITES</a></li>
-	        <li><a href="myPage.do">MYPAGE</a></li>
+	        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
 	    </ul>
-	</nav>
+	</nav>	
 	
 	
 		<div id="main">
 			
 			  <div class="insertBook">
-			  	<a href="insertBook.do" id="test" data-ajax="false"><span class="glyphicon glyphicon-plus" id="plus_location"></span></a>
+			  	<a href="insertBook.do" id="test"><span class="glyphicon glyphicon-plus" id="plus_location"></span></a>
 			  </div>
 		
 			<div id="main_container"></div>
 	
 		</div>  
-	
-</div>
+	</div>
+
     
 <!-- 푸터  -->
 <footer class="footer">
@@ -278,6 +293,6 @@
        </li>
     </ul>
 </footer>
-
+</div>
 </body>
 </html>
