@@ -27,8 +27,7 @@ ul{
 	margin-left: auto;	
 }
 #favolist > li{
-	list-style: none;
-	
+	list-style: none;	
 }
 #favolist
 {
@@ -72,7 +71,7 @@ ul{
 					var a = $("<a href='othersDiary.do?id="+f.id+"&fno="+f.fno+"&fmno="+f.fmno+"'></a>").html(f.id+"님");		
 					var li = $("<li></li>");
 					var removeimg = $("<a href='deleteFavorite.do?mno=" + ${mno} + "&fmno="+f.fmno+"' class='glyphicon glyphicon-remove' id='plus_location'></a>");
-					 
+					  
 					$(li).append(img,a,removeimg);
 					$("#list").append(li);
 				});
@@ -89,7 +88,6 @@ ul{
 				
 		<div data-role="content">
 			<ul data-role="listview" id="list"></ul>
-
 		</div>
 			
 		<div data-role="footer">

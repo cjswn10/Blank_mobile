@@ -163,27 +163,7 @@ user-scalable=no">
 					$.each(list, function(idx, d) {
 						var li = $('<li></li>');
 						$(li).attr("idx",idx);									
-						var a = $('<a href=#detailDiary></a>');						
-						
-						$(li).click(function() {
-							
-							var i = $(this).attr("idx");							
-							var selG = list[i];							
-							 
-							$('#diaryImg').attr("src", "../resources/upload2/"+ selG.dfile);							
-							$('#ddate').html(selG.ddate);
-							$('#dweather').html(selG.dweather);
-							$('#dtitle').html(selG.dtitle);
-							$('#dcontent').html(selG.dcontent);
-						})
-						
-						/* var img = $('<img></img>').attr({
-							src: "../resources/upload2/" + d.dfile,
-							width: "100",
-							height: "100"
-						}) */
-						
-						
+						var a = $('<a data-ajax="false" href=detailDiary.do?dno='+d.dno+'></a>');	
 						var title = $('<span></span>').html(d.dtitle);
 						var content = $('<p></p>').html(d.dcontent);				
 						var ddate = $('<p class="ddate" style="font-size: 8px;"></p>').html(d.ddate);
@@ -217,54 +197,6 @@ user-scalable=no">
 							$(li).append(a);
 							$('#list').append(li);					
 						}						
-						/* $(a).append(img, title, content, ddate);
-						$(li).append(a);
-						$('#list').append(li); */	
-						
-						/* //날짜 날씨 제목 그림 사진 글
-						var div = $('<div class="listdiary"></div>');
-						var title = $('<div class="diarytitle">제목:'+d.dtitle+'</div>');
-						
-						var a = $('<a href="detailDiary.do?dno='+d.dno+'"></a>')
-						var br = $('<br>');
-					
-						var reContent = (d.dcontent).replace(/(?:\r\n|\r|\n)/g, '<br/>');
-						
-						var p = $('<div class="dcontent"></div>').html(reContent);
-						$(p).attr({
-							style: "font-family:"+d.dfont
-						})
-            			$("dcontent").scrollTop();
-						if (d.dphoto != null) {							
-							var img = $('<img></img>').attr({
-								src: "../resources/upload/" + d.dphoto,
-								width: "50%",
-								height: "50%"					
-							});
-							$(a).append(img);
-							$(div).append(title,a,br,p);
-							$("#main_container").append(div);
-						}else {
-							$(a).append(p);
-							$(div).append(title,a);
-							$("#main_container").append(div);					
-						}		            
-						
-						if (d.dfile != null) {							
-							var img = $('<img></img>').attr({
-								src: "../resources/upload2/" + d.dfile,
-								width: "50%",
-								height: "50%"					
-							});
-							$(a).append(img);
-							$(div).append(title,a,br,p);
-							$("#main_container").append(div);
-						}else {
-							$(a).append(p);
-							$(div).append(title,a);
-							$("#main_container").append(div);					
-						}		            
- */
 					})
 					$('#list').listview("refresh");
 			}});		
@@ -275,8 +207,7 @@ user-scalable=no">
 	 
 </script>
 </head>
-<body>
-	
+<body>	
 	<div data-role="page">
 		<div data-role="header">헤더</div>
 				
@@ -313,49 +244,7 @@ user-scalable=no">
 				    </ul>
 		    </footer>
 		</div>
-	</div>	
-	
-	<div data-role="page" id="detailDiary">
-		<div data-role="header">헤더</div>
-				
-		<div data-role="content">
-			<img id="diaryImg">
-			<span id="ddate" style="font-size: 12px;"></span>
-			<span id="dweather" style="font-size: 12px;"></span>
-			<p id="dtitle" style="font-size: 20px;"></p>
-			<p id="dcontent" style="font-size: 15px;"></p>			
-		</div>
-			
-		<div data-role="footer" data-position="fixed">
-			<font color="white"><span onclick="location.href='updateDiary.do'" class="updateDiary" style="position:fixed; right: 92px; bottom: 0; cursor: pointer;">일기 수정</span></font>
-			<font color="white"><span onclick="location.href='deleteDiary.do'" class="deleteDiary" style="position:fixed; right: 0px; bottom: 0; cursor: pointer;">일기 삭제</span></font>
-			<footer class="footer">
-				<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
-					<ul class="list-inline">
-				       <li>
-				           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
-				           <br><h5>김영호</h5>
-				       </li>
-				       <li>
-				           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
-				           <br><h5>변성인</h5>
-				       </li>
-				       <li>
-				           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
-				           <br><h5>성민규</h5>
-				       </li>
-				       <li>
-				           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
-				           <br><h5>임연주</h5>
-				       </li>
-				       <li>
-				           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
-				           <br><h5>차건우</h5>
-				       </li>
-				    </ul>
-		    </footer>
-		</div>
-	</div>	
+	</div>			
 </body>
 </html>
 
