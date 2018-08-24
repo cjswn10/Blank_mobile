@@ -140,7 +140,7 @@
 						
 						
 						//일기장 -->> 일기목록
-						var aList = $("<a class='btitle' href='diary.do?mno="+d.mno+"&bno="+d.bno+"'></a>")
+						var aList = $("<a class='btitle' data-ajax='false' href='diary.do?mno="+d.mno+"&bno="+d.bno+"'></a>")
 						
 						//일기장 제목
 						var title = $("<span ></span>").html(d.btitle);

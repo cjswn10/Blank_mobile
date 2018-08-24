@@ -32,10 +32,7 @@
 		left: 10px;
 	}
 
-	.container2
-	{
-		width: :600px;
-	}
+
 	#d
 	{
 		font-family: 'Nanum Pen Script', serif;
@@ -120,9 +117,9 @@
 	        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
 	    </ul>
 	</nav>	
-
+	<div class="container">
 	<div class="content" style="margin-top: 100px">
-		<div class="container2">
+		
 			<div class="check">
 				<h2><span>본인확인</span></h2><br>
 				<h4><span>고객님의 소중한 개인정보보호를 위해서 본인확인을 진행합니다.</span></h4>
@@ -132,14 +129,14 @@
 			
 			<div id="d"><font color="red">${msg }</font></div>
 			
-			<div>
+			
 				<form action="pwdCheck.do" method="post" class="f">
 					<input type="hidden" name="id" id="id" value="${id }"><br>
 					<input type="hidden" name="mno" id="mno" value="${mno }"><br>
 					<label for="pwd">비밀번호 : </label><input type="password" name="pwd" id="pwd"><br>
 					<input class="btn btn-default" type="submit" value="확인" id="sub">
 				</form>
-			</div>
+			
 
 		</div>
 	</div>
@@ -171,6 +168,5 @@
 	    </ul>
 	</footer>
 </div>
-
 </body>
 </html>

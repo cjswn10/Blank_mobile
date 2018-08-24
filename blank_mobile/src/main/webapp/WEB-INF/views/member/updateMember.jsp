@@ -15,21 +15,14 @@
 <style type="text/css">
 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
-	.main
-	{
-		position: relative;
-		left: 250px;
-		width:960px;
-		text-align: center;;
-		
-	}
+	
 	
 	#sub
 	{
 		font-family: 'Nanum Pen Script', serif;
 		position: relative;
 		font-size: 20px;
-		left: -250px;
+		
 		
 	}
 	#s1
@@ -37,7 +30,7 @@
 		font-family: 'Nanum Pen Script', serif;
 		position: relative;
 		font-size: 20px;
-		left: -240px;
+		
 	
 	}
 	.check
@@ -60,18 +53,8 @@
 	#tb
 	{
 		font-family: 'Nanum Pen Script', serif;
-		position: relative;
-		font-size:30px;
-		width: 600px;
-		height: 500px;
 	}
-	.container
-	{
-		position: relative;
-		width: 600px;
-		height: 900px;
-		
-	}
+	
 
 
 
@@ -185,43 +168,43 @@ border: none;">
 	    </ul>
 	</nav>	
 
-	
+	<div class="container">
 	<div class="content" style="margin-top: 100px;text-align: center;">
 		<h2>회원 정보 수정</h2>
 		<hr>
-		<div class="container">
+		
 		<div class="main">
 		<form action="updateMember.do" method="post" class="f">
-				<table id="tb">
+				<table id="tb" class="table"> 
 					<tr>
 						<td>아이디</td>
 						<td>
 							<input type="hidden" name="mno" id="mno" value="${mno }">
-							<input type="text" name="id" id="id" value="${id }" readonly="readonly" style="text-align: center;">
+							<input type="text" class="form-control" name="id" id="id" value="${id }" readonly="readonly" style="text-align: center;">
 						</td>
 					</tr>
 					<tr>
 						<td>비밀번호</td>
 						<td>
-							<input type="password" name="pwd" id="pwd" style="text-align: center;">
+							<input type="password" class="form-control" name="pwd" id="pwd" style="text-align: center;">
 						</td>
 					</tr>
 					<tr>
 						<td>이름</td>
 						<td>
-							<input type="text" name="name" id="name" value="${m.name }" style="text-align: center;">
+							<input type="text" class="form-control" name="name" id="name" value="${m.name }" style="text-align: center;">
 						</td>
 					</tr>
 					<tr>
 						<td>휴대전화</td>
 						<td>
-							<input type="tel" name="phone" id="phone" maxlength="13" value="${m.phone }" style="text-align: center;">
+							<input type="tel" class="form-control" name="phone" id="phone" maxlength="13" value="${m.phone }" style="text-align: center;">
 						</td>
 					</tr>
 					<tr>
 						<td>이메일</td>
 						<td>
-							<input type="email" name="email" id="email" value="${m.email }" style="text-align: center;">
+							<input type="email" class="form-control" name="email" id="email" value="${m.email }" style="text-align: center;">
 						</td>
 					</tr>
 				</table>
