@@ -73,6 +73,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <!-- Jquery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -138,14 +139,20 @@ $(function () {
 				if(d.dfile == null && d.dphoto != null) {
 					src = "../resources/upload/" + d.dphoto;
 				} else if (d.dfile == null && d.dphoto == null) {
-					src = "../resources/upload/standard.png";
+					//src = "../resources/upload/standard.png";
+					src = 0;
 				}
 				var filephoto = $("<img></img>").attr({
 					src : src,
-					width : "400px",
+					width : "90%"
 				});
 				
-				$(contentsDiv).append(writer, dtitle, ddate, dweather, filephoto, dcontent);	
+				if(src == 0) {
+					$(contentsDiv).append(writer, dtitle, ddate, dweather, dcontent);	
+					
+				} else {
+					$(contentsDiv).append(writer, dtitle, ddate, dweather, filephoto, dcontent);	
+				}
 				
 				
 				//친구일기장으로 가는 태그
@@ -179,7 +186,7 @@ $(function () {
 				
 				$(a).append(diaryDiv);
 				$('#mainList').append(a);
-				/*
+				/* 웹버전용
 				$(diaryDiv).hover(function() {
 					$(div).detach();
 					$(this).append(contents);

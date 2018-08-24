@@ -87,10 +87,10 @@
 			<br>
 			<div class="row">
 				<div class="col-md-6">
-	 					<h3>Location</h3>
-	 					<h5>서울 마포구 백범로 23 구프라자 3층</h5><br>
-	 					<h3>Tel</h3>
- 						<h5>(010)-7706-2878</h5>
+ 					<h3>Location</h3>
+ 					<h5>서울 마포구 백범로 23 구프라자 3층</h5><br>
+ 					<h3>Tel</h3>
+					<h5>(010)-7706-2878</h5>
 	 			</div>
  				<div class="col-md-6">
  					<h3>STAFF</h3>

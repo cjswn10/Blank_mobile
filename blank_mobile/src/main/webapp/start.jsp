@@ -10,6 +10,7 @@
 <body>
 	<%
 		response.sendRedirect("login.do");
+		System.out.println(request.getRealPath("resources/upload"));
 	%>
 </body>
 </html>
