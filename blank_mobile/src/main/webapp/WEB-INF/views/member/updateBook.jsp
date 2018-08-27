@@ -17,16 +17,18 @@
 	.book
 	{
 		position: relative;
-		top: 130px;
+		top: 100px;
 		left:50px;
+		background-color:#ffc0cb;
 		width: 100%;
 		height: 300px;
+
 
 	}
 	#btitle
 	{
 		position: relative;
-		top:-140px;
+		top:-170px;
 		width:75%;
 		left: 75px;
 		font-size: 15px;
@@ -36,27 +38,34 @@
 	#s1
 	{
 		position: relative;
-		width:50px;
-		left: 90px;
-		top: 80px;
+		text-align:center;
+		width:30%;
+		font-size:80%;
+		left: 80px;
+		top: 50px;
 	}
 	#false
 	{
 		position: relative;
-		left: 110px;
-		width:50px;
-		top: 80px;
+		text-align:center;
+		left: 100px;
+		width:30%;
+		font-size:80%;
+		top: 50px;
 	}
 	.containe
 	{
 		position: relative;
 		width: 50%;
+		height:100%;
 		left: 20px;
+		margin-top:20px;
+		margin-bottom: 70px;
 	}
 	.containerr
 	{
 		position: relative;
-		top: -250px;
+		top: -280px;
 		left: 60px;	
 		width: 90%;
 	}
