@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html manifest="resources/conf/bit.manifest">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="with=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+minimum-scale=1.0,
+user-scalable=0">
 <title>빈칸을 채우다.</title>
 
 <link rel="stylesheet" type="text/css" href="resources/css/login.css">
@@ -27,33 +33,32 @@
 	}
 	.phrases1
 	{
-		font-size: 35px;
+		font-size: 15px;
 	}
 	.phrases2
 	{
 		position:relative;
-		font-size: 15px;
+		font-size: 10px;
 	}
 	.infomation
 	{
-		font-size: 20px;
+		font-size: 30px;
 		position: relative;
 		top: 30px;
-		left:100px;
 		text-align: center;
 	}
 	#searchId
-	{
+	{	
 		position: relative;
-		left:-100px;
 		top: 50px;
+		text-align: center;
 	}
 	#tb
 	{
 		position: relative;
 		font-size:20px;
-		width: 500px;
-		height: 100px;
+		width: 100%;
+		height: 100%;
 	}
 	#name
 	{
@@ -62,7 +67,7 @@
 	}
 	#phone
 	{
-		width: 200px;
+		width: 100%;
 		height: 30px;
 	}
 	#dd
@@ -72,7 +77,7 @@
 	}
 	.glyphicon-search
 	{
-		font-size: 200%;
+		font-size: 100%;
 	}
 
 </style>
@@ -82,6 +87,9 @@
 
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -151,18 +159,17 @@
 				<tr>
 					<td align="center" width="150">이름</td>
 					<td width="200">
-						<input type="text" name="name" id="name" style="text-align: center;" placeholder="이름">
+						<input type="text" name="name" id="name" placeholder="이름" style="text-align: center;" >
 					</td>
 				</tr>
 				<tr>
 					<td align="center">휴대전화</td>
 					<td>
-						<input type="text" id="dd" value="+82">
-						<input type="text" name="phone" id="phone" maxlength="13" style="text-align: center;" placeholder="휴대전화">
+						<input type="text" name="phone" id="phone" maxlength="13" placeholder="휴대전화" style="text-align: center;" >
 					</td>
 				</tr>
 			</table>
-			<button id="searchId">확인</button>
+				<button id="searchId">확인</button>
 		</div>
 	</div>
 </div>	

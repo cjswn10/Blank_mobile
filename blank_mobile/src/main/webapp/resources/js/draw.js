@@ -10,7 +10,7 @@ context.lineWidth = document.getElementById("Lwidth").value;
 canvas.addEventListener("touchstart", function(e) {
 	down(e)
 }, false);
-canvas.addEventListener("touchend", function(e) {
+canvas.addEventListener("touchcancel", function(e) {
 	up(e)
 }, false);
 canvas.addEventListener("touchmove", function(e) {
@@ -109,14 +109,12 @@ function down(e) {
 function move(e) {
 	if (!drawing)
 		return;
-	
-	e.preventDefault();
-	
 	var curX = e.pageX;
 	var curY = e.pageY;
 	draw(curX, curY);
 	startX = curX;
 	startY = curY;
+	e.preventDefault();
 	
 }
 
