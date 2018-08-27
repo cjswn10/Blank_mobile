@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class GrimpanController {
 
 	
-	
-	
 	@RequestMapping("/member/grimpan.do")
 	public void grimpan() {
 
