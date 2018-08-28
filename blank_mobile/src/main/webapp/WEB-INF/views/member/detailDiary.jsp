@@ -106,41 +106,84 @@ span{
 <body>
 
 	<div data-role="page">
-		<div data-role="header">헤더</div>
+		
 				
-		<div data-role="content" id="detailDiary">
+		<div data-role="content" style="padding: 0">
+		
+		<!-- side-menu -->
+		<section id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
+			<h5>회원정보</h5>
+			<a href="pwdCheck.do?id=${id }">Edit</a>
+			<a href="logOut.do?id=${id }">logout</a>
+			<br>
+			<h5>고객센터</h5>
+			<a href="qNa.do">Contact</a>
+			<br>
+			<div class="side_icon_set">
+				<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+				<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
+			</div>
+		</section>
+
+		<div id="wrapper">	
+	
+			<div class="mainSearchId" id="mainSearchId">
+				<div class="mainSearchId_inner" id="mainSearchId_inner">
+					<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+					<span id="btnMove" class="glyphicon glyphicon-search" ></span>
+					<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
 					
-		</div>
+					<div id="searchid"></div>
+				</div>
+			</div>
 			
-		<div data-role="footer" data-position="fixed">
-			<font color="white"><span onclick="location.href='updateDiary.do?dno=${d.dno}'" class="updateDiary" style="position:fixed; right: 92px; bottom: 0; cursor: pointer;">일기 수정</span></font>
-			<font color="white"><span onclick="location.href='deleteDiary.do?dno=${d.dno}'" class="deleteDiary" style="position:fixed; right: 0px; bottom: 0; cursor: pointer;">일기 삭제</span></font>
-			<footer class="footer">
+			<!------ main-menu ------>
+			<nav class="clearfix" style="margin-bottom: 20px">
+				<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
+			    <a data-ajax="false" href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
+			    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
+			    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+			    <ul id="main_menu">
+			        <li><a href="book.do" data-ajax="false">DIARY</a></li>
+			        <li><a href="favorite.do" data-ajax="false">FAVORITES</a></li>
+			        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
+			    </ul>
+			</nav>					
+		<div id="detailDiary" style="padding: 2px"></div>
+			<!--------- 푸터 ---------->
+			<div class="footer">
 				<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
-					<ul class="list-inline">
-				       <li>
-				           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
-				           <br><h5>김영호</h5>
-				       </li>
-				       <li>
-				           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
-				           <br><h5>변성인</h5>
-				       </li>
-				       <li>
-				           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
-				           <br><h5>성민규</h5>
-				       </li>
-				       <li>
-				           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
-				           <br><h5>임연주</h5>
-				       </li>
-				       <li>
-				           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
-				           <br><h5>차건우</h5>
-				       </li>
-				    </ul>
-		    </footer>
+				<ul class="list-inline">
+			       <li>
+			           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+			           <br><h5>김영호</h5>
+			       </li>
+			       <li>
+			           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+			           <br><h5>변성인</h5>
+			       </li>
+			       <li>
+			           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+			           <br><h5>성민규</h5>
+			       </li>
+			       <li>
+			           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+			           <br><h5>임연주</h5>
+			       </li>
+			       <li>
+			           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+			           <br><h5>차건우</h5>
+			       </li>
+			    </ul>
+			</div>			
+		
+			<font color="white"><span onclick="location.href='updateDiary.do?dno=${d.dno}'" class="updateDiary" style="position:fixed; right: 82px; bottom: 0; cursor: pointer;">일기 수정</span></font>
+			<font color="white"><span onclick="location.href='deleteDiary.do?dno=${d.dno}'" class="deleteDiary" style="position:fixed; right: 0px; bottom: 0; cursor: pointer;">일기 삭제</span></font>			
 		</div>
 	</div>
+</div>
+		
 </body>
 </html>
