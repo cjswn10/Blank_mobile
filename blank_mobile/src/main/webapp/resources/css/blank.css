@@ -46,8 +46,6 @@ body  {
 	
 	/********** mobile *********/
 
-
-
 .logo {
 	width: 105px;
 	display: inline-block;
@@ -122,7 +120,13 @@ nav span {
 	padding: 10px;
 }
 
+#id {
+	width: 85%;
+}
 
+.mainSearchId_inner span {
+	margin-left: 0.5%;
+}
 
 /**************	side-menu	*************/
 
@@ -168,9 +172,11 @@ nav span {
 
 #wrapper {
     transition: margin-left .5s;
-    min-height: calc(100vh - 160px);
+    min-height: calc(100vh);
     margin: 0;
     bottom: 0;
+    position: relative;
+    padding-bottom: 150px;
 }
 
 @media screen and (max-height: 575px) {
@@ -236,7 +242,10 @@ h2 {
     color: #818181;
     background-color: #151515;
 	padding: 5px;
+	position: absolute;
 	bottom: 0;
+	left: 0;
+	width: 100%;
 }
 
 
@@ -286,11 +295,7 @@ border:2px solid #fff;
 
 
 
-
 	/********** web *********/
-	
-	
-	
 	
 
 @media screen and (min-width: 576px) {	
