@@ -33,7 +33,11 @@ ul{
 {
 	font-size: 30px;
 }
-
+#list
+{
+	width: 100%;
+	height: 100%;
+}
 </style>
 
 <title>빈칸을 채우다.</title>
