@@ -7,6 +7,7 @@ var drawBackup = new Array();
 context.strokeStyle = myColor.value;
 context.lineWidth = document.getElementById("Lwidth").value;
 
+
 canvas.addEventListener("touchstart", function(e) {
 	down(e)
 }, false);
