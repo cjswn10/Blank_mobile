@@ -134,9 +134,7 @@ ul{
 			</nav>		
 		
 			<ul data-role="listview" id="list"></ul>
-		</div>
-			
-		<!--------- 푸터 ---------->
+			<!--------- 푸터 ---------->
 			<div class="footer">
 				<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
 				<ul class="list-inline">
@@ -162,6 +160,7 @@ ul{
 			       </li>
 			    </ul>
 			</div>	
+		</div>	
 		</div>
 	</div>
 </body>
