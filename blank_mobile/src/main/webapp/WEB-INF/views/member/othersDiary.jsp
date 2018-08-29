@@ -15,6 +15,15 @@ user-scalable=no">
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
+.ddate{	
+	text-align: right;	
+}
+
+#diaryImg{
+	width: 100%;
+	height: 100%;
+}
+
 .favoriteIcon:hover{
 	/* box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); */
 	opacity: .8;
@@ -31,7 +40,7 @@ user-scalable=no">
 }
 #user_id {
 	font-family: 'Nanum Pen Script', serif;
-	font-size: 50px;
+	font-size: 20px;
 	text-align: center;
 }
 
@@ -71,14 +80,13 @@ user-scalable=no">
 
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../resources/css/blank.css?ver=1">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.6.1.min.js"></script>
 <link rel="stylesheet" href="../resources/css/blank.css">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript">
@@ -96,7 +104,7 @@ user-scalable=no">
 		var fno = location.search.substring(location.search.indexOf("&")+5, location.search.lastIndexOf("&"));
 		var fmno = location.search.substr(location.search.lastIndexOf("=")+1);
 		$('#user_id').text(id + "님의 일기  ");
-		$('	<img class="favoriteIcon" width="150" height="40" src="../resources/img/nfavorite.jpg">').appendTo('#user_id');
+		$('	<img class="favoriteIcon" width="150" height="40" src="../resources/img/nfavorite.png">').appendTo('#user_id');
 		if (fno.length <= 4) {
 			$('.favoriteIcon').attr("src", "../resources/img/favorite.jpg")
 		} 
@@ -108,47 +116,45 @@ user-scalable=no">
 			data: {"fmno":fmno},
 			success:function(data){				
 				var list = eval("("+data+")");
-				$.each(list, function(i, d) {
+				$.each(list, function(idx, d) {
+					var li = $('<li data-icon="false"></li>');
+					$(li).attr("idx",idx);			
+					var a = $('<a data-ajax="false" href="detailFavoriteDiary.do?dno='+d.dno+'"></a>')
+					var title = $('<span></span>').html(d.dtitle);
+					var content = $('<p></p>').html(d.dcontent);				
+					var ddate = $('<p class="ddate" style="font-size: 8px;"></p>').html(d.ddate);					
 					
-					/* var div = $('<div class="listdiary"></div>');						
-					var a = $('<a href="detailFavoriteDiary.do?dno='+d.dno+'"></a>')
-					var br = $('<br>');		
-					var reContent = (d.dcontent).replace(/(?:\r\n|\r|\n)/g, '<br/>');
-					var p = $('<div class="dcontent"></div>').html(reContent);
-					$(".dcontent").scrollTop();
-					$(p).attr({
-						style: "font-family:"+d.dfont
-					})            
 					if (d.dphoto != null) {							
 						var img = $('<img></img>').attr({
 							src: "../resources/upload/" + d.dphoto,
-							width: "353",
-							height: "250"					
+							width: "100%",
+							height: "100%"					
 						});
-						$(a).append(img);
-						$(div).append(a,br,p);
-						$("#main_container").append(div);
+						$(a).append(img, title, content, ddate);
+						$(li).append(a);
+						$('#list').append(li);
 					}else {
-						$(a).append(p);
-						$(div).append(a);
-						$("#main_container").append(div);
-					}	
+						$(a).append(title, content, ddate);
+						$(li).append(a);
+						$('#list').append(li);					
+					}		            
 					
 					if (d.dfile != null) {							
 						var img = $('<img></img>').attr({
 							src: "../resources/upload2/" + d.dfile,
-							width: "353",
-							height: "250"					
+							width: "100%",
+							height: "100%"					
 						});
-						$(a).append(img);
-						$(div).append(a,br,p);
-						$("#main_container").append(div);
+						$(a).append(img, title, content, ddate);
+						$(li).append(a);
+						$('#list').append(li);
 					}else {
-						$(a).append(p);
-						$(div).append(a);
-						$("#main_container").append(div);					
-					} */      
-				})	
+						$(a).append(title, content, ddate);
+						$(li).append(a);
+						$('#list').append(li);					
+					}											 				
+				})
+				$('#list').listview("refresh");
 		}})		
 	};
 	othersDiaryList();		
@@ -157,7 +163,7 @@ user-scalable=no">
 	if (fno.length <= 4) {
 		$('.favoriteIcon').toggle(function(){
 			//즐겨찾기에서 삭제
-			$(this).attr("src","../resources/img/nfavorite.jpg")				
+			$(this).attr("src","../resources/img/nfavorite.png")				
 			$.ajax({
 				url: "deleteFavorite.do",
 				data: {"fmno":fmno,"mno":mno},
@@ -192,7 +198,7 @@ user-scalable=no">
 			})				
 		}, function(){
 			//즐겨찾기에서 삭제
-			$(this).attr("src", "../resources/img/nfavorite.jpg")				
+			$(this).attr("src", "../resources/img/nfavorite.png")				
 			$.ajax({
 				url: "deleteFavorite.do",
 				data: {"fmno":fmno,"mno":mno},				
@@ -209,7 +215,7 @@ user-scalable=no">
 
 	<div data-role="page">		
 				
-		<div data-role="content">
+		<div data-role="content" style="padding: 0">
 		<!-- side-menu -->
 		<section id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -250,10 +256,11 @@ user-scalable=no">
 			        <li><a href="favorite.do" data-ajax="false">FAVORITES</a></li>
 			        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
 			    </ul>
-			</nav>		
-		
-			<ul data-role="listview" id="list"></ul>						
-		</div>
+			</nav>
+					
+			<div id="user_id"></div>
+				
+			<ul data-role="listview" data-theme="d" id="list" style="padding: 15px;"></ul>						
 			
 			<!--------- 푸터 ---------->
 			<div class="footer">
@@ -283,5 +290,6 @@ user-scalable=no">
 			</div>
 		</div>
 	</div>	
+</div>
 </body>
 </html>
