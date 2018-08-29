@@ -203,7 +203,7 @@ user-scalable=no">
 			
 			<!----------- 내용 -------------->		
 			
-			<ul data-role="listview" id="list" style="padding: 14px;"></ul>	
+			<ul data-role="listview" id="list" style="padding: 15px;"></ul>	
 			
 			
 			<!--------- 푸터 ---------->
