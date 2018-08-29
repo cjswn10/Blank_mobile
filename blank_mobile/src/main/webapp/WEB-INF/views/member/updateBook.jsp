@@ -193,7 +193,7 @@
 			<input class="btn btn-default" id="false" type="reset" value="취소">				
 		</form>
 		</div>
-	</div>
+
 
 
 	<!-- 푸터 -->
