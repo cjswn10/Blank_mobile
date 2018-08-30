@@ -313,7 +313,7 @@ public class DiaryController {
 	        
 	        
 	        String weather = caller.getParser().getXMLFileAsString();
-	        System.out.println(weather);
+	        //System.out.println(weather);
 	        
 			mav.addObject("weather", weather);
 			mav.addObject("todays", todays);
@@ -451,6 +451,7 @@ public class DiaryController {
 	@ResponseBody
 	public String keyword(HttpSession session,int mno,int bno)
 	{
+		//ModelAndView mav = new ModelAndView();
 		
 		String keyword="";
 		//int mno = (Integer)session.getAttribute("mno");
@@ -469,7 +470,7 @@ public class DiaryController {
 			code.addRCode("library(wordcloud)");
 			code.addRCode("useSejongDic()");
 			code.addRCode("db = odbcConnect('blank','blank','blank')");
-			code.addRCode("sql = sqlQuery(db,'select dcontent from book b,member m,diary d where b.mno=m.mno and d.bno=b.bno and b.mno="+mno+" and b.bno="+bno+" and ddate = trunc(sysdate-1)')");
+			code.addRCode("sql = sqlQuery(db,'select dcontent from book b,member m,diary d where b.mno=m.mno and d.bno=b.bno and b.mno="+mno+" and b.bno="+bno+"')");
 			code.addRCode("keyword = matrix(sql$DCONTENT)");
 			code.addRCode("write(keyword ,'keyword.txt')");
 			code.addRCode("data = readLines('keyword.txt')");
@@ -498,6 +499,9 @@ public class DiaryController {
 	        String data9 = caller.getParser().getAsStringArray("data9")[0];
 
 	        keyword = caller.getParser().getXMLFileAsString();
+	        System.out.println(keyword);
+	        
+	        //mav.addObject("keyword", keyword);
 	        
 		}catch (Exception e) {
 			// TODO: handle exception
