@@ -89,7 +89,9 @@ $(function() {
 		})
 	}
 	
-
+	$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
+	
+	
 });
 // 그림판 띄어주는 창
 var openG;
@@ -211,15 +213,15 @@ border: none;">
 	    </ul>
 	</nav>	
 
-	<div class="content" style="margin-top: 100px">
+	<div class="content">
 		<h2>일기 수정</h2>
 		<hr>
 		<form action="updateDiary.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="dno" id="dno" value="${d.dno}">
 	
-			<table>
+			<table style="width:100%;">
 				<tr>
-					<td colspan="2">
+					<td>
 						<label for="dtitle">제목 </label>
 						<input type="text" name="dtitle" id="dtitle" required="required" value="${d.dtitle }">
 					</td>
@@ -227,17 +229,72 @@ border: none;">
 				
 				<tr>
 					<td>
-						<label for="ddate">날짜</label>
+						<label for="ddate">날&nbsp;&nbsp;&nbsp;짜</label>
 						<input type="date" name="ddate" id="ddate" required="required" value="${d.ddate }">
 					</td>
+				</tr>
+				<tr>
 					<td>
-						<label for="dweather">날씨</label>
-						<input type="text" name="dweather" id="dweather" value="${d.dweather }">
+						<label for="dweather">날&nbsp;&nbsp;&nbsp;씨</label>
+						<input type="text" name="dweather" id="dweather" value="${d.dweather }" style="display:none;">
+
+						<div class="today_weather" style="display: inline-block;">
+
+						<br>
+						<div class="city_weather">
+							<select id="citySelect">
+									<option>지역</option>
+									<option>서울</option>
+									<option>인천</option>
+									<option>수원</option>
+									<option>파주</option>
+									<option>춘천</option>
+									<option>백령도</option>
+									<option>강릉</option>
+									<option>속초</option>
+									<option>청주</option>
+									<option>안동</option>
+									<option>대전</option>
+									<option>홍성</option>
+									<option>전주</option>
+									<option>대구</option>
+									<option>울산</option>
+									<option>포항</option>
+									<option>부산</option>
+									<option>창원</option>
+									<option>광주</option>
+									<option>목포</option>
+									<option>여수</option>
+									<option>흑산도</option>
+									<option>제주</option>
+								</select>
+								<input type="hidden" name="cityName" id="cityName">
+								<input type="hidden" id="citys" value="${cityName }">
+								<input type="hidden" id="day" value="${ddate }">
+								<input type="hidden" name="date" id="date" value="${date }">
+								<input type="hidden" id="today_date" value="${todays }">
+								<input type="hidden" name="year" id="year" value="${year }">
+								<input type="hidden" name="month" id="month" value="${month }">
+								<span id="weather"> ${weather } </span>
+								<button id="search" type="button">검색</button>
+						</div>
+						
+						
+					</div>
+			
+					<div class="status" style="display: inline-block;">
+						<!--  <span id="city"></span> -->
+						<img id="tmef_img" src="" width="30px" height="30px">
+						<span id="tmef_info"></span>
+					</div>
+
+
+
 					</td>
 				</tr>
 				
 				<tr>
-					<td colspan="2">
+					<td>
 						<label for="dfont">글씨체</label>
 						<select name="dfont" id="dfont">
 							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script" selected="selected" >Nanum Brush Script</option>
@@ -259,30 +316,26 @@ border: none;">
 						<label for="uploadG"><img alt="사진첨부" src="../resources/img/icon/draw.png" width="40px"></label>
 						<input type="file" name="uploadG" id="uploadG" style="display: none;">
 						
-						<!-- 사진첨부 버튼 -->
-						<label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="25px"></label>
+						<!-- 사진첨부 버튼  그림버튼으로 통합 -->
+						<!-- <label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="25px"></label> -->
 						<input type="file" name="upload" id="upload" style="display: none;">
 					</td>
 				</tr>
 				
 				<!-- 그림, 사진 첨에 띄어주기-->
 				<tr>
-					<td colspan="2">
+					<td>
 						<!-- 그림 -->
 						<img id="grim" width="300">
-						<br>
 						<!-- 사진 -->
 						<img width="300" id="photo">
-	
-						<br>
-						<br>
 						<!-- 글 -->
 						<textarea rows="8" cols="40" name="dcontent" id="dcontent" style="font-family: ${d.dfont};">${d.dcontent }</textarea>
 					</td>
 				</tr>
 				
 				<tr>
-					<td colspan="2">
+					<td>
 						<input type="radio" name="secret" class="secret" value=1> 나만보기
 						<input type="radio" name="secret" class="secret" value=0> 전체공개<br>
 					</td>
