@@ -510,8 +510,8 @@ function openGrimpan() {
 						<label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px">(그림)</label>
 						<input type="file" name="uploadG" id="uploadG" style="display: none;">
 						
-						<!-- 사진첨부 버튼 -->
-						<label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px">(사진)</label>
+						<!-- 사진첨부 버튼 -> 그림판 버튼으로 통합-->
+						<!-- <label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label> -->
 						<input type="file" name="upload" id="upload" style="display: none;">
 					</td>
 				</tr>

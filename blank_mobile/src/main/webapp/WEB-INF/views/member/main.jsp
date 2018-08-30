@@ -100,7 +100,14 @@ $(function () {
 	$.ajax({
 		url: "dailyKeyword.do",
 		success: function(data) {
-			alert("데일리키워드");
+			dailyfname = data;
+			console.log(data)
+			var dailyImg = $('<img></img>').attr({
+				src: dailyfname,
+				width: "100%"
+			})
+			
+			$("#statistics").append(dailyImg);
 		}
 	});
 	
