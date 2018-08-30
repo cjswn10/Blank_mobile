@@ -15,6 +15,14 @@
 
 
 <style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+/*a 파란색 지우기 */
+ a:link { color: black; text-decoration: none;}
+ a:visited { color: black; text-decoration: none;}
+ a:hover { color: black; text-decoration: none;}
+
+
+
 #mainList{
 	text-align: center;
 }
@@ -50,7 +58,27 @@
 	overflow: hidden;	
 }
 
-@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+.iljung-div{
+    display:flex;
+    flex-direction:row;
+    justify-content : space-around;
+    padding:20px 0px;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30%;
+   
+}
+
+.iljung-date-div .btn{
+    border:1px solid #EFE7E6;
+    background-color: #EFE7E6;
+    color:#662408;
+    font-family: 'Nanum Pen Script', serif;
+}
+
+
+
 
 .landing {
     width: 100%;
@@ -376,9 +404,15 @@ $(function () {
 		    </ul>
 		</nav>
 		<div class="landing">
-			<img src="../resources/img/mainlogo.jpg" width="100%">
+			<img src="../resources/img/mainlogo.jpg" width="100%" height="50%">
 		</div>
 		
+		<!-- 페이지 버튼 -->
+		<div class="iljung-div">
+                    <div class="iljung-date-div"><p class="btn btn1" rel="div1"><a href="#statisticsD">빅데이터</a></p></div>
+                    <div class="iljung-date-div"><p class="btn btn1" rel="div2"><a href="#mainList">뉴스피드</a></p></div>
+                    <div class="iljung-date-div"><p class="btn btn1" rel="div3"><a href="#foot">개발자</a></p></div>
+        </div>
 		<!----------- 내용 -------------->
 		
 		
@@ -394,7 +428,7 @@ $(function () {
 
 	
 			<!--------- 푸터 ---------->
-		<div class="footer">
+		<div class="footer" id="foot">
 			<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
 			<ul class="list-inline">
 		       <li>
