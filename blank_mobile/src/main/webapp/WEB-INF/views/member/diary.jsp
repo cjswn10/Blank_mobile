@@ -68,7 +68,7 @@ user-scalable=no">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript">
 	 $(function () {	 
-		 
+				
 		setTimeout(function () {
 			
 			location.href = "logOut.do?id=${id}&autoOut=out";
@@ -94,6 +94,21 @@ user-scalable=no">
 				}
 			})
 		};
+		
+		var mykeyword = function()
+		{
+			 $.ajax({
+					url:"myKeyword.do",
+					data:{"mno":mno,"bno":bno},
+					success:function(data)
+					{
+						$("#keyword").html(data);
+						$("#keyword").hide();
+						$("#hash").html("#"+$("[name='data7'] > v").html()+"   #"+$("[name='data8'] > v").html()+"   #"+$("[name='data9'] > v").html())
+							
+					}
+				})
+		}
 		
 		$(".btitle").change(function(){
 			var btitle = $(".btitle").val();
@@ -150,6 +165,7 @@ user-scalable=no">
 		};
 		selectBook();
 		listDiary();
+		mykeyword();
 	});
 	 
 </script>
@@ -174,7 +190,10 @@ user-scalable=no">
 				<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 			</div>
 		</section>
-
+		<div>
+			<span id="keyword"></span>
+			<span id="hash"></span>
+		</div>
 		<div id="wrapper">	
 	
 			<div class="mainSearchId" id="mainSearchId">

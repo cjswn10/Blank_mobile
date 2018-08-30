@@ -34,7 +34,7 @@ public class DiaryController {
 		this.dao = dao;
 	}
 
-	// �ѱ۱���??
+	// 占싼글깍옙占쏙옙??
 	@RequestMapping("/member/mainDetailDiary.do")
 	public ModelAndView mainDetailDiary(int dno) {
 		Map map = new HashMap();
@@ -44,7 +44,7 @@ public class DiaryController {
 		return mav;
 	}
 
-	// �ѱ۱���??
+	// 占싼글깍옙占쏙옙??
 	@RequestMapping("/member/detailFavoriteDiary.do")
 	public ModelAndView detailFavoriteDiary(int dno) {
 		Map map = new HashMap();
@@ -390,7 +390,7 @@ public class DiaryController {
 			}
 		}
 		
-		/************** �׸� ***************/
+		/************** 占쌓몌옙 ***************/
 		String orgnameG = uploadG.getOriginalFilename();
 		String dfile = "x";
 
@@ -447,9 +447,65 @@ public class DiaryController {
 		return mav;
 	}
 
-	@RequestMapping("/member/diary.do")
-	public void diary() {
+	@RequestMapping(value="/member/myKeyword.do", produces="text/plain;charset=utf-8")
+	@ResponseBody
+	public String keyword(HttpSession session,int mno,int bno)
+	{
+		
+		String keyword="";
+		//int mno = (Integer)session.getAttribute("mno");
+		
+		try {
+			RCaller caller = new RCaller();
+			caller.setRscriptExecutable("C:/Program Files/R/R-3.5.1/bin/x64/Rscript.exe");
+			
+			RCode code = new RCode();
+			code.clear();
+			
+			code.addRCode("setwd('c:/r_temp')");
+			code.addRCode("library(DBI)");
+			code.addRCode("library(RODBC)");
+			code.addRCode("library(KoNLP)");
+			code.addRCode("library(wordcloud)");
+			code.addRCode("useSejongDic()");
+			code.addRCode("db = odbcConnect('blank','blank','blank')");
+			code.addRCode("sql = sqlQuery(db,'select dcontent from book b,member m,diary d where b.mno=m.mno and d.bno=b.bno and b.mno="+mno+" and b.bno="+bno+" and ddate = trunc(sysdate-1)')");
+			code.addRCode("keyword = matrix(sql$DCONTENT)");
+			code.addRCode("write(keyword ,'keyword.txt')");
+			code.addRCode("data = readLines('keyword.txt')");
+			code.addRCode("data <- gsub('[ㄱ-ㅎ]','', data)");
+			code.addRCode("data <- gsub('[0-9]','', data)");
+			//code.addRCode("data <- gsub('.','', data)");
+			code.addRCode("data1 <- sapply(data,extractNoun,USE.NAMES=F)");
+			code.addRCode("data2 <- unlist(data1)");
+			code.addRCode("data2 <- Filter(function(x) {nchar(x) >= 2} ,data2)");
+			code.addRCode("write(unlist(data2),'diary_dtitle.txt')");
+			code.addRCode("data4 <- read.table('diary_dtitle.txt')");
+			code.addRCode("wordcount <- table(data4)");
+			code.addRCode("data5 = head(sort(wordcount, decreasing=T),3)");
+			code.addRCode("data6 = data.frame(data5)");
+			code.addRCode("data7 = as.character(data6[1,1])");
+			code.addRCode("data8 = as.character(data6[2,1])");
+			code.addRCode("data9 = as.character(data6[3,1])");   
+	        code.addRCode("allvars <- as.list(globalenv())");
 
+	        caller.setRCode(code);
+
+	        caller.runAndReturnResult("allvars");
+			
+	        String data7 = caller.getParser().getAsStringArray("data7")[0];
+	        String data8 = caller.getParser().getAsStringArray("data8")[0];
+	        String data9 = caller.getParser().getAsStringArray("data9")[0];
+
+	        keyword = caller.getParser().getXMLFileAsString();
+	        
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}  
+		
+		return keyword;
+		
 	}
 
 	// LIST DIARY
@@ -472,6 +528,11 @@ public class DiaryController {
 			e.printStackTrace();
 		}
 		return str;
+	}
+	
+	@RequestMapping("/member/diary.do")
+	public void diary() {
+		
 	}
 
 }
