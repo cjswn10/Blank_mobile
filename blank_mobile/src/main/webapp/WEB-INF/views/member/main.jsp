@@ -100,17 +100,33 @@ $(function () {
 	$.ajax({
 		url: "dailyKeyword.do",
 		success: function(data) {
+			console.log("일간키워드 success")
 			dailyfname = data;
-			console.log(data)
+			console.log(dailyfname)
 			var dailyImg = $('<img></img>').attr({
-				src: dailyfname,
+				src: "../resources/rImg/" + dailyfname,
 				width: "100%"
 			})
 			
-			$("#statistics").append(dailyImg);
+			$("#statisticsD").append(dailyImg);
 		}
 	});
 	
+	//주간키워드
+	$.ajax({
+		url: "weeklyKeyword.do",
+		success: function(data) {
+			console.log("주간키워드 success")
+			weeklyfname = data;
+			console.log(weeklyfname)
+			var weeklyImg = $('<img></img>').attr({
+				src: "../resources/rImg/" + weeklyfname,
+				width: "100%"
+			})
+			
+			$("#statisticsW").append(weeklyImg);
+		}
+	});
 	
 	//메인리스트
 	$.ajax({
@@ -366,7 +382,8 @@ $(function () {
 		<!----------- 내용 -------------->
 		
 		
-		<div id="statistics"></div>
+		<div id="statisticsD"></div>
+		<div id="statisticsW"></div>
 		
 		
 		<div class="clearfix" id="mainList"></div>

@@ -37,7 +37,7 @@ public class MemberController {
 
 
 
-	//ë§ˆì´í˜ì´ì§€ ë·°
+	//¸¶ÀÌÆäÀÌÁö ºä
 	@RequestMapping(value="/member/myPage.do")
 	public ModelAndView myPage() {
 		
@@ -46,7 +46,7 @@ public class MemberController {
 	}
 	
 
-	//ì•„ì´ë””,ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ë·°
+	//¾ÆÀÌµğ,ºñ¹Ğ¹øÈ£ Ã£±â ºä
 	@RequestMapping(value="search.do")
 	public ModelAndView search() {
 			
@@ -56,7 +56,7 @@ public class MemberController {
 	
 
 
-	//idì°¾ê¸° ë·° 
+	//idÃ£±â ºä 
 	@RequestMapping(value="searchIdPage.do")
 	public ModelAndView searchId() {
 				
@@ -64,7 +64,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//pwdì°¾ê¸° ë·°
+	//pwdÃ£±â ºä
 	@RequestMapping(value="searchPwdPage.do")
 	public ModelAndView searchPwd() {
 					
@@ -72,7 +72,7 @@ public class MemberController {
 		return mav;
 	}
 
-	//ì•„ì´ë””ì°¾ê¸°
+	//¾ÆÀÌµğÃ£±â
 	@RequestMapping(value="searchId.do")
 	@ResponseBody
 	public String searchId(String name,String phone)
@@ -93,7 +93,7 @@ public class MemberController {
 		return str;
 	}
 	
-	//ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
+	//ºñ¹Ğ¹øÈ£ Ã£±â
 	@RequestMapping(value="searchPwd.do")
 	@ResponseBody
 	public String searchPwd(String id,String phone)
@@ -123,7 +123,7 @@ public class MemberController {
 	}
 
 
-	//ë¡œê·¸ì•„ì›ƒ
+	//·Î±×¾Æ¿ô
 	@RequestMapping(value="/member/logOut.do")
 	public ModelAndView logOut(HttpSession session,LogVo l,HttpServletRequest request,String autoOut) {
 		
@@ -178,7 +178,7 @@ public class MemberController {
 		String id = request.getParameter("id");
 		
 		l.setId(id);
-		l.setRecord("ë¡œê·¸ì•„ì›ƒ");
+		l.setRecord("·Î±×¾Æ¿ô");
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 
@@ -191,12 +191,12 @@ public class MemberController {
 		int re = dao.logRecord(l);
 		if(re > 0)
 		{
-			mav.addObject("msg", "ì„±ê³µ");
+			mav.addObject("msg", "¼º°ø");
 			mav.setViewName("redirect:/member/main.do");
 		}
 		else
 		{
-			mav.addObject("msg", "ì‹¤íŒ¨");
+			mav.addObject("msg", "½ÇÆĞ");
 			mav.setViewName("error");
 		}
 		mav.addObject("autoOut", autoOut);
@@ -206,12 +206,12 @@ public class MemberController {
 	}
 	
 
-	//íšŒì›ê°€ì…(GET)
+	//È¸¿ø°¡ÀÔ(GET)
 	@RequestMapping(value="join.do", method=RequestMethod.GET)	
 	public void joinForm() {
 		
 	}
-	//íšŒì›ê°€ì…(POST)
+	//È¸¿ø°¡ÀÔ(POST)
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
 	public ModelAndView joinSubmit(MemberVo mv) {
 		ModelAndView mav = new ModelAndView("redirect:/login.do");
@@ -219,14 +219,14 @@ public class MemberController {
 		int re = dao.memberInsert(mv);
 		if (re < 1) {
 
-			mav.addObject("msg", "íšŒì›ê°€ì…ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			mav.addObject("msg", "È¸¿ø°¡ÀÔ¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
 			mav.setViewName("/member/error");
 		}
 		return mav;
 	}
 	
 
-	//ì¤‘ë³µí™•ì¸
+	//Áßº¹È®ÀÎ
 	@RequestMapping(value="checkId.do")
 	@ResponseBody
 	public String checkId(@RequestParam("id")String id) {
@@ -239,7 +239,7 @@ public class MemberController {
 	
 	}
 	
-	//ë©”ì¸ í˜ì´ì§€ ì•„ì´ë””ê²€ìƒ‰(idì¤‘ë³µì²´í¬)
+	//¸ŞÀÎ ÆäÀÌÁö ¾ÆÀÌµğ°Ë»ö(idÁßº¹Ã¼Å©)
 	@RequestMapping(value="/member/checkId2.do")
 	@ResponseBody
 	public String checkId2(@RequestParam("id")String id,HttpSession session) {
@@ -253,7 +253,7 @@ public class MemberController {
 	}
 	
 
-	//ë¡œê·¸ì¸
+	//·Î±×ÀÎ
 	@RequestMapping(value="login.do", method=RequestMethod.GET)
 	public void loginForm() {	
 		
@@ -270,7 +270,7 @@ public class MemberController {
 		Boolean r = dao.login(map);
 		if (r == true) {
 
-			//id, mno ì„¸ì…˜ìƒì„±
+			//id, mno ¼¼¼Ç»ı¼º
 			session.setAttribute("id", id);
 			session.setAttribute("mno", dao.mno(map));
 			mav.setViewName("redirect:/member/main.do");
@@ -322,7 +322,7 @@ public class MemberController {
 		}
 		
 		l.setId(id);
-		l.setRecord("ë¡œê·¸ì¸");
+		l.setRecord("·Î±×ÀÎ");
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 
@@ -335,22 +335,22 @@ public class MemberController {
 		int re = dao.logRecord(l);
 		if(re > 0)
 		{
-			mav.addObject("msg", "ì„±ê³µ");
+			mav.addObject("msg", "¼º°ø");
 			mav.setViewName("redirect:/member/main.do");
 		}
 		else
 		{
-			mav.addObject("msg", "ì‹¤íŒ¨");
+			mav.addObject("msg", "½ÇÆĞ");
 			mav.setViewName("error");
 		}
 		
-		//ë¡œê·¸ì¸ í•˜ê³  3ì‹œê°„5ë¶„ ë™ì•ˆ í˜ì´ì§€ë¥¼ ì´ë™í•˜ì§€ì•Šìœ¼ë©´ ì„¸ì…˜ ì‚­ì œ(ì¦‰, ìë™ ë¡œê·¸ì•„ì›ƒ)
+		//·Î±×ÀÎ ÇÏ°í 3½Ã°£5ºĞ µ¿¾È ÆäÀÌÁö¸¦ ÀÌµ¿ÇÏÁö¾ÊÀ¸¸é ¼¼¼Ç »èÁ¦(Áï, ÀÚµ¿ ·Î±×¾Æ¿ô)
 		session.setMaxInactiveInterval(185*60);
 		
 		return mav;
 	}
 
-	//ë¹„ë°€ë²ˆí˜¸ì°¾ê¸°
+	//ºñ¹Ğ¹øÈ£Ã£±â
   @RequestMapping(value="/member/pwdCheck.do", method=RequestMethod.GET)
 	public void pwdCheckForm() {
 		
@@ -373,14 +373,14 @@ public class MemberController {
 		else
 		{
 
-			mav.addObject("msg", "ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+			mav.addObject("msg", "¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
 		}	
 		
 		return mav;
 	}
 	
 
-	//íšŒì›ì •ë³´ ìˆ˜ì •
+	//È¸¿øÁ¤º¸ ¼öÁ¤
 	@RequestMapping(value="/member/updateMember.do", method=RequestMethod.GET)
 	public void memberUpdateForm() {
 		
@@ -393,14 +393,14 @@ public class MemberController {
 		
 		int re = dao.updateMember(mv);
 		if (re < 1) {
-			mav.addObject("msg", "íšŒì›ìˆ˜ì •ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			mav.addObject("msg", "È¸¿ø¼öÁ¤¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
 			mav.setViewName("/member/error");
 		}
 		
 		return mav;
 	}
 	
-	//ë©”ì¸ ì•„ì´ë””ê²€ìƒ‰
+	//¸ŞÀÎ ¾ÆÀÌµğ°Ë»ö
 	@RequestMapping(value="/member/mainSearchId.do",produces="text/plain;charset=utf-8")
 	@ResponseBody
 	public String mainSearchId(String id,HttpSession session)
@@ -428,7 +428,7 @@ public class MemberController {
 		return str;
 	}
 	
-	//ì•„ì´ë”” ê°€ì ¸ì˜¤ê¸°
+	//¾ÆÀÌµğ °¡Á®¿À±â
 	@RequestMapping(value="/member/getId.do", produces="text/plain;charset=utf-8")
 	@ResponseBody
 	public String getIdByMno(int mno) {
