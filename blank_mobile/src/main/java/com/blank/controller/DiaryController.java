@@ -313,7 +313,7 @@ public class DiaryController {
 	        
 	        
 	        String weather = caller.getParser().getXMLFileAsString();
-	        //System.out.println(weather);
+	        System.out.println(weather);
 	        
 			mav.addObject("weather", weather);
 			mav.addObject("todays", todays);

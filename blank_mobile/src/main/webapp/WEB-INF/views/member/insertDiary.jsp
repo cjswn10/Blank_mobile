@@ -23,69 +23,10 @@
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 
 <style type="text/css">
-/*
-	.today_weather
-	{
-		position: relative;
-		top: -450px;
-		width:400px;
-		left: 650px;
-	}
-
-	.city_weather
-	{
-		position: relative;
-		left: 120px;
-		
-	}
-	
-	#citySelect
-	{
-		width: 70px;
-		height: 26px;
-	}
-	
-
-	#today
-	{
-		font-size: 20px;
-		position: relative;
-		left: 40px;
-	}
-	#location
-	{
-		font-size: 10px;
-		position: relative;
-		left: 30px;
-	}
-	#tmef_img
-	{
-		position: relative;
-		left: 30px;
-	}
-	#test > li
-	{
-		list-style: none;
-	}
-
-	#weather_icon
-	{
-		position: relative;
-		top: 30px;
-		left: 0px;
-	}
-	.status
-	{
-		position: relative;
-		font-size:20px;
-		left: 120px;
-	}
-*/
 
 table label {
 	display: inline-block;
 	width: 15%;
-
 }
 </style>
 
@@ -406,7 +347,7 @@ function openGrimpan() {
 
 			<table style="width:100%;">
 				<tr>
-					<td colspan="2">
+					<td>
 						<label for="dtitle">제&nbsp;&nbsp;&nbsp;목 </label>
 						<input type="text" name="dtitle" id="dtitle" required="required" value="${dtitle }">
 					</td>
@@ -473,11 +414,11 @@ function openGrimpan() {
 						
 					</div>
 			
-						<div class="status" style="display: inline-block;">
-							<!--  <span id="city"></span> -->
-							<img id="tmef_img" src="" width="30px" height="30px">
-							<span id="tmef_info"></span>
-						</div>
+					<div class="status" style="display: inline-block;">
+						<!--  <span id="city"></span> -->
+						<img id="tmef_img" src="" width="30px" height="30px">
+						<span id="tmef_info"></span>
+					</div>
 						
 						
 					</td>
@@ -523,7 +464,7 @@ function openGrimpan() {
 						<!-- 사진 -->
 						<img id="photo" width="300">
 						<!-- 글 -->
-						<textarea class="form-control" rows="10" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script">${dcontent }</textarea>
+						<textarea class="form-control" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; width:100%; height:">${dcontent }</textarea>
 					</td>
 				</tr>
 				<tr>
