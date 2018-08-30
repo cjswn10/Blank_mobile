@@ -91,7 +91,7 @@ public class MainController {
 			code.addRCode("data2 <- sapply(data1,extractNoun,USE.NAMES=F)");
 			code.addRCode("data3 <- unlist(data2)");
 			code.addRCode("data3 <- Filter(function(x) {nchar(x) >= 1} ,data3)");
-			code.addRCode("data3=gsub('\\d','',data3)");
+			//code.addRCode("data3=gsub('\\d','',data3)");
 			code.addRCode("data3=gsub('ㅎ','',data3)");
 			code.addRCode("write(unlist(data3),'dailyKeyword2.txt')");
 			code.addRCode("data4 <- read.table('dailyKeyword2.txt')");
@@ -127,4 +127,81 @@ public class MainController {
 		return keywords;
 	}
 	
+	@RequestMapping(value="/member/weeklyKeyword.do", produces="text/plain;charset=utf-8")
+	@ResponseBody
+	public String weeklyKeyword(HttpServletRequest request) {
+		String keywords = "";
+		
+		try {
+			RCaller caller = new RCaller();
+			caller.setRscriptExecutable("C:\\Program Files\\R\\R-3.5.1\\bin\\x64\\Rscript.exe");
+			
+			RCode code = new RCode();
+			code.clear();		
+			
+			File file;			
+			file = code.startPlot();
+			/**
+			 * db연동 후 파일(weeklyKeyword.txt) 생성
+			 */
+			code.addRCode("setwd('c:/r_temp')");
+			code.addRCode("library(DBI)");
+			code.addRCode("library(RODBC)");
+			//code.addRCode("library(devtools)");
+			//code.addRCode("library(RCurl)");
+			//code.addRCode("library(d3Network)");
+			//code.addRCode("library(Rserve)");
+			
+			code.addRCode("db = odbcConnect('blank', 'blank', 'blank')");
+			code.addRCode("sql = 'SELECT dcontent FROM diary WHERE ddate BETWEEN TRUNC(sysdate-7) AND TRUNC(sysdate)'");
+			code.addRCode("data = sqlQuery(db, sql)");
+			code.addRCode("keywords = matrix(data$DCONTENT)");
+			code.addRCode("write(keywords, 'weeklyKeyword.txt')");
+			
+			//code.addRCode("Rserve(FALSE,port=6311,args='--RS-encoding utf8 --no-save --slave --encoding utf8')");
+			/**
+			 * wordcloud로 만들기
+			 */
+			code.addRCode("library(KoNLP)");
+			code.addRCode("library(wordcloud)");
+			code.addRCode("useSejongDic()");
+			code.addRCode("data1=readLines('weeklyKeyword.txt')");
+			code.addRCode("data2 <- sapply(data1,extractNoun,USE.NAMES=F)");
+			code.addRCode("data3 <- unlist(data2)");
+			code.addRCode("data3 <- Filter(function(x) {nchar(x) >= 1} ,data3)");
+			//code.addRCode("data3=gsub('\\d','',data3)");
+			code.addRCode("data3=gsub('ㅎ','',data3)");
+			code.addRCode("write(unlist(data3),'weeklyKeyword2.txt')");
+			code.addRCode("data4 <- read.table('weeklyKeyword2.txt')");
+			code.addRCode("library(RColorBrewer)");
+			code.addRCode("wordcount = table(data4)");
+			code.addRCode("palete <- brewer.pal(9,'Set3')");
+			code.addRCode("wordcloud(names(wordcount),freq=wordcount,scale=c(5,1),rot.per=0.25,min.freq=1,random.order=F,random.color=T,colors=palete)");
+			
+			code.endPlot();
+			caller.setRCode(code);
+			caller.runOnly();
+			
+			String path = request.getRealPath("/resources/rImg");
+			System.out.println(path);
+			keywords = file.getName();
+
+			try {
+				FileInputStream fis = new FileInputStream(file);
+				FileOutputStream fos = new FileOutputStream(path + "/" + keywords);
+				FileCopyUtils.copy(fis, fos);
+				fis.close();
+				fos.close();
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e.getMessage());
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		return keywords;
+	}
 }
