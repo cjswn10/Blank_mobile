@@ -81,6 +81,12 @@
 		left: 120px;
 	}
 */
+
+table label {
+	display: inline-block;
+	width: 15%;
+
+}
 </style>
 
 <script type="text/javascript">
@@ -398,23 +404,23 @@ function openGrimpan() {
 			<input type="hidden" name="bno" id="bno" value="${bno }"> 
 			<input type="hidden" name="mno" id="mno" value="${mno }">
 
-			<table width="100%">
+			<table style="width:100%;">
 				<tr>
 					<td colspan="2">
-						<label for="dtitle">제목 </label>
+						<label for="dtitle">제&nbsp;&nbsp;&nbsp;목 </label>
 						<input type="text" name="dtitle" id="dtitle" required="required" value="${dtitle }">
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-						<label for="ddate">날짜</label>
+						<label for="ddate">날&nbsp;&nbsp;&nbsp;짜</label>
 						<input type="date" name="ddate" id="ddate" value="${ddate }" required="required">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="dweather">날씨</label>
+						<label for="dweather">날&nbsp;&nbsp;&nbsp;씨</label>
 						<input type="text" name="dweather" id="dweather" style="display:none;">
 						
 						<div class="today_weather" style="display: inline-block;">
@@ -470,6 +476,7 @@ function openGrimpan() {
 						<div class="status" style="display: inline-block;">
 							<!--  <span id="city"></span> -->
 							<img id="tmef_img" src="" width="30px" height="30px">
+							<span id="tmef_info"></span>
 						</div>
 						
 						

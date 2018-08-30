@@ -96,6 +96,16 @@ $(function () {
 	
 	var mno = ${mno}
 	
+	//일간키워드
+	$.ajax({
+		url: "dailyKeyword.do",
+		success: function(data) {
+			alert("데일리키워드");
+		}
+	});
+	
+	
+	//메인리스트
 	$.ajax({
 		url: "mainList.do",
 		success:function(data){				
@@ -347,6 +357,10 @@ $(function () {
 		</div>
 		
 		<!----------- 내용 -------------->
+		
+		
+		<div id="statistics"></div>
+		
 		
 		<div class="clearfix" id="mainList"></div>
 		
