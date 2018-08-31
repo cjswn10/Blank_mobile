@@ -53,6 +53,24 @@ user-scalable=no">
 	font-size: 50px;
 	position: relative;
 }
+.iljung-div{
+    display:flex;
+    flex-direction:row;
+    justify-content : space-around;
+    width:100%;
+    margin-left: 80%;
+    
+    
+   
+}
+
+.iljung-date-div .btn{
+    border:1px solid #EFE7E6;
+    background-color: #EFE7E6;
+    color:#662408;
+    font-family: 'Nanum Pen Script', serif;
+}
+
 
 </style>
 <title>빈칸을 채우다.</title>
@@ -220,7 +238,11 @@ user-scalable=no">
 			<!----------- 내용 -------------->		
 			<div>
 				<span id="keyword"></span>
-				<span id="hash">많이 쓰는 단어 분석중...</span>
+				<div class="iljung-div">
+                    <div class="iljung-date-div"><p class="btn btn1" rel="div2"><span id="hash">많이 쓰는 단어 분석중...</span></p></div>
+                    
+        		</div>
+				
 			</div>
 			<ul data-role="listview" id="list" style="padding: 15px;"></ul>	
 			
