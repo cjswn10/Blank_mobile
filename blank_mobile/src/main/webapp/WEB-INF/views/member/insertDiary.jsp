@@ -264,7 +264,7 @@ function openGrimpan() {
 			reader.readAsDataURL(f);
 		});
 	}
-	
+	<!-- 그림 보여주기 -->
 	$(document).ready(function() {
 		$("#uploadG").on("change", showImgG)
 	});
@@ -282,6 +282,10 @@ function openGrimpan() {
 			sel_fileG = f;
 			var reader = new FileReader();
 			reader.onload = function(e) {
+				$("#img").css({
+					display: "inline-block"
+				});
+				
 				$("#img").attr("src", e.target.result);
 			}
 			reader.readAsDataURL(f);
@@ -337,11 +341,10 @@ function openGrimpan() {
 	</nav>	
 
 	
-	<div class="content">
-		<h2>빈칸을 채우다</h2>
+	<div class="content" style="width:100%;">
 		<hr>
 	 
-		<form action="insertDiary.do" method="post" enctype="multipart/form-data">
+		<form action="insertDiary.do" method="post" enctype="multipart/form-data" style="width:95%; margin-left: auto; margin-right: auto;">
 			<input type="hidden" name="bno" id="bno" value="${bno }"> 
 			<input type="hidden" name="mno" id="mno" value="${mno }">
 
@@ -349,14 +352,14 @@ function openGrimpan() {
 				<tr>
 					<td>
 						<label for="dtitle">제&nbsp;&nbsp;&nbsp;목 </label>
-						<input type="text" name="dtitle" id="dtitle" required="required" value="${dtitle }">
+						<input type="text" name="dtitle" id="dtitle" required="required" value="${dtitle }" style="width: 80%;">
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
 						<label for="ddate">날&nbsp;&nbsp;&nbsp;짜</label>
-						<input type="date" name="ddate" id="ddate" value="${ddate }" required="required">
+						<input type="date" name="ddate" id="ddate" value="${ddate }" required="required" style="line-height: normal;width: 80%;">
 					</td>
 				</tr>
 				<tr>
@@ -364,7 +367,7 @@ function openGrimpan() {
 						<label for="dweather">날&nbsp;&nbsp;&nbsp;씨</label>
 						<input type="text" name="dweather" id="dweather" style="display:none;">
 						
-						<div class="today_weather" style="display: inline-block;">
+						<div class="today_weather" style="display: inline-block; width:65%"">
 						<!-- 
 						<ul id="test">
 							<img id="weather_icon" src="../resources/img/weather.png" width="30" height="30">
@@ -372,9 +375,8 @@ function openGrimpan() {
 							<li id="location">지역과 날씨를 선택 후 검색버튼을 눌러주세요.</li>
 						</ul>
 						 -->
-						<br>
 						<div class="city_weather">
-							<select id="citySelect">
+							<select id="citySelect" style="width:70%">
 									<option>지역</option>
 									<option>서울</option>
 									<option>인천</option>
@@ -400,7 +402,7 @@ function openGrimpan() {
 									<option>흑산도</option>
 									<option>제주</option>
 								</select>
-								<input type="hidden" name="cityName" id="cityName">
+								<input type="hidden" name="cityName" id="cityName" >
 								<input type="hidden" id="citys" value="${cityName }">
 								<input type="hidden" id="day" value="${ddate }">
 								<input type="hidden" name="date" id="date" value="${date }">
@@ -427,7 +429,7 @@ function openGrimpan() {
 				<tr>
 					<td>
 						<label for="dfont">글씨체</label>
-						<select name="dfont" id="dfont">
+						<select name="dfont" id="dfont" style="width:80%">
 							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script">Nanum Brush Script</option>
 							<option value="Nanum Gothic Coding" style="font-family:Nanum Gothic Coding">Nanum Gothic Coding</option>
 							<option value="Nanum Myeongjo" style="font-family:Nanum Myeongjo">Nanum Myeongjo</option>
@@ -446,9 +448,9 @@ function openGrimpan() {
 				<tr>
 					<td>
 						<!-- 그림판 버튼 -->
-						<button type="button" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button>
+						<button type="button" style="display: inline-block;" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button>
 						
-						<label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px">(그림)</label>
+						<label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px"></label>
 						<input type="file" name="uploadG" id="uploadG" style="display: none;">
 						
 						<!-- 사진첨부 버튼 -> 그림판 버튼으로 통합-->
@@ -460,11 +462,11 @@ function openGrimpan() {
 				<tr>
 					<td>
 						<!-- 그림 -->
-						<img id="img" width="300" style="display: inline-block;">
+						<img id="img" width="300" style="display: none">
 						<!-- 사진 -->
-						<img id="photo" width="300">
+						<img id="photo" width="300" style="display: none">
 						<!-- 글 -->
-						<textarea class="form-control" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; width:100%; height:">${dcontent }</textarea>
+						<textarea class="form-control" rows="8" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; width:100%; height:50%;">${dcontent }</textarea>
 					</td>
 				</tr>
 				<tr>

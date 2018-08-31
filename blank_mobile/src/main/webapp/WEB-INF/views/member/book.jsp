@@ -18,22 +18,35 @@
 		width: 93%;
 		text-align: center;
 		position:relative;
-		left: 10px;
-		margin-left: 0 auto;
+		margin: 15px auto;
 	}
 
+	/* remove 아이콘 & update 아이콘 */
+	#aDiv {
+		top: 216px;
+  		position: relative;
+	}
+	
+	
 	/* remove 아이콘위치 */
 	#remove_location
 	{
 		font-family: 'Nanum Pen Script', serif;
-		position:relative;
-		display:table;
+		display: inline-block;
 		font-size: 10px;
-		top:140.5px;
 		color:black;
-		left: 50px;
+		margin: 0 10px; 
 	}
 
+	/*일기장 수정*/
+	.update
+	{
+		font-family: 'Nanum Pen Script', serif;
+		display: inline-block;
+		font-size: 10px;
+		color:black;
+		margin: 0 10px;
+	}
 	/* plus 아이콘 */
 	.glyphicon-plus
 	{
@@ -45,67 +58,46 @@
 	#main_container
 	{
 		width: 100%;
-		
+		text-align: center;
 	}
 	
 	#main
 	{
 		width:100%;
 		height:100%;
-		overflow: hidden;
-		margin: 10px;
-		position: relative;
-		left: -5px;
-		
 	}
 	
 	/* 서브컨테이너의 자식 div들 */
 	#main_container > div
 	{
-		position:relative;
-		width: 150px;
-		height: 180px;
-		float: left;
-		margin: 25px;
-		padding: 30px;
-		background-color: pink;
+		width: 200px;
+		height: 240px;
+		display: inline-block;
+		margin-bottom: 35px;
 	}
+	
+	
 	/* 일기장 제목 */
 	.btitle
 	{
 		font-family: 'Nanum Pen Script', serif;
 		position:relative;
 		display:table;
-		font-size: 10px;
+		font-size: 20px;
+		width: 70%;
+		text-align: center;
+		top: 15px;
 		color:black;
-		top:-10px;
+		background-color: white;
 		margin-left: auto;
 		margin-right: auto;
-		background-color: white;
-		width: 100%;
-		text-align: center;
-		
-		
 	}
-	/*일기장 수정*/
-	.update
-	{
-		font-family: 'Nanum Pen Script', serif;
-		position:relative;
-		display:table;
-		font-size: 10px;
-		color:black;
-		top:122px;
-		left: 5px;
-
-	}
+	
 	
 	body 
 	{
     	-webkit-text-size-adjust: none;
 	}
-	
-	
 	
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -193,9 +185,15 @@
 						//일기장 목록 --> 일기목록
 						$(aList).append(title)
 						
+						var aDiv = $("<div id='aDiv'></div>");
+						$(aDiv).append(aUpdate, aRemove);
+						
+						$(div).append(aList, color, aDiv);
+						
+						/*
 						//일기장 목록에 제목,삭제a태그 추가
 						$(div).append(aList,aRemove,color,aUpdate)
-
+						*/
 						
 						//일기장 서브컨테이너에 추가
 						$("#main_container").append(div)
