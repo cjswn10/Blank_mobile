@@ -69,10 +69,6 @@ public class MainController {
 			code.addRCode("setwd('c:/r_temp')");
 			code.addRCode("library(DBI)");
 			code.addRCode("library(RODBC)");
-			//code.addRCode("library(devtools)");
-			//code.addRCode("library(RCurl)");
-			//code.addRCode("library(d3Network)");
-			//code.addRCode("library(Rserve)");
 			
 			code.addRCode("db = odbcConnect('blank', 'blank', 'blank')");
 			code.addRCode("sql = 'SELECT dcontent FROM diary WHERE ddate=TRUNC(sysdate-1)'");
@@ -80,22 +76,21 @@ public class MainController {
 			code.addRCode("keywords = matrix(data$DCONTENT)");
 			code.addRCode("write(keywords, 'dailyKeyword.txt')");
 			
-			//code.addRCode("Rserve(FALSE,port=6311,args='--RS-encoding utf8 --no-save --slave --encoding utf8')");
 			/**
 			 * wordcloud로 만들기
 			 */
 			code.addRCode("library(KoNLP)");
+			code.addRCode("library(RColorBrewer)");
 			code.addRCode("library(wordcloud)");
 			code.addRCode("useSejongDic()");
 			code.addRCode("data1=readLines('dailyKeyword.txt')");
 			code.addRCode("data2 <- sapply(data1,extractNoun,USE.NAMES=F)");
 			code.addRCode("data3 <- unlist(data2)");
 			code.addRCode("data3 <- Filter(function(x) {nchar(x) >= 1} ,data3)");
-			//code.addRCode("data3=gsub('\\d','',data3)");
-			code.addRCode("data3=gsub('ㅎ','',data3)");
+			code.addRCode("data3=gsub('[0-9]','',data3)");
+			code.addRCode("data3=gsub('[ㄱ-ㅎ]','',data3)");
 			code.addRCode("write(unlist(data3),'dailyKeyword2.txt')");
 			code.addRCode("data4 <- read.table('dailyKeyword2.txt')");
-			code.addRCode("library(RColorBrewer)");
 			code.addRCode("wordcount = table(data4)");
 			code.addRCode("palete <- brewer.pal(9,'Set3')");
 			code.addRCode("wordcloud(names(wordcount),freq=wordcount,scale=c(5,1),rot.per=0.25,min.freq=1,random.order=F,random.color=T,colors=palete)");
@@ -105,7 +100,6 @@ public class MainController {
 			caller.runOnly();
 			
 			String path = request.getRealPath("/resources/rImg");
-			System.out.println(path);
 			keywords = file.getName();
 
 			try {
@@ -147,10 +141,6 @@ public class MainController {
 			code.addRCode("setwd('c:/r_temp')");
 			code.addRCode("library(DBI)");
 			code.addRCode("library(RODBC)");
-			//code.addRCode("library(devtools)");
-			//code.addRCode("library(RCurl)");
-			//code.addRCode("library(d3Network)");
-			//code.addRCode("library(Rserve)");
 			
 			code.addRCode("db = odbcConnect('blank', 'blank', 'blank')");
 			code.addRCode("sql = 'SELECT dcontent FROM diary WHERE ddate BETWEEN TRUNC(sysdate-7) AND TRUNC(sysdate)'");
@@ -158,22 +148,21 @@ public class MainController {
 			code.addRCode("keywords = matrix(data$DCONTENT)");
 			code.addRCode("write(keywords, 'weeklyKeyword.txt')");
 			
-			//code.addRCode("Rserve(FALSE,port=6311,args='--RS-encoding utf8 --no-save --slave --encoding utf8')");
 			/**
 			 * wordcloud로 만들기
 			 */
 			code.addRCode("library(KoNLP)");
+			code.addRCode("library(RColorBrewer)");
 			code.addRCode("library(wordcloud)");
 			code.addRCode("useSejongDic()");
 			code.addRCode("data1=readLines('weeklyKeyword.txt')");
 			code.addRCode("data2 <- sapply(data1,extractNoun,USE.NAMES=F)");
 			code.addRCode("data3 <- unlist(data2)");
 			code.addRCode("data3 <- Filter(function(x) {nchar(x) >= 1} ,data3)");
-			//code.addRCode("data3=gsub('\\d','',data3)");
-			code.addRCode("data3=gsub('ㅎ','',data3)");
+			code.addRCode("data3=gsub('[0-9]','',data3)");
+			code.addRCode("data3=gsub('[ㄱ-ㅎ]','',data3)");
 			code.addRCode("write(unlist(data3),'weeklyKeyword2.txt')");
 			code.addRCode("data4 <- read.table('weeklyKeyword2.txt')");
-			code.addRCode("library(RColorBrewer)");
 			code.addRCode("wordcount = table(data4)");
 			code.addRCode("palete <- brewer.pal(9,'Set3')");
 			code.addRCode("wordcloud(names(wordcount),freq=wordcount,scale=c(5,1),rot.per=0.25,min.freq=1,random.order=F,random.color=T,colors=palete)");
@@ -183,7 +172,6 @@ public class MainController {
 			caller.runOnly();
 			
 			String path = request.getRealPath("/resources/rImg");
-			System.out.println(path);
 			keywords = file.getName();
 
 			try {
