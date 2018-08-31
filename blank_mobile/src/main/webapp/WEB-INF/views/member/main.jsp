@@ -13,15 +13,12 @@
 		minimum-scale=1.0,
 		user-scalable=no">
 
-
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 /*a 파란색 지우기 */
  a:link { color: black; text-decoration: none;}
  a:visited { color: black; text-decoration: none;}
  a:hover { color: black; text-decoration: none;}
-
-
 
 #mainList{
 	text-align: center;
@@ -46,8 +43,6 @@
     cursor: pointer;
 }
 
-
-
 .contents{	
 	width: 300px;
 	height: 300px;
@@ -62,11 +57,12 @@
     display:flex;
     flex-direction:row;
     justify-content : space-around;
-    padding:20px 0px;
     width:80%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30%;
+    margin-top: 15%;
+    margin-bottom: 15%;
+    text-align : center;
    
 }
 
@@ -76,9 +72,6 @@
     color:#662408;
     font-family: 'Nanum Pen Script', serif;
 }
-
-
-
 
 .landing {
     width: 100%;
@@ -409,23 +402,19 @@ $(function () {
 		
 		<!-- 페이지 버튼 -->
 		<div class="iljung-div">
-                    <div class="iljung-date-div"><p class="btn btn1" rel="div1"><a href="#statisticsD">빅데이터</a></p></div>
                     <div class="iljung-date-div"><p class="btn btn1" rel="div2"><a href="#mainList">뉴스피드</a></p></div>
-                    <div class="iljung-date-div"><p class="btn btn1" rel="div3"><a href="#foot">개발자</a></p></div>
+                    <div class="iljung-date-div"><p class="btn btn1" rel="div1"><a href="#statisticsD">주요키워드</a></p></div>
+                    <!-- <div class="iljung-date-div"><p class="btn btn1" rel="div3"><a href="#foot">개발자</a></p></div>  -->
         </div>
 		<!----------- 내용 -------------->
-		
-		
-		<div id="statisticsD"></div>
-		<div id="statisticsW"></div>
-		
 		
 		<div class="clearfix" id="mainList"></div>
 		
 		<!-- modal들을 넣을 div -->
 		<div id="modal"></div>
 			
-
+		<div id="statisticsD" style="margin-top: 10%;"><h2>DAILY KEYWORDS</h2></div>
+		<div id="statisticsW"><h2>WEEKLY KEYWORDS</h2></div>
 	
 			<!--------- 푸터 ---------->
 		<div class="footer" id="foot">
