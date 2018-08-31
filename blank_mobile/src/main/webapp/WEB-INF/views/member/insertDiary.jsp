@@ -117,9 +117,8 @@ $(function() {
 			$("#date").val(date)
 		}
 			
-		
 	})
-
+	
 	var area = "";
 	var cityName = $("#citys").val();
 	
@@ -157,10 +156,20 @@ $(function() {
 	
 	$.ajax({url:"http://203.236.209.112:4997/weather2.do",success:function(data){}})
 	
-	$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
+	select_day = $("#select_day").val();
+	
+	if(select_day == today_now)
+	{
+		$("#tmef_img").attr({"src":$("[name='img2'] > v").html()})
+	}
+	else if(select_day < today_now)
+	{
+		$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
+	}
 	
 	$("#search").click(function() {	
 		
+		$("#select_day").val(select_day);
 		
 		if($("#date").val() == '')
 		{
@@ -188,13 +197,13 @@ $(function() {
 		{
 			location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
 			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
-			+"&year="+$("#year").val()+"&month="+$("#month").val();
+			+"&year="+$("#year").val()+"&month="+$("#month").val()+"&select_day="+$("#select_day").val();
 		}
 		else
 		{
 			location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
 			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
-			+"&year="+$("#year").val()+"&month="+$("#month").val();
+			+"&year="+$("#year").val()+"&month="+$("#month").val()+"&select_day="+$("#select_day").val();
 		}
 		
 	})
@@ -203,6 +212,21 @@ $(function() {
 		
 		$("#cityName").val($("#citySelect").val())
 	
+	})
+	
+	$("#btnAdd").click(function(){
+		if($("#dweather").val() == "")
+		{
+			var re = confirm("날씨를 입력해주세요.")
+			if(re)
+			{
+				return false;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	})
 	
 	//선택한 폰트 dfont, dcontent에 적용
@@ -409,6 +433,7 @@ function openGrimpan() {
 								<input type="hidden" id="today_date" value="${todays }">
 								<input type="hidden" name="year" id="year" value="${year }">
 								<input type="hidden" name="month" id="month" value="${month }">
+								<input type="hidden" name="select_day" id="select_day" value="${select_day }">
 								<span id="weather"> ${weather } </span>
 								<button id="search" type="button">검색</button>
 						</div>
@@ -477,7 +502,7 @@ function openGrimpan() {
 				</tr>
 				<tr>
 					<td>
-						<button type="submit">등록</button>
+						<button id="btnAdd" type="submit">등록</button>
 					</td>
 				</tr>
 			</table>
