@@ -21,6 +21,20 @@
 <link rel="stylesheet" href="../resources/css/blank.css?ver=1">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script src="//code.jquery.com/jquery-3.2.1.js"></script>
+
+<style type="text/css">
+table label {
+	display: inline-block;
+	width: 15%;
+}
+
+#dcontent {
+	width: 100%; 
+	height: 50%;
+}
+</style>
+
+
 <script type="text/javascript">
 $(function() {
 	
@@ -289,7 +303,7 @@ $(function() {
 	
 	//이전 폰트설정
 	$("#dcontent").attr({
-		style : "font-family:${d.dfont}; font-size:35px;",
+		style : "font-family:${d.dfont};",
 	});
 	$.each($("#dfont").find("option"), function(i, f) {
 		if($(f).val() == oldFont) {
@@ -325,6 +339,10 @@ $(function() {
 	//이전 그림이 있으면 보여주기
 	if(oldDfile != "") {
 		console.log("그림있따!!")
+		$("#grim").css({
+			display: "inline-block"
+		});
+		
 		$("#grim").attr({
 			src : "../resources/upload2/" + oldDfile
 		})
@@ -347,7 +365,7 @@ var openG;
 
 function openGrimpan() {
 	
-	var popupX = (window.screen.width / 2) - (600 / 2);
+	var popupX = (window.screen.width /2) - (600 / 2);
 	// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
 
 	var popupY= (window.screen.height /2) - (680 / 2);
@@ -408,6 +426,10 @@ function openGrimpan() {
 			sel_fileG = f;
 			var reader = new FileReader();
 			reader.onload = function(e) {
+				$("#grim").css({
+					display: "inline-block"
+				});
+				
 				$("#grim").attr("src", e.target.result);
 			}
 			reader.readAsDataURL(f);
@@ -462,7 +484,6 @@ border: none;">
 	</nav>	
 
 	<div class="content">
-		<h2>일기 수정</h2>
 		<hr>
 		<form action="updateDiary.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="dno" id="dno" value="${d.dno}">
@@ -471,25 +492,25 @@ border: none;">
 				<tr>
 					<td>
 						<label for="dtitle">제목 </label>
-						<input type="text" name="dtitle" id="dtitle" required="required" value="${d.dtitle }">
+						<input type="text" name="dtitle" id="dtitle" required="required" value="${d.dtitle }" style="width: 80%;">
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
 						<label for="ddate">날&nbsp;&nbsp;&nbsp;짜</label>
-						<input type="date" name="ddate" id="ddate" required="required" value="">
+						<input type="date" name="ddate" id="ddate" required="required" value="" style="line-height: normal;width: 80%;">
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<label for="dweather">날&nbsp;&nbsp;&nbsp;씨</label>
 						<input type="text" name="dweather" id="dweather" value="${d.dweather }" style="display:none;">
-						<div class="today_weather" style="display: inline-block;">
+						<div class="today_weather" style="display: inline-block; width:65%">
 
-						<br>
+
 						<div class="city_weather">
-							<select id="citySelect">
+							<select id="citySelect" style="width:70%">
 									<option>지역</option>
 									<option>서울</option>
 									<option>인천</option>
@@ -546,7 +567,7 @@ border: none;">
 				<tr>
 					<td>
 						<label for="dfont">글씨체</label>
-						<select name="dfont" id="dfont">
+						<select name="dfont" id="dfont" style="width:80%">
 							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script" selected="selected" >Nanum Brush Script</option>
 							<option value="Nanum Gothic Coding" style="font-family:Nanum Gothic Coding">Nanum Gothic Coding</option>
 							<option value="Nanum Myeongjo" style="font-family:Nanum Myeongjo">Nanum Myeongjo</option>
@@ -560,8 +581,13 @@ border: none;">
 							<option value="Source Sans Pro" style="font-family:Source Sans Pro">Source Sans Pro</option>
 							<option value="Gaegu" style="font-family:Gaegu">Gaegu</option>
 						</select>
+						
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<!-- 그림판 버튼 -->
-						<button type="button" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px"></button>
+						<button type="button" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button>
 		
 						<label for="uploadG"><img alt="사진첨부" src="../resources/img/icon/draw.png" width="40px"></label>
 						<input type="file" name="uploadG" id="uploadG" style="display: none;">
@@ -576,11 +602,11 @@ border: none;">
 				<tr>
 					<td>
 						<!-- 그림 -->
-						<img id="grim" width="300">
+						<img id="grim" width="300" style="display: none;">
 						<!-- 사진 -->
-						<img width="300" id="photo">
+						<img id="photo" width="300" style="display: none;">
 						<!-- 글 -->
-						<textarea rows="8" cols="40" name="dcontent" id="dcontent" style="font-family: ${d.dfont};">${d.dcontent }</textarea>
+						<textarea rows="8" class="form-control" name="dcontent" id="dcontent" style="font-family: ${d.dfont};">${d.dcontent }</textarea>
 					</td>
 				</tr>
 				

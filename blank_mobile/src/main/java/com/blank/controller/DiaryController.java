@@ -34,7 +34,7 @@ public class DiaryController {
 		this.dao = dao;
 	}
 
-	// 占싼글깍옙占쏙옙??
+	// �뜝�떬湲�源띿삕�뜝�룞�삕??
 	@RequestMapping("/member/mainDetailDiary.do")
 	public ModelAndView mainDetailDiary(int dno) {
 		Map map = new HashMap();
@@ -44,7 +44,7 @@ public class DiaryController {
 		return mav;
 	}
 
-	// 占싼글깍옙占쏙옙??
+	// �뜝�떬湲�源띿삕�뜝�룞�삕??
 	@RequestMapping("/member/detailFavoriteDiary.do")
 	public ModelAndView detailFavoriteDiary(int dno) {
 		Map map = new HashMap();
@@ -470,7 +470,7 @@ public class DiaryController {
 			}
 		}
 		
-		/************** 占쌓몌옙 ***************/
+		/************** �뜝�뙎紐뚯삕 ***************/
 		String orgnameG = uploadG.getOriginalFilename();
 		String dfile = "x";
 
