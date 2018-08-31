@@ -28,7 +28,256 @@ $(function() {
 		
 		location.href = "logOut.do?id=${id}&autoOut=out";
 		
-	},10800*1000);
+	},10800*1000);	
+	
+	var today = $("#today_date").val();
+	var today_year = parseInt(today.substring(0,4));
+	var today_month = parseInt(today.substring(5,6));
+	var today_date = parseInt(today.substring(7,9));
+	
+	var todays = "";
+	var arr2 = today.split("-");
+	
+	for(i=0;i<arr2.length;i++)
+	{
+		todays += arr2[i]
+	}
+	
+	var today_now = parseInt(todays);
+	
+	var months = "";
+	var year = "";
+	var month = "";
+	var select_day = "";
+	var day = "";
+	
+	
+	$("#ddate").change(function(){
+		
+		var ddate = $(this).val()
+		
+		year = parseInt(ddate.substring(0,4));
+		month = ddate.substring(5,7);
+		
+		var arr = ddate.split("-")
+		
+		for(i=0;i<arr.length;i++)
+		{
+			day += arr[i]
+		}
+		
+		select_day = parseInt(day)
+		
+		months = parseInt(ddate.substring(5,7));
+		
+		$("#year").val(year)
+		$("#month").val(month)
+		
+		if(ddate.charAt(8) == '0')
+		{
+			date = parseInt(ddate.charAt(9))
+			$("#date").val(date)
+		}
+		else
+		{
+			date = parseInt(ddate.substring(8,10))
+			$("#date").val(date)
+		}
+			
+		
+	})
+	
+	$("#weather").hide()	
+	
+	var cityName = location.search.substr(1,1)
+	
+	if(cityName == '' || cityName == 'd')
+	{
+		//$("#tmef_img").hide()
+		$("#city").hide()
+		$("#dweather").val("")	
+		
+		var dweather = $("#tes").val();
+		var dweathera = dweather.substring(dweather.indexOf("/")+1,dweather.length)
+		var dweathers = dweather.substring(dweather.indexOf("/")+1,dweather.indexOf("/",dweather.indexOf("/")+1))
+		
+		if(dweathers == "")
+		{
+			dweathers = dweather
+		}
+		
+		else if(dweathers.match("/") == "/")
+		{
+			dweathers = dweathera
+		}
+		
+		if(dweathers == "맑음"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB01.png"})}
+		else if(dweathers == "구름조금"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB02.png"})}
+		else if(dweathers == "구름많음"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB03.png"})}
+		else if(dweathers == "흐림"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB04.png"})}
+		else if(dweathers == "비"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB08.png"})}
+		else if(dweathers == "소나기"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB07.png"})}
+		else if(dweathers == "흐리고 비"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB08.png"})}
+		else if(dweathers == "눈"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB11.png"})}
+		else if(dweathers == "비 또는 눈"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB12.png"})}
+		else if(dweathers == "눈 또는 비"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB13.png"})}
+		else if(dweathers == "안개"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s9.gif"})}
+		else if(dweathers == "천둥번개"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s10.gif"})}
+		else if(dweathers == "황사"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s22.gif"})}
+		else if(dweathers == "박무"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB17.png"})}
+		else if(dweathers == "연무"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB18.png"})}
+		else if(dweathers == "흐리고 가끔 비"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB20.png"})}
+		else if(dweathers == "흐리고 한때 비"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB20.png"})}
+		
+		/*
+		if(dweathers == '맑음'){$("#tmef_img").attr({src:'https://ssl.pstatic.net/static/weather/images/w_icon/w_s1.gif'})}
+		else if(dweathers == '구름조금'){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s2.gif"})}
+		else if(dweathers == "흐림"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s3.gif"})}
+		else if(dweathers == "비"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s4.gif"})}
+		else if(dweathers == "눈"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s5.gif"})}
+		else if(dweathers == "소나기"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s7.gif"})}
+		else if(dweathers == "구름많음"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s21.gif"})}
+		else if(dweathers == "소낙 눈"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s8.gif"})}
+		else if(dweathers == "진눈깨비"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s6.gif"})}
+		else if(dweathers == "흐려짐"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s11.gif"})}
+		else if(dweathers == "흐려져 뇌우"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s12.gif"})}
+		else if(dweathers == "흐려져 비"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s13.gif"})}
+		else if(dweathers == "흐려져 눈"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s14.gif"})}
+		else if(dweathers == "흐려져 진눈깨비"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s15.gif"})}
+		else if(dweathers == "흐린 후 갬"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s16.gif"})}
+		else if(dweathers == "뇌우 후 갬"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s17.gif"})}
+		else if(dweathers == "비 후 갬"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s18.gif"})}
+		else if(dweathers == "눈 후 갬"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s19.gif"})}
+		else if(dweathers == "진눈깨비 후 갬"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s20.gif"})}
+		else if(dweathers == "천둥번개"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB14.png"})}
+		else if(dweathers == "안개"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB15.png"})}
+		else if(dweathers == "황사"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB16.png"})}
+		else if(dweathers == "박무"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB21.png"})}
+		else if(dweathers == "박무"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB22.png"})}
+		else if(dweathers == "박무"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB23.png"})}
+		*/
+	}	
+	else if($("[name='tmef'] > v").html().substring(1,2) == 's')
+	{
+		select_day = $("#select_day").val();
+
+		$("#tmef_img").show()
+		$("#dweather").val($("[name='tmef2'] > v").html())
+		$("#ddate").val($("#day").val())
+		//$("#city").html($("#citys").val()+"의 날씨")
+		if(select_day == today_now)
+		{
+			$("#tmef_img").attr({"src":$("[name='img2'] > v").html()})
+		}
+		else if(select_day < today_now)
+		{
+			$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
+		}
+		
+	}	
+	else
+	{
+		select_day = $("#select_day").val();
+		
+		$("#tmef_img").show()
+		$("#dweather").val($("[name='tmef'] > v").html())
+		$("#ddate").val($("#day").val())
+		//$("#city").html($("#citys").val()+"의 날씨")
+		if(select_day == today_now)
+		{
+			$("#tmef_img").attr({"src":$("[name='img2'] > v").html()})
+		}
+		else if(select_day < today_now)
+		{
+			$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
+		}
+			
+	}	
+	
+	var area = "";
+	var cityName = $("#citys").val();
+	
+	if(cityName == '서울'){area = "09680";}
+	else if(cityName == '인천'){area = "11200";}
+	else if(cityName == '수원'){area = "02111";}
+	//else if(cityName == '파주'){area = "02480";}
+	else if(cityName == '춘천'){area = "01110";}
+	else if(cityName == '백령도'){area = "11720";}
+	else if(cityName == '강릉'){area = "01150";}
+	else if(cityName == '독도'){area = "04940";}
+	//else if(cityName == '속초'){area = "01210";}
+	else if(cityName == '청주'){area = "16111";}
+	else if(cityName == '안동'){area = "04170";}
+	else if(cityName == '대전'){area = "07110";}
+	else if(cityName == '홍성'){area = "15800";}
+	else if(cityName == '전주'){area = "13113";}
+	else if(cityName == '대구'){area = "06290";}
+	else if(cityName == '울산'){area = "10140";}
+	else if(cityName == '포항'){area = "04111";}
+	else if(cityName == '울진'){area = "04930";}
+	else if(cityName == '부산'){area = "08710";}
+	else if(cityName == '창원'){area = "03123";}
+	else if(cityName == '광주'){area = "05200";}
+	else if(cityName == '목포'){area = "12110";}
+	else if(cityName == '여수'){area = "12130";}
+	else if(cityName == '흑산도'){area = "12910";}
+	else if(cityName == '제주'){area = "14100";}
+	else
+	{
+		area = "09680";
+	}
+
+	$.ajax({url:"http://203.236.209.112:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
+	
+	$.ajax({url:"http://203.236.209.112:4997/weather2.do",success:function(data){}})
+	
+	$("#search").click(function() {	
+		
+		$("#select_day").val(select_day);
+		
+		if($("#date").val() == '')
+		{
+			confirm("날짜를 입력 해주세요.")
+		}
+		else if($("#cityName").val() == '')
+		{
+			confirm("지역을 입력 해주세요.")
+		}
+		else if(select_day > today_now)
+		{
+			var re = confirm("지난 날씨의 달력만 볼수 있습니다.")
+			if(re)
+			{
+				location.href="updateDiary.do?dtitle="+$("#dtitle").val()+"&dcontent="+$("#dcontent").val()+"&dno="+$("#dno").val()
+				
+			}	
+			else
+			{
+				location.href="updateDiary.do?dtitle="+$("#dtitle").val()+"&dcontent="+$("#dcontent").val()+"&dno="+$("#dno").val()
+				
+			}	
+		}
+		else if(select_day == today_now)
+		{
+			location.href="updateDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
+			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
+			+"&year="+$("#year").val()+"&month="+$("#month").val()+"&dno="+$("#dno").val()+"&select_day="+$("#select_day").val();
+		}
+		else
+		{
+			location.href="updateDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
+			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
+			+"&year="+$("#year").val()+"&month="+$("#month").val()+"&dno="+$("#dno").val()+"&select_day="+$("#select_day").val();
+		}
+		
+		
+		
+		})
+		$("#citySelect").change(function(){
+			
+			$("#cityName").val($("#citySelect").val())
+		
+	})
 	
 	var oldFont="${d.dfont}"
 	var oldSecret=${d.secret}
@@ -89,7 +338,7 @@ $(function() {
 		})
 	}
 	
-	$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
+	//$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
 	
 	
 });
@@ -167,7 +416,6 @@ function openGrimpan() {
 </script>
 </head>
 <body>
-
 <section id="mySidenav" class="sidenav">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 	
@@ -230,14 +478,13 @@ border: none;">
 				<tr>
 					<td>
 						<label for="ddate">날&nbsp;&nbsp;&nbsp;짜</label>
-						<input type="date" name="ddate" id="ddate" required="required" value="${d.ddate }">
+						<input type="date" name="ddate" id="ddate" required="required" value="">
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<label for="dweather">날&nbsp;&nbsp;&nbsp;씨</label>
 						<input type="text" name="dweather" id="dweather" value="${d.dweather }" style="display:none;">
-
 						<div class="today_weather" style="display: inline-block;">
 
 						<br>
@@ -275,6 +522,9 @@ border: none;">
 								<input type="hidden" id="today_date" value="${todays }">
 								<input type="hidden" name="year" id="year" value="${year }">
 								<input type="hidden" name="month" id="month" value="${month }">
+								<input type="hidden" name="dno" id="dno" value="${d.dno }">
+								<input type="hidden" id="tes" value="${d.dweather }">
+								<input type="hidden" name="select_day" id="select_day" value="${select_day }">
 								<span id="weather"> ${weather } </span>
 								<button id="search" type="button">검색</button>
 						</div>
