@@ -95,6 +95,13 @@
 		margin-right: auto;
 	}
 	
+	#top
+	{
+		display:none;
+		position:fixed;
+		bottom:10px;
+		right:2px;
+	}	
 	
 	body 
 	{
@@ -206,6 +213,25 @@
 		//일기장 목록 불러오기
 		listBook();
 		
+		$(window).scroll(function(){
+			
+			if($(this).scrollTop() > 50)
+			{
+				$("#top").fadeIn();
+			}
+			else
+			{
+				$("#top").fadeOut();
+			}
+			
+		})
+		
+		$("#top").click(function(){
+			
+			$('html, body').scrollTop(0);
+			
+		})
+		
 	})
 
 </script>
@@ -266,7 +292,8 @@
 			<div id="main_container"></div>
 	
 		</div>  
-
+	<img id="top" src="../resources/img/top.PNG">
+	<button id="ttt">위로</button>
     
 	<!-- 푸터  -->
 	<footer class="footer" >

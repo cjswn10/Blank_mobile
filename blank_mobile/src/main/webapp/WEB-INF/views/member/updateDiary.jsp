@@ -109,7 +109,7 @@ $(function() {
 	{
 		//$("#tmef_img").hide()
 		$("#city").hide()
-		$("#dweather").val("")	
+		//$("#dweather").val("")	
 		
 		var dweather = $("#tes").val();
 		var dweathera = dweather.substring(dweather.indexOf("/")+1,dweather.length)
@@ -530,11 +530,11 @@ border: none;">
 									<option>서울</option>
 									<option>인천</option>
 									<option>수원</option>
-									<option>파주</option>
+									<option>독도</option>
 									<option>춘천</option>
 									<option>백령도</option>
 									<option>강릉</option>
-									<option>속초</option>
+									<option>울진</option>
 									<option>청주</option>
 									<option>안동</option>
 									<option>대전</option>
