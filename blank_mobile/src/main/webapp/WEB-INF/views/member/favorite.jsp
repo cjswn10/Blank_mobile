@@ -125,7 +125,7 @@ ul{
 				<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 			    <a data-ajax="false" href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 			    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
-			    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+			   
 			    <ul id="main_menu">
 			        <li><a href="book.do" data-ajax="false">DIARY</a></li>
 			        <li><a href="favorite.do" data-ajax="false">FAVORITES</a></li>

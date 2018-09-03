@@ -293,6 +293,21 @@ $(function() {
 		
 	})
 	
+	$("#btnAdd").click(function(){
+		if($("#dweather").val() == "")
+		{
+			var re = confirm("날씨를 입력해주세요.")
+			if(re)
+			{
+				return false;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	})
+	
 	var oldFont="${d.dfont}"
 	var oldSecret=${d.secret}
 	var oldDfile="${d.dfile}"
@@ -475,7 +490,7 @@ border: none;">
 		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 	    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
-	    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+	    
 	    <ul id="main_menu">
 	        <li><a href="book.do">DIARY</a></li>
 	        <li><a href="favorite.do">FAVORITES</a></li>
@@ -618,7 +633,7 @@ border: none;">
 				</tr>
 				
 			</table>
-			<button type="submit">수정</button>
+			<button id="btnAdd" type="submit">수정</button>
 		</form>
 	</div>
 
