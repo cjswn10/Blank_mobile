@@ -62,7 +62,8 @@ user-scalable=no">
   	margin-bottom: 10px;
 }
 .iljung-date-div {
-	margin-left: 50%;
+	margin-left: auto;
+    margin-right: 2px;
 }
 .iljung-date-div .btn{
     border:1px solid #EFE7E6;
