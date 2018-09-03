@@ -81,7 +81,7 @@ span{
 		var ddate = $('<span style="font-size: 12px;"></span>').html("${d.ddate}")
 		var dweather = $('<span style="font-size: 12px;"></span>').html("${d.dweather}")
 		var dtitle = $('<p style="font-size: 20px;"></p>').html("${d.dtitle}")
-		var dcontent = $('<p style="font-size: 15px;"></p>').html("${d.dcontent}")
+		var dcontent = $('<p style="font-size: 15px;"></p>').html($("#con").val())
 		$('#detailDiary').append(ddate, dweather, dtitle, dcontent);					
 		
 		setTimeout(function () {
@@ -138,7 +138,7 @@ span{
 					<div id="searchid"></div>
 				</div>
 			</div>
-			
+			<input id="con" type="hidden" value="${d.dcontent }">
 			<!------ main-menu ------>
 			<nav class="clearfix" style="margin-bottom: 20px">
 				<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>

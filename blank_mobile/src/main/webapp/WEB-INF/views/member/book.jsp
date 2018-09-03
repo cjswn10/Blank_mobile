@@ -293,7 +293,7 @@
 	
 		</div>  
 	<img id="top" src="../resources/img/top.PNG">
-	<button id="ttt">위로</button>
+	
     
 	<!-- 푸터  -->
 	<footer class="footer" >
