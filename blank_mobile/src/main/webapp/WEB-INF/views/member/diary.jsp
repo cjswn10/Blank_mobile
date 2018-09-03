@@ -58,14 +58,20 @@ user-scalable=no">
     flex-direction:row;
     justify-content : space-around;
     width:100%;
+    text-align: right;
+  	margin-bottom: 10px;
+}
+.iljung-date-div {
+	margin-left: auto;
+    margin-right: 2px;
 
 }
-
 .iljung-date-div .btn{
     border:1px solid #EFE7E6;
     background-color: #EFE7E6;
     color:#662408;
     font-family: 'Nanum Pen Script', serif;
+	margin-right: 10px;    
 }
 
 
@@ -79,7 +85,7 @@ user-scalable=no">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=1">
+<link rel="stylesheet" href="../resources/css/blank.css">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript">
 	 $(function () {	 
@@ -119,8 +125,18 @@ user-scalable=no">
 					{
 						$("#keyword").html(data);
 						$("#keyword").hide();
-						$("#hash").html("#"+$("[name='data7'] > v").html()+"   #"+$("[name='data8'] > v").html()+"   #"+$("[name='data9'] > v").html())
-							
+						//$("#hash").html("#"+$("[name='data7'] > v").html()+"   #"+$("[name='data8'] > v").html()+"   #"+$("[name='data9'] > v").html())
+						
+						var p1 = $("<p class='btn btn1'></p>").html("#"+$("[name='data7'] > v").html());
+						var p2 = $("<p class='btn btn1'></p>").html("#"+$("[name='data8'] > v").html());
+						var p3 = $("<p class='btn btn1'></p>").html("#"+$("[name='data9'] > v").html());
+						
+						$(".iljung-date-div").html("");
+						$(".iljung-date-div").append(p1, p2, p3);
+						
+						/*<div class="iljung-date-div"><p class="btn btn1" rel="div2">*/
+						
+						
 					}
 				})
 		};
@@ -219,7 +235,7 @@ user-scalable=no">
 			</div>
 			
 			<!------ main-menu ------>
-			<nav class="clearfix" style="margin-bottom: 20px">
+			<nav class="clearfix" style="margin-bottom: 10px">
 				<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 			    <a data-ajax="false" href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 			    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>

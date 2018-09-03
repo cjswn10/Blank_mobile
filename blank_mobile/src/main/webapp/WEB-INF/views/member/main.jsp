@@ -75,9 +75,15 @@
 
 .landing {
     width: 100%;
+    height: 89%;
     margin: auto;
     background-size: cover;
-    background-position: center center;
+    padding: 0;
+    background-color: #ebcfce;
+    background-image: url(../resources/img/mainlogo.jpg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: auto 80%;
 }
 
 #searchid
@@ -88,6 +94,61 @@
 		color: black;
 	}
 
+@media screen and (max-width: 670px) and (min-width: 541px) {	
+	.landing {
+	    width: 100%;
+	    height: 80%;
+	    margin: auto;
+	    background-size: cover;
+	    padding: 0;
+	    background-color: #ebcfce;
+	    background-image: url(../resources/img/mainlogo_mobile.jpg);
+	    background-repeat: no-repeat;
+	    background-position: right;
+	    background-size: auto 80%;
+	}
+	
+	.iljung-div{
+    display:flex;
+    flex-direction:row;
+    justify-content : space-around;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 15%;
+    text-align : center;
+   
+	}
+}
+
+@media screen and (max-width: 540px) {	
+	.landing {
+	    width: 100%;
+	    height: 70%;
+	    margin: auto;
+	    background-size: cover;
+	    padding: 0;
+	    background-color: #ebcfce;
+	    background-image: url(../resources/img/mainlogo_mobile.jpg);
+	    background-repeat: no-repeat;
+	    background-position: right;
+	    background-size: auto 100%;
+	}
+	
+	.iljung-div{
+    display:flex;
+    flex-direction:row;
+    justify-content : space-around;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 15%;
+    text-align : center;
+   
+	}
+}
 </style>
 
 <!-- Bootstrap -->
@@ -397,7 +458,7 @@ $(function () {
 		    </ul>
 		</nav>
 		<div class="landing">
-			<img src="../resources/img/mainlogo.jpg" width="100%" height="50%">
+			<!--  <img src="../resources/img/mainlogo.jpg" height="50%"> -->
 		</div>
 		
 		<!-- 페이지 버튼 -->

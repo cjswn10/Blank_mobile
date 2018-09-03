@@ -37,7 +37,7 @@
 </script>
 </head>
 <body>
-<div class="container">
+
 <!-- side-menu -->
 <section id="mySidenav" class="sidenav">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -118,6 +118,6 @@
     </ul>
 </footer>
 </div>
-</div>
+
 </body>
 </html>
