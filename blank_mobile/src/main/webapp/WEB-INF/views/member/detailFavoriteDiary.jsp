@@ -79,7 +79,7 @@
 		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 	    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
-	    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+	    
 	    <ul id="main_menu">
 	        <li><a href="book.do">DIARY</a></li>
 	        <li><a href="favorite.do">FAVORITES</a></li>
@@ -105,10 +105,10 @@
 		</div>
 		
 		<c:if test="${not empty d.dfile}">	
-			<img width="500" height="500" src="../resources/upload2/${d.dfile }"><br>
+			<img width="100%" height="100%" src="../resources/upload2/${d.dfile }"><br>
 		</c:if>
 		<c:if test="${not empty d.dphoto}">	
-			<img width="500" height="500" src="../resources/upload/${d.dphoto }"><br>
+			<img width="100%" height="100%" src="../resources/upload/${d.dphoto }"><br>
 		</c:if>
 		<div class="row">
 		  	<div class="col-md-2" id="diary">내용:</div>

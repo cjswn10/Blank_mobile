@@ -36,11 +36,9 @@
 	#d
 	{
 		font-family: 'Nanum Pen Script', serif;
-		font-size:30px;
+		font-size:20px;
 		position: relative;
-		top:220px;
-		left:430px;
-		width:300px;
+		top: 20px;
 	}
 
 
@@ -110,7 +108,7 @@
 		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 	    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
-	    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+	    
 	    <ul id="main_menu">
 	        <li><a href="book.do">DIARY</a></li>
 	        <li><a href="favorite.do">FAVORITES</a></li>
