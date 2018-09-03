@@ -93,6 +93,13 @@
 		background: white;
 		color: black;
 	}
+#top
+	{
+		display:none;
+		position:fixed;
+		bottom:10px;
+		right:2px;
+	}	
 
 @media screen and (max-width: 670px) and (min-width: 541px) {	
 	.landing {
@@ -105,7 +112,7 @@
 	    background-image: url(../resources/img/mainlogo_mobile.jpg);
 	    background-repeat: no-repeat;
 	    background-position: right;
-	    background-size: auto 100%;
+	    background-size: auto 80%;
 	}
 	
 	.iljung-div{
@@ -133,7 +140,7 @@
 	    background-image: url(../resources/img/mainlogo_mobile.jpg);
 	    background-repeat: no-repeat;
 	    background-position: right;
-	    background-size: auto 80%;
+	    background-size: auto 100%;
 	}
 	
 	.iljung-div{
@@ -148,6 +155,7 @@
     text-align : center;
    
 	}
+	
 }
 </style>
 
@@ -408,6 +416,28 @@ $(function () {
 					$("#searchid").hide();
 				}
 		})		
+		
+		
+		$(window).scroll(function(){
+			
+			if($(this).scrollTop() > 50)
+			{
+				$("#top").fadeIn();
+			}
+			else
+			{
+				$("#top").fadeOut();
+			}
+			
+		})
+		
+		$("#top").click(function(){
+		
+			$("body").scrollTop(0);
+			
+		})
+		
+		
 })
 </script>
 <title>빈칸을 채우다.</title>
@@ -476,7 +506,9 @@ $(function () {
 			
 		<div id="statisticsD" style="margin-top: 10%;"><h2>DAILY KEYWORDS</h2></div>
 		<div id="statisticsW"><h2>WEEKLY KEYWORDS</h2></div>
-	
+		
+		<img id="top" src="../resources/img/top.PNG">
+		
 			<!--------- 푸터 ---------->
 		<div class="footer" id="foot">
 			<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
