@@ -105,7 +105,7 @@
 	    background-image: url(../resources/img/mainlogo_mobile.jpg);
 	    background-repeat: no-repeat;
 	    background-position: right;
-	    background-size: auto 80%;
+	    background-size: auto 100%;
 	}
 	
 	.iljung-div{
@@ -133,7 +133,7 @@
 	    background-image: url(../resources/img/mainlogo_mobile.jpg);
 	    background-repeat: no-repeat;
 	    background-position: right;
-	    background-size: auto 100%;
+	    background-size: auto 80%;
 	}
 	
 	.iljung-div{
