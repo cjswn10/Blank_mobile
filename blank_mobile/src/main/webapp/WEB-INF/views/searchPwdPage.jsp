@@ -45,7 +45,6 @@ user-scalable=0">
 	}
 	.infomation
 	{	
-		
 		font-size: 30px;
 		position: relative;
 		top: 30px;

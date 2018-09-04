@@ -127,7 +127,7 @@ user-scalable=0">
 						var re = confirm("고객님의 아이디는 "+data+" 입니다.")
 						if(re)
 						{
-							location.href="search.do";
+							location.href="login.do";
 						}
 						else
 						{

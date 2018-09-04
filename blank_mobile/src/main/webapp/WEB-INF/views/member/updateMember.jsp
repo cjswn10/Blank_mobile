@@ -131,7 +131,7 @@
 	<a href="qNa.do">Contact</a>
 	<br>
 	<div class="side_icon_set">
-		<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+		<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
 		<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 	</div>
 	
@@ -186,7 +186,7 @@ border: none;">
 					<tr>
 						<td>비밀번호</td>
 						<td>
-							<input type="password" class="form-control" name="pwd" id="pwd" style="text-align: center;">
+							<input type="password" class="form-control" name="pwd" id="pwd" style="text-align: center;" required="required">
 						</td>
 					</tr>
 					<tr>
