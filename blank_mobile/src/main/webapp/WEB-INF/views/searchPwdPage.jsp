@@ -181,7 +181,7 @@ user-scalable=0">
 				<tr>
 					<td align="center">휴대전화</td>
 					<td>
-						<input type="text" name="phone" id="phone" maxlength="13" style="text-align: center;" placeholder="휴대전화">
+						<input type="tel" name="phone" id="phone" maxlength="13" style="text-align: center;" placeholder="휴대전화">
 					</td>
 				</tr>
 			</table>
