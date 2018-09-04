@@ -187,7 +187,7 @@ user-scalable=0">
 			</table>
 			<button id="searchPwd">확인</button>
 		</div>
-			<span class="test">아이디가 기억이 나지 않는 다면 ?</span>&nbsp;&nbsp;<a class="test" href="searchIdPage.do">아이디 찾기 바로가기</a>
+			<span class="test">아이디가 기억이 나지 않는 다면 ?</span>&nbsp;&nbsp;<a class="test" href="searchIdPage.do" data-ajax="false">아이디 찾기 바로가기</a>
 	</div>
 </div>
 </body>
