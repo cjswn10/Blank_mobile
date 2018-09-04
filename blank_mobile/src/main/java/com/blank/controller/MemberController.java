@@ -32,7 +32,7 @@ public class MemberController {
 		this.dao = dao;
 	}
 
-	//¸â¹öÄÁÆ®·Ñ·¯°¡ ÀÎÄÚµùÀÌ Àß µÇ³ª º¸°Ú½À´Ï´Ù.
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ç³ï¿½ ï¿½ï¿½ï¿½Ú½ï¿½ï¿½Ï´ï¿½.
 
 	//myPage
 	@RequestMapping(value="/member/myPage.do")
@@ -43,7 +43,7 @@ public class MemberController {
 	}
 	
 
-	//°èÁ¤Ã£±â
+	//ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½
 	@RequestMapping(value="search.do")
 	public ModelAndView search() {
 			
@@ -53,7 +53,7 @@ public class MemberController {
 	
 
 
-	//idÃ£±â form
+	//idÃ£ï¿½ï¿½ form
 	@RequestMapping(value="searchIdPage.do")
 	public ModelAndView searchId() {
 				
@@ -61,7 +61,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//pwdÃ£±â form
+	//pwdÃ£ï¿½ï¿½ form
 	@RequestMapping(value="searchPwdPage.do")
 	public ModelAndView searchPwd() {
 					
@@ -69,7 +69,7 @@ public class MemberController {
 		return mav;
 	}
 
-	//idÃ£±â
+	//idÃ£ï¿½ï¿½
 	@RequestMapping(value="searchId.do")
 	@ResponseBody
 	public String searchId(String name,String phone)
@@ -90,7 +90,7 @@ public class MemberController {
 		return str;
 	}
 	
-	//pwdÃ£±â
+	//pwdÃ£ï¿½ï¿½
 	@RequestMapping(value="searchPwd.do")
 	@ResponseBody
 	public String searchPwd(String id,String phone)
@@ -191,7 +191,7 @@ public class MemberController {
 		
 		
 		/**
-		 * ·Î±×¾Æ¿ô ½Ã rImg ÆÄÀÏ »èÁ¦
+		 * ï¿½Î±×¾Æ¿ï¿½ ï¿½ï¿½ rImg ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		 */
 		String FilePath = request.getRealPath("/resources/rImg");
 		File FileList = new File(FilePath);
@@ -201,7 +201,7 @@ public class MemberController {
 		for(int i = 0; i < fileList.length; i++){
 		  String FileName = fileList[i];
 		  
-		  //ÀÌ¸§¿¡ RPlotÀÌ µé¾î°£ ÆÄÀÏµé »èÁ¦
+		  //ï¿½Ì¸ï¿½ï¿½ï¿½ RPlotï¿½ï¿½ ï¿½ï¿½î°£ ï¿½ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½
 		  if(FileName.contains("RPlot")){
 		    File deleteFile = new File(FilePath + "/" + FileName);
 		    deleteFile.delete();
@@ -235,7 +235,7 @@ public class MemberController {
 	}
 	
 
-	//id Áßº¹È®ÀÎ
+	//id ï¿½ßºï¿½È®ï¿½ï¿½
 	@RequestMapping(value="checkId.do")
 	@ResponseBody
 	public String checkId(@RequestParam("id")String id) {

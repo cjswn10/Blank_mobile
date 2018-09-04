@@ -58,6 +58,7 @@ span{
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../resources/css/blank.css?ver=2">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 	$(function () {		
 		if ("${d.dfile}" !== "") {
@@ -82,9 +83,14 @@ span{
 		var dweather = $('<span style="font-size: 12px;"></span>').html("${d.dweather}")
 		var dtitle = $('<p style="font-size: 20px;"></p>').html("${d.dtitle}")
 
-		var content = "${d.dcontent}";	
 		
-		$('#detailDiary').append(ddate, dweather, dtitle, content);					
+		
+		var con = $("#con").html();
+		var content = con.replace("\n\r","<br />");
+		$("#con").hide();
+		
+		
+		$('#detailDiary').append(ddate, dweather, dtitle, con);					
 
 		
 		setTimeout(function () {
@@ -141,13 +147,13 @@ span{
 					<div id="searchid"></div>
 				</div>
 			</div>
-			<input id="con" type="hidden" value="${d.dcontent }">
+			<span id="con">${d.dcontent }</span>
 			<!------ main-menu ------>
 			<nav class="clearfix" style="margin-bottom: 20px">
 				<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 			    <a data-ajax="false" href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 			    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
-			    
+			    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
 			    <ul id="main_menu">
 			        <li><a href="book.do" data-ajax="false">DIARY</a></li>
 			        <li><a href="favorite.do" data-ajax="false">FAVORITES</a></li>
