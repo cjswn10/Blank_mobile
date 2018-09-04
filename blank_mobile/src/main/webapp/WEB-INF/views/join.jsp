@@ -212,7 +212,7 @@ $(function() {
 	    </div>
 	    <div class="form-group">
 		    <label>연락처 </label>
-		    <input type="text" class="form-control" id="phone" name="phone" maxlength="13" placeholder="연락처" autocomplete="off" required="required">
+		    <input type="tel" class="form-control" id="phone" name="phone" maxlength="13" placeholder="연락처" autocomplete="off" required="required">
 	    </div>
 	
 	   <button type="submit" class="btn btn-default">가입</button>
