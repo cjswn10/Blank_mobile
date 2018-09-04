@@ -173,7 +173,7 @@
 
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=16">
-<script type="text/javascript" src="../resources/js/menu.js?ver=6" ></script>
+<script type="text/javascript" src="../resources/js/menu.js?ver=7" ></script>
 
 <script type="text/javascript">
 $(function () {
