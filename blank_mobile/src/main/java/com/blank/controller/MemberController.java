@@ -1,6 +1,6 @@
-
 package com.blank.controller;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -199,6 +199,30 @@ public class MemberController {
 			mav.addObject("msg", "실패");
 			mav.setViewName("error");
 		}
+		
+		
+		/**
+		 * 로그아웃 할 때마다 통계이미지파일들 삭제해주기
+		 */
+		String FilePath = request.getRealPath("/resources/rImg");
+		File FileList = new File(FilePath);
+
+		//해당 폴더의 전체 파일리스트 조회
+		String fileList[] = FileList.list();
+
+		//전체파일
+		for(int i = 0; i < fileList.length; i++){
+		  //파일명 조회
+		  String FileName = fileList[i];
+
+		  //파일명에 eid 값이 존재하는지 체크
+		  if(FileName.contains("RPlot")){
+		    //존재하면 파일삭제
+		    File deleteFile = new File(FilePath + "/" + FileName);
+		    deleteFile.delete();
+		  }
+		}
+		
 		mav.addObject("autoOut", autoOut);
 		session.invalidate();
 		mav.setViewName("redirect:/login.do");
@@ -255,7 +279,7 @@ public class MemberController {
 
 	//로그인
 	@RequestMapping(value="login.do", method=RequestMethod.GET)
-	public void loginForm() {	
+	public void loginForm(HttpServletRequest request) {	
 		
 	}
 	
@@ -373,7 +397,7 @@ public class MemberController {
 		else
 		{
 
-			mav.addObject("msg", "아이디와 비밀번호를 확인해주세요.");
+			mav.addObject("msg", "비밀번호를 확인해주세요.");
 		}	
 		
 		return mav;
@@ -438,4 +462,3 @@ public class MemberController {
 		return id;
 	}
 }
-

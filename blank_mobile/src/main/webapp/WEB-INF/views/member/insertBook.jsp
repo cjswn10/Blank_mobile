@@ -172,7 +172,7 @@
 		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 	    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
-	    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+	    
 	    <ul id="main_menu">
 	        <li><a href="book.do">DIARY</a></li>
 	        <li><a href="favorite.do">FAVORITES</a></li>
@@ -193,33 +193,35 @@
 			<input class="btn btn-default" id="false" type="reset" value="취소">
 		</form>
 	</div>
-</div>	
 
-<!-- 푸터 -->
-<footer class="footer">
-	<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
-	<ul class="list-inline">
-       <li>
-           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
-           <br><h5>김영호</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
-           <br><h5>변성인</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
-           <br><h5>성민규</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
-           <br><h5>임연주</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
-           <br><h5>차건우</h5>
-       </li>
-    </ul>
-</footer>
+
+	<!-- 푸터 -->
+	<footer class="footer">
+		<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+		<ul class="list-inline">
+	       <li>
+	           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+	           <br><h5>김영호</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+	           <br><h5>변성인</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+	           <br><h5>성민규</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+	           <br><h5>임연주</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+	           <br><h5>차건우</h5>
+	       </li>
+	    </ul>
+	</footer>
+
+</div>	
 </body>
 </html>

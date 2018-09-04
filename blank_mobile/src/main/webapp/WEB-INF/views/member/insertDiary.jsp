@@ -23,58 +23,11 @@
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 
 <style type="text/css">
-	.today_weather
-	{
-		position: relative;
-		top: -450px;
-		width:400px;
-		left: 650px;
-	}
-	.city_weather
-	{
-		position: relative;
-		left: 120px;
-		
-	}
-	#citySelect
-	{
-		width: 70px;
-		height: 26px;
-	}
-	#today
-	{
-		font-size: 20px;
-		position: relative;
-		left: 40px;
-	}
-	#location
-	{
-		font-size: 10px;
-		position: relative;
-		left: 30px;
-	}
-	#tmef_img
-	{
-		position: relative;
-		left: 30px;
-	}
-	#test > li
-	{
-		list-style: none;
-	}
-	#weather_icon
-	{
-		position: relative;
-		top: 30px;
-		left: 0px;
-	}
-	.status
-	{
-		position: relative;
-		font-size:20px;
-		left: 120px;
-	}
 
+table label {
+	display: inline-block;
+	width: 15%;
+}
 </style>
 
 <script type="text/javascript">
@@ -164,9 +117,8 @@ $(function() {
 			$("#date").val(date)
 		}
 			
-		
 	})
-
+	
 	var area = "";
 	var cityName = $("#citys").val();
 	
@@ -200,14 +152,24 @@ $(function() {
 		area = "09680";
 	}
 	
-	$.ajax({url:"http://203.236.209.108:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
+	$.ajax({url:"http://203.236.209.112:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
 	
-	$.ajax({url:"http://203.236.209.108:4997/weather2.do",success:function(data){}})
+	$.ajax({url:"http://203.236.209.112:4997/weather2.do",success:function(data){}})
 	
-	$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
+	select_day = $("#select_day").val();
+	
+	if(select_day == today_now)
+	{
+		$("#tmef_img").attr({"src":$("[name='img2'] > v").html()})
+	}
+	else if(select_day < today_now)
+	{
+		$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
+	}
 	
 	$("#search").click(function() {	
 		
+		$("#select_day").val(select_day);
 		
 		if($("#date").val() == '')
 		{
@@ -235,13 +197,13 @@ $(function() {
 		{
 			location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
 			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
-			+"&year="+$("#year").val()+"&month="+$("#month").val();
+			+"&year="+$("#year").val()+"&month="+$("#month").val()+"&select_day="+$("#select_day").val();
 		}
 		else
 		{
 			location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
 			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
-			+"&year="+$("#year").val()+"&month="+$("#month").val();
+			+"&year="+$("#year").val()+"&month="+$("#month").val()+"&select_day="+$("#select_day").val();
 		}
 		
 	})
@@ -250,6 +212,21 @@ $(function() {
 		
 		$("#cityName").val($("#citySelect").val())
 	
+	})
+	
+	$("#btnAdd").click(function(){
+		if($("#dweather").val() == "")
+		{
+			var re = confirm("날씨를 입력해주세요.")
+			if(re)
+			{
+				return false;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	})
 	
 	//선택한 폰트 dfont, dcontent에 적용
@@ -285,33 +262,9 @@ function openGrimpan() {
 
 <!-- 사진 보여주기 -->
 <script>
-	var sel_file;
 	var sel_fileG;
 	
-
-	$(document).ready(function() {
-		$("#upload").on("change", showImg)
-	});
-
-	function showImg(e) {
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-
-		filesArr.forEach(function(f) {
-			if (!f.type.match("image.*")) {
-				alert("확장자 오류");
-				return;
-			}
-
-			sel_file = f;
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$("#photo").attr("src", e.target.result);
-			}
-			reader.readAsDataURL(f);
-		});
-	}
-	
+	<!-- 그림 보여주기 -->
 	$(document).ready(function() {
 		$("#uploadG").on("change", showImgG)
 	});
@@ -329,6 +282,10 @@ function openGrimpan() {
 			sel_fileG = f;
 			var reader = new FileReader();
 			reader.onload = function(e) {
+				$("#img").css({
+					display: "inline-block"
+				});
+				
 				$("#img").attr("src", e.target.result);
 			}
 			reader.readAsDataURL(f);
@@ -375,7 +332,7 @@ function openGrimpan() {
 		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 	    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
-	    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+	    
 	    <ul id="main_menu">
 	        <li><a href="book.do">DIARY</a></li>
 	        <li><a href="favorite.do">FAVORITES</a></li>
@@ -384,39 +341,95 @@ function openGrimpan() {
 	</nav>	
 
 	
-	<div class="content" style="margin-top: 100px">
-		<h2>빈칸을 채우다</h2>
+	<div class="content" style="width:100%;">
 		<hr>
 	 
-		<form action="insertDiary.do" method="post" enctype="multipart/form-data">
-		
-			<input type="hidden" name="bno" id="bno" value="${bno }"><br> 
-			<input type="hidden" name="mno" id="mno" value="${mno }"><br> 
-			
+		<form action="insertDiary.do" method="post" enctype="multipart/form-data" style="width:95%; margin-left: auto; margin-right: auto;">
+			<input type="hidden" name="bno" id="bno" value="${bno }"> 
+			<input type="hidden" name="mno" id="mno" value="${mno }">
 
-			<table>
+			<table style="width:100%;">
 				<tr>
-					<td colspan="2">
-						<label for="dtitle">제목 </label>
-						<input type="text" name="dtitle" id="dtitle" required="required" value="${dtitle }">
+					<td>
+						<label for="dtitle">제&nbsp;&nbsp;&nbsp;목 </label>
+						<input type="text" name="dtitle" id="dtitle" required="required" value="${dtitle }" style="width: 80%;">
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-						<label for="ddate">날짜</label>
-						<input type="date" name="ddate" id="ddate" value="${ddate }" required="required">
-					</td>
-					<td>
-						<label for="dweather">날씨</label>
-						<input type="text" name="dweather" id="dweather">
+						<label for="ddate">날&nbsp;&nbsp;&nbsp;짜</label>
+						<input type="date" name="ddate" id="ddate" value="${ddate }" required="required" style="line-height: normal;width: 80%;">
 					</td>
 				</tr>
-				
 				<tr>
-					<td colspan="2">
+					<td>
+						<label for="dweather">날&nbsp;&nbsp;&nbsp;씨</label>
+						<input type="text" name="dweather" id="dweather" style="display:none;">
+						
+						<div class="today_weather" style="display: inline-block; width:65%"">
+						<!-- 
+						<ul id="test">
+							<img id="weather_icon" src="../resources/img/weather.png" width="30" height="30">
+							<li id="today">날씨가 궁금하신가요?</li>
+							<li id="location">지역과 날씨를 선택 후 검색버튼을 눌러주세요.</li>
+						</ul>
+						 -->
+						<div class="city_weather">
+							<select id="citySelect" style="width:70%">
+									<option>지역</option>
+									<option>서울</option>
+									<option>인천</option>
+									<option>수원</option>
+									<option>파주</option>
+									<option>춘천</option>
+									<option>백령도</option>
+									<option>강릉</option>
+									<option>속초</option>
+									<option>청주</option>
+									<option>안동</option>
+									<option>대전</option>
+									<option>홍성</option>
+									<option>전주</option>
+									<option>대구</option>
+									<option>울산</option>
+									<option>포항</option>
+									<option>부산</option>
+									<option>창원</option>
+									<option>광주</option>
+									<option>목포</option>
+									<option>여수</option>
+									<option>흑산도</option>
+									<option>제주</option>
+								</select>
+								<input type="hidden" name="cityName" id="cityName" >
+								<input type="hidden" id="citys" value="${cityName }">
+								<input type="hidden" id="day" value="${ddate }">
+								<input type="hidden" name="date" id="date" value="${date }">
+								<input type="hidden" id="today_date" value="${todays }">
+								<input type="hidden" name="year" id="year" value="${year }">
+								<input type="hidden" name="month" id="month" value="${month }">
+								<input type="hidden" name="select_day" id="select_day" value="${select_day }">
+								<span id="weather"> ${weather } </span>
+								<button id="search" type="button">검색</button>
+						</div>
+						
+						
+					</div>
+			
+					<div class="status" style="display: inline-block;">
+						<!--  <span id="city"></span> -->
+						<img id="tmef_img" src="" width="30px" height="30px">
+						<span id="tmef_info"></span>
+					</div>
+						
+						
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="dfont">글씨체</label>
-						<select name="dfont" id="dfont">
+						<select name="dfont" id="dfont" style="width:80%">
 							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script">Nanum Brush Script</option>
 							<option value="Nanum Gothic Coding" style="font-family:Nanum Gothic Coding">Nanum Gothic Coding</option>
 							<option value="Nanum Myeongjo" style="font-family:Nanum Myeongjo">Nanum Myeongjo</option>
@@ -430,94 +443,44 @@ function openGrimpan() {
 							<option value="Source Sans Pro" style="font-family:Source Sans Pro">Source Sans Pro</option>
 							<option value="Gaegu" style="font-family:Gaegu">Gaegu</option>
 						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<!-- 그림판 버튼 -->
-						<button type="button" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button>
+						<button type="button" style="display: inline-block;" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button>
 						
-						<label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px">(그림첨부)</label>
+						<label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px"></label>
 						<input type="file" name="uploadG" id="uploadG" style="display: none;">
 						
-						<!-- 사진첨부 버튼 -->
-						<label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px">(사진첨부)</label>
+						<!-- 사진첨부 버튼 -> 그림판 버튼으로 통합-->
+						<!-- <label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label> -->
 						<input type="file" name="upload" id="upload" style="display: none;">
 					</td>
 				</tr>
+						
 				<tr>
-					<td colspan="2">
+					<td>
 						<!-- 그림 -->
-						<img id="img" width="300">
-						<br>
-						<!-- 사진 -->
-						<img id="photo" width="300">
+						<img id="img" width="300" style="display: none">
 						<!-- 글 -->
-						<textarea class="form-control" rows="10" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script">${dcontent }</textarea>
+						<textarea class="form-control" rows="8" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; width:100%; height:50%;">${dcontent }</textarea>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<td>
 						<input type="radio" name="secret" value=1>나만보기
 						<input type="radio" name="secret" value=0 checked="checked">전체공개
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"></td>
-				</tr>
-				<tr>
 					<td>
-						<button type="submit">등록</button>
+						<button id="btnAdd" type="submit">등록</button>
 					</td>
 				</tr>
 			</table>
 			
-			<div class="today_weather">
-				<ul id="test">
-					<img id="weather_icon" src="../resources/img/weather.png" width="30" height="30">
-					<li id="today">날씨가 궁금하신가요?</li>
-					<li id="location">지역과 날씨를 선택 후 검색버튼을 눌러주세요.</li>
-				</ul>
-				<br>
-				<div class="city_weather">
-					<select id="citySelect">
-							<option>지역</option>
-							<option>서울</option>
-							<option>인천</option>
-							<option>수원</option>
-							<option>파주</option>
-							<option>춘천</option>
-							<option>백령도</option>
-							<option>강릉</option>
-							<option>속초</option>
-							<option>청주</option>
-							<option>안동</option>
-							<option>대전</option>
-							<option>홍성</option>
-							<option>전주</option>
-							<option>대구</option>
-							<option>울산</option>
-							<option>포항</option>
-							<option>부산</option>
-							<option>창원</option>
-							<option>광주</option>
-							<option>목포</option>
-							<option>여수</option>
-							<option>흑산도</option>
-							<option>제주</option>
-						</select>
-						<input type="hidden" name="cityName" id="cityName">
-						<input type="hidden" id="citys" value="${cityName }">
-						<input type="hidden" id="day" value="${ddate }">
-						<input type="hidden" name="date" id="date" value="${date }">
-						<input type="hidden" id="today_date" value="${todays }">
-						<input type="hidden" name="year" id="year" value="${year }">
-						<input type="hidden" name="month" id="month" value="${month }">
-						<span id="weather"> ${weather } </span>
-						<button id="search" type="button">검색</button>
-				</div>
-				<br><br>
-				<div class="status">
-					<span id="city"></span><br><br>
-					<img id="tmef_img" src="" width="60" height="60">
-				</div>
-			</div>
+			
 			
 		</form>
 		

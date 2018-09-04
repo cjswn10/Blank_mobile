@@ -33,7 +33,11 @@ ul{
 {
 	font-size: 30px;
 }
-
+#list
+{
+	width: 100%;
+	height: 100%;
+}
 </style>
 
 <title>빈칸을 채우다.</title>
@@ -121,7 +125,7 @@ ul{
 				<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 			    <a data-ajax="false" href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 			    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
-			    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+			   
 			    <ul id="main_menu">
 			        <li><a href="book.do" data-ajax="false">DIARY</a></li>
 			        <li><a href="favorite.do" data-ajax="false">FAVORITES</a></li>
@@ -130,9 +134,7 @@ ul{
 			</nav>		
 		
 			<ul data-role="listview" id="list"></ul>
-		</div>
-			
-		<!--------- 푸터 ---------->
+			<!--------- 푸터 ---------->
 			<div class="footer">
 				<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
 				<ul class="list-inline">
@@ -158,6 +160,7 @@ ul{
 			       </li>
 			    </ul>
 			</div>	
+		</div>	
 		</div>
 	</div>
 </body>

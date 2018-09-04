@@ -34,7 +34,7 @@ public class DiaryController {
 		this.dao = dao;
 	}
 
-	// �ѱ۱���??
+	// �뜝�떬湲�源띿삕�뜝�룞�삕??
 	@RequestMapping("/member/mainDetailDiary.do")
 	public ModelAndView mainDetailDiary(int dno) {
 		Map map = new HashMap();
@@ -44,7 +44,7 @@ public class DiaryController {
 		return mav;
 	}
 
-	// �ѱ۱���??
+	// �뜝�떬湲�源띿삕�뜝�룞�삕??
 	@RequestMapping("/member/detailFavoriteDiary.do")
 	public ModelAndView detailFavoriteDiary(int dno) {
 		Map map = new HashMap();
@@ -105,11 +105,90 @@ public class DiaryController {
 	}
 
 	@RequestMapping(value = "/member/updateDiary.do", method = RequestMethod.GET)
-	public ModelAndView diaryUpdateForm(int dno) {
+	public ModelAndView diaryUpdateForm(int dno,HttpSession session,HttpServletRequest request) {
 		Map map = new HashMap();
 		map.put("dno", dno);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("d", dao.detailDiary(map));
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
+		Calendar today = Calendar.getInstance();
+		
+		String todays = sdf.format(today.getTime());
+		
+		String cityName = request.getParameter("cityName");
+		String dtitle = request.getParameter("dtitle");
+		String ddate = request.getParameter("ddate");
+		String dcontent = request.getParameter("dcontent");
+		String dates = request.getParameter("date");
+		String year = request.getParameter("year");
+		String month = request.getParameter("month");
+		String select_day = request.getParameter("select_day");
+		
+		
+		session.setAttribute("cityName", cityName);
+		session.setAttribute("dtitle", dtitle);
+		session.setAttribute("ddate", ddate);
+		session.setAttribute("dcontent", dcontent);
+		session.setAttribute("date", dates);
+		session.setAttribute("year", year);
+		session.setAttribute("month", month);
+		session.setAttribute("select_day", select_day);
+		
+		
+		try {
+			
+		
+			RCaller caller = new RCaller();
+			caller.setRscriptExecutable("C:/Program Files/R/R-3.5.1/bin/x64/Rscript.exe");
+			
+			RCode code = new RCode();
+			code.clear();
+			
+			code.addRCode("setwd('c:/r_temp')");
+			code.addRCode("data = read.csv('weather.csv')");
+			code.addRCode("data2 = data.frame(data)");
+			code.addRCode("weather = subset(data2,date=='"+dates+"')");
+			code.addRCode("date = as.character(weather[1,1])");
+	        code.addRCode("img = as.character(weather[1,2])");
+	        code.addRCode("tmef = as.character(weather[1,3])");
+	        
+	        code.addRCode("setwd('c:/r_temp')");
+			code.addRCode("data3 = read.csv('weather2.csv')");
+			code.addRCode("data4 = data.frame(data3)");
+			code.addRCode("weather2 = subset(data4,city=='"+cityName+"')");
+			code.addRCode("city = as.character(weather2[1,1])");
+	        code.addRCode("img2 = as.character(weather2[1,2])");
+	        code.addRCode("tmef2 = as.character(weather2[1,3])");
+	        
+	        code.addRCode("allvars <- as.list(globalenv())");
+
+	        caller.setRCode(code);
+
+	        caller.runAndReturnResult("allvars");
+			
+	        String date = caller.getParser().getAsStringArray("date")[0];
+	        String img = caller.getParser().getAsStringArray("img")[0];
+	        String tmef = caller.getParser().getAsStringArray("tmef")[0];
+	        
+	        String city = caller.getParser().getAsStringArray("city")[0];
+	        String img2 = caller.getParser().getAsStringArray("img2")[0];
+	        String tmef2 = caller.getParser().getAsStringArray("tmef2")[0];
+	        
+	        
+	        String weather = caller.getParser().getXMLFileAsString();
+	        //System.out.println(weather);
+	        
+			mav.addObject("weather", weather);
+			mav.addObject("todays", todays);
+		
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		
 		return mav;
 	}
 
@@ -262,8 +341,8 @@ public class DiaryController {
 		String dates = request.getParameter("date");
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
-		
-		
+		String select_day = request.getParameter("select_day");
+
 		session.setAttribute("cityName", cityName);
 		session.setAttribute("dtitle", dtitle);
 		session.setAttribute("ddate", ddate);
@@ -271,6 +350,7 @@ public class DiaryController {
 		session.setAttribute("date", dates);
 		session.setAttribute("year", year);
 		session.setAttribute("month", month);
+		session.setAttribute("select_day", select_day);
 		
 		try {
 			
@@ -395,7 +475,7 @@ public class DiaryController {
 			}
 		}
 		
-		/************** �׸� ***************/
+		/************** �뜝�뙎紐뚯삕 ***************/
 		String orgnameG = uploadG.getOriginalFilename();
 		String dfile = "x";
 
@@ -452,9 +532,69 @@ public class DiaryController {
 		return mav;
 	}
 
-	@RequestMapping("/member/diary.do")
-	public void diary() {
+	@RequestMapping(value="/member/myKeyword.do", produces="text/plain;charset=utf-8")
+	@ResponseBody
+	public String keyword(HttpSession session,int mno,int bno)
+	{
+		//ModelAndView mav = new ModelAndView();
+		
+		String keyword="";
+		//int mno = (Integer)session.getAttribute("mno");
+		
+		try {
+			RCaller caller = new RCaller();
+			caller.setRscriptExecutable("C:/Program Files/R/R-3.5.1/bin/x64/Rscript.exe");
+			
+			RCode code = new RCode();
+			code.clear();
+			
+			code.addRCode("setwd('c:/r_temp')");
+			code.addRCode("library(DBI)");
+			code.addRCode("library(RODBC)");
+			code.addRCode("library(KoNLP)");
+			code.addRCode("library(wordcloud)");
+			code.addRCode("useSejongDic()");
+			code.addRCode("db = odbcConnect('blank','blank','blank')");
+			code.addRCode("sql = sqlQuery(db,'select dcontent from book b,member m,diary d where b.mno=m.mno and d.bno=b.bno and b.mno="+mno+" and b.bno="+bno+"')");
+			code.addRCode("keyword = matrix(sql$DCONTENT)");
+			code.addRCode("write(keyword ,'keyword.txt')");
+			code.addRCode("data = readLines('keyword.txt')");
+			code.addRCode("data <- gsub('[ㄱ-ㅎ]','', data)");
+			code.addRCode("data <- gsub('[0-9]','', data)");
+			//code.addRCode("data <- gsub('.','', data)");
+			code.addRCode("data1 <- sapply(data,extractNoun,USE.NAMES=F)");
+			code.addRCode("data2 <- unlist(data1)");
+			code.addRCode("data2 <- Filter(function(x) {nchar(x) >= 2} ,data2)");
+			code.addRCode("write(unlist(data2),'diary_dtitle.txt')");
+			code.addRCode("data4 <- read.table('diary_dtitle.txt')");
+			code.addRCode("wordcount <- table(data4)");
+			code.addRCode("data5 = head(sort(wordcount, decreasing=T),3)");
+			code.addRCode("data6 = data.frame(data5)");
+			code.addRCode("data7 = as.character(data6[1,1])");
+			code.addRCode("data8 = as.character(data6[2,1])");
+			code.addRCode("data9 = as.character(data6[3,1])");   
+	        code.addRCode("allvars <- as.list(globalenv())");
 
+	        caller.setRCode(code);
+
+	        caller.runAndReturnResult("allvars");
+			
+	        String data7 = caller.getParser().getAsStringArray("data7")[0];
+	        String data8 = caller.getParser().getAsStringArray("data8")[0];
+	        String data9 = caller.getParser().getAsStringArray("data9")[0];
+
+	        keyword = caller.getParser().getXMLFileAsString();
+	       // System.out.println(keyword);
+	        
+	        //mav.addObject("keyword", keyword);
+	        
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}  
+		
+		return keyword;
+		
 	}
 
 	// LIST DIARY
@@ -477,6 +617,12 @@ public class DiaryController {
 			e.printStackTrace();
 		}
 		return str;
+	}
+	
+	
+	@RequestMapping("/member/diary.do")
+	public void diary() {
+		
 	}
 
 }

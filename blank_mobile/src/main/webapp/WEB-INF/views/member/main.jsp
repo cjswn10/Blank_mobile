@@ -13,8 +13,13 @@
 		minimum-scale=1.0,
 		user-scalable=no">
 
-
 <style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+/*a 파란색 지우기 */
+ a:link { color: black; text-decoration: none;}
+ a:visited { color: black; text-decoration: none;}
+ a:hover { color: black; text-decoration: none;}
+
 #mainList{
 	text-align: center;
 }
@@ -38,8 +43,6 @@
     cursor: pointer;
 }
 
-
-
 .contents{	
 	width: 300px;
 	height: 300px;
@@ -50,13 +53,37 @@
 	overflow: hidden;	
 }
 
-@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+.iljung-div{
+    display:flex;
+    flex-direction:row;
+    justify-content : space-around;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%;
+    margin-bottom: 15%;
+    text-align : center;
+   
+}
+
+.iljung-date-div .btn{
+    border:1px solid #EFE7E6;
+    background-color: #EFE7E6;
+    color:#662408;
+    font-family: 'Nanum Pen Script', serif;
+}
 
 .landing {
     width: 100%;
+    height: 89%;
     margin: auto;
     background-size: cover;
-    background-position: center center;
+    padding: 0;
+    background-color: #ebcfce;
+    background-image: url(../resources/img/mainlogo.jpg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: auto 80%;
 }
 
 #searchid
@@ -66,7 +93,70 @@
 		background: white;
 		color: black;
 	}
+#top
+	{
+		display:none;
+		position:fixed;
+		bottom:10px;
+		right:2px;
+	}	
 
+@media screen and (max-width: 670px) and (min-width: 541px) {	
+	.landing {
+	    width: 100%;
+	    height: 80%;
+	    margin: auto;
+	    background-size: cover;
+	    padding: 0;
+	    background-color: #ebcfce;
+	    background-image: url(../resources/img/mainlogo_mobile.jpg);
+	    background-repeat: no-repeat;
+	    background-position: right;
+	    background-size: auto 80%;
+	}
+	
+	.iljung-div{
+    display:flex;
+    flex-direction:row;
+    justify-content : space-around;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 15%;
+    text-align : center;
+   
+	}
+}
+
+@media screen and (max-width: 540px) {	
+	.landing {
+	    width: 100%;
+	    height: 70%;
+	    margin: auto;
+	    background-size: cover;
+	    padding: 0;
+	    background-color: #ebcfce;
+	    background-image: url(../resources/img/mainlogo_mobile.jpg);
+	    background-repeat: no-repeat;
+	    background-position: right;
+	    background-size: auto 100%;
+	}
+	
+	.iljung-div{
+    display:flex;
+    flex-direction:row;
+    justify-content : space-around;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 15%;
+    text-align : center;
+   
+	}
+	
+}
 </style>
 
 <!-- Bootstrap -->
@@ -83,7 +173,7 @@
 
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=16">
-<script type="text/javascript" src="../resources/js/menu.js?ver=6" ></script>
+<script type="text/javascript" src="../resources/js/menu.js?ver=7" ></script>
 
 <script type="text/javascript">
 $(function () {
@@ -96,6 +186,39 @@ $(function () {
 	
 	var mno = ${mno}
 	
+	//일간키워드
+	$.ajax({
+		url: "dailyKeyword.do",
+		success: function(data) {
+			console.log("일간키워드 success")
+			dailyfname = data;
+			console.log(dailyfname)
+			var dailyImg = $('<img></img>').attr({
+				src: "../resources/rImg/" + dailyfname,
+				width: "100%"
+			})
+			
+			$("#statisticsD").append(dailyImg);
+		}
+	});
+	
+	//주간키워드
+	$.ajax({
+		url: "weeklyKeyword.do",
+		success: function(data) {
+			console.log("주간키워드 success")
+			weeklyfname = data;
+			console.log(weeklyfname)
+			var weeklyImg = $('<img></img>').attr({
+				src: "../resources/rImg/" + weeklyfname,
+				width: "100%"
+			})
+			
+			$("#statisticsW").append(weeklyImg);
+		}
+	});
+	
+	//메인리스트
 	$.ajax({
 		url: "mainList.do",
 		success:function(data){				
@@ -293,6 +416,28 @@ $(function () {
 					$("#searchid").hide();
 				}
 		})		
+		
+		
+		$(window).scroll(function(){
+			
+			if($(this).scrollTop() > 50)
+			{
+				$("#top").fadeIn();
+			}
+			else
+			{
+				$("#top").fadeOut();
+			}
+			
+		})
+		
+		$("#top").click(function(){
+		
+			$("body").scrollTop(0);
+			
+		})
+		
+		
 })
 </script>
 <title>빈칸을 채우다.</title>
@@ -343,9 +488,15 @@ $(function () {
 		    </ul>
 		</nav>
 		<div class="landing">
-			<img src="../resources/img/mainlogo.jpg" width="100%">
+			<!--  <img src="../resources/img/mainlogo.jpg" height="50%"> -->
 		</div>
 		
+		<!-- 페이지 버튼 -->
+		<div class="iljung-div">
+                    <div class="iljung-date-div"><p class="btn btn1" rel="div2"><a href="#mainList">뉴스피드</a></p></div>
+                    <div class="iljung-date-div"><p class="btn btn1" rel="div1"><a href="#statisticsD">주요키워드</a></p></div>
+                    <!-- <div class="iljung-date-div"><p class="btn btn1" rel="div3"><a href="#foot">개발자</a></p></div>  -->
+        </div>
 		<!----------- 내용 -------------->
 		
 		<div class="clearfix" id="mainList"></div>
@@ -353,10 +504,13 @@ $(function () {
 		<!-- modal들을 넣을 div -->
 		<div id="modal"></div>
 			
-
-	
+		<div id="statisticsD" style="margin-top: 10%;"><h2>DAILY KEYWORDS</h2></div>
+		<div id="statisticsW"><h2>WEEKLY KEYWORDS</h2></div>
+		
+		<img id="top" src="../resources/img/top.PNG">
+		
 			<!--------- 푸터 ---------->
-		<div class="footer">
+		<div class="footer" id="foot">
 			<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
 			<ul class="list-inline">
 		       <li>

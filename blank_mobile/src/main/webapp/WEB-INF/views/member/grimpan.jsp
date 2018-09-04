@@ -60,7 +60,7 @@ user-scalable=0">
 	
 	<img id="myImage">
 
-	<script src="../resources/js/draw.js"></script>
+	<script src="../resources/js/draw.js?ver=4"></script>
 </body>
 </html>
 
