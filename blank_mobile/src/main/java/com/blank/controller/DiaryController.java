@@ -342,7 +342,8 @@ public class DiaryController {
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
 		String select_day = request.getParameter("select_day");
-
+		String img3 = request.getParameter("img_a");
+		
 		session.setAttribute("cityName", cityName);
 		session.setAttribute("dtitle", dtitle);
 		session.setAttribute("ddate", ddate);
@@ -351,6 +352,7 @@ public class DiaryController {
 		session.setAttribute("year", year);
 		session.setAttribute("month", month);
 		session.setAttribute("select_day", select_day);
+		session.setAttribute("img", img3);
 		
 		try {
 			
@@ -476,14 +478,14 @@ public class DiaryController {
 		}
 		
 		/************** �뜝�뙎紐뚯삕 ***************/
-		String orgnameG = uploadG.getOriginalFilename();
+		String orgnameG = uploadG.getOriginalFilename();	
 		String dfile = "x";
-
+		
 		if (orgnameG != null && !orgnameG.equals("")) {
 			String excG = orgnameG.substring(orgnameG.lastIndexOf(".") + 1, orgnameG.length());
 			dfile = bno + "b" + no + "grim." + excG;
 			File saveFileG = new File(pathG + "/" + dfile);
-
+			
 			try {
 				upload.transferTo(saveFileG);
 			} catch (Exception e) {

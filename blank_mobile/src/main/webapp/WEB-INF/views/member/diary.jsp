@@ -134,7 +134,7 @@ user-scalable=no">
 						$(".iljung-date-div").html("");
 						$(".iljung-date-div").append(p1, p2, p3);
 						
-						/*<div class="iljung-date-div"><p class="btn btn1" rel="div2">*/
+						//<div class="iljung-date-div"><p class="btn btn1" rel="div2">
 						
 						
 					}
