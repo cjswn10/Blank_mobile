@@ -195,6 +195,10 @@ public class DiaryController {
 	@RequestMapping(value = "/member/updateDiary.do", method = RequestMethod.POST)
 	public ModelAndView diaryUpdateSubmit(DiaryVo d, HttpSession session, HttpServletRequest request) {
 
+		String content = request.getParameter("dcontent");
+		content = content.replace("\r\n", "<br>");
+		d.setDcontent(content);
+		
 		int no = d.getDno();
 
 		d.setDtype("000");
