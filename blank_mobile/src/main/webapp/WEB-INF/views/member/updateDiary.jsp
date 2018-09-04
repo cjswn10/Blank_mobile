@@ -80,8 +80,13 @@ $(function() {
 			day += arr[i]
 		}
 		
-		select_day = parseInt(day)
+		if(day.length > 8)
+		{
+			location.href="updateDiary.do?dno="+$("#dno").val()
+		}
 		
+		select_day = parseInt(day)
+			
 		months = parseInt(ddate.substring(5,7));
 		
 		$("#year").val(year)

@@ -32,13 +32,13 @@ table label {
 
 <script type="text/javascript">
 $(function() {
-	
+	$("#img_a").hide();
 	setTimeout(function () {
 		
 		location.href = "logOut.do?id=${id}&autoOut=out";
 		
 	},10800*1000);
-	
+
 	$("#weather").hide()	
 	
 	var cityName = location.search.substr(1,1)
@@ -54,13 +54,22 @@ $(function() {
 		$("#tmef_img").show()
 		$("#dweather").val($("[name='tmef2'] > v").html())
 		$("#city").html($("#citys").val()+"의 날씨")
+		$("#img").css({
+			display: "inline-block"
+		});
+		
+		$("#img").attr("src", $("#img_a").html());
 	}	
 	else
 	{
 		$("#tmef_img").show()
 		$("#dweather").val($("[name='tmef'] > v").html())
 		$("#city").html($("#citys").val()+"의 날씨")
+		$("#img").css({
+			display: "inline-block"
+		});
 		
+		$("#img").attr("src", $("#img_a").html());
 	}		
 	
 	var today = $("#today_date").val();
@@ -101,6 +110,11 @@ $(function() {
 		
 		select_day = parseInt(day)
 		
+		if(day.length > 8)
+		{
+			location.href="insertDiary.do?dtitle="+$("#dtitle").val()+"&dcontent="+$("#dcontent").val();
+		}
+		
 		months = parseInt(ddate.substring(5,7));
 		
 		$("#year").val(year)
@@ -118,6 +132,7 @@ $(function() {
 		}
 			
 	})
+	
 	
 	var area = "";
 	var cityName = $("#citys").val();
@@ -152,6 +167,7 @@ $(function() {
 		area = "09680";
 	}
 	
+	
 	$.ajax({url:"http://203.236.209.112:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
 	
 	$.ajax({url:"http://203.236.209.112:4997/weather2.do",success:function(data){}})
@@ -167,9 +183,15 @@ $(function() {
 		$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
 	}
 	
+	$("#img_a").val()
+	
 	$("#search").click(function() {	
 		
 		$("#select_day").val(select_day);
+		
+		var str = $("#img_a").html();
+
+		function replace(str) { return encodeURIComponent(str); }
 		
 		if($("#date").val() == '')
 		{
@@ -195,15 +217,19 @@ $(function() {
 		}
 		else if(select_day == today_now)
 		{
+			
 			location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
 			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
-			+"&year="+$("#year").val()+"&month="+$("#month").val()+"&select_day="+$("#select_day").val();
+			+"&year="+$("#year").val()+"&month="+$("#month").val()+"&select_day="+$("#select_day").val()
+			+"&img_a="+replace(str)
 		}
 		else
 		{
+			
 			location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
 			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
-			+"&year="+$("#year").val()+"&month="+$("#month").val()+"&select_day="+$("#select_day").val();
+			+"&year="+$("#year").val()+"&month="+$("#month").val()+"&select_day="+$("#select_day").val()
+			+"&img_a="+replace(str)
 		}
 		
 	})
@@ -213,6 +239,7 @@ $(function() {
 		$("#cityName").val($("#citySelect").val())
 	
 	})
+	
 	
 	$("#btnAdd").click(function(){
 		if($("#dweather").val() == "")
@@ -265,29 +292,6 @@ function openGrimpan() {
 	var sel_file;
 	var sel_fileG;
 	
-
-	$(document).ready(function() {
-		$("#upload").on("change", showImg)
-	});
-
-	function showImg(e) {
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-
-		filesArr.forEach(function(f) {
-			if (!f.type.match("image.*")) {
-				alert("확장자 오류");
-				return;
-			}
-
-			sel_file = f;
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$("#photo").attr("src", e.target.result);
-			}
-			reader.readAsDataURL(f);
-		});
-	}
 	<!-- 그림 보여주기 -->
 	$(document).ready(function() {
 		$("#uploadG").on("change", showImgG)
@@ -296,7 +300,7 @@ function openGrimpan() {
 	function showImgG(e) {
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
-
+		
 		filesArr.forEach(function(f) {
 			if (!f.type.match("image.*")) {
 				alert("확장자 오류");
@@ -307,10 +311,13 @@ function openGrimpan() {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				$("#img").css({
+					
 					display: "inline-block"
 				});
 				
 				$("#img").attr("src", e.target.result);
+				$("#img_a").html(e.target.result);
+				
 			}
 			reader.readAsDataURL(f);
 		});
@@ -434,6 +441,7 @@ function openGrimpan() {
 								<input type="hidden" name="year" id="year" value="${year }">
 								<input type="hidden" name="month" id="month" value="${month }">
 								<input type="hidden" name="select_day" id="select_day" value="${select_day }">
+								<span id="img_a">${img }</span>
 								<span id="weather"> ${weather } </span>
 								<button id="search" type="button">검색</button>
 						</div>
