@@ -395,33 +395,7 @@ function openGrimpan() {
 </script>
 
 <script>
-	var sel_file;
 	var sel_fileG;
-	
-
-	<!-- 사진 보여주기 -->
-	$(document).ready(function() {
-		$("#upload").on("change", showImg)
-	});
-	
-	function showImg(e) {
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		
-		filesArr.forEach(function(f) {
-			if(!f.type.match("image.*")) {
-				alert("확장자 오류");
-				return;
-			}
-			
-			sel_file = f;
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$("#photo").attr("src", e.target.result);
-			}
-			reader.readAsDataURL(f);
-		});
-	}
 	
 	<!-- 그림 보여주기 -->
 	$(document).ready(function() {
@@ -618,8 +592,6 @@ border: none;">
 					<td>
 						<!-- 그림 -->
 						<img id="grim" width="300" style="display: none;">
-						<!-- 사진 -->
-						<img id="photo" width="300" style="display: none;">
 						<!-- 글 -->
 						<textarea rows="8" class="form-control" name="dcontent" id="dcontent" style="font-family: ${d.dfont};">${d.dcontent }</textarea>
 					</td>
