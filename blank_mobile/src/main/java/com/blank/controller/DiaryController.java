@@ -409,6 +409,11 @@ public class DiaryController {
 
 	@RequestMapping(value = "/member/insertDiary.do", method = RequestMethod.POST)
 	public ModelAndView diaryInsertSubmit(DiaryVo d, HttpServletRequest request, HttpSession session) {
+		
+		String content = request.getParameter("dcontent");
+		content = content.replace("\r\n", "<br>");
+		d.setDcontent(content);		
+		
 		int mno = (Integer) session.getAttribute("mno");
 		int bno = (Integer) session.getAttribute("bno");
 

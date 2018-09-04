@@ -81,8 +81,11 @@ span{
 		var ddate = $('<span style="font-size: 12px;"></span>').html("${d.ddate}")
 		var dweather = $('<span style="font-size: 12px;"></span>').html("${d.dweather}")
 		var dtitle = $('<p style="font-size: 20px;"></p>').html("${d.dtitle}")
-		var dcontent = $('<p style="font-size: 15px;"></p>').html($("#con").val())
-		$('#detailDiary').append(ddate, dweather, dtitle, dcontent);					
+
+		var content = "${d.dcontent}";	
+		
+		$('#detailDiary').append(ddate, dweather, dtitle, content);					
+
 		
 		setTimeout(function () {
 			
