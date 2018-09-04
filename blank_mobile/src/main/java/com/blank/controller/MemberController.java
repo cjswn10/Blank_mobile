@@ -1,19 +1,16 @@
 package com.blank.controller;
 
 import java.io.File;
-import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,9 +32,9 @@ public class MemberController {
 		this.dao = dao;
 	}
 
+	//�����Ʈ�ѷ��� ���ڵ��� �� �ǳ� ���ڽ��ϴ�.
 
-
-	//마이페이지 뷰
+	//myPage
 	@RequestMapping(value="/member/myPage.do")
 	public ModelAndView myPage() {
 		
@@ -46,7 +43,7 @@ public class MemberController {
 	}
 	
 
-	//아이디,비밀번호 찾기 뷰
+	//����ã��
 	@RequestMapping(value="search.do")
 	public ModelAndView search() {
 			
@@ -56,7 +53,7 @@ public class MemberController {
 	
 
 
-	//id찾기 뷰 
+	//idã�� form
 	@RequestMapping(value="searchIdPage.do")
 	public ModelAndView searchId() {
 				
@@ -64,7 +61,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//pwd찾기 뷰
+	//pwdã�� form
 	@RequestMapping(value="searchPwdPage.do")
 	public ModelAndView searchPwd() {
 					
@@ -72,7 +69,7 @@ public class MemberController {
 		return mav;
 	}
 
-	//아이디찾기
+	//idã��
 	@RequestMapping(value="searchId.do")
 	@ResponseBody
 	public String searchId(String name,String phone)
@@ -93,7 +90,7 @@ public class MemberController {
 		return str;
 	}
 	
-	//비밀번호 찾기
+	//pwdã��
 	@RequestMapping(value="searchPwd.do")
 	@ResponseBody
 	public String searchPwd(String id,String phone)
@@ -114,6 +111,7 @@ public class MemberController {
 		return str;
 	}
 	
+	
 	//qna(contact)
 	@RequestMapping(value="/member/qNa.do")
 	public ModelAndView Qna() {
@@ -123,7 +121,7 @@ public class MemberController {
 	}
 
 
-	//로그아웃
+	//logout
 	@RequestMapping(value="/member/logOut.do")
 	public ModelAndView logOut(HttpSession session,LogVo l,HttpServletRequest request,String autoOut) {
 		
@@ -135,37 +133,28 @@ public class MemberController {
 			//System.out.println("TEST : X-FORWARDED-FOR : "+ip);
 
 			if (ip == null) {
-
 				ip = request.getHeader("Proxy-Client-IP");
 				//System.out.println("TEST : Proxy-Client-IP : "+ip);
-
 			}
 
 			if (ip == null) {
-
 				ip = request.getHeader("WL-Proxy-Client-IP");
 				//System.out.println("TEST : WL-Proxy-Client-IP : "+ip);
-
 			}
 
 			if (ip == null) {
-
 				ip = request.getHeader("HTTP_CLIENT_IP");
 				//System.out.println("TEST : HTTP_CLIENT_IP : "+ip);
-
 			}
 
 			if (ip == null) {
-
 				ip = request.getHeader("HTTP_X_FORWARDED_FOR");
 				//System.out.println("TEST : HTTP_X_FORWARDED_FOR : "+ip);
 
 			}
 
 			if (ip == null) {
-
 				ip = request.getRemoteAddr();
-
 			}
 			
 			l.setIp(ip);
@@ -178,7 +167,7 @@ public class MemberController {
 		String id = request.getParameter("id");
 		
 		l.setId(id);
-		l.setRecord("로그아웃");
+		l.setRecord("logout");
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 
@@ -191,33 +180,29 @@ public class MemberController {
 		int re = dao.logRecord(l);
 		if(re > 0)
 		{
-			mav.addObject("msg", "성공");
+			mav.addObject("msg", "success");
 			mav.setViewName("redirect:/member/main.do");
 		}
 		else
 		{
-			mav.addObject("msg", "실패");
+			mav.addObject("msg", "fail");
 			mav.setViewName("error");
 		}
 		
 		
 		/**
-		 * 로그아웃 할 때마다 통계이미지파일들 삭제해주기
+		 * �α׾ƿ� �� rImg ���� ����
 		 */
 		String FilePath = request.getRealPath("/resources/rImg");
 		File FileList = new File(FilePath);
 
-		//해당 폴더의 전체 파일리스트 조회
 		String fileList[] = FileList.list();
 
-		//전체파일
 		for(int i = 0; i < fileList.length; i++){
-		  //파일명 조회
 		  String FileName = fileList[i];
-
-		  //파일명에 eid 값이 존재하는지 체크
+		  
+		  //�̸��� RPlot�� �� ���ϵ� ����
 		  if(FileName.contains("RPlot")){
-		    //존재하면 파일삭제
 		    File deleteFile = new File(FilePath + "/" + FileName);
 		    deleteFile.delete();
 		  }
@@ -230,12 +215,12 @@ public class MemberController {
 	}
 	
 
-	//회원가입(GET)
+	//join(GET)
 	@RequestMapping(value="join.do", method=RequestMethod.GET)	
 	public void joinForm() {
 		
 	}
-	//회원가입(POST)
+	//join(POST)
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
 	public ModelAndView joinSubmit(MemberVo mv) {
 		ModelAndView mav = new ModelAndView("redirect:/login.do");
@@ -243,14 +228,14 @@ public class MemberController {
 		int re = dao.memberInsert(mv);
 		if (re < 1) {
 
-			mav.addObject("msg", "회원가입에 실패하였습니다.");
+			mav.addObject("msg", "success login");
 			mav.setViewName("/member/error");
 		}
 		return mav;
 	}
 	
 
-	//중복확인
+	//id �ߺ�Ȯ��
 	@RequestMapping(value="checkId.do")
 	@ResponseBody
 	public String checkId(@RequestParam("id")String id) {
@@ -263,7 +248,7 @@ public class MemberController {
 	
 	}
 	
-	//메인 페이지 아이디검색(id중복체크)
+	//main - search_id
 	@RequestMapping(value="/member/checkId2.do")
 	@ResponseBody
 	public String checkId2(@RequestParam("id")String id,HttpSession session) {
@@ -273,11 +258,10 @@ public class MemberController {
 		int rowcount = dao.memberCheckId(map);
         return String.valueOf(rowcount);
         
-	
 	}
 	
 
-	//로그인
+	//login
 	@RequestMapping(value="login.do", method=RequestMethod.GET)
 	public void loginForm(HttpServletRequest request) {	
 		
@@ -294,7 +278,7 @@ public class MemberController {
 		Boolean r = dao.login(map);
 		if (r == true) {
 
-			//id, mno 세션생성
+			//id, mno  	session
 			session.setAttribute("id", id);
 			session.setAttribute("mno", dao.mno(map));
 			mav.setViewName("redirect:/member/main.do");
@@ -305,37 +289,27 @@ public class MemberController {
 			//System.out.println("TEST : X-FORWARDED-FOR : "+ip);
 
 			if (ip == null) {
-
 				ip = request.getHeader("Proxy-Client-IP");
 				//System.out.println("TEST : Proxy-Client-IP : "+ip);
-
 			}
 
 			if (ip == null) {
-
 				ip = request.getHeader("WL-Proxy-Client-IP");
 				//System.out.println("TEST : WL-Proxy-Client-IP : "+ip);
-
 			}
 
 			if (ip == null) {
-
 				ip = request.getHeader("HTTP_CLIENT_IP");
 				//System.out.println("TEST : HTTP_CLIENT_IP : "+ip);
-
 			}
 
 			if (ip == null) {
-
 				ip = request.getHeader("HTTP_X_FORWARDED_FOR");
 				//System.out.println("TEST : HTTP_X_FORWARDED_FOR : "+ip);
-
 			}
 
 			if (ip == null) {
-
 				ip = request.getRemoteAddr();
-
 			}
 			
 			l.setIp(ip);
@@ -346,7 +320,7 @@ public class MemberController {
 		}
 		
 		l.setId(id);
-		l.setRecord("로그인");
+		l.setRecord("login");
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 
@@ -359,22 +333,20 @@ public class MemberController {
 		int re = dao.logRecord(l);
 		if(re > 0)
 		{
-			mav.addObject("msg", "성공");
 			mav.setViewName("redirect:/member/main.do");
 		}
 		else
 		{
-			mav.addObject("msg", "실패");
+			mav.addObject("msg", "failed to login");
 			mav.setViewName("error");
 		}
 		
-		//로그인 하고 3시간5분 동안 페이지를 이동하지않으면 세션 삭제(즉, 자동 로그아웃)
 		session.setMaxInactiveInterval(185*60);
 		
 		return mav;
 	}
 
-	//비밀번호찾기
+	//pwdCheck
   @RequestMapping(value="/member/pwdCheck.do", method=RequestMethod.GET)
 	public void pwdCheckForm() {
 		
@@ -396,15 +368,14 @@ public class MemberController {
 		}
 		else
 		{
-
-			mav.addObject("msg", "비밀번호를 확인해주세요.");
+			mav.addObject("msg", "failed to update");
 		}	
 		
 		return mav;
 	}
 	
 
-	//회원정보 수정
+	//updateMember
 	@RequestMapping(value="/member/updateMember.do", method=RequestMethod.GET)
 	public void memberUpdateForm() {
 		
@@ -417,14 +388,14 @@ public class MemberController {
 		
 		int re = dao.updateMember(mv);
 		if (re < 1) {
-			mav.addObject("msg", "회원수정에 실패하였습니다.");
+			mav.addObject("msg", "failed to update Member");
 			mav.setViewName("/member/error");
 		}
 		
 		return mav;
 	}
 	
-	//메인 아이디검색
+	//Search Id in main
 	@RequestMapping(value="/member/mainSearchId.do",produces="text/plain;charset=utf-8")
 	@ResponseBody
 	public String mainSearchId(String id,HttpSession session)
@@ -452,7 +423,7 @@ public class MemberController {
 		return str;
 	}
 	
-	//아이디 가져오기
+	//getIdByMno
 	@RequestMapping(value="/member/getId.do", produces="text/plain;charset=utf-8")
 	@ResponseBody
 	public String getIdByMno(int mno) {
