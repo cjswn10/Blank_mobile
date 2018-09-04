@@ -118,7 +118,7 @@
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=16">
 <script type="text/javascript" src="../resources/js/menu.js?ver=7" ></script>
-
+<script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -274,7 +274,7 @@
 		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 	    <a href="main.do" ><img src="../resources/img/blank.png" class="logo"></a>
 	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
-	    
+	    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
 	    <ul id="main_menu">
 	        <li><a href="book.do">DIARY</a></li>
 	        <li><a href="favorite.do">FAVORITES</a></li>
