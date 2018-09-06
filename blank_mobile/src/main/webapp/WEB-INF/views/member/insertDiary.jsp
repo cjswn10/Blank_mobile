@@ -256,41 +256,39 @@ $(function() {
 	
 	
 	$("#download").click(function() {
-		downloadCanvas(this, 'canvas', 'myGrim.png');
+		//downloadCanvas(this, 'canvas', 'myGrim.png');
+		var imgUrl = document.getElementById('canvas').toDataURL();
+		
+		$.ajax({
+			  url: "makeImgFile.do",
+			  data: { "imgbase64": imgUrl },
+			  success : function() {
+				  alert('선택영역을 서버의 이미지 파일에 저장했습니다');
+			  }
+		});
+		
 	});
 
 	$("#btnOk").click(function() {
 
 		var myImage = document.getElementById("myImage");
-		var imageUrl = canvas.toDataURL();
 		myImage.src = canvas.toDataURL();
 
 		self.close();
 	});
+	
+	//$("#insertDiaryDiv").find("*").attr("data-enhance", "false");
+	
 });
 
+/*
 //C:\Blank\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Blank\resources\upload2
 // 작업 이미지 로컬 다운로드(.PNG)
 function downloadCanvas(link, canvasId, filename) {
 	link.href = document.getElementById(canvasId).toDataURL();
 	link.download = filename;
 }
-/*
-var openG;
-
-function openGrimpan() {
-	
-	var popupX = (window.screen.width / 2) - (600 / 2);
-	// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
-
-	var popupY= (window.screen.height /2) - (680 / 2);
-	// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
-	
-	window.name = "insertDiary";
-	openG = window.open("grimpan.do","grimpan",'status=no, height=600px, width=600px, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
-}
 */
-//var showGrimpan = $(function() {
 function showGrimpan() {
 	$("#grimpan").css("display", "block");
 	$("#insertDiaryDiv").css("display", "none");
@@ -330,7 +328,6 @@ function showDiary() {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				$("#img").css({
-					
 					display: "inline-block"
 				});
 				
@@ -345,8 +342,6 @@ function showDiary() {
 </head>
 <body>
 <div id="insertDiaryDiv">
-
-
 <!-- side-menu -->
 <section id="mySidenav" class="sidenav">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -500,7 +495,7 @@ function showDiary() {
 					<td>
 						<!-- 그림판 버튼 -->
 						<!-- <button type="button" style="display: inline-block;" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button> -->
-						<a href="#" onclick="showGrimpan()"><button type="button" style="display: inline-block;"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button></a>
+						<a href="#" onclick="showGrimpan()" data-ajax="false"><button type="button" style="display: inline-block;"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button></a>
 						
 						<label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px"></label>
 						<input type="file" name="uploadG" id="uploadG" style="display: none;">
@@ -546,7 +541,6 @@ function showDiary() {
 		<div>
 			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;"></canvas>
 		</div>
-	</div>
 	<script type="text/javascript" src="../resources/js/drawingColor.js?ver=18"></script>
 	
 	<input type="hidden" id="selectColor">
@@ -557,13 +551,14 @@ function showDiary() {
 		<button data-inline='true' style='margin:0px auto;' id="delete"><img src="../resources/img/icon/newpage.png" width="15px"></button>
 		<button data-inline='true' style='margin:0px auto;' id="prev"><img src="../resources/img/icon/prev.png" width="15px"></button>
 		<a id="download"><button data-inline='true' style='margin:0px auto;'><img src="../resources/img/icon/download.png" width="15px"></button></a>
-		<a href="#" onclick="showDiary()"><button data-inline='true' style='margin:0px auto;' id="btnOk" ><img src="../resources/img/icon/exit.png" width="15px"></button></a>
+		<a href="#" onclick="showDiary()" data-ajax="false"><button data-inline='true' style='margin:0px auto;' id="btnOk"><img src="../resources/img/icon/exit.png" width="15px"></button></a>
 	
 	
 	<img id="myImage">
 
 	<script src="../resources/js/draw.js?ver=4"></script>
 
+	</div>
 </div>
 
 
