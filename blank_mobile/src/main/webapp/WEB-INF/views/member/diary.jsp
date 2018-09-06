@@ -291,7 +291,7 @@ user-scalable=no">
 	</div>
 			
 		<div data-role="footer" data-position="fixed">
-			<div onclick="location.href='insertDiary.do'" class="insertDiary" style="position:fixed; right: 0; bottom: 0; cursor: pointer;">일기 등록</div>
+			<div onclick="location.href='insertDiary.do'" data-ajax="false" class="insertDiary" style="position:fixed; right: 0; bottom: 0; cursor: pointer;">일기 등록</div>
 		</div>
 	</div>			
 </body>
