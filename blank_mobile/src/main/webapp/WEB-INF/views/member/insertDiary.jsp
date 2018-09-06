@@ -13,10 +13,11 @@
 		
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <!-- 웹폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gaegu|Gamja+Flower|Jua|Nanum+Brush+Script|Nanum+Gothic+Coding|Nanum+Myeongjo|Nanum+Pen+Script|Source+Sans+Pro|Stylish|Sunflower:300" rel="stylesheet">
 <link rel="stylesheet" href="../resources/css/blank.css">
@@ -252,8 +253,29 @@ $(function() {
 			style : "font-family:"+$(this).val()
 		})
 	});
+	
+	
+	$("#download").click(function() {
+		downloadCanvas(this, 'canvas', 'myGrim.png');
+	});
+
+	$("#btnOk").click(function() {
+
+		var myImage = document.getElementById("myImage");
+		var imageUrl = canvas.toDataURL();
+		myImage.src = canvas.toDataURL();
+
+		self.close();
+	});
 });
 
+//C:\Blank\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Blank\resources\upload2
+// 작업 이미지 로컬 다운로드(.PNG)
+function downloadCanvas(link, canvasId, filename) {
+	link.href = document.getElementById(canvasId).toDataURL();
+	link.download = filename;
+}
+/*
 var openG;
 
 function openGrimpan() {
@@ -266,6 +288,19 @@ function openGrimpan() {
 	
 	window.name = "insertDiary";
 	openG = window.open("grimpan.do","grimpan",'status=no, height=600px, width=600px, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+}
+*/
+//var showGrimpan = $(function() {
+function showGrimpan() {
+	$("#grimpan").css("display", "block");
+	$("#insertDiaryDiv").css("display", "none");
+	$(location).attr('href','#grimpan');
+}
+
+function showDiary() {
+	$("#insertDiaryDiv").css("display", "block");
+	$("#grimpan").css("display", "none");
+	$(location).attr('href','#insertDiaryDiv');
 }
 
 </script>
@@ -309,6 +344,9 @@ function openGrimpan() {
 
 </head>
 <body>
+<div id="insertDiaryDiv">
+
+
 <!-- side-menu -->
 <section id="mySidenav" class="sidenav">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -461,7 +499,8 @@ function openGrimpan() {
 				<tr>
 					<td>
 						<!-- 그림판 버튼 -->
-						<button type="button" style="display: inline-block;" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button>
+						<!-- <button type="button" style="display: inline-block;" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button> -->
+						<a href="#" onclick="showGrimpan()"><button type="button" style="display: inline-block;"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button></a>
 						
 						<label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px"></label>
 						<input type="file" name="uploadG" id="uploadG" style="display: none;">
@@ -482,8 +521,8 @@ function openGrimpan() {
 				</tr>
 				<tr>
 					<td>
-						<input type="radio" name="secret" value=1>나만보기
-						<input type="radio" name="secret" value=0 checked="checked">전체공개
+						<input type="radio" name="secret" value=1 id="private"><label for="private">나만보기</label>
+						<input type="radio" name="secret" value=0 checked="checked" id="public"><label for="public">전체보기</label>
 					</td>
 				</tr>
 				<tr>
@@ -499,5 +538,35 @@ function openGrimpan() {
 		
 	</div>
 </div>
+</div>
+
+
+<div id="grimpan" style="display: none;">
+	<div data-role="content">
+		<div>
+			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;"></canvas>
+		</div>
+	</div>
+	<script type="text/javascript" src="../resources/js/drawingColor.js?ver=18"></script>
+	
+	<input type="hidden" id="selectColor">
+	<input type="color" id="myColor" onchange="cg_color(this.value)">
+	
+	Size:<input type="range" min="1" max="5" id="Lwidth" value="1" onchange="cg_line(this.value)">
+
+		<button data-inline='true' style='margin:0px auto;' id="delete"><img src="../resources/img/icon/newpage.png" width="15px"></button>
+		<button data-inline='true' style='margin:0px auto;' id="prev"><img src="../resources/img/icon/prev.png" width="15px"></button>
+		<a id="download"><button data-inline='true' style='margin:0px auto;'><img src="../resources/img/icon/download.png" width="15px"></button></a>
+		<a href="#" onclick="showDiary()"><button data-inline='true' style='margin:0px auto;' id="btnOk" ><img src="../resources/img/icon/exit.png" width="15px"></button></a>
+	
+	
+	<img id="myImage">
+
+	<script src="../resources/js/draw.js?ver=4"></script>
+
+</div>
+
+
+
 </body>
 </html>
