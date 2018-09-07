@@ -38,6 +38,9 @@ $(function() {
 	console.log(oldDfile);
 	console.log(oldDphoto);
 	
+	
+	$('#dcontent').text("${d.dcontent}");
+	
 	//이전 폰트설정
 	$("#dcontent").attr({
 		style : "font-family:${d.dfont}; font-size:35px;",
