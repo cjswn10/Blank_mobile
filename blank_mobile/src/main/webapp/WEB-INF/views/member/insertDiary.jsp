@@ -236,15 +236,15 @@ $(function() {
 			  success : function(data) {
 				  var grim = data;
 				  console.log(grim);
-				  $("#uploadG").val(grim);
-				  showImgG();
+				  $("#dfile").val(grim);
+				  showImg();
 			  }
 		});
 		
 	});
 
 	
-	$("#btnShowGrim").click(function() {
+	function showImg(){
 
 
 		var myImage = document.getElementById("img");
@@ -255,10 +255,8 @@ $(function() {
 		});
 		
 		$("#img").attr("src",myImage.src);
-		
 
-		self.close();
-	});
+	}
 	
 	
 	
@@ -432,7 +430,7 @@ function showDiary() {
                      </div>
                   
                   
-                     <div class="ui-block-b"><button id="search" class="ui-icon-search">검색</button></div>
+                     <div class="ui-block-b"><button id="search" class="ui-icon-search" data-ajax="false">검색</button></div>
                
                      <div class="status ui-block-c">
                         <!--  <span id="city"></span> -->
@@ -466,11 +464,11 @@ function showDiary() {
 					<td>
 						<!-- 그림판 버튼 -->
 						<!-- <button type="button" style="display: inline-block;" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button> -->
-						<a href="#" onclick="showGrimpan()" data-ajax="false"><button type="button" data-inline='true'><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button></a>
+						<a href="#" onclick="showGrimpan()" data-ajax="false"><button type="button" data-inline='true' data-ajax="false"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button></a>
 						
 						<!-- 그림첨부 버튼 -->
-						<!-- <label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px"></label> -->
-						<input type="hidden" name="uploadG" id="uploadG" style="display: none;">
+						<!-- <label for="dfile"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px"></label> -->
+						<input type="hidden" name="dfile" id="dfile" style="display: none;">
 						
 						<!-- 사진첨부 버튼 -->
 						<label for="upload" style="display:inline-block;"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label>
@@ -483,7 +481,7 @@ function showDiary() {
 						<!-- 그림 -->
 						<img id="img" width="300" style="display: none">
 						<!-- 글 -->
-						내용<textarea class="form-control" rows="10" cols="30" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; height: 50%;"></textarea>
+						내용<textarea data-autogrow="false" class="form-control" rows="10" cols="30" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; height: 50%;"></textarea>
 					</td>
 				</tr>
 				<tr>

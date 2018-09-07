@@ -342,10 +342,6 @@ public class DiaryController {
 	@RequestMapping(value = "/member/insertDiary.do", method = RequestMethod.POST)
 	public ModelAndView diaryInsertSubmit(DiaryVo d, HttpServletRequest request, HttpSession session) {
 		
-		/*String content = request.getParameter("dcontent");
-		content = content.replace("\r\n", "<br>");
-		d.setDcontent(content);	*/	
-		
 		int mno = (Integer) session.getAttribute("mno");
 		int bno = (Integer) session.getAttribute("bno");
 		int dno = d.getDno();
@@ -353,17 +349,7 @@ public class DiaryController {
 		//d.setDno(no);
 
 		d.setDtype("000");
-
-		if (d.getDfile() != null) {
-			d.setDtype("100");
-		}
-
-		if (d.getDcontent() != null) {
-			d.setDtype(d.getDtype().substring(0, 1) + "1" + d.getDtype().substring(2));
-		}
-
 		d.setDphoto("");
-
 
 		String path = request.getRealPath("resources/upload");
 
@@ -419,6 +405,9 @@ public class DiaryController {
 		map.put("mno", d.getMno());
 		map.put("bno", d.getBno());
 
+
+		
+		System.out.println(d.getDfile());
 		ModelAndView mav = new ModelAndView("redirect:/member/diary.do?mno=" + mno + "&bno=" + bno);
 
 		int re = dao.insertDiary(map);
