@@ -256,14 +256,19 @@ $(function() {
 	
 	
 	$("#download").click(function() {
-		//downloadCanvas(this, 'canvas', 'myGrim.png');
 		var imgUrl = document.getElementById('canvas').toDataURL();
+		var bno = ${bno}
+		var dno = ${dno}
 		
+		/* 그림을 이미지파일로 서버에 저장하고 이름 가져오기*/
 		$.ajax({
 			  url: "makeImgFile.do",
-			  data: { "imgbase64": imgUrl },
-			  success : function() {
-				  alert('선택영역을 서버의 이미지 파일에 저장했습니다');
+			  data: { "imgbase64": imgUrl, "bno": bno, "dno": dno },
+			  success : function(data) {
+				  var grim = data;
+				  console.log(grim);
+				  $("#uploadG").val(grim);
+				  
 			  }
 		});
 		
@@ -272,12 +277,14 @@ $(function() {
 	
 	$("#btnShowGrim").click(function() {
 
+
 		var myImage = document.getElementById("img");
 		myImage.src = canvas.toDataURL();
 		
 		
 		$("#img").val(myImage.src);
 		
+
 		self.close();
 	});
 	
@@ -288,14 +295,6 @@ $(function() {
 	
 });
 
-/*
-//C:\Blank\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Blank\resources\upload2
-// 작업 이미지 로컬 다운로드(.PNG)
-function downloadCanvas(link, canvasId, filename) {
-	link.href = document.getElementById(canvasId).toDataURL();
-	link.download = filename;
-}
-*/
 function showGrimpan() {
 	$("#grimpan").css("display", "block");
 	$("#insertDiaryDiv").css("display", "none");
@@ -316,10 +315,37 @@ function showDiary() {
 <script>
 
 
+	var sel_file;
+	var sel_fileG;	
+	
+	$(document).ready(function() {
+		$("#upload").on("change", showImg)
+	});
+
+	function showImg(e) {
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+
+		filesArr.forEach(function(f) {
+			if (!f.type.match("image.*")) {
+				alert("확장자 오류");
+				return;
+			}
+
+			sel_file = f;
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$("#photo").attr("src", e.target.result);
+			}
+			reader.readAsDataURL(f);
+		});
+	}
+	
 
 	var sel_fileG;
 	
 	<!-- 그림 보여주기 -->
+
 	$(document).ready(function() {
 		$("#uploadG").on("change", showImgG)
 	});
@@ -404,6 +430,7 @@ function showDiary() {
 		<form action="insertDiary.do" method="post" enctype="multipart/form-data" style="width:95%; margin-left: auto; margin-right: auto;">
 			<input type="hidden" name="bno" id="bno" value="${bno }"> 
 			<input type="hidden" name="mno" id="mno" value="${mno }">
+			<input type="hidden" name="dno" id="mno" value="${dno }">
 
 			<table style="width:100%;">
 				<tr>
@@ -507,11 +534,12 @@ function showDiary() {
 						<!-- <button type="button" style="display: inline-block;" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button> -->
 						<a href="#" onclick="showGrimpan()" data-ajax="false"><button type="button" style="display: inline-block;"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button></a>
 						
-						<label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px"></label>
-						<input type="file" name="uploadG" id="uploadG" style="display: none;">
+						<!-- 그림첨부 버튼 -->
+						<!-- <label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px"></label> -->
+						<input type="hidden" name="uploadG" id="uploadG" style="display: none;">
 						
-						<!-- 사진첨부 버튼 -> 그림판 버튼으로 통합-->
-						<!-- <label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label> -->
+						<!-- 사진첨부 버튼 -->
+						<label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label>
 						<input type="file" name="upload" id="upload" style="display: none;">
 					</td>
 				</tr>

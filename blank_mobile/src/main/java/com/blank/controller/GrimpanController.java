@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class GrimpanController {
@@ -21,11 +22,19 @@ public class GrimpanController {
 
 	}
 	
+	
+	/**
+	 * server.xml에 <Connector URIEncoding="utf-8" connectionTimeout="20000" port="8099" protocol="HTTP/1.1" redirectPort="8443" />
+	 *  maxHttpHeaderSize="30000"
+	 * 추가해야함
+	 */
 	@RequestMapping("/member/makeImgFile.do")
-	public void makePngFile(String imgbase64, HttpServletRequest request) throws Exception {
+	@ResponseBody
+	public String makePngFile(String imgbase64, int bno, int dno, HttpServletRequest request) throws Exception {
 		/**
 		 * imgbase64 (imgbase64data:image/png;base64,iVBORw0KGgoAA 로 시작)
 		 */ 
+		String savename = bno + "b" + dno + "grim";
 		try {
 			// create a buffered image
 			BufferedImage image = null;
@@ -39,7 +48,6 @@ public class GrimpanController {
 
 			String filePath = request.getRealPath("/resources/upload2");
 			// write the image to a file
-			String savename = "MyGrim";
 			File outputfile = new File(filePath + "/" + savename + ".png");
 			ImageIO.write(image, "png", outputfile); // 파일생성
 			
@@ -47,10 +55,8 @@ public class GrimpanController {
 			throw e;
 		}
 		
-		/**
-		 * server.xml에 <Connector URIEncoding="utf-8" connectionTimeout="20000" port="8099" protocol="HTTP/1.1" redirectPort="8443" />
-		 *  maxHttpHeaderSize="30000"
-		 * 추가해야함
-		 */
+		
+		return savename;
+		
 	}
 }

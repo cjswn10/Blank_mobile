@@ -202,10 +202,7 @@ user-scalable=no">
 	 
 </script>
 </head>
-<body>	
-	<div data-role="page">
-				
-	<div data-role="content" style="padding: 0">
+<body>		
 		<!-- side-menu -->
 		<section id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -250,6 +247,10 @@ user-scalable=no">
 
 			
 			<!----------- 내용 -------------->		
+
+		<div data-role="page">				
+		<div data-role="content" style="padding: 0">
+
 			<div>
 				<span id="keyword"></span>
 				<div class="iljung-div">
@@ -258,6 +259,7 @@ user-scalable=no">
         		</div>
 				
 			</div>
+
 			<ul data-role="listview" id="list" style="padding: 15px;"></ul>	
 			
 			
