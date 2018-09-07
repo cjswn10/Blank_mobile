@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -362,14 +363,11 @@ public class DiaryController {
 		}
 
 		d.setDphoto("");
-		d.setDfile("");
 
 
 		String path = request.getRealPath("resources/upload");
-		String pathG = request.getRealPath("resources/upload2");
 
 		MultipartFile upload = d.getUpload();
-		MultipartFile uploadG = d.getUploadG();
 
 		String ser_id = request.getParameter("ser_id");
 		Boolean success = false;
@@ -405,38 +403,7 @@ public class DiaryController {
 				e.printStackTrace();
 			}
 		}
-		
-		/************** 占쎈쐻占쎈솊筌뤿슣�굲 ***************/
-		String orgnameG = uploadG.getOriginalFilename();	
-		String dfile = "x";
-		
-		if (orgnameG != null && !orgnameG.equals("")) {
-			String excG = orgnameG.substring(orgnameG.lastIndexOf(".") + 1, orgnameG.length());
-			dfile = bno + "b" + dno + "grim." + excG;
-			File saveFileG = new File(pathG + "/" + dfile);
-			
-			try {
-				upload.transferTo(saveFileG);
-			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println(e.getMessage());
-			}
-
-		}
-		
-		if (!dfile.equals("x")) {
-			d.setDfile(dfile);
-			d.setDtype(d.getDtype().substring(0, 2) + "1");
-			try {
-				byte[] dataG = uploadG.getBytes();
-				FileOutputStream fosG = new FileOutputStream(pathG + "/" + dfile);
-				fosG.write(dataG);
-				fosG.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+	
 
 		Map map = new HashMap();
 		map.put("dno", d.getDno());

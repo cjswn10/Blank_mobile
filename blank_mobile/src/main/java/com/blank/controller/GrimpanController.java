@@ -47,7 +47,6 @@ public class GrimpanController {
 			bis.close();
 
 			String filePath = request.getRealPath("/resources/upload2");
-			
 			// write the image to a file
 			File outputfile = new File(filePath + "/" + savename + ".png");
 			ImageIO.write(image, "png", outputfile); // 파일생성

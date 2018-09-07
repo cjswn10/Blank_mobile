@@ -274,20 +274,22 @@ $(function() {
 		
 	});
 
-	$("#btnOk").click(function() {
-
-
-function openGrimpan() {
 	
-	var popupX = (window.screen.width / 2) - (600 / 2); 
-	// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+	$("#btnShowGrim").click(function() {
 
-		var myImage = document.getElementById("myImage");
+
+		var myImage = document.getElementById("img");
 		myImage.src = canvas.toDataURL();
-
+		
+		
+		$("#img").val(myImage.src);
+		
 
 		self.close();
 	});
+	
+	
+	
 	
 	//$("#insertDiaryDiv").find("*").attr("data-enhance", "false");
 	
@@ -311,6 +313,7 @@ function showDiary() {
 
 <!-- 사진 보여주기 -->
 <script>
+
 
 	var sel_file;
 	var sel_fileG;	
@@ -585,7 +588,7 @@ function showDiary() {
 
 		<button data-inline='true' style='margin:0px auto;' id="delete"><img src="../resources/img/icon/newpage.png" width="15px"></button>
 		<button data-inline='true' style='margin:0px auto;' id="prev"><img src="../resources/img/icon/prev.png" width="15px"></button>
-		<a id="download"><button data-inline='true' style='margin:0px auto;'><img src="../resources/img/icon/download.png" width="15px"></button></a>
+		<a id="download"><button data-inline='true' style='margin:0px auto;' id="btnShowGrim"><img src="../resources/img/icon/download.png" width="15px"></button></a>
 		<a href="#" onclick="showDiary()" data-ajax="false"><button data-inline='true' style='margin:0px auto;' id="btnOk"><img src="../resources/img/icon/exit.png" width="15px"></button></a>
 	
 	
