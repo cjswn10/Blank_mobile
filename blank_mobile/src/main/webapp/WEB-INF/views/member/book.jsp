@@ -77,7 +77,12 @@
 		margin-left: 10%; 
 		margin-right: 10%; 
 	}
+	@media screen and (min-width: 576px) {
+		#main_container > div {
+			margin-bottom: 8%;
+		}
 	
+	}
 	
 	/* 일기장 제목 */
 	.btitle
@@ -116,7 +121,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=16">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=17">
 <script type="text/javascript" src="../resources/js/menu.js?ver=7" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
