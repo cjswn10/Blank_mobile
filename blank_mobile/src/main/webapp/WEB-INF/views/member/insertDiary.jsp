@@ -25,10 +25,10 @@
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <style type="text/css">
 
-table label {
-	display: inline-block;
-	width: 15%;
+.ui-page {
+  background-color: white;
 }
+
 </style>
 
 <script type="text/javascript">
@@ -42,38 +42,7 @@ $(function() {
 
 	$("#weather").hide()	
 	$("#tmef_img").hide()
-	/*
-	var cityName = location.search.substr(1,1)
-	
-	if(cityName == '' || cityName == 'd')
-	{
-		$("#tmef_img").hide()
-		$("#city").hide()
-		$("#dweather").val("")
-	}	
-	else if($("[name='tmef'] > v").html().substring(1,2) == 's')
-	{
-		$("#tmef_img").show()
-		$("#dweather").val($("[name='tmef2'] > v").html())
-		$("#city").html($("#citys").val()+"의 날씨")
-		$("#img").css({
-			display: "inline-block"
-		});
-		
-		$("#img").attr("src", $("#img_a").html());
-	}	
-	else
-	{
-		$("#tmef_img").show()
-		$("#dweather").val($("[name='tmef'] > v").html())
-		$("#city").html($("#citys").val()+"의 날씨")
-		$("#img").css({
-			display: "inline-block"
-		});
-		
-		$("#img").attr("src", $("#img_a").html());
-	}		
-	*/
+
 	var today = $("#today_date").val();
 	var today_year = parseInt(today.substring(0,4));
 	var today_month = parseInt(today.substring(5,6));
@@ -268,7 +237,7 @@ $(function() {
 				  var grim = data;
 				  console.log(grim);
 				  $("#uploadG").val(grim);
-				  
+				  showImgG();
 			  }
 		});
 		
@@ -281,8 +250,11 @@ $(function() {
 		var myImage = document.getElementById("img");
 		myImage.src = canvas.toDataURL();
 		
+		$("#img").css({
+			display: "inline-block"
+		});
 		
-		$("#img").val(myImage.src);
+		$("#img").attr("src",myImage.src);
 		
 
 		self.close();
@@ -340,39 +312,9 @@ function showDiary() {
 			reader.readAsDataURL(f);
 		});
 	}
-	
 
-	var sel_fileG;
-	
-	<!-- 그림 보여주기 -->
 
-	$(document).ready(function() {
-		$("#uploadG").on("change", showImgG)
-	});
 
-	function showImgG(e) {
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		
-		filesArr.forEach(function(f) {
-			if (!f.type.match("image.*")) {
-				alert("확장자 오류");
-				return;
-			}
-
-			sel_fileG = f;
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$("#img").css({
-					display: "inline-block"
-				});
-				
-				$("#img").attr("src", e.target.result);
-				
-			}
-			reader.readAsDataURL(f);
-		});
-	}
 </script>
 
 </head>
@@ -448,65 +390,57 @@ function showDiary() {
 				</tr>
 				<tr>
 					<td>
-						<label for="dweather">날&nbsp;&nbsp;&nbsp;씨</label>
-						<input type="text" name="dweather" id="dweather" style="display:none;">
-						
-						<div class="today_weather" style="display: inline-block; width:65%"">
-						<!-- 
-						<ul id="test">
-							<img id="weather_icon" src="../resources/img/weather.png" width="30" height="30">
-							<li id="today">날씨가 궁금하신가요?</li>
-							<li id="location">지역과 날씨를 선택 후 검색버튼을 눌러주세요.</li>
-						</ul>
-						 -->
-						<div class="city_weather">
-							<select id="citySelect" style="width:70%">
-									<option>지역</option>
-									<option>서울</option>
-									<option>인천</option>
-									<option>수원</option>
-									<option>독도</option>
-									<option>춘천</option>
-									<option>백령도</option>
-									<option>강릉</option>
-									<option>울진</option>
-									<option>청주</option>
-									<option>안동</option>
-									<option>대전</option>
-									<option>홍성</option>
-									<option>전주</option>
-									<option>대구</option>
-									<option>울산</option>
-									<option>포항</option>
-									<option>부산</option>
-									<option>창원</option>
-									<option>광주</option>
-									<option>목포</option>
-									<option>여수</option>
-									<option>흑산도</option>
-									<option>제주</option>
-								</select>
-								<input type="hidden" name="cityName" id="cityName" >
-								<input type="hidden" id="day">
-								<input type="hidden" name="date" id="date">
-								<input type="hidden" id="today_date" value="${todays }">
-								<input type="hidden" name="year" id="year">
-								<input type="hidden" name="month" id="month">
-								<input type="hidden" name="select_day" id="select_day">
-								<span id="weather"> ${weather } </span>
-								<button id="search" type="button">검색</button>
-						</div>
-						
-						
-					</div>
+					<label for="dweather">날&nbsp;&nbsp;&nbsp;씨</label>
+                  <input type="text" name="dweather" id="dweather" style="display:none;">
+                  
+                  <div class="ui-grid-b">
+                     <div class="city_weather ui-block-a">
+                        <select id="citySelect">
+                           <option>지역</option>
+                           <option>서울</option>
+                           <option>인천</option>
+                           <option>수원</option>
+                           <option>독도</option>
+                           <option>춘천</option>
+                           <option>백령도</option>
+                           <option>강릉</option>
+                           <option>울진</option>
+                           <option>청주</option>
+                           <option>안동</option>
+                           <option>대전</option>
+                           <option>홍성</option>
+                           <option>전주</option>
+                           <option>대구</option>
+                           <option>울산</option>
+                           <option>포항</option>
+                           <option>부산</option>
+                           <option>창원</option>
+                           <option>광주</option>
+                           <option>목포</option>
+                           <option>여수</option>
+                           <option>흑산도</option>
+                           <option>제주</option>
+                        </select>
+                        <input type="hidden" name="cityName" id="cityName" >
+                        <input type="hidden" id="day">
+                        <input type="hidden" name="date" id="date">
+                        <input type="hidden" id="today_date" value="${todays }">
+                        <input type="hidden" name="year" id="year">
+                        <input type="hidden" name="month" id="month">
+                        <input type="hidden" name="select_day" id="select_day">
+                        <span id="weather"> ${weather } </span>
+                     </div>
+                  
+                  
+                     <div class="ui-block-b"><button id="search" class="ui-icon-search">검색</button></div>
+               
+                     <div class="status ui-block-c">
+                        <!--  <span id="city"></span> -->
+                        <img id="tmef_img" src="" width="30px" height="30px">
+                        <span id="tmef_info"></span>
+                     </div>
+                  </div>
 			
-					<div class="status" style="display: inline-block;">
-						<!--  <span id="city"></span> -->
-						<img id="tmef_img" src="" width="30px" height="30px">
-						<span id="tmef_info"></span>
-					</div>
-						
-						
 					</td>
 				</tr>
 				<tr>
@@ -532,14 +466,14 @@ function showDiary() {
 					<td>
 						<!-- 그림판 버튼 -->
 						<!-- <button type="button" style="display: inline-block;" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button> -->
-						<a href="#" onclick="showGrimpan()" data-ajax="false"><button type="button" style="display: inline-block;"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button></a>
+						<a href="#" onclick="showGrimpan()" data-ajax="false"><button type="button" data-inline='true'><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button></a>
 						
 						<!-- 그림첨부 버튼 -->
 						<!-- <label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px"></label> -->
 						<input type="hidden" name="uploadG" id="uploadG" style="display: none;">
 						
 						<!-- 사진첨부 버튼 -->
-						<label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label>
+						<label for="upload" style="display:inline-block;"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label>
 						<input type="file" name="upload" id="upload" style="display: none;">
 					</td>
 				</tr>
@@ -549,13 +483,15 @@ function showDiary() {
 						<!-- 그림 -->
 						<img id="img" width="300" style="display: none">
 						<!-- 글 -->
-						<textarea class="form-control" rows="8" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; width:100%; height:50%;">${dcontent }</textarea>
+						내용<textarea class="form-control" rows="10" cols="30" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; height: 50%;"></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type="radio" name="secret" value=1 id="private"><label for="private">나만보기</label>
-						<input type="radio" name="secret" value=0 checked="checked" id="public"><label for="public">전체보기</label>
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<input type="radio" name="secret" value=1 id="private"><label for="private">나만보기</label>
+							<input type="radio" name="secret" value=0 checked="checked" id="public"><label for="public">전체보기</label>
+						</fieldset>
 					</td>
 				</tr>
 				<tr>
