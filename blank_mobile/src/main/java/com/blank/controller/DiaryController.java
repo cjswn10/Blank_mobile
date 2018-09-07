@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,7 +35,7 @@ public class DiaryController {
 		this.dao = dao;
 	}
 
-	// �뜝�떬湲�源띿삕�뜝�룞�삕??
+	// 占쎈쐻占쎈뼩疫뀐옙繹먮씮�굲占쎈쐻占쎈짗占쎌굲??
 	@RequestMapping("/member/mainDetailDiary.do")
 	public ModelAndView mainDetailDiary(int dno) {
 		Map map = new HashMap();
@@ -44,7 +45,7 @@ public class DiaryController {
 		return mav;
 	}
 
-	// �뜝�떬湲�源띿삕�뜝�룞�삕??
+	// 占쎈쐻占쎈뼩疫뀐옙繹먮씮�굲占쎈쐻占쎈짗占쎌굲??
 	@RequestMapping("/member/detailFavoriteDiary.do")
 	public ModelAndView detailFavoriteDiary(int dno) {
 		Map map = new HashMap();
@@ -353,14 +354,11 @@ public class DiaryController {
 		}
 
 		d.setDphoto("");
-		d.setDfile("");
 
 
 		String path = request.getRealPath("resources/upload");
-		String pathG = request.getRealPath("resources/upload2");
 
 		MultipartFile upload = d.getUpload();
-		MultipartFile uploadG = d.getUploadG();
 
 		String ser_id = request.getParameter("ser_id");
 		Boolean success = false;
@@ -397,37 +395,6 @@ public class DiaryController {
 			}
 		}
 		
-		/************** �뜝�뙎紐뚯삕 ***************/
-		String orgnameG = uploadG.getOriginalFilename();	
-		String dfile = "x";
-		
-		if (orgnameG != null && !orgnameG.equals("")) {
-			String excG = orgnameG.substring(orgnameG.lastIndexOf(".") + 1, orgnameG.length());
-			dfile = bno + "b" + no + "grim." + excG;
-			File saveFileG = new File(pathG + "/" + dfile);
-			
-			try {
-				upload.transferTo(saveFileG);
-			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println(e.getMessage());
-			}
-
-		}
-		
-		if (!dfile.equals("x")) {
-			d.setDfile(dfile);
-			d.setDtype(d.getDtype().substring(0, 2) + "1");
-			try {
-				byte[] dataG = uploadG.getBytes();
-				FileOutputStream fosG = new FileOutputStream(pathG + "/" + dfile);
-				fosG.write(dataG);
-				fosG.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 
 		Map map = new HashMap();
 		map.put("dno", d.getDno());
@@ -481,7 +448,7 @@ public class DiaryController {
 			code.addRCode("keyword = matrix(sql$DCONTENT)");
 			code.addRCode("write(keyword ,'keyword.txt')");
 			code.addRCode("data = readLines('keyword.txt')");
-			code.addRCode("data <- gsub('[ㄱ-ㅎ]','', data)");
+			code.addRCode("data <- gsub('[�꽦-�뀕]','', data)");
 			code.addRCode("data <- gsub('[0-9]','', data)");
 			//code.addRCode("data <- gsub('.','', data)");
 			code.addRCode("data1 <- sapply(data,extractNoun,USE.NAMES=F)");

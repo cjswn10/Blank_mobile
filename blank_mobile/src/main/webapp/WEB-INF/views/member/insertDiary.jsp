@@ -269,13 +269,20 @@ $(function() {
 		
 	});
 
-	$("#btnOk").click(function() {
+	
+	$("#btnShowGrim").click(function() {
 
-		var myImage = document.getElementById("myImage");
+		var myImage = document.getElementById("img");
 		myImage.src = canvas.toDataURL();
-
+		
+		
+		$("#img").val(myImage.src);
+		
 		self.close();
 	});
+	
+	
+	
 	
 	//$("#insertDiaryDiv").find("*").attr("data-enhance", "false");
 	
@@ -307,6 +314,9 @@ function showDiary() {
 
 <!-- 사진 보여주기 -->
 <script>
+
+
+
 	var sel_fileG;
 	
 	<!-- 그림 보여주기 -->
@@ -550,7 +560,7 @@ function showDiary() {
 
 		<button data-inline='true' style='margin:0px auto;' id="delete"><img src="../resources/img/icon/newpage.png" width="15px"></button>
 		<button data-inline='true' style='margin:0px auto;' id="prev"><img src="../resources/img/icon/prev.png" width="15px"></button>
-		<a id="download"><button data-inline='true' style='margin:0px auto;'><img src="../resources/img/icon/download.png" width="15px"></button></a>
+		<a id="download"><button data-inline='true' style='margin:0px auto;' id="btnShowGrim"><img src="../resources/img/icon/download.png" width="15px"></button></a>
 		<a href="#" onclick="showDiary()" data-ajax="false"><button data-inline='true' style='margin:0px auto;' id="btnOk"><img src="../resources/img/icon/exit.png" width="15px"></button></a>
 	
 	

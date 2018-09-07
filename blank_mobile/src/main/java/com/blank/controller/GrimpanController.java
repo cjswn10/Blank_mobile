@@ -38,7 +38,6 @@ public class GrimpanController {
 			bis.close();
 
 			String filePath = request.getRealPath("/resources/upload2");
-			
 			// write the image to a file
 			String savename = "MyGrim";
 			File outputfile = new File(filePath + "/" + savename + ".png");
