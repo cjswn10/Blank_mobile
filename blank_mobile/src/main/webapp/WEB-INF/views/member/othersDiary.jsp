@@ -15,6 +15,8 @@ user-scalable=no">
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
+.ul-link { color:#242424; font-weight:200; }
+
 .ddate{	
 	text-align: right;	
 }
@@ -82,6 +84,7 @@ user-scalable=no">
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -93,6 +96,8 @@ user-scalable=no">
 <script type="text/javascript">
 
 	$(function () {				
+		
+		
 		
 		setTimeout(function () {
 			
@@ -115,9 +120,10 @@ user-scalable=no">
 		$.ajax({
 			url: "othersDiaryList.do",	
 			data: {"fmno":fmno},
-			success:function(data){				
+			success:function(data){	
 				var list = eval("("+data+")");
 				$.each(list, function(idx, d) {
+					 
 					var li = $('<li data-icon="false"></li>');
 					$(li).attr("idx",idx);			
 					var a = $('<a data-ajax="false" href="detailFavoriteDiary.do?dno='+d.dno+'"></a>')
@@ -250,7 +256,7 @@ user-scalable=no">
 			<nav class="clearfix" style="margin-bottom: 20px">
 				<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 			    <a data-ajax="false" href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
-			    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
+			    <span id="btnn" style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
 			    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
 			    <ul id="main_menu">
 			        <li><a href="book.do" data-ajax="false">DIARY</a></li>

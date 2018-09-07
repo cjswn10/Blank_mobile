@@ -125,10 +125,6 @@ public class DiaryController {
 
 	@RequestMapping(value = "/member/updateDiary.do", method = RequestMethod.POST)
 	public ModelAndView diaryUpdateSubmit(DiaryVo d, HttpSession session, HttpServletRequest request) {
-
-		String content = request.getParameter("dcontent");
-		content = content.replace("\r\n", "<br>");
-		d.setDcontent(content);
 		
 		int no = d.getDno();
 
@@ -155,14 +151,19 @@ public class DiaryController {
 
 		d.setDphoto(oldDphoto);
 		d.setDfile(oldDfile);
-
+		
+		String content = dao.detailDiary(map).getDcontent();
+		content = content.replace("<br>", "\r\n");
+		d.setDcontent(content);
+		
 		String path = request.getRealPath("resources/upload");
 		String pathG = request.getRealPath("resources/upload2");
 
 		MultipartFile upload = d.getUpload();
 		MultipartFile uploadG = d.getUploadG();
 
-
+			
+		
 		String orgname = upload.getOriginalFilename();
 		String dphoto = "x";
 
@@ -254,6 +255,10 @@ public class DiaryController {
 		map.put("dno", dno);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("d", dao.detailDiary(map));
+		
+		String content = dao.detailDiary(map).getDcontent();
+		content = content.replace("\r\n", "<br>");			
+		mav.addObject("dcontent2", content);
 		return mav;
 	}
 	@RequestMapping(value = "/member/weather4.do",produces="text/plain;charset=utf-8")
@@ -332,9 +337,9 @@ public class DiaryController {
 	@RequestMapping(value = "/member/insertDiary.do", method = RequestMethod.POST)
 	public ModelAndView diaryInsertSubmit(DiaryVo d, HttpServletRequest request, HttpSession session) {
 		
-		String content = request.getParameter("dcontent");
+		/*String content = request.getParameter("dcontent");
 		content = content.replace("\r\n", "<br>");
-		d.setDcontent(content);		
+		d.setDcontent(content);	*/	
 		
 		int mno = (Integer) session.getAttribute("mno");
 		int bno = (Integer) session.getAttribute("bno");
