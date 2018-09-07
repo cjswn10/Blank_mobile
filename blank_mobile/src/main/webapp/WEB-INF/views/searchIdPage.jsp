@@ -95,7 +95,7 @@ user-scalable=0">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		
+		 
 		$("#phone").keyup(function() {
 			var textinput = $("#phone").val();
 			textinput = textinput.replace(/[^0-9]/g, '');
@@ -127,7 +127,7 @@ user-scalable=0">
 						var re = confirm("고객님의 아이디는 "+data+" 입니다.")
 						if(re)
 						{
-							location.href="search.do";
+							location.href="login.do";
 						}
 						else
 						{
@@ -165,7 +165,7 @@ user-scalable=0">
 				<tr>
 					<td align="center">휴대전화</td>
 					<td>
-						<input type="text" name="phone" id="phone" maxlength="13" placeholder="휴대전화" style="text-align: center;" >
+						<input type="tel" name="phone" id="phone" maxlength="13" placeholder="휴대전화" style="text-align: center;" >
 					</td>
 				</tr>
 			</table>

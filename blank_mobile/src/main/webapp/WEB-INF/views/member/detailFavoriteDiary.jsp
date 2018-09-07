@@ -34,6 +34,7 @@
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=2">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 	$(function() {
 		
@@ -59,7 +60,7 @@
 	<a href="qNa.do">Contact</a>
 	<br>
 	<div class="side_icon_set">
-		<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+		<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
 		<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 	</div>
 	
@@ -105,10 +106,10 @@
 		</div>
 		
 		<c:if test="${not empty d.dfile}">	
-			<img width="500" height="500" src="../resources/upload2/${d.dfile }"><br>
+			<img width="100%" height="100%" src="../resources/upload2/${d.dfile }"><br>
 		</c:if>
 		<c:if test="${not empty d.dphoto}">	
-			<img width="500" height="500" src="../resources/upload/${d.dphoto }"><br>
+			<img width="100%" height="100%" src="../resources/upload/${d.dphoto }"><br>
 		</c:if>
 		<div class="row">
 		  	<div class="col-md-2" id="diary">내용:</div>

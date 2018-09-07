@@ -42,6 +42,6 @@
 		SELECT *
 		FROM diary
 		WHERE mno=#{mno} AND bno=#{bno}
-		ORDER BY ddate DESC
+		ORDER BY ddate DESC, dno DESC
 	</select>
 </mapper>

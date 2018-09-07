@@ -33,6 +33,17 @@ ul{
 {
 	font-size: 30px;
 }
+#list
+{
+	width: 100%;
+	height: 100%;
+}
+
+@media screen and (min-width: 576px) {	
+	#list {
+	    margin-left: 40%;
+	}
+}
 
 </style>
 
@@ -43,11 +54,14 @@ ul{
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<link rel="stylesheet" href="../resources/css/blank.css">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=2">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 	
 	$(function() {		
+		
+		
 		
 		setTimeout(function () {
 			
@@ -99,7 +113,7 @@ ul{
 			<a href="qNa.do">Contact</a>
 			<br>
 			<div class="side_icon_set">
-				<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+				<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
 				<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 			</div>
 		</section>
@@ -121,7 +135,7 @@ ul{
 				<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 			    <a data-ajax="false" href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 			    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
-			    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
+			   	<span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
 			    <ul id="main_menu">
 			        <li><a href="book.do" data-ajax="false">DIARY</a></li>
 			        <li><a href="favorite.do" data-ajax="false">FAVORITES</a></li>
@@ -129,10 +143,9 @@ ul{
 			    </ul>
 			</nav>		
 		
+			<h2># 팔로잉</h2><br>
 			<ul data-role="listview" id="list"></ul>
-		</div>
-			
-		<!--------- 푸터 ---------->
+			<!--------- 푸터 ---------->
 			<div class="footer">
 				<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
 				<ul class="list-inline">
@@ -158,6 +171,7 @@ ul{
 			       </li>
 			    </ul>
 			</div>	
+		</div>	
 		</div>
 	</div>
 </body>

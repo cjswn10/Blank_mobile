@@ -53,6 +53,27 @@ user-scalable=no">
 	font-size: 50px;
 	position: relative;
 }
+.iljung-div{
+    display:flex;
+    flex-direction:row;
+    justify-content : space-around;
+    width:100%;
+    text-align: right;
+  	margin-bottom: 10px;
+}
+.iljung-date-div {
+	margin-left: auto;
+    margin-right: 2px;
+
+}
+.iljung-date-div .btn{
+    border:1px solid #EFE7E6;
+    background-color: #EFE7E6;
+    color:#662408;
+    font-family: 'Nanum Pen Script', serif;
+	margin-right: 10px;    
+}
+
 
 </style>
 <title>빈칸을 채우다.</title>
@@ -64,11 +85,12 @@ user-scalable=no">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=1">
+<link rel="stylesheet" href="../resources/css/blank.css">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 	 $(function () {	 
-		 
+				
 		setTimeout(function () {
 			
 			location.href = "logOut.do?id=${id}&autoOut=out";
@@ -93,6 +115,31 @@ user-scalable=no">
 					})
 				}
 			})
+		};
+		
+		var mykeyword = function()
+		{
+			 $.ajax({
+					url:"myKeyword.do",
+					data:{"bno":bno,"mno":mno},
+					success:function(data)
+					{
+						$("#keyword").html(data);
+						$("#keyword").hide();
+						//$("#hash").html("#"+$("[name='data7'] > v").html()+"   #"+$("[name='data8'] > v").html()+"   #"+$("[name='data9'] > v").html())
+						
+						var p1 = $("<p class='btn btn1'></p>").html("#"+$("[name='data7'] > v").html());
+						var p2 = $("<p class='btn btn1'></p>").html("#"+$("[name='data8'] > v").html());
+						var p3 = $("<p class='btn btn1'></p>").html("#"+$("[name='data9'] > v").html());
+						
+						$(".iljung-date-div").html("");
+						$(".iljung-date-div").append(p1, p2, p3);
+						
+						//<div class="iljung-date-div"><p class="btn btn1" rel="div2">
+						
+						
+					}
+				})
 		};
 		
 		$(".btitle").change(function(){
@@ -150,6 +197,7 @@ user-scalable=no">
 		};
 		selectBook();
 		listDiary();
+		mykeyword();
 	});
 	 
 </script>
@@ -160,18 +208,18 @@ user-scalable=no">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 			<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 			<h5>회원정보</h5>
-			<a href="pwdCheck.do?id=${id }">Edit</a>
-			<a href="logOut.do?id=${id }">logout</a>
+			<a data-ajax="false" href="pwdCheck.do?id=${id }">Edit</a>
+			<a data-ajax="false" href="logOut.do?id=${id }">logout</a>
 			<br>
 			<h5>고객센터</h5>
-			<a href="qNa.do">Contact</a>
+			<a href="qNa.do" data-ajax="false">Contact</a>
 			<br>
 			<div class="side_icon_set">
-				<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+				<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
 				<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 			</div>
 		</section>
-
+		
 		<div id="wrapper">	
 	
 			<div class="mainSearchId" id="mainSearchId">
@@ -185,7 +233,7 @@ user-scalable=no">
 			</div>
 			
 			<!------ main-menu ------>
-			<nav class="clearfix" style="margin-bottom: 20px">
+			<nav class="clearfix" style="margin-bottom: 10px">
 				<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
 			    <a data-ajax="false" href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 			    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
@@ -193,14 +241,25 @@ user-scalable=no">
 			    <ul id="main_menu">
 			        <li><a href="book.do" data-ajax="false">DIARY</a></li>
 			        <li><a href="favorite.do" data-ajax="false">FAVORITES</a></li>
-			        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
+			        <li style="border: none"><a href="myPage.do" data-ajax="false">MYPAGE</a></li>
 			    </ul>
 			</nav>
 
 			
 			<!----------- 내용 -------------->		
+
 		<div data-role="page">				
 		<div data-role="content" style="padding: 0">
+
+			<div>
+				<span id="keyword"></span>
+				<div class="iljung-div">
+                    <div class="iljung-date-div"><p class="btn btn1" rel="div2"><span id="hash">많이 쓰는 단어 분석중...</span></p></div>
+                    
+        		</div>
+				
+			</div>
+
 			<ul data-role="listview" id="list" style="padding: 15px;"></ul>	
 			
 			
@@ -234,7 +293,7 @@ user-scalable=no">
 	</div>
 			
 		<div data-role="footer" data-position="fixed">
-			<div onclick="location.href='insertDiary.do'" class="insertDiary" style="position:fixed; right: 0; bottom: 0; cursor: pointer;">일기 등록</div>
+			<div onclick="location.href='insertDiary.do'" data-ajax="false" class="insertDiary" style="position:fixed; right: 0; bottom: 0; cursor: pointer;">일기 등록</div>
 		</div>
 	</div>			
 </body>

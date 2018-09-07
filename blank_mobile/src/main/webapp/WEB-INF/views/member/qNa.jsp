@@ -22,6 +22,7 @@
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=2">
 <script type="text/javascript" src="../resources/js/menu.js?ver=2" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 	$(function() {
 		setTimeout(function () {
@@ -46,7 +47,7 @@
 	<a href="qNa.do">Contact</a>
 	<br>
 	<div class="side_icon_set">
-		<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+		<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
 		<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 	</div>
 	

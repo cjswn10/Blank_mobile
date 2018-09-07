@@ -87,7 +87,7 @@
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=1">
 <script type="text/javascript" src="../resources/js/menu.js?ver=6" ></script>
-
+<script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 	$(function() {
 
@@ -149,7 +149,7 @@
 	<a href="qNa.do">Contact</a>
 	<br>
 	<div class="side_icon_set">
-		<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+		<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
 		<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 	</div>
 	
@@ -193,33 +193,35 @@
 			<input class="btn btn-default" id="false" type="reset" value="취소">
 		</form>
 	</div>
-</div>	
 
-<!-- 푸터 -->
-<footer class="footer">
-	<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
-	<ul class="list-inline">
-       <li>
-           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
-           <br><h5>김영호</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
-           <br><h5>변성인</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
-           <br><h5>성민규</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
-           <br><h5>임연주</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
-           <br><h5>차건우</h5>
-       </li>
-    </ul>
-</footer>
+
+	<!-- 푸터 -->
+	<footer class="footer">
+		<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+		<ul class="list-inline">
+	       <li>
+	           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+	           <br><h5>김영호</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+	           <br><h5>변성인</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+	           <br><h5>성민규</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+	           <br><h5>임연주</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+	           <br><h5>차건우</h5>
+	       </li>
+	    </ul>
+	</footer>
+
+</div>	
 </body>
 </html>

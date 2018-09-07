@@ -92,6 +92,7 @@ user-scalable=no">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <link rel="stylesheet" href="../resources/css/blank.css">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 
 	$(function () {				
@@ -227,14 +228,14 @@ user-scalable=no">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 			<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 			<h5>회원정보</h5>
-			<a href="pwdCheck.do?id=${id }">Edit</a>
-			<a href="logOut.do?id=${id }">logout</a>
+			<a href="pwdCheck.do?id=${id }" data-ajax="false">Edit</a>
+			<a href="logOut.do?id=${id }" data-ajax="false">logout</a>
 			<br>
 			<h5>고객센터</h5>
-			<a href="qNa.do">Contact</a>
+			<a href="qNa.do" data-ajax="false">Contact</a>
 			<br>
 			<div class="side_icon_set">
-				<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+				<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
 				<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 			</div>
 		</section>
@@ -260,7 +261,7 @@ user-scalable=no">
 			    <ul id="main_menu">
 			        <li><a href="book.do" data-ajax="false">DIARY</a></li>
 			        <li><a href="favorite.do" data-ajax="false">FAVORITES</a></li>
-			        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
+			        <li style="border: none"><a href="myPage.do" data-ajax="false">MYPAGE</a></li>
 			    </ul>
 			</nav>
 					

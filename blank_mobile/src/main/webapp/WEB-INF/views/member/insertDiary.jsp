@@ -13,68 +13,22 @@
 		
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <!-- 웹폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gaegu|Gamja+Flower|Jua|Nanum+Brush+Script|Nanum+Gothic+Coding|Nanum+Myeongjo|Nanum+Pen+Script|Source+Sans+Pro|Stylish|Sunflower:300" rel="stylesheet">
 <link rel="stylesheet" href="../resources/css/blank.css">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
-
+<script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <style type="text/css">
-	.today_weather
-	{
-		position: relative;
-		top: -450px;
-		width:400px;
-		left: 650px;
-	}
-	.city_weather
-	{
-		position: relative;
-		left: 120px;
-		
-	}
-	#citySelect
-	{
-		width: 70px;
-		height: 26px;
-	}
-	#today
-	{
-		font-size: 20px;
-		position: relative;
-		left: 40px;
-	}
-	#location
-	{
-		font-size: 10px;
-		position: relative;
-		left: 30px;
-	}
-	#tmef_img
-	{
-		position: relative;
-		left: 30px;
-	}
-	#test > li
-	{
-		list-style: none;
-	}
-	#weather_icon
-	{
-		position: relative;
-		top: 30px;
-		left: 0px;
-	}
-	.status
-	{
-		position: relative;
-		font-size:20px;
-		left: 120px;
-	}
 
+table label {
+	display: inline-block;
+	width: 15%;
+}
 </style>
 
 <script type="text/javascript">
@@ -85,9 +39,10 @@ $(function() {
 		location.href = "logOut.do?id=${id}&autoOut=out";
 		
 	},10800*1000);
-	
+
 	$("#weather").hide()	
-	
+	$("#tmef_img").hide()
+	/*
 	var cityName = location.search.substr(1,1)
 	
 	if(cityName == '' || cityName == 'd')
@@ -101,15 +56,24 @@ $(function() {
 		$("#tmef_img").show()
 		$("#dweather").val($("[name='tmef2'] > v").html())
 		$("#city").html($("#citys").val()+"의 날씨")
+		$("#img").css({
+			display: "inline-block"
+		});
+		
+		$("#img").attr("src", $("#img_a").html());
 	}	
 	else
 	{
 		$("#tmef_img").show()
 		$("#dweather").val($("[name='tmef'] > v").html())
 		$("#city").html($("#citys").val()+"의 날씨")
+		$("#img").css({
+			display: "inline-block"
+		});
 		
+		$("#img").attr("src", $("#img_a").html());
 	}		
-	
+	*/
 	var today = $("#today_date").val();
 	var today_year = parseInt(today.substring(0,4));
 	var today_month = parseInt(today.substring(5,6));
@@ -130,11 +94,11 @@ $(function() {
 	var month = "";
 	var select_day = "";
 	var day = "";
-	
+
 	
 	$("#ddate").change(function(){
 		
-		var ddate = $(this).val()
+		var ddate = $(this).val();
 		
 		year = parseInt(ddate.substring(0,4));
 		month = ddate.substring(5,7);
@@ -146,8 +110,13 @@ $(function() {
 			day += arr[i]
 		}
 		
-		select_day = parseInt(day)
+		if(day.length > 8)
+		{
+			day = day.substring(8,day.length)
+		}
 		
+		select_day = parseInt(day)
+
 		months = parseInt(ddate.substring(5,7));
 		
 		$("#year").val(year)
@@ -164,50 +133,17 @@ $(function() {
 			$("#date").val(date)
 		}
 			
-		
 	})
-
-	var area = "";
-	var cityName = $("#citys").val();
 	
-	if(cityName == '서울'){area = "09680";}
-	else if(cityName == '인천'){area = "11200";}
-	else if(cityName == '수원'){area = "02111";}
-	//else if(cityName == '파주'){area = "02480";}
-	else if(cityName == '춘천'){area = "01110";}
-	else if(cityName == '백령도'){area = "11720";}
-	else if(cityName == '강릉'){area = "01150";}
-	else if(cityName == '독도'){area = "04940";}
-	//else if(cityName == '속초'){area = "01210";}
-	else if(cityName == '청주'){area = "16111";}
-	else if(cityName == '안동'){area = "04170";}
-	else if(cityName == '대전'){area = "07110";}
-	else if(cityName == '홍성'){area = "15800";}
-	else if(cityName == '전주'){area = "13113";}
-	else if(cityName == '대구'){area = "06290";}
-	else if(cityName == '울산'){area = "10140";}
-	else if(cityName == '포항'){area = "04111";}
-	else if(cityName == '울진'){area = "04930";}
-	else if(cityName == '부산'){area = "08710";}
-	else if(cityName == '창원'){area = "03123";}
-	else if(cityName == '광주'){area = "05200";}
-	else if(cityName == '목포'){area = "12110";}
-	else if(cityName == '여수'){area = "12130";}
-	else if(cityName == '흑산도'){area = "12910";}
-	else if(cityName == '제주'){area = "14100";}
-	else
-	{
-		area = "09680";
-	}
+		$("#citySelect").change(function(){
+		
+		$("#cityName").val($("#citySelect").val())
 	
-	$.ajax({url:"http://203.236.209.108:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
-	
-	$.ajax({url:"http://203.236.209.108:4997/weather2.do",success:function(data){}})
-	
-	$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
+	})
 	
 	$("#search").click(function() {	
 		
+		$("#select_day").val(select_day);
 		
 		if($("#date").val() == '')
 		{
@@ -219,37 +155,91 @@ $(function() {
 		}
 		else if(select_day > today_now)
 		{
-			var re = confirm("지난 날씨의 달력만 볼수 있습니다.")
-			if(re)
-			{
-				location.href="insertDiary.do?dtitle="+$("#dtitle").val()+"&dcontent="+$("#dcontent").val()
-				
-			}	
-			else
-			{
-				location.href="insertDiary.do?dtitle="+$("#dtitle").val()+"&dcontent="+$("#dcontent").val()
-				
-			}	
-		}
-		else if(select_day == today_now)
-		{
-			location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
-			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
-			+"&year="+$("#year").val()+"&month="+$("#month").val();
+			confirm("지난 날씨의 달력만 볼수 있습니다.")	
 		}
 		else
 		{
-			location.href="insertDiary.do?cityName="+$("#cityName").val()+"&dtitle="+$("#dtitle").val()
-			+"&ddate="+$("#ddate").val()+"&dcontent="+$("#dcontent").val()+"&date="+$("#date").val()
-			+"&year="+$("#year").val()+"&month="+$("#month").val();
+			$.ajax({
+				url:"weather4.do",
+				data:{"cityName":$("#cityName").val(),"dates":$("#date").val()},
+				success:function(data)
+				{
+					
+					var area = "";
+					var cityName = $("#cityName").val();
+					
+					if(cityName == '서울'){area = "09680";}
+					else if(cityName == '인천'){area = "11200";}
+					else if(cityName == '수원'){area = "02111";}
+					//else if(cityName == '파주'){area = "02480";}
+					else if(cityName == '춘천'){area = "01110";}
+					else if(cityName == '백령도'){area = "11720";}
+					else if(cityName == '강릉'){area = "01150";}
+					else if(cityName == '독도'){area = "04940";}
+					//else if(cityName == '속초'){area = "01210";}
+					else if(cityName == '청주'){area = "16111";}
+					else if(cityName == '안동'){area = "04170";}
+					else if(cityName == '대전'){area = "07110";}
+					else if(cityName == '홍성'){area = "15800";}
+					else if(cityName == '전주'){area = "13113";}
+					else if(cityName == '대구'){area = "06290";}
+					else if(cityName == '울산'){area = "10140";}
+					else if(cityName == '포항'){area = "04111";}
+					else if(cityName == '울진'){area = "04930";}
+					else if(cityName == '부산'){area = "08710";}
+					else if(cityName == '창원'){area = "03123";}
+					else if(cityName == '광주'){area = "05200";}
+					else if(cityName == '목포'){area = "12110";}
+					else if(cityName == '여수'){area = "12130";}
+					else if(cityName == '흑산도'){area = "12910";}
+					else if(cityName == '제주'){area = "14100";}
+					else
+					{
+						area = "09680";
+					}
+					
+					$.ajax({url:"http://203.236.209.112:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
+					
+					$.ajax({url:"http://203.236.209.112:4997/weather2.do",success:function(data){}})
+					
+					$("#weather").html(data);
+					
+					$("#tmef_img").show()
+					
+					
+					select_day = $("#select_day").val();
+					
+					if(select_day == today_now)
+					{
+						$("#tmef_img").attr({"src":$("[name='img2'] > v").html()})
+						$("#dweather").val($("[name='tmef2'] > v").html())
+					}
+					else if(select_day < today_now)
+					{
+						$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
+						$("#dweather").val($("[name='tmef'] > v").html())
+					}	
+					
+				}
+			})
 		}
 		
 	})
 	
-	$("#citySelect").change(function(){
-		
-		$("#cityName").val($("#citySelect").val())
 	
+	$("#btnAdd").click(function(){
+		if($("#dweather").val() == "")
+		{
+			var re = confirm("날씨를 입력해주세요.")
+			if(re)
+			{
+				return false;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	})
 	
 	//선택한 폰트 dfont, dcontent에 적용
@@ -263,20 +253,59 @@ $(function() {
 			style : "font-family:"+$(this).val()
 		})
 	});
-});
+	
+	
+	$("#download").click(function() {
+		//downloadCanvas(this, 'canvas', 'myGrim.png');
+		var imgUrl = document.getElementById('canvas').toDataURL();
+		
+		$.ajax({
+			  url: "makeImgFile.do",
+			  data: { "imgbase64": imgUrl },
+			  success : function() {
+				  alert('선택영역을 서버의 이미지 파일에 저장했습니다');
+			  }
+		});
+		
+	});
 
-var openG;
+	$("#btnOk").click(function() {
+
 
 function openGrimpan() {
 	
 	var popupX = (window.screen.width / 2) - (600 / 2); 
 	// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
 
-	var popupY= (window.screen.height /2) - (680 / 2);
-	// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+		var myImage = document.getElementById("myImage");
+		myImage.src = canvas.toDataURL();
+
+
+		self.close();
+	});
 	
-	window.name = "insertDiary";
-	openG = window.open("grimpan.do","grimpan",'status=no, height=600px, width=600px, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+	//$("#insertDiaryDiv").find("*").attr("data-enhance", "false");
+	
+});
+
+/*
+//C:\Blank\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Blank\resources\upload2
+// 작업 이미지 로컬 다운로드(.PNG)
+function downloadCanvas(link, canvasId, filename) {
+	link.href = document.getElementById(canvasId).toDataURL();
+	link.download = filename;
+}
+*/
+function showGrimpan() {
+	$("#grimpan").css("display", "block");
+	$("#insertDiaryDiv").css("display", "none");
+	$(location).attr('href','#grimpan');
+}
+
+function showDiary() {
+	$("#insertDiaryDiv").css("display", "block");
+	$("#grimpan").css("display", "none");
+	$(location).attr('href','#insertDiaryDiv');
 }
 
 </script>
@@ -285,6 +314,7 @@ function openGrimpan() {
 
 <!-- 사진 보여주기 -->
 <script>
+
 	var sel_file;
 	var sel_fileG;	
 	
@@ -311,6 +341,11 @@ function openGrimpan() {
 		});
 	}
 	
+
+	var sel_fileG;
+	
+	<!-- 그림 보여주기 -->
+
 	$(document).ready(function() {
 		$("#uploadG").on("change", showImgG)
 	});
@@ -318,7 +353,7 @@ function openGrimpan() {
 	function showImgG(e) {
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
-
+		
 		filesArr.forEach(function(f) {
 			if (!f.type.match("image.*")) {
 				alert("확장자 오류");
@@ -328,7 +363,12 @@ function openGrimpan() {
 			sel_fileG = f;
 			var reader = new FileReader();
 			reader.onload = function(e) {
+				$("#img").css({
+					display: "inline-block"
+				});
+				
 				$("#img").attr("src", e.target.result);
+				
 			}
 			reader.readAsDataURL(f);
 		});
@@ -337,6 +377,7 @@ function openGrimpan() {
 
 </head>
 <body>
+<div id="insertDiaryDiv">
 <!-- side-menu -->
 <section id="mySidenav" class="sidenav">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -350,7 +391,7 @@ function openGrimpan() {
 	<a href="qNa.do">Contact</a>
 	<br>
 	<div class="side_icon_set">
-		<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+		<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
 		<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 	</div>
 	
@@ -383,39 +424,94 @@ function openGrimpan() {
 	</nav>	
 
 	
-	<div class="content" style="margin-top: 100px">
-		<h2>빈칸을 채우다</h2>
+	<div class="content" style="width:100%;">
 		<hr>
 	 
-		<form action="insertDiary.do" method="post" enctype="multipart/form-data">
-		
-			<input type="hidden" name="bno" id="bno" value="${bno }"><br> 
-			<input type="hidden" name="mno" id="mno" value="${mno }"><br> 
-			
+		<form action="insertDiary.do" method="post" enctype="multipart/form-data" style="width:95%; margin-left: auto; margin-right: auto;">
+			<input type="hidden" name="bno" id="bno" value="${bno }"> 
+			<input type="hidden" name="mno" id="mno" value="${mno }">
 
-			<table>
+			<table style="width:100%;">
 				<tr>
-					<td colspan="2">
-						<label for="dtitle">제목 </label>
-						<input type="text" name="dtitle" id="dtitle" required="required" value="${dtitle }">
+					<td>
+						<label for="dtitle">제&nbsp;&nbsp;&nbsp;목 </label>
+						<input type="text" name="dtitle" id="dtitle" required="required" value="${dtitle }" style="width: 80%;">
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-						<label for="ddate">날짜</label>
-						<input type="date" name="ddate" id="ddate" value="${ddate }" required="required">
-					</td>
-					<td>
-						<label for="dweather">날씨</label>
-						<input type="text" name="dweather" id="dweather">
+						<label for="ddate">날&nbsp;&nbsp;&nbsp;짜</label>
+						<input type="date" name="ddate" id="ddate" value="${ddate }" required="required" style="line-height: normal;width: 80%;">
 					</td>
 				</tr>
-				
 				<tr>
-					<td colspan="2">
+					<td>
+						<label for="dweather">날&nbsp;&nbsp;&nbsp;씨</label>
+						<input type="text" name="dweather" id="dweather" style="display:none;">
+						
+						<div class="today_weather" style="display: inline-block; width:65%"">
+						<!-- 
+						<ul id="test">
+							<img id="weather_icon" src="../resources/img/weather.png" width="30" height="30">
+							<li id="today">날씨가 궁금하신가요?</li>
+							<li id="location">지역과 날씨를 선택 후 검색버튼을 눌러주세요.</li>
+						</ul>
+						 -->
+						<div class="city_weather">
+							<select id="citySelect" style="width:70%">
+									<option>지역</option>
+									<option>서울</option>
+									<option>인천</option>
+									<option>수원</option>
+									<option>독도</option>
+									<option>춘천</option>
+									<option>백령도</option>
+									<option>강릉</option>
+									<option>울진</option>
+									<option>청주</option>
+									<option>안동</option>
+									<option>대전</option>
+									<option>홍성</option>
+									<option>전주</option>
+									<option>대구</option>
+									<option>울산</option>
+									<option>포항</option>
+									<option>부산</option>
+									<option>창원</option>
+									<option>광주</option>
+									<option>목포</option>
+									<option>여수</option>
+									<option>흑산도</option>
+									<option>제주</option>
+								</select>
+								<input type="hidden" name="cityName" id="cityName" >
+								<input type="hidden" id="day">
+								<input type="hidden" name="date" id="date">
+								<input type="hidden" id="today_date" value="${todays }">
+								<input type="hidden" name="year" id="year">
+								<input type="hidden" name="month" id="month">
+								<input type="hidden" name="select_day" id="select_day">
+								<span id="weather"> ${weather } </span>
+								<button id="search" type="button">검색</button>
+						</div>
+						
+						
+					</div>
+			
+					<div class="status" style="display: inline-block;">
+						<!--  <span id="city"></span> -->
+						<img id="tmef_img" src="" width="30px" height="30px">
+						<span id="tmef_info"></span>
+					</div>
+						
+						
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="dfont">글씨체</label>
-						<select name="dfont" id="dfont">
+						<select name="dfont" id="dfont" style="width:80%">
 							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script">Nanum Brush Script</option>
 							<option value="Nanum Gothic Coding" style="font-family:Nanum Gothic Coding">Nanum Gothic Coding</option>
 							<option value="Nanum Myeongjo" style="font-family:Nanum Myeongjo">Nanum Myeongjo</option>
@@ -429,98 +525,79 @@ function openGrimpan() {
 							<option value="Source Sans Pro" style="font-family:Source Sans Pro">Source Sans Pro</option>
 							<option value="Gaegu" style="font-family:Gaegu">Gaegu</option>
 						</select>
-						<!-- 그림판 버튼 -->
-						<button type="button" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button>
-						
-						<label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px">(그림첨부)</label>
-						<input type="file" name="uploadG" id="uploadG" style="display: none;">
-						
-						<!-- 사진첨부 버튼 -->
-						<label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px">(사진첨부)</label>
-						<input type="file" name="upload" id="upload" style="display: none;">
 					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<!-- 그림 -->
-						<img id="img" width="300">
-						<br>
-						<!-- 사진 -->
-						<img id="photo" width="300">
-						<!-- 글 -->
-						<textarea class="form-control" rows="10" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script">${dcontent }</textarea>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<input type="radio" name="secret" value=1>나만보기
-						<input type="radio" name="secret" value=0 checked="checked">전체공개
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
 				</tr>
 				<tr>
 					<td>
-						<button type="submit">등록</button>
+						<!-- 그림판 버튼 -->
+						<!-- <button type="button" style="display: inline-block;" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button> -->
+						<a href="#" onclick="showGrimpan()" data-ajax="false"><button type="button" style="display: inline-block;"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button></a>
+						
+						<label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px"></label>
+						<input type="file" name="uploadG" id="uploadG" style="display: none;">
+						
+						<!-- 사진첨부 버튼 -> 그림판 버튼으로 통합-->
+						<!-- <label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label> -->
+						<input type="file" name="upload" id="upload" style="display: none;">
+					</td>
+				</tr>
+						
+				<tr>
+					<td>
+						<!-- 그림 -->
+						<img id="img" width="300" style="display: none">
+						<!-- 글 -->
+						<textarea class="form-control" rows="8" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; width:100%; height:50%;">${dcontent }</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="radio" name="secret" value=1 id="private"><label for="private">나만보기</label>
+						<input type="radio" name="secret" value=0 checked="checked" id="public"><label for="public">전체보기</label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button id="btnAdd" type="submit">등록</button>
 					</td>
 				</tr>
 			</table>
 			
-			<div class="today_weather">
-				<ul id="test">
-					<img id="weather_icon" src="../resources/img/weather.png" width="30" height="30">
-					<li id="today">날씨가 궁금하신가요?</li>
-					<li id="location">지역과 날씨를 선택 후 검색버튼을 눌러주세요.</li>
-				</ul>
-				<br>
-				<div class="city_weather">
-					<select id="citySelect">
-							<option>지역</option>
-							<option>서울</option>
-							<option>인천</option>
-							<option>수원</option>
-							<option>파주</option>
-							<option>춘천</option>
-							<option>백령도</option>
-							<option>강릉</option>
-							<option>속초</option>
-							<option>청주</option>
-							<option>안동</option>
-							<option>대전</option>
-							<option>홍성</option>
-							<option>전주</option>
-							<option>대구</option>
-							<option>울산</option>
-							<option>포항</option>
-							<option>부산</option>
-							<option>창원</option>
-							<option>광주</option>
-							<option>목포</option>
-							<option>여수</option>
-							<option>흑산도</option>
-							<option>제주</option>
-						</select>
-						<input type="hidden" name="cityName" id="cityName">
-						<input type="hidden" id="citys" value="${cityName }">
-						<input type="hidden" id="day" value="${ddate }">
-						<input type="hidden" name="date" id="date" value="${date }">
-						<input type="hidden" id="today_date" value="${todays }">
-						<input type="hidden" name="year" id="year" value="${year }">
-						<input type="hidden" name="month" id="month" value="${month }">
-						<span id="weather"> ${weather } </span>
-						<button id="search" type="button">검색</button>
-				</div>
-				<br><br>
-				<div class="status">
-					<span id="city"></span><br><br>
-					<img id="tmef_img" src="" width="60" height="60">
-				</div>
-			</div>
+			
 			
 		</form>
 		
 	</div>
 </div>
+</div>
+
+
+<div id="grimpan" style="display: none;">
+	<div data-role="content">
+		<div>
+			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;"></canvas>
+		</div>
+	<script type="text/javascript" src="../resources/js/drawingColor.js?ver=18"></script>
+	
+	<input type="hidden" id="selectColor">
+	<input type="color" id="myColor" onchange="cg_color(this.value)">
+	
+	Size:<input type="range" min="1" max="5" id="Lwidth" value="1" onchange="cg_line(this.value)">
+
+		<button data-inline='true' style='margin:0px auto;' id="delete"><img src="../resources/img/icon/newpage.png" width="15px"></button>
+		<button data-inline='true' style='margin:0px auto;' id="prev"><img src="../resources/img/icon/prev.png" width="15px"></button>
+		<a id="download"><button data-inline='true' style='margin:0px auto;'><img src="../resources/img/icon/download.png" width="15px"></button></a>
+		<a href="#" onclick="showDiary()" data-ajax="false"><button data-inline='true' style='margin:0px auto;' id="btnOk"><img src="../resources/img/icon/exit.png" width="15px"></button></a>
+	
+	
+	<img id="myImage">
+
+	<script src="../resources/js/draw.js?ver=4"></script>
+
+	</div>
+</div>
+
+
+
 </body>
 </html>

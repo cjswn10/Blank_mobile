@@ -58,6 +58,7 @@ span{
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../resources/css/blank.css?ver=2">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 	$(function () {		
 		if ("${d.dfile}" !== "") {
@@ -81,9 +82,10 @@ span{
 		var ddate = $('<span style="font-size: 12px;"></span>').html("${d.ddate}")
 		var dweather = $('<span style="font-size: 12px;"></span>').html("${d.dweather}")
 		var dtitle = $('<p style="font-size: 20px;"></p>').html("${d.dtitle}")
-		var content = "${dcontent2}";	
+		var content = "${dcontent2}";			
 		
-		$('#detailDiary').append(ddate, dweather, dtitle, content);					
+		$('#detailDiary').append(ddate, dweather, dtitle, con);					
+
 		
 		setTimeout(function () {
 			
@@ -123,7 +125,7 @@ span{
 			<a href="qNa.do">Contact</a>
 			<br>
 			<div class="side_icon_set">
-				<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+				<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
 				<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 			</div>
 		</section>
@@ -139,7 +141,7 @@ span{
 					<div id="searchid"></div>
 				</div>
 			</div>
-			
+			<span id="con">${d.dcontent }</span>
 			<!------ main-menu ------>
 			<nav class="clearfix" style="margin-bottom: 20px">
 				<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
