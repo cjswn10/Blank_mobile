@@ -34,7 +34,7 @@ public class DiaryController {
 		this.dao = dao;
 	}
 
-	// �뜝�떬湲�源띿삕�뜝�룞�삕??
+	// 占쎈쐻占쎈뼩疫뀐옙繹먮씮�굲占쎈쐻占쎈짗占쎌굲??
 	@RequestMapping("/member/mainDetailDiary.do")
 	public ModelAndView mainDetailDiary(int dno) {
 		Map map = new HashMap();
@@ -44,7 +44,7 @@ public class DiaryController {
 		return mav;
 	}
 
-	// �뜝�떬湲�源띿삕�뜝�룞�삕??
+	// 占쎈쐻占쎈뼩疫뀐옙繹먮씮�굲占쎈쐻占쎈짗占쎌굲??
 	@RequestMapping("/member/detailFavoriteDiary.do")
 	public ModelAndView detailFavoriteDiary(int dno) {
 		Map map = new HashMap();
@@ -331,6 +331,10 @@ public class DiaryController {
 
 		mav.addObject("todays", todays);
 		
+		//dno생성 후 전달
+		int dno = dao.diaryNextNo();
+		mav.addObject("dno", dno);
+		
 		return mav;
 	}
 
@@ -343,9 +347,9 @@ public class DiaryController {
 		
 		int mno = (Integer) session.getAttribute("mno");
 		int bno = (Integer) session.getAttribute("bno");
-
-		int no = dao.diaryNextNo();
-		d.setDno(no);
+		int dno = d.getDno();
+		//int no = dao.diaryNextNo();
+		//d.setDno(no);
 
 		d.setDtype("000");
 
@@ -377,7 +381,7 @@ public class DiaryController {
 		if (orgname != null && !orgname.equals("")) {
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
 
-			dphoto = bno + "b" + no + "." + exc;
+			dphoto = bno + "b" + dno + "." + exc;
 			File saveFile = new File(path + "/" + dphoto);
 
 			try {
@@ -402,13 +406,13 @@ public class DiaryController {
 			}
 		}
 		
-		/************** �뜝�뙎紐뚯삕 ***************/
+		/************** 占쎈쐻占쎈솊筌뤿슣�굲 ***************/
 		String orgnameG = uploadG.getOriginalFilename();	
 		String dfile = "x";
 		
 		if (orgnameG != null && !orgnameG.equals("")) {
 			String excG = orgnameG.substring(orgnameG.lastIndexOf(".") + 1, orgnameG.length());
-			dfile = bno + "b" + no + "grim." + excG;
+			dfile = bno + "b" + dno + "grim." + excG;
 			File saveFileG = new File(pathG + "/" + dfile);
 			
 			try {
@@ -486,7 +490,7 @@ public class DiaryController {
 			code.addRCode("keyword = matrix(sql$DCONTENT)");
 			code.addRCode("write(keyword ,'keyword.txt')");
 			code.addRCode("data = readLines('keyword.txt')");
-			code.addRCode("data <- gsub('[ㄱ-ㅎ]','', data)");
+			code.addRCode("data <- gsub('[�꽦-�뀕]','', data)");
 			code.addRCode("data <- gsub('[0-9]','', data)");
 			//code.addRCode("data <- gsub('.','', data)");
 			code.addRCode("data1 <- sapply(data,extractNoun,USE.NAMES=F)");
