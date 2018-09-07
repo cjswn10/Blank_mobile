@@ -18,22 +18,35 @@
 		width: 93%;
 		text-align: center;
 		position:relative;
-		left: 10px;
-		margin-left: 0 auto;
+		margin: 15px auto;
 	}
 
+	/* remove 아이콘 & update 아이콘 */
+	#aDiv {
+		top: 216px;
+  		position: relative;
+	}
+	
+	
 	/* remove 아이콘위치 */
 	#remove_location
 	{
 		font-family: 'Nanum Pen Script', serif;
-		position:relative;
-		display:table;
+		display: inline-block;
 		font-size: 10px;
-		top:140.5px;
 		color:black;
-		left: 50px;
+		margin: 0 10px; 
 	}
 
+	/*일기장 수정*/
+	.update
+	{
+		font-family: 'Nanum Pen Script', serif;
+		display: inline-block;
+		font-size: 10px;
+		color:black;
+		margin: 0 10px;
+	}
 	/* plus 아이콘 */
 	.glyphicon-plus
 	{
@@ -45,67 +58,60 @@
 	#main_container
 	{
 		width: 100%;
-		
+		text-align: center;
 	}
 	
 	#main
 	{
 		width:100%;
 		height:100%;
-		overflow: hidden;
-		margin: 10px;
-		position: relative;
-		left: -5px;
-		
 	}
 	
 	/* 서브컨테이너의 자식 div들 */
 	#main_container > div
 	{
-		position:relative;
-		width: 150px;
-		height: 180px;
-		float: left;
-		margin: 25px;
-		padding: 30px;
-		background-color: pink;
+		width: 200px;
+		height: 240px;
+		display: inline-block;
+		margin-bottom: 35px;
+		margin-left: 10%; 
+		margin-right: 10%; 
 	}
+	@media screen and (min-width: 576px) {
+		#main_container > div {
+			margin-bottom: 8%;
+		}
+	
+	}
+	
 	/* 일기장 제목 */
 	.btitle
 	{
 		font-family: 'Nanum Pen Script', serif;
 		position:relative;
 		display:table;
-		font-size: 10px;
+		font-size: 20px;
+		width: 70%;
+		text-align: center;
+		top: 15px;
 		color:black;
-		top:-10px;
+		background-color: white;
 		margin-left: auto;
 		margin-right: auto;
-		background-color: white;
-		width: 100%;
-		text-align: center;
-		
-		
 	}
-	/*일기장 수정*/
-	.update
+	
+	#top
 	{
-		font-family: 'Nanum Pen Script', serif;
-		position:relative;
-		display:table;
-		font-size: 10px;
-		color:black;
-		top:122px;
-		left: 5px;
-
-	}
+		display:none;
+		position:fixed;
+		bottom:10px;
+		right:2px;
+	}	
 	
 	body 
 	{
     	-webkit-text-size-adjust: none;
 	}
-	
-	
 	
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -115,9 +121,9 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=16">
-<script type="text/javascript" src="../resources/js/menu.js?ver=6" ></script>
-
+<link rel="stylesheet" href="../resources/css/blank.css?ver=17">
+<script type="text/javascript" src="../resources/js/menu.js?ver=7" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -193,9 +199,15 @@
 						//일기장 목록 --> 일기목록
 						$(aList).append(title)
 						
+						var aDiv = $("<div id='aDiv'></div>");
+						$(aDiv).append(aUpdate, aRemove);
+						
+						$(div).append(aList, color, aDiv);
+						
+						/*
 						//일기장 목록에 제목,삭제a태그 추가
 						$(div).append(aList,aRemove,color,aUpdate)
-
+						*/
 						
 						//일기장 서브컨테이너에 추가
 						$("#main_container").append(div)
@@ -205,6 +217,25 @@
 		}
 		//일기장 목록 불러오기
 		listBook();
+		
+		$(window).scroll(function(){
+			
+			if($(this).scrollTop() > 50)
+			{
+				$("#top").fadeIn();
+			}
+			else
+			{
+				$("#top").fadeOut();
+			}
+			
+		})
+		
+		$("#top").click(function(){
+			
+			$('html, body').scrollTop(0);
+			
+		})
 		
 	})
 
@@ -224,7 +255,7 @@
 	<a href="qNa.do"  data-ajax="false">Contact</a>
 	<br>
 	<div class="side_icon_set">
-		<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+		<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
 		<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 	</div>
 	
@@ -266,35 +297,35 @@
 			<div id="main_container"></div>
 	
 		</div>  
-	</div>
-
+	<img id="top" src="../resources/img/top.PNG">
+	
     
-<!-- 푸터  -->
-<footer class="footer">
-	<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
-	<ul class="list-inline">	
-       <li>
-           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
-           <br><h5>김영호</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
-           <br><h5>변성인</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
-           <br><h5>성민규</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
-           <br><h5>임연주</h5>
-       </li>
-       <li>
-           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
-           <br><h5>차건우</h5>
-       </li>
-    </ul>
-</footer>
+	<!-- 푸터  -->
+	<footer class="footer" >
+		<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+		<ul class="list-inline">	
+	       <li>
+	           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+	           <br><h5>김영호</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+	           <br><h5>변성인</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+	           <br><h5>성민규</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+	           <br><h5>임연주</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+	           <br><h5>차건우</h5>
+	       </li>
+	    </ul>
+	</footer>
 </div>
 </body>
 </html>

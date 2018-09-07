@@ -10,7 +10,7 @@ context.lineWidth = document.getElementById("Lwidth").value;
 canvas.addEventListener("touchstart", function(e) {
 	down(e)
 }, false);
-canvas.addEventListener("touchcancel", function(e) {
+canvas.addEventListener("touchend", function(e) {
 	up(e)
 }, false);
 canvas.addEventListener("touchmove", function(e) {
@@ -98,8 +98,10 @@ var startX = 0,
 var drawing = false;
 
 
-function down(e) {
 
+
+function down(e) {
+	
 	drawBackup.push(context.getImageData(0, 0, canvas.width, canvas.height));
 	startX = e.pageX;
 	startY = e.pageY;
@@ -107,10 +109,11 @@ function down(e) {
 }
 
 function move(e) {
+	var touches = e.targetTouches[0];
 	if (!drawing)
 		return;
-	var curX = e.pageX;
-	var curY = e.pageY;
+	var curX = touches.pageX;
+	var curY = touches.pageY;
 	draw(curX, curY);
 	startX = curX;
 	startY = curY;
@@ -119,6 +122,7 @@ function move(e) {
 }
 
 function draw(curX, curY) {
+	
 	drawBackup.push(context.getImageData(0, 0, canvas.width, canvas.height));
 	context.beginPath();
 	context.moveTo(startX, startY);

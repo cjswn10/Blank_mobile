@@ -45,7 +45,6 @@ user-scalable=0">
 	}
 	.infomation
 	{	
-		
 		font-size: 30px;
 		position: relative;
 		top: 30px;
@@ -181,13 +180,13 @@ user-scalable=0">
 				<tr>
 					<td align="center">휴대전화</td>
 					<td>
-						<input type="text" name="phone" id="phone" maxlength="13" style="text-align: center;" placeholder="휴대전화">
+						<input type="tel" name="phone" id="phone" maxlength="13" style="text-align: center;" placeholder="휴대전화">
 					</td>
 				</tr>
 			</table>
 			<button id="searchPwd">확인</button>
 		</div>
-			<span class="test">아이디가 기억이 나지 않는 다면 ?</span>&nbsp;&nbsp;<a class="test" href="searchIdPage.do">아이디 찾기 바로가기</a>
+			<span class="test">아이디가 기억이 나지 않는 다면 ?</span>&nbsp;&nbsp;<a class="test" href="searchIdPage.do" data-ajax="false">아이디 찾기 바로가기</a>
 	</div>
 </div>
 </body>

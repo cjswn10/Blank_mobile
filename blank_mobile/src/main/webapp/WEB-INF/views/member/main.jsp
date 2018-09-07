@@ -13,8 +13,13 @@
 		minimum-scale=1.0,
 		user-scalable=no">
 
-
 <style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+/*a 파란색 지우기 */
+ a:link { color: black; text-decoration: none;}
+ a:visited { color: black; text-decoration: none;}
+ a:hover { color: black; text-decoration: none;}
+
 #mainList{
 	text-align: center;
 }
@@ -38,8 +43,6 @@
     cursor: pointer;
 }
 
-
-
 .contents{	
 	width: 300px;
 	height: 300px;
@@ -50,13 +53,37 @@
 	overflow: hidden;	
 }
 
-@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+.iljung-div{
+    display:flex;
+    flex-direction:row;
+    justify-content : space-around;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%;
+    margin-bottom: 15%;
+    text-align : center;
+   
+}
+
+.iljung-date-div .btn{
+    border:1px solid #EFE7E6;
+    background-color: #EFE7E6;
+    color:#662408;
+    font-family: 'Nanum Pen Script', serif;
+}
 
 .landing {
     width: 100%;
+    height: 89%;
     margin: auto;
     background-size: cover;
-    background-position: center center;
+    padding: 0;
+    background-color: #ebcfce;
+    background-image: url(../resources/img/mainlogo.jpg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: auto 80%;
 }
 
 #searchid
@@ -66,7 +93,69 @@
 		background: white;
 		color: black;
 	}
+#top
+	{
+		display:none;
+		position:fixed;
+		bottom:10px;
+		right:2px;
+	}	
 
+@media screen and (max-width: 670px) and (min-width: 541px) {	
+	.landing {
+	    width: 100%;
+	    height: 80%;
+	    margin: auto;
+	    background-size: cover;
+	    padding: 0;
+	    background-color: #ebcfce;
+	    background-image: url(../resources/img/mainlogo_mobile.jpg);
+	    background-repeat: no-repeat;
+	    background-position: right;
+	    background-size: auto 80%;
+	}
+	
+	.iljung-div{
+    display:flex;
+    flex-direction:row;
+    justify-content : space-around;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 15%;
+    text-align : center;
+   
+	}
+}
+
+@media screen and (max-width: 540px) {	
+	.landing {
+	    width: 100%;
+	    height: 70%;
+	    margin: auto;
+	    background-size: cover;
+	    padding: 0;
+	    background-color: #ebcfce;
+	    background-image: url(../resources/img/mainlogo_mobile.jpg);
+	    background-repeat: no-repeat;
+	    background-position: right;
+	    background-size: auto 80%;
+	}
+	
+	.iljung-div{
+    display:flex;
+    flex-direction:row;
+    justify-content : space-around;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 15%;
+    text-align : center;
+	}
+	
+}
 </style>
 
 <!-- Bootstrap -->
@@ -83,8 +172,8 @@
 
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=16">
-<script type="text/javascript" src="../resources/js/menu.js?ver=6" ></script>
-
+<script type="text/javascript" src="../resources/js/menu.js?ver=7" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 $(function () {
 	
@@ -96,6 +185,39 @@ $(function () {
 	
 	var mno = ${mno}
 	
+	//일간키워드
+	$.ajax({
+		url: "dailyKeyword.do",
+		success: function(data) {
+			console.log("일간키워드 success")
+			dailyfname = data;
+			console.log(dailyfname)
+			var dailyImg = $('<img></img>').attr({
+				src: "../resources/rImg/" + dailyfname,
+				width: "100%"
+			})
+			
+			$("#statisticsD").append(dailyImg);
+		}
+	});
+	
+	//주간키워드
+	$.ajax({
+		url: "weeklyKeyword.do",
+		success: function(data) {
+			console.log("주간키워드 success")
+			weeklyfname = data;
+			console.log(weeklyfname)
+			var weeklyImg = $('<img></img>').attr({
+				src: "../resources/rImg/" + weeklyfname,
+				width: "100%"
+			})
+			
+			$("#statisticsW").append(weeklyImg);
+		}
+	});
+	
+	//메인리스트
 	$.ajax({
 		url: "mainList.do",
 		success:function(data){				
@@ -203,96 +325,28 @@ $(function () {
 	
 	
 	$("#searchid").hide();
-	
-	$("#id").keyup(function() {
-
-		$("#searchid").empty();
-		$.ajax({
-			url:"mainSearchId.do",
-			data:{"id":this.value},
-			success:function(data)
+		
+		
+		$(window).scroll(function(){
+			
+			if($(this).scrollTop() > 50)
 			{
-
-				var arr = eval("("+data+")")
-				$.each(arr,function(i,v){
-					var id = $("<span></span>").html(v.id);
-					var br = $("<br>");
-					$("#searchid").append(id,br);
-					
-					$("#searchid").click(function(){
-						$(this).hide();
-					})
-					
-					$(id).click(function() {
-						$("#id").val(v.id);
-						$("#searchid").hide();	
-						$.ajax({
-							url:"listFavorite2.do",
-							data:{"mno":v.mno},
-							success:function(data)
-							{
-								location.href="othersDiary.do?id="+v.id+"&fmno="+v.mno+"";
-								var arr = eval("("+data+")");		
-								$.each(arr,function(i,a){
-									if(a.mno == mno )
-									{
-										location.href="othersDiary.do?id="+v.id+"&fno="+a.fno+"&fmno="+v.mno+"";
-									}				
-								})
-							}
-						})//ajax
-					})
-          
-
-					$("#btnMove").one("click",function(){
-							$.ajax({
-								url:"checkId2.do",
-								data:{"id":$("#id").val()},
-								success:function(data)
-								{
-									if($.trim(data) == 0){
-					                    location.href="#";
-					                    return;
-					                }
-					                else{
-					                	
-					                	$("#searchid").empty();
-					                	$("#id").val(v.id)
-					                	$.ajax({
-											url:"listFavorite2.do",
-											data:{"mno":v.mno},
-											success:function(data)
-											{
-												location.href="othersDiary.do?id="+v.id+"&fmno="+v.mno+"";
-												var arr = eval("("+data+")");		
-												$.each(arr,function(i,a){
-													if(a.mno == $("#mno").val() )
-													{
-														location.href="othersDiary.do?id="+v.id+"&fno="+a.fno+"&fmno="+v.mno+"";
-													}				
-												})
-											}
-
-										})//ajax
-									
-					                	}
-					                }
-								})//ajax
-
-					          })
-						
-							});
-						}
-					})
-				if(this.value != "")
-				{
-					$("#searchid").show();	
-				}
-				else
-				{
-					$("#searchid").hide();
-				}
-		})		
+				$("#top").fadeIn();
+			}
+			else
+			{
+				$("#top").fadeOut();
+			}
+			
+		})
+		
+		$("#top").click(function(){
+		
+			$("body").scrollTop(0);
+			
+		})
+		
+		
 })
 </script>
 <title>빈칸을 채우다.</title>
@@ -311,7 +365,7 @@ $(function () {
 		<a href="qNa.do">Contact</a>
 		<br>
 		<div class="side_icon_set">
-			<a href="https://github.com/cjswn10/Blank"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
+			<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
 			<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 		</div>
 	</section>
@@ -343,9 +397,15 @@ $(function () {
 		    </ul>
 		</nav>
 		<div class="landing">
-			<img src="../resources/img/mainlogo.jpg" width="100%">
+			<!--  <img src="../resources/img/mainlogo.jpg" height="50%"> -->
 		</div>
 		
+		<!-- 페이지 버튼 -->
+		<div class="iljung-div">
+                    <div class="iljung-date-div"><p class="btn btn1" rel="div2"><a href="#mainList">뉴스피드</a></p></div>
+                    <div class="iljung-date-div"><p class="btn btn1" rel="div1"><a href="#statisticsD">주요키워드</a></p></div>
+                    <!-- <div class="iljung-date-div"><p class="btn btn1" rel="div3"><a href="#foot">개발자</a></p></div>  -->
+        </div>
 		<!----------- 내용 -------------->
 		
 		<div class="clearfix" id="mainList"></div>
@@ -353,10 +413,13 @@ $(function () {
 		<!-- modal들을 넣을 div -->
 		<div id="modal"></div>
 			
-
-	
+		<div id="statisticsD" style="margin-top: 10%;"><h2>DAILY KEYWORDS</h2></div>
+		<div id="statisticsW"><h2>WEEKLY KEYWORDS</h2></div>
+		
+		<img id="top" src="../resources/img/top.PNG">
+		
 			<!--------- 푸터 ---------->
-		<div class="footer">
+		<div class="footer" id="foot">
 			<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
 			<ul class="list-inline">
 		       <li>

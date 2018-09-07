@@ -36,6 +36,7 @@ user-scalable=0">
 	function downloadCanvas(link, canvasId, filename) {
 		link.href = document.getElementById(canvasId).toDataURL();
 		link.download = filename;
+
 	}
 </script>
 <body>
@@ -60,7 +61,7 @@ user-scalable=0">
 	
 	<img id="myImage">
 
-	<script src="../resources/js/draw.js"></script>
+	<script src="../resources/js/draw.js?ver=4"></script>
 </body>
 </html>
 
