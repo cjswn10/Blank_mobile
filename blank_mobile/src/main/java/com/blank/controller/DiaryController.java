@@ -1,7 +1,11 @@
 package com.blank.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -11,10 +15,15 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,9 +34,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.rcaller.rStuff.RCaller;
 import com.github.rcaller.rStuff.RCode;
 
+
 @Controller
 public class DiaryController {
-
+	
 	@Autowired
 	private DiaryDao dao;
 
@@ -262,6 +272,7 @@ public class DiaryController {
 		mav.addObject("dcontent2", content);
 		return mav;
 	}
+	
 	@RequestMapping(value = "/member/weather4.do",produces="text/plain;charset=utf-8")
 	@ResponseBody
 	public String weather(HttpSession session,HttpServletRequest request,String cityName,int dates)
@@ -317,6 +328,50 @@ public class DiaryController {
 			System.out.println(e.getMessage());
 		}
 		return weather;
+	}
+	
+	@RequestMapping(value = "/member/weather5.do",produces="text/plain;charset=utf-8")
+	@ResponseBody
+	public String weather2(HttpSession session,HttpServletRequest request,String cityName)
+	{
+		System.out.println(cityName);
+		String weather2 = "";
+
+		try {
+			
+		
+			RCaller caller = new RCaller();
+			caller.setRscriptExecutable("C:/Program Files/R/R-3.5.1/bin/x64/Rscript.exe");
+			
+			RCode code = new RCode();
+			code.clear();
+	        
+	        code.addRCode("setwd('c:/r_temp')");
+			code.addRCode("data3 = read.csv('weather2.csv')");
+			code.addRCode("data4 = data.frame(data3)");
+			code.addRCode("weather2 = subset(data4,city=='"+cityName+"')");
+			code.addRCode("city = as.character(weather2[1,1])");
+	        code.addRCode("img2 = as.character(weather2[1,2])");
+	        code.addRCode("tmef2 = as.character(weather2[1,3])");
+	        
+	        code.addRCode("allvars <- as.list(globalenv())");
+
+	        caller.setRCode(code);
+
+	        caller.runAndReturnResult("allvars");
+			
+	        String city = caller.getParser().getAsStringArray("city")[0];
+	        String img2 = caller.getParser().getAsStringArray("img2")[0];
+	        String tmef2 = caller.getParser().getAsStringArray("tmef2")[0];
+	        
+	        weather2 = caller.getParser().getXMLFileAsString();
+	        System.out.println(weather2);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		return weather2;
 	}
 	
 	@RequestMapping(value = "/member/insertDiary.do", method = RequestMethod.GET)

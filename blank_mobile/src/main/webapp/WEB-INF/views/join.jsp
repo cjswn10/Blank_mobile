@@ -101,6 +101,7 @@ $(function() {
 		if(pwd == "")
 		{
 			$("#checkMsg2").html("");
+			$("#checkPwd").html("");
 			
 		}
 		else if(pwd.length < 3 || pwd.length > 15)
@@ -114,12 +115,16 @@ $(function() {
 	});
 	
   	$("#pwd2").keyup(function() {
-	
+  		
 		if($("#pwd").val() != $("#pwd2").val()){
 			$("#checkPwd").html("비밀번호가 일치하지 않습니다").attr("style", "color:#F2594B");
 		}
-		else{
+		else if($(this).val() == "")
+		{
 			$("#checkPwd").html("");
+		}
+		else{
+			$("#checkPwd").html("비밀번호가 일치 합니다.").attr("style", "color:blue");
 		}
 		
 	});
