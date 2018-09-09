@@ -82,13 +82,7 @@ span{
 		var ddate = $('<span style="font-size: 12px;"></span>').html("${d.ddate}")
 		var dweather = $('<span style="font-size: 12px;"></span>').html("${d.dweather}")
 		var dtitle = $('<p style="font-size: 20px;"></p>').html("${d.dtitle}")
-
-		
-		
-		var con = $("#con").html();
-		var content = con.replace("\n\r","<br />");
-		$("#con").hide();
-		
+		var content = "${dcontent2}";			
 		
 		$('#detailDiary').append(ddate, dweather, dtitle, con);					
 

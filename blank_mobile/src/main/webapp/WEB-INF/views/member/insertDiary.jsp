@@ -13,10 +13,11 @@
 		
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <!-- 웹폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gaegu|Gamja+Flower|Jua|Nanum+Brush+Script|Nanum+Gothic+Coding|Nanum+Myeongjo|Nanum+Pen+Script|Source+Sans+Pro|Stylish|Sunflower:300" rel="stylesheet">
 
@@ -26,9 +27,8 @@
 
 <style type="text/css">
 
-table label {
-	display: inline-block;
-	width: 15%;
+.ui-page {
+  background-color: white;
 }
 
 </style>
@@ -146,7 +146,7 @@ $(function() {
 	$("#weather").hide()	
 	$("#weather2").hide()	
 	$("#tmef_img").hide()
-	
+
 	var today = $("#today_date").val();
 	var today_year = parseInt(today.substring(0,4));
 	var today_month = parseInt(today.substring(5,6));
@@ -317,20 +317,59 @@ $(function() {
 			style : "font-family:"+$(this).val()
 		})
 	});
+	
+	
+	$("#download").click(function() {
+		var imgUrl = document.getElementById('canvas').toDataURL();
+		var bno = ${bno}
+		var dno = ${dno}
+		
+		/* 그림을 이미지파일로 서버에 저장하고 이름 가져오기*/
+		$.ajax({
+			  url: "makeImgFile.do",
+			  data: { "imgbase64": imgUrl, "bno": bno, "dno": dno },
+			  success : function(data) {
+				  var grim = data;
+				  console.log(grim);
+				  $("#dfile").val(grim);
+				  showImg();
+			  }
+		});
+		
+	});
+
+	
+	function showImg(){
+
+
+		var myImage = document.getElementById("img");
+		myImage.src = canvas.toDataURL();
+		
+		$("#img").css({
+			display: "inline-block"
+		});
+		
+		$("#img").attr("src",myImage.src);
+
+	}
+	
+	
+	
+	
+	//$("#insertDiaryDiv").find("*").attr("data-enhance", "false");
+	
 });
 
-var openG;
+function showGrimpan() {
+	$("#grimpan").css("display", "block");
+	$("#insertDiaryDiv").css("display", "none");
+	$(location).attr('href','#grimpan');
+}
 
-function openGrimpan() {
-	
-	var popupX = (window.screen.width / 2) - (600 / 2);
-	// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
-
-	var popupY= (window.screen.height /2) - (680 / 2);
-	// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
-	
-	window.name = "insertDiary";
-	openG = window.open("grimpan.do","grimpan",'status=no, height=600px, width=600px, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+function showDiary() {
+	$("#insertDiaryDiv").css("display", "block");
+	$("#grimpan").css("display", "none");
+	$(location).attr('href','#insertDiaryDiv');
 }
 
 </script>
@@ -339,41 +378,41 @@ function openGrimpan() {
 
 <!-- 사진 보여주기 -->
 <script>
-	var sel_fileG;
+
+
+	var sel_file;
+	var sel_fileG;	
 	
-	<!-- 그림 보여주기 -->
 	$(document).ready(function() {
-		$("#uploadG").on("change", showImgG)
+		$("#upload").on("change", showImg)
 	});
 
-	function showImgG(e) {
+	function showImg(e) {
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
-		
+
 		filesArr.forEach(function(f) {
 			if (!f.type.match("image.*")) {
 				alert("확장자 오류");
 				return;
 			}
 
-			sel_fileG = f;
+			sel_file = f;
 			var reader = new FileReader();
 			reader.onload = function(e) {
-				$("#img").css({
-					
-					display: "inline-block"
-				});
-				
-				$("#img").attr("src", e.target.result);
-				
+				$("#photo").attr("src", e.target.result);
 			}
 			reader.readAsDataURL(f);
 		});
 	}
+
+
+
 </script>
 
 </head>
 <body>
+<div id="insertDiaryDiv">
 
 <!-- side-menu -->
 <section id="mySidenav" class="sidenav">
@@ -427,6 +466,7 @@ function openGrimpan() {
 		<form action="insertDiary.do" method="post" enctype="multipart/form-data" style="width:95%; margin-left: auto; margin-right: auto;">
 			<input type="hidden" name="bno" id="bno" value="${bno }"> 
 			<input type="hidden" name="mno" id="mno" value="${mno }">
+			<input type="hidden" name="dno" id="mno" value="${dno }">
 
 			<table style="width:100%;">
 				<tr>
@@ -444,6 +484,7 @@ function openGrimpan() {
 				</tr>
 				<tr>
 					<td>
+
 						<label for="dweather">날&nbsp;&nbsp;&nbsp;씨</label>
 						<input type="text" name="dweather" id="dweather" style="display:none;">
 						<span id="citya"></span>
@@ -504,13 +545,9 @@ function openGrimpan() {
 								<input type="hidden" id="y" name="longitude">
 								
 						</div>
-						
-						
+			
 					</div>
-
 					
-						
-						
 					</td>
 				</tr>
 				<tr>
@@ -535,13 +572,15 @@ function openGrimpan() {
 				<tr>
 					<td>
 						<!-- 그림판 버튼 -->
-						<button type="button" style="display: inline-block;" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button>
+						<!-- <button type="button" style="display: inline-block;" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button> -->
+						<a href="#" onclick="showGrimpan()" data-ajax="false"><button type="button" data-inline='true' data-ajax="false"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button></a>
 						
-						<label for="uploadG"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px"></label>
-						<input type="file" name="uploadG" id="uploadG" style="display: none;">
+						<!-- 그림첨부 버튼 -->
+						<!-- <label for="dfile"><img alt="그림첨부" src="../resources/img/icon/draw.png" width="40px"></label> -->
+						<input type="hidden" name="dfile" id="dfile" style="display: none;">
 						
-						<!-- 사진첨부 버튼 -> 그림판 버튼으로 통합-->
-						<!-- <label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label> -->
+						<!-- 사진첨부 버튼 -->
+						<label for="upload" style="display:inline-block;"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label>
 						<input type="file" name="upload" id="upload" style="display: none;">
 					</td>
 				</tr>
@@ -551,13 +590,15 @@ function openGrimpan() {
 						<!-- 그림 -->
 						<img id="img" width="300" style="display: none">
 						<!-- 글 -->
-						<textarea class="form-control" rows="8" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; width:100%; height:50%;">${dcontent }</textarea>
+						내용<textarea data-autogrow="false" class="form-control" rows="10" cols="30" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; height: 50%;"></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type="radio" name="secret" value=1>나만보기
-						<input type="radio" name="secret" value=0 checked="checked">전체공개
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<input type="radio" name="secret" value=1 id="private"><label for="private">나만보기</label>
+							<input type="radio" name="secret" value=0 checked="checked" id="public"><label for="public">전체보기</label>
+						</fieldset>
 					</td>
 				</tr>
 				<tr>
@@ -573,5 +614,35 @@ function openGrimpan() {
 		
 	</div>
 </div>
+</div>
+
+
+<div id="grimpan" style="display: none;">
+	<div data-role="content">
+		<div>
+			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;"></canvas>
+		</div>
+	<script type="text/javascript" src="../resources/js/drawingColor.js?ver=18"></script>
+	
+	<input type="hidden" id="selectColor">
+	<input type="color" id="myColor" onchange="cg_color(this.value)">
+	
+	Size:<input type="range" min="1" max="5" id="Lwidth" value="1" onchange="cg_line(this.value)">
+
+		<button data-inline='true' style='margin:0px auto;' id="delete"><img src="../resources/img/icon/newpage.png" width="15px"></button>
+		<button data-inline='true' style='margin:0px auto;' id="prev"><img src="../resources/img/icon/prev.png" width="15px"></button>
+		<a id="download"><button data-inline='true' style='margin:0px auto;' id="btnShowGrim"><img src="../resources/img/icon/download.png" width="15px"></button></a>
+		<a href="#" onclick="showDiary()" data-ajax="false"><button data-inline='true' style='margin:0px auto;' id="btnOk"><img src="../resources/img/icon/exit.png" width="15px"></button></a>
+	
+	
+	<img id="myImage">
+
+	<script src="../resources/js/draw.js?ver=4"></script>
+
+	</div>
+</div>
+
+
+
 </body>
 </html>

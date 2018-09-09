@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -44,7 +45,7 @@ public class DiaryController {
 		this.dao = dao;
 	}
 
-	// �뜝�떬湲�源띿삕�뜝�룞�삕??
+	// 占쎈쐻占쎈뼩疫뀐옙繹먮씮�굲占쎈쐻占쎈짗占쎌굲??
 	@RequestMapping("/member/mainDetailDiary.do")
 	public ModelAndView mainDetailDiary(int dno) {
 		Map map = new HashMap();
@@ -54,7 +55,7 @@ public class DiaryController {
 		return mav;
 	}
 
-	// �뜝�떬湲�源띿삕�뜝�룞�삕??
+	// 占쎈쐻占쎈뼩疫뀐옙繹먮씮�굲占쎈쐻占쎈짗占쎌굲??
 	@RequestMapping("/member/detailFavoriteDiary.do")
 	public ModelAndView detailFavoriteDiary(int dno) {
 		Map map = new HashMap();
@@ -135,10 +136,6 @@ public class DiaryController {
 
 	@RequestMapping(value = "/member/updateDiary.do", method = RequestMethod.POST)
 	public ModelAndView diaryUpdateSubmit(DiaryVo d, HttpSession session, HttpServletRequest request) {
-
-		String content = request.getParameter("dcontent");
-		content = content.replace("\r\n", "<br>");
-		d.setDcontent(content);
 		
 		int no = d.getDno();
 
@@ -165,14 +162,19 @@ public class DiaryController {
 
 		d.setDphoto(oldDphoto);
 		d.setDfile(oldDfile);
-
+		
+		String content = dao.detailDiary(map).getDcontent();
+		content = content.replace("<br>", "\r\n");
+		d.setDcontent(content);
+		
 		String path = request.getRealPath("resources/upload");
 		String pathG = request.getRealPath("resources/upload2");
 
 		MultipartFile upload = d.getUpload();
 		MultipartFile uploadG = d.getUploadG();
 
-
+			
+		
 		String orgname = upload.getOriginalFilename();
 		String dphoto = "x";
 
@@ -264,6 +266,10 @@ public class DiaryController {
 		map.put("dno", dno);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("d", dao.detailDiary(map));
+		
+		String content = dao.detailDiary(map).getDcontent();
+		content = content.replace("\r\n", "<br>");			
+		mav.addObject("dcontent2", content);
 		return mav;
 	}
 	
@@ -381,41 +387,28 @@ public class DiaryController {
 
 		mav.addObject("todays", todays);
 		
+		//dno생성 후 전달
+		int dno = dao.diaryNextNo();
+		mav.addObject("dno", dno);
+		
 		return mav;
 	}
 
 	@RequestMapping(value = "/member/insertDiary.do", method = RequestMethod.POST)
 	public ModelAndView diaryInsertSubmit(DiaryVo d, HttpServletRequest request, HttpSession session) {
 		
-		String content = request.getParameter("dcontent");
-		content = content.replace("\r\n", "<br>");
-		d.setDcontent(content);		
-		
 		int mno = (Integer) session.getAttribute("mno");
 		int bno = (Integer) session.getAttribute("bno");
-
-		int no = dao.diaryNextNo();
-		d.setDno(no);
+		int dno = d.getDno();
+		//int no = dao.diaryNextNo();
+		//d.setDno(no);
 
 		d.setDtype("000");
-
-		if (d.getDfile() != null) {
-			d.setDtype("100");
-		}
-
-		if (d.getDcontent() != null) {
-			d.setDtype(d.getDtype().substring(0, 1) + "1" + d.getDtype().substring(2));
-		}
-
 		d.setDphoto("");
-		d.setDfile("");
-
 
 		String path = request.getRealPath("resources/upload");
-		String pathG = request.getRealPath("resources/upload2");
 
 		MultipartFile upload = d.getUpload();
-		MultipartFile uploadG = d.getUploadG();
 
 		String ser_id = request.getParameter("ser_id");
 		Boolean success = false;
@@ -427,7 +420,7 @@ public class DiaryController {
 		if (orgname != null && !orgname.equals("")) {
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
 
-			dphoto = bno + "b" + no + "." + exc;
+			dphoto = bno + "b" + dno + "." + exc;
 			File saveFile = new File(path + "/" + dphoto);
 
 			try {
@@ -451,38 +444,7 @@ public class DiaryController {
 				e.printStackTrace();
 			}
 		}
-		
-		/************** �뜝�뙎紐뚯삕 ***************/
-		String orgnameG = uploadG.getOriginalFilename();	
-		String dfile = "x";
-		
-		if (orgnameG != null && !orgnameG.equals("")) {
-			String excG = orgnameG.substring(orgnameG.lastIndexOf(".") + 1, orgnameG.length());
-			dfile = bno + "b" + no + "grim." + excG;
-			File saveFileG = new File(pathG + "/" + dfile);
-			
-			try {
-				upload.transferTo(saveFileG);
-			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println(e.getMessage());
-			}
-
-		}
-		
-		if (!dfile.equals("x")) {
-			d.setDfile(dfile);
-			d.setDtype(d.getDtype().substring(0, 2) + "1");
-			try {
-				byte[] dataG = uploadG.getBytes();
-				FileOutputStream fosG = new FileOutputStream(pathG + "/" + dfile);
-				fosG.write(dataG);
-				fosG.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+	
 
 		Map map = new HashMap();
 		map.put("dno", d.getDno());
@@ -498,6 +460,9 @@ public class DiaryController {
 		map.put("mno", d.getMno());
 		map.put("bno", d.getBno());
 
+
+		
+		System.out.println(d.getDfile());
 		ModelAndView mav = new ModelAndView("redirect:/member/diary.do?mno=" + mno + "&bno=" + bno);
 
 		int re = dao.insertDiary(map);
@@ -536,7 +501,7 @@ public class DiaryController {
 			code.addRCode("keyword = matrix(sql$DCONTENT)");
 			code.addRCode("write(keyword ,'keyword.txt')");
 			code.addRCode("data = readLines('keyword.txt')");
-			code.addRCode("data <- gsub('[ㄱ-ㅎ]','', data)");
+			code.addRCode("data <- gsub('[�꽦-�뀕]','', data)");
 			code.addRCode("data <- gsub('[0-9]','', data)");
 			//code.addRCode("data <- gsub('.','', data)");
 			code.addRCode("data1 <- sapply(data,extractNoun,USE.NAMES=F)");

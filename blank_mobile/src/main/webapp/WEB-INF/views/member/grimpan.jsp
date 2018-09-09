@@ -36,6 +36,7 @@ user-scalable=0">
 	function downloadCanvas(link, canvasId, filename) {
 		link.href = document.getElementById(canvasId).toDataURL();
 		link.download = filename;
+
 	}
 </script>
 <body>
