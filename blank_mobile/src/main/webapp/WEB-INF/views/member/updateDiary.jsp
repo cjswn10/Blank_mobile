@@ -37,12 +37,102 @@ table label {
 
 <script type="text/javascript">
 $(function() {
+	$(".today_weather").hide();
+	
+	if($("#cityName").val() == "")
+	{
+		$("#citya").html("현재 위치를 찾고 있습니다.")
+	}
 	
 	setTimeout(function () {
 		
 		location.href = "logOut.do?id=${id}&autoOut=out";
 		
 	},10800*1000);	
+	
+	$.ajax({
+		url:"http://ip-api.com/json",
+		success:function(data)
+		{
+			var lat = data.lat
+			var lon = data.lon
+			var city = data.city
+			
+			if(city == "Seoul"){city = "서울";}
+			else if(city == "Seoul-si"){city = "서울";}
+			else if(city == "Incheon"){city = "인천";}
+			else if(city == "Incheon-si"){city = "인천";}
+			else if(city == "Suwon"){city = "수원";}
+			else if(city == "Suwon-si"){city = "수원";}
+			else if(city == "Chuncheon"){city = "춘천";}
+			else if(city == "Chuncheon-si"){city = "춘천";}
+			else if(city == "Gangneung"){city = "강릉";}
+			else if(city == "Gangneung-si"){city = "강릉";}
+			else if(city == "Cheongju"){city = "청주";}
+			else if(city == "Cheongju-si"){city = "청주";}
+			else if(city == "Daejeon"){city = "대전";}
+			else if(city == "Daejeon-si"){city = "대전";}
+			else if(city == "Hong Sung"){city = "홍성";}
+			else if(city == "Hong Sung-si"){city = "홍성";}
+			else if(city == "Seosan City"){city = "홍성";}
+			else if(city == "Seosan City-si"){city = "홍성";}
+			else if(city == "Jeonju"){city = "전주";}
+			else if(city == "Jeonju-si"){city = "전주";}
+			else if(city == "Daegu"){city = "대구";}
+			else if(city == "Daegu-si"){city = "대구";}
+			else if(city == "Ulsan"){city = "울산";}
+			else if(city == "Ulsan-si"){city = "울산";}
+			else if(city == "Pohang"){city = "포항";}
+			else if(city == "Pohang-si"){city = "포항";}
+			else if(city == "Busan"){city = "부산";}
+			else if(city == "Busan-si"){city = "부산";}
+			else if(city == "Gwangju"){city = "광주";}
+			else if(city == "Gwangju-si"){city = "광주";}
+			else if(city == "Mokpo"){city = "목포";}
+			else if(city == "Mokpo-si"){city = "목포";}
+			else if(city == "Jeju City"){city = "제주";}
+			else if(city == "Jeju City-si"){city = "제주";}
+			else if(city == "Changwon"){city = "창원";}
+			else if(city == "Changwon-si"){city = "창원";}
+			else if(city == "Yeosu"){city = "여수";}
+			else if(city == "Yeosu-si"){city = "여수";}
+			else if(city == "Baengnyeongdo"){city = "백령도";}
+			else if(city == "Baengnyeongdo-si"){city = "백령도";}
+			else if(city == "Dokdo"){city = "독도";}
+			else if(city == "Dokdo-si"){city = "독도";}
+			else if(city == "Uljin"){city = "울진";}
+			else if(city == "Uljin-si"){city = "울진";}
+			else if(city == "Andong"){city = "안동";}
+			else if(city == "Andong-si"){city = "안동";}
+			else if(city == "Heuksando"){city = "흑산도";}
+			else if(city == "Heuksando-si"){city = "흑산도";}
+			else
+			{
+				city = "서울";
+			}
+			$("#x").val(lat);
+			$("#y").val(lon);
+			$("#cityName").val(city);
+			
+			var y_day = $("#day").val()
+			var y_month = y_day.substring(5,7)
+			var y_date = y_day.substring(8,10)
+
+			if(city != "")
+			{
+				setTimeout(function() {
+					
+					$("#citya").hide();
+					$("#cityb").show();
+					$("#cityb").html("현재 위치는 "+city+"이며, "+y_month+"월"+y_date+"일 날씨")
+					
+				}, 1000);
+					
+				
+			}
+			
+		}
+	})		
 	
 	var today = $("#today_date").val();
 	var today_year = parseInt(today.substring(0,4));
@@ -72,6 +162,8 @@ $(function() {
 		
 		year = parseInt(ddate.substring(0,4));
 		month = ddate.substring(5,7);
+		date_a = ddate.substring(8,10);
+		
 		
 		var arr = ddate.split("-")
 		
@@ -102,11 +194,95 @@ $(function() {
 			date = parseInt(ddate.substring(8,10))
 			$("#date").val(date)
 		}
-			
+		
+		$("#select_day").val(select_day);
+		
+		if($("#date").val() == '')
+		{
+			confirm("날짜를 입력 해주세요.")
+		}
+		else if($("#cityName").val() == '')
+		{
+			confirm("지역을 입력 해주세요.")
+		}
+		else if(select_day > today_now)
+		{
+			confirm("지난 날씨의 달력만 볼수 있습니다.")	
+		}	
+		else
+		{
+			$.ajax({
+				url:"weather4.do",
+				data:{"cityName":$("#cityName").val(),"dates":$("#date").val()},
+				success:function(data)
+				{
+					
+					var area = "";
+					var cityName = $("#cityName").val();
+					
+					if(cityName == '서울'){area = "09680";}
+					else if(cityName == '인천'){area = "11200";}
+					else if(cityName == '수원'){area = "02111";}
+					//else if(cityName == '파주'){area = "02480";}
+					else if(cityName == '춘천'){area = "01110";}
+					else if(cityName == '백령도'){area = "11720";}
+					else if(cityName == '강릉'){area = "01150";}
+					else if(cityName == '독도'){area = "04940";}
+					//else if(cityName == '속초'){area = "01210";}
+					else if(cityName == '청주'){area = "16111";}
+					else if(cityName == '안동'){area = "04170";}
+					else if(cityName == '대전'){area = "07110";}
+					else if(cityName == '홍성'){area = "15800";}
+					else if(cityName == '전주'){area = "13113";}
+					else if(cityName == '대구'){area = "06290";}
+					else if(cityName == '울산'){area = "10140";}
+					else if(cityName == '포항'){area = "04111";}
+					else if(cityName == '울진'){area = "04930";}
+					else if(cityName == '부산'){area = "08710";}
+					else if(cityName == '창원'){area = "03123";}
+					else if(cityName == '광주'){area = "05200";}
+					else if(cityName == '목포'){area = "12110";}
+					else if(cityName == '여수'){area = "12130";}
+					else if(cityName == '흑산도'){area = "12910";}
+					else if(cityName == '제주'){area = "14100";}
+					else
+					{
+						area = "09680";
+					}
+					
+					$.ajax({url:"http://203.236.209.112:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
+					$.ajax({url:"http://203.236.209.112:4997/weather2.do",success:function(data){}})
+					
+					$("#cityb").hide();
+					$("#cityc").show();
+					$("#cityc").html("현재 위치는 "+cityName+"이며, "+month+"월"+date_a+"일 날씨")
+					
+					$("#weather").html(data);
+					
+					$("#tmef_img").show()
+					
+					select_day = $("#select_day").val();
+					
+					if(select_day == today_now)
+					{
+						$("#tmef_img").attr({"src":$("[name='img2'] > v").html()})
+						$("#dweather").val($("[name='tmef2'] > v").html())
+					}
+					else if(select_day < today_now)
+					{
+						$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
+						$("#dweather").val($("[name='tmef'] > v").html())
+					}	
+					
+				}
+			})
+		}
 		
 	})
 	
 	$("#weather").hide()	
+	$("#weather2").hide()	
+	
 					var cityName = location.search.substr(1,1)
 					
 					if(cityName == '' || cityName == 'd')
@@ -174,134 +350,6 @@ $(function() {
 						else if(dweathers == "박무"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB23.png"})}
 						*/
 					}
-	
-	/*
-	else if($("[name='tmef'] > v").html().substring(1,2) == 's')
-	{
-		select_day = $("#select_day").val();
-
-		$("#tmef_img").show()
-		$("#dweather").val($("[name='tmef2'] > v").html())
-		$("#ddate").val($("#day").val())
-		//$("#city").html($("#citys").val()+"의 날씨")
-		if(select_day == today_now)
-		{
-			$("#tmef_img").attr({"src":$("[name='img2'] > v").html()})
-		}
-		else if(select_day < today_now)
-		{
-			$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
-		}
-		
-	}	
-	else
-	{
-		select_day = $("#select_day").val();
-		
-		$("#tmef_img").show()
-		$("#dweather").val($("[name='tmef'] > v").html())
-		$("#ddate").val($("#day").val())
-		//$("#city").html($("#citys").val()+"의 날씨")
-		if(select_day == today_now)
-		{
-			$("#tmef_img").attr({"src":$("[name='img2'] > v").html()})
-		}
-		else if(select_day < today_now)
-		{
-			$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
-		}
-			
-	}	
-	*/
-	$("#search").click(function() {	
-		
-		$("#select_day").val(select_day);
-		
-		if($("#date").val() == '')
-		{
-			confirm("날짜를 입력 해주세요.")
-		}
-		else if($("#cityName").val() == '')
-		{
-			confirm("지역을 입력 해주세요.")
-		}
-		else if(select_day > today_now)
-		{
-			confirm("지난 날씨의 달력만 볼수 있습니다.")
-		}
-		else
-		{
-			$.ajax({
-				url:"weather4.do",
-				data:{"cityName":$("#cityName").val(),"dates":$("#date").val()},
-				success:function(data)
-				{
-					
-					var area = "";
-					var cityName = $("#cityName").val();
-					
-					if(cityName == '서울'){area = "09680";}
-					else if(cityName == '인천'){area = "11200";}
-					else if(cityName == '수원'){area = "02111";}
-					//else if(cityName == '파주'){area = "02480";}
-					else if(cityName == '춘천'){area = "01110";}
-					else if(cityName == '백령도'){area = "11720";}
-					else if(cityName == '강릉'){area = "01150";}
-					else if(cityName == '독도'){area = "04940";}
-					//else if(cityName == '속초'){area = "01210";}
-					else if(cityName == '청주'){area = "16111";}
-					else if(cityName == '안동'){area = "04170";}
-					else if(cityName == '대전'){area = "07110";}
-					else if(cityName == '홍성'){area = "15800";}
-					else if(cityName == '전주'){area = "13113";}
-					else if(cityName == '대구'){area = "06290";}
-					else if(cityName == '울산'){area = "10140";}
-					else if(cityName == '포항'){area = "04111";}
-					else if(cityName == '울진'){area = "04930";}
-					else if(cityName == '부산'){area = "08710";}
-					else if(cityName == '창원'){area = "03123";}
-					else if(cityName == '광주'){area = "05200";}
-					else if(cityName == '목포'){area = "12110";}
-					else if(cityName == '여수'){area = "12130";}
-					else if(cityName == '흑산도'){area = "12910";}
-					else if(cityName == '제주'){area = "14100";}
-					else
-					{
-						area = "09680";
-					}
-					
-					$.ajax({url:"http://203.236.209.112:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
-					
-					$.ajax({url:"http://203.236.209.112:4997/weather2.do",success:function(data){}})
-					
-					$("#weather").html(data);
-					
-					$("#tmef_img").show()
-					
-					
-					select_day = $("#select_day").val();
-					
-					if(select_day == today_now)
-					{
-						$("#tmef_img").attr({"src":$("[name='img2'] > v").html()})
-						$("#dweather").val($("[name='tmef2'] > v").html())
-					}
-					else if(select_day < today_now)
-					{
-						$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
-						$("#dweather").val($("[name='tmef'] > v").html())
-					}
-					
-				}
-			})
-		}
-		
-	})
-		$("#citySelect").change(function(){
-			
-			$("#cityName").val($("#citySelect").val())
-		
-	})
 	
 	$("#btnAdd").click(function(){
 		if($("#dweather").val() == "")
@@ -505,9 +553,17 @@ border: none;">
 					<td>
 						<label for="dweather">날&nbsp;&nbsp;&nbsp;씨</label>
 						<input type="text" name="dweather" id="dweather" value="${d.dweather }" style="display:none;">
+						<span id="citya"></span>
+						<span id="cityb"></span>
+						<span id="cityc"></span>
+						<div class="status" style="display: inline-block;">
+						<!--  <span id="city"></span> -->
+						<img id="tmef_img" src="" width="30px" height="30px">
+						<span id="tmef_info"></span>
+						</div>
 						<div class="today_weather" style="display: inline-block; width:65%">
 
-
+				<!--  
 						<div class="city_weather">
 							<select id="citySelect" style="width:70%">
 									<option>지역</option>
@@ -535,27 +591,28 @@ border: none;">
 									<option>흑산도</option>
 									<option>제주</option>
 								</select>
+								
+								-->
+								
 								<input type="hidden" name="cityName" id="cityName">
-								<input type="hidden" id="day">
+								<input type="hidden" id="day" value="${d.ddate }">
 								<input type="hidden" id="date">
 								<input type="hidden" id="today_date" value="${todays }">
 								<input type="hidden" id="year">
 								<input type="hidden" id="month">
 								<input type="hidden" name="dno" id="dno" value="${d.dno }">
 								<input type="hidden" id="tes" value="${d.dweather }">
-								<input type="hidden" name="select_day" id="select_day" value="${select_day }">
-								<span id="weather"> ${weather } </span>
-								<button id="search" type="button">검색</button>
+								<input type="hidden" name="select_day" id="select_day">
+								<span id="weather"></span>
+								<span id="weather2"></span>
+								<input type="hidden" id="x" name="latitude">
+								<input type="hidden" id="y" name="longitude">
+								
 						</div>
 						
 						
 					</div>
 			
-					<div class="status" style="display: inline-block;">
-						<!--  <span id="city"></span> -->
-						<img id="tmef_img" src="" width="30px" height="30px">
-						<span id="tmef_info"></span>
-					</div>
 
 
 
