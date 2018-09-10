@@ -333,6 +333,7 @@ $(function() {
 				  console.log(grim);
 				  $("#dfile").val(grim);
 				  showImg();
+				  showDiary();
 			  }
 		});
 		
@@ -550,7 +551,7 @@ function showDiary() {
 						<!-- 그림 -->
 						<img id="img" width="300" style="display: none">
 						<!-- 글 -->
-						내용<textarea data-autogrow="false" class="form-control" rows="10" cols="30" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; height: 50%;"></textarea>
+						<textarea data-autogrow="false" class="form-control" rows="10" cols="30" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; height: 50%;"></textarea>
 					</td>
 				</tr>
 				<tr>
