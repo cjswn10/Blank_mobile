@@ -16,6 +16,7 @@ user-scalable=0">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+
 	$(function() {
 		$("#download").click(function() {
 			downloadCanvas(this, 'canvas', 'myGrim.png');
@@ -36,8 +37,8 @@ user-scalable=0">
 	function downloadCanvas(link, canvasId, filename) {
 		link.href = document.getElementById(canvasId).toDataURL();
 		link.download = filename;
-
 	}
+	
 </script>
 <body>
 <div data-role="content">
