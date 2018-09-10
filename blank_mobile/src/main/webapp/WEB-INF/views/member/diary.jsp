@@ -203,7 +203,7 @@ user-scalable=no">
 </script>
 </head>
 <body>	
-<div data-role="page">	
+<div data-role="page">	 
 		<!-- side-menu -->
 		<section id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
