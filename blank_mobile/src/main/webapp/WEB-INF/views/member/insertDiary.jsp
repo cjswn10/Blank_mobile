@@ -463,7 +463,7 @@ function showDiary() {
 	<div class="content" style="width:100%;">
 		<hr>
 	 
-		<form action="insertDiary.do" method="post" enctype="multipart/form-data" style="width:95%; margin-left: auto; margin-right: auto;">
+		<form action="insertDiary.do" method="post" enctype="multipart/form-data" style="width:95%; margin-left: auto; margin-right: auto;" data-ajax="false">
 			<input type="hidden" name="bno" id="bno" value="${bno }"> 
 			<input type="hidden" name="mno" id="mno" value="${mno }">
 			<input type="hidden" name="dno" id="mno" value="${dno }">
@@ -495,43 +495,7 @@ function showDiary() {
 						<img id="tmef_img" src="" width="30px" height="30px">
 						<span id="tmef_info"></span>
 						</div>
-						<div class="today_weather" style="display: inline-block; width:65%"">
-						<!-- 
-						<ul id="test">
-							<img id="weather_icon" src="../resources/img/weather.png" width="30" height="30">
-							<li id="today">날씨가 궁금하신가요?</li>
-							<li id="location">지역과 날씨를 선택 후 검색버튼을 눌러주세요.</li>
-						</ul>
-						
-						<div class="city_weather">
-							<select id="citySelect" style="width:70%">
-									<option>지역</option>
-									<option>서울</option>
-									<option>인천</option>
-									<option>수원</option>
-									<option>독도</option>
-									<option>춘천</option>
-									<option>백령도</option>
-									<option>강릉</option>
-									<option>울진</option>
-									<option>청주</option>
-									<option>안동</option>
-									<option>대전</option>
-									<option>홍성</option>
-									<option>전주</option>
-									<option>대구</option>
-									<option>울산</option>
-									<option>포항</option>
-									<option>부산</option>
-									<option>창원</option>
-									<option>광주</option>
-									<option>목포</option>
-									<option>여수</option>
-									<option>흑산도</option>
-									<option>제주</option>
-									<button id="search" type="button">검색</button>
-								</select>
-								 -->
+						<div class="today_weather" style="display: inline-block; width:65%">
 								<input type="hidden" name="cityName" id="cityName" >
 								<input type="hidden" id="day">
 								<input type="hidden" name="date" id="date">
@@ -543,11 +507,7 @@ function showDiary() {
 								<span id="weather2"></span>
 								<input type="hidden" id="x" name="latitude">
 								<input type="hidden" id="y" name="longitude">
-								
 						</div>
-			
-					</div>
-					
 					</td>
 				</tr>
 				<tr>

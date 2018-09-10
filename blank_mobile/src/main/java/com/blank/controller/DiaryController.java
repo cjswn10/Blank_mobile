@@ -409,6 +409,7 @@ public class DiaryController {
 		String path = request.getRealPath("resources/upload");
 
 		MultipartFile upload = d.getUpload();
+		MultipartFile uploadG = d.getUploadG();
 
 		String ser_id = request.getParameter("ser_id");
 		Boolean success = false;
