@@ -74,7 +74,6 @@ user-scalable=no">
 	margin-right: 10px;    
 }
 
-
 </style>
 <title>빈칸을 채우다.</title>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
@@ -85,12 +84,19 @@ user-scalable=no">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="../resources/css/blank.css">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 	 $(function () {	 
+		
+		 setTimeout(function () {
 				
+			 $('html, body').scrollTop(0);
+				
+			},100);
+		
+		 
 		setTimeout(function () {
 			
 			location.href = "logOut.do?id=${id}&autoOut=out";
@@ -223,10 +229,10 @@ user-scalable=no">
 		
 		<div id="wrapper">	
 	
-			<div class="mainSearchId" id="mainSearchId">
+			<div class="mainSearchId" id="mainSearchId" data-role="content" style="display:none;">
 				<div class="mainSearchId_inner" id="mainSearchId_inner">
-					<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
-					<span id="btnMove" class="glyphicon glyphicon-search" ></span>
+					<input type="text" data-role="none" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+					<span id="btnMove" class="glyphicon glyphicon-search"></span>
 					<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
 					
 					<div id="searchid"></div>
@@ -249,7 +255,7 @@ user-scalable=no">
 			
 			<!----------- 내용 -------------->		
 
-		<div data-role="content" style="padding: 0">
+		<div data-role="content" style="padding: 0;margin-bottom: 30px;overflow:hidden;">
 
 			<div>
 				<span id="keyword"></span>

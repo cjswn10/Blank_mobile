@@ -86,13 +86,6 @@
     background-size: auto 80%;
 }
 
-#searchid
-	{
-		border: 1px solid black;
-		height: 150px;
-		background: white;
-		color: black;
-	}
 #top
 	{
 		display:none;
@@ -156,6 +149,7 @@
 	}
 	
 }
+
 </style>
 
 <!-- Bootstrap -->
@@ -171,7 +165,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
 
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=16">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=6">
 <script type="text/javascript" src="../resources/js/menu.js?ver=7" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
@@ -354,7 +348,7 @@ $(function () {
 <body>
 
 	<!-- side-menu -->
-	<section id="mySidenav" class="sidenav">
+	<section id="mySidenav" class="sidenav" data-role="none">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 		<h5>회원정보</h5>
