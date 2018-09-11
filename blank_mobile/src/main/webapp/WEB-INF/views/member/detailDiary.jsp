@@ -56,11 +56,18 @@ span{
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="../resources/css/blank.css?ver=2">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 	$(function () {		
+		
+		 setTimeout(function () {
+				
+			 $('html, body').scrollTop(0);
+				
+			},100);
+		
 		if ("${d.dfile}" !== "") {
 			var img = $('<img></img>').attr({
 				src: "../resources/upload2/${d.dfile}",
@@ -132,13 +139,13 @@ span{
 
 		<div id="wrapper">	
 	
-			<div class="mainSearchId" id="mainSearchId">
+			<div class="mainSearchId" id="mainSearchId" data-role="footer" style="display:none;background-color:black;">
 				<div class="mainSearchId_inner" id="mainSearchId_inner">
-					<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
-					<span id="btnMove" class="glyphicon glyphicon-search" ></span>
-					<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
+					<input type="text"  data-role="none" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+					<span id="btnMove" class="glyphicon glyphicon-search" style="color:white"></span>
+					<span onclick="closeSearch()" class="glyphicon glyphicon-remove" style="color:white"></span>
 					
-					<div id="searchid"></div>
+					<div id="searchid" style="color:white;"></div>
 				</div>
 			</div>
 			<span id="con">${d.dcontent }</span>
@@ -154,7 +161,7 @@ span{
 			        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
 			    </ul>
 			</nav>					
-		<div id="detailDiary" style="padding: 2px"></div>
+		<div id="detailDiary" style="padding: 30px"></div>
 			<!--------- 푸터 ---------->
 			<div class="footer">
 				<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>

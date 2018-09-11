@@ -20,7 +20,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=TJJZXTuJHDxAWrWZPEdS&submodules=geocoder"></script>
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=2">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js?ver=2" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
@@ -80,7 +80,7 @@
 	</nav>
 		
 	
-	<div class="content">
+	<div class="content" style="margin-bottom:20px;">
 			<div class="row">
 				<div id="map" style="width:100%;height:400px;"></div>
 			</div>

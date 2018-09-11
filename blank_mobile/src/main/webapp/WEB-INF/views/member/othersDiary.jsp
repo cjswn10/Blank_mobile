@@ -88,16 +88,18 @@ user-scalable=no">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="../resources/css/blank.css?ver=1">
-<script type="text/javascript" src="../resources/js/menu.js" ></script>
-<link rel="stylesheet" href="../resources/css/blank.css">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 
 	$(function () {				
 		
-		
+		setTimeout(function () {
+			
+			 $('html, body').scrollTop(0);
+				
+			},100);
 		
 		setTimeout(function () {
 			
@@ -222,7 +224,7 @@ user-scalable=no">
 
 	<div data-role="page">		
 				
-		<div data-role="content" style="padding: 0">
+		<div data-role="content" style="padding: 0;overflow:hidden;">
 		<!-- side-menu -->
 		<section id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -242,13 +244,13 @@ user-scalable=no">
 
 		<div id="wrapper">	
 	
-			<div class="mainSearchId" id="mainSearchId">
+			<div class="mainSearchId" id="mainSearchId" data-role="footer" style="display:none;background-color:black;">
 				<div class="mainSearchId_inner" id="mainSearchId_inner">
-					<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
-					<span id="btnMove" class="glyphicon glyphicon-search" ></span>
-					<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
+					<input type="text"  data-role="none" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+					<span id="btnMove" class="glyphicon glyphicon-search" style="color:white" ></span>
+					<span onclick="closeSearch()" class="glyphicon glyphicon-remove" style="color:white"></span>
 					
-					<div id="searchid"></div>
+					<div id="searchid" style="color:white;"></div>
 				</div>
 			</div>
 			
@@ -267,7 +269,7 @@ user-scalable=no">
 					
 			<div id="user_id"></div>
 				
-			<ul data-role="listview" data-theme="d" id="list" style="padding: 15px;"></ul>						
+			<ul data-role="listview" data-theme="d" id="list" style="margin-bottom:10px;padding: 15px;"></ul>						
 			
 			<!--------- 푸터 ---------->
 			<div class="footer">

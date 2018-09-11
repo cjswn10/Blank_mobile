@@ -18,8 +18,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gaegu|Gamja+Flower|Jua|Nanum+Brush+Script|Nanum+Gothic+Coding|Nanum+Myeongjo|Nanum+Pen+Script|Source+Sans+Pro|Stylish|Sunflower:300" rel="stylesheet">
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=1">
-<script type="text/javascript" src="../resources/js/menu.js" ></script>
+<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
+<script type="text/javascript" src="../resources/js/menu.js?ver=2" ></script>
 <script src="//code.jquery.com/jquery-3.2.1.js"></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <style type="text/css">
@@ -533,7 +533,7 @@ border: none;">
 	    </ul>
 	</nav>	
 
-	<div class="content">
+	<div class="content" style="margin-bottom:30px;">
 		<hr>
 		<form action="updateDiary.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="dno" id="dno" value="${d.dno}">
@@ -549,7 +549,7 @@ border: none;">
 				<tr>
 					<td>
 						<label for="ddate">날&nbsp;&nbsp;&nbsp;짜</label>
-						<input type="date" name="ddate" id="ddate" required="required" value="" style="line-height: normal;width: 80%;">
+						<input type="date" name="ddate" id="ddate" required="required" value="${d.ddate }" style="line-height: normal;width: 80%;">
 					</td>
 				</tr>
 				<tr>

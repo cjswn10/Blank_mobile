@@ -1,29 +1,20 @@
 package com.blank.controller;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -104,8 +95,8 @@ public class DiaryController {
 		ModelAndView mav = new ModelAndView("redirect:/member/diary.do?mno=" + mno + "&bno=" + bno);
 		int re = dao.deleteDiary(map);
 		if (re < 1) {
-			mav.addObject("msg", "ERROR");
-			mav.setViewName("/member/DELETE DIARY ERROR");
+			mav.addObject("msg", "DELETE DIARY ERROR");
+			mav.setViewName("/member/deleteDiary.do");
 		}
 		if (re > 0 && oldFname != null && !oldFname.equals("")) {
 			File file = new File(path + "/" + oldFname);
@@ -163,10 +154,14 @@ public class DiaryController {
 		d.setDphoto(oldDphoto);
 		d.setDfile(oldDfile);
 		
+		String dcontent = request.getParameter("dcontent");
+		dcontent = dcontent.replace("\r\n", "<br />");
+		d.setDcontent(dcontent);
+		/*
 		String content = dao.detailDiary(map).getDcontent();
 		content = content.replace("<br>", "\r\n");
 		d.setDcontent(content);
-		
+		*/
 		String path = request.getRealPath("resources/upload");
 		String pathG = request.getRealPath("resources/upload2");
 
@@ -365,7 +360,7 @@ public class DiaryController {
 	        String tmef2 = caller.getParser().getAsStringArray("tmef2")[0];
 	        
 	        weather2 = caller.getParser().getXMLFileAsString();
-	        System.out.println(weather2);
+	        //System.out.println(weather2);
 			
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -407,9 +402,7 @@ public class DiaryController {
 		d.setDphoto("");
 
 		String path = request.getRealPath("resources/upload");
-
 		MultipartFile upload = d.getUpload();
-		MultipartFile uploadG = d.getUploadG();
 
 		String ser_id = request.getParameter("ser_id");
 		Boolean success = false;
@@ -418,6 +411,10 @@ public class DiaryController {
 		String orgname = upload.getOriginalFilename();
 		String dphoto = "x";
 
+		String dcontent = request.getParameter("dcontent");
+		dcontent = dcontent.replace("\r\n", "<br />");
+		d.setDcontent(dcontent);
+		
 		if (orgname != null && !orgname.equals("")) {
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
 
@@ -445,7 +442,6 @@ public class DiaryController {
 				e.printStackTrace();
 			}
 		}
-	
 
 		Map map = new HashMap();
 		map.put("dno", d.getDno());
@@ -461,8 +457,6 @@ public class DiaryController {
 		map.put("mno", d.getMno());
 		map.put("bno", d.getBno());
 
-
-		
 		System.out.println(d.getDfile());
 		ModelAndView mav = new ModelAndView("redirect:/member/diary.do?mno=" + mno + "&bno=" + bno);
 
@@ -502,9 +496,10 @@ public class DiaryController {
 			code.addRCode("keyword = matrix(sql$DCONTENT)");
 			code.addRCode("write(keyword ,'keyword.txt')");
 			code.addRCode("data = readLines('keyword.txt')");
-			code.addRCode("data <- gsub('[�꽦-�뀕]','', data)");
+			code.addRCode("data <- gsub('[ㄱ-ㅎ]','', data)");
 			code.addRCode("data <- gsub('[0-9]','', data)");
-			//code.addRCode("data <- gsub('.','', data)");
+			code.addRCode("data <- gsub('<br />','', data)");
+			code.addRCode("data <- gsub('\r\n','', data)");
 			code.addRCode("data1 <- sapply(data,extractNoun,USE.NAMES=F)");
 			code.addRCode("data2 <- unlist(data1)");
 			code.addRCode("data2 <- Filter(function(x) {nchar(x) >= 2} ,data2)");
@@ -527,7 +522,7 @@ public class DiaryController {
 	        String data9 = caller.getParser().getAsStringArray("data9")[0];
 
 	        keyword = caller.getParser().getXMLFileAsString();
-	       // System.out.println(keyword);
+	        //System.out.println(keyword);
 	        
 	        //mav.addObject("keyword", keyword);
 	        
