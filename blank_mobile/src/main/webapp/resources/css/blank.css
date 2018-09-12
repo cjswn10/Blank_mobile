@@ -108,7 +108,7 @@ nav span {
     width: 100%;
     top: 0;
     left: 0;
-    height: 30%;
+    height: 46px;
     transition: height .5s;
     display: none;
     overflow:auto;

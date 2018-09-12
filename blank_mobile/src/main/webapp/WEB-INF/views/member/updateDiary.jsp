@@ -395,8 +395,6 @@ $(function() {
 		$("#grim").attr({
 			src : "../resources/upload2/" + oldDfile
 		})
-		
-		
 	}
 	
 	//이전 사진이 있으면 보여주기
@@ -424,10 +422,21 @@ $(function() {
 				var grim = data + '.png';
 				console.log(grim + "업데이트");
 				$("#dfile").val(grim);
-				$("#grim").attr({
-					src : "../resources/upload2/" + grim
-				});
-				location.reload();
+				
+				if(oldDfile != "") {
+					console.log("이전파일 있음---------")
+					showImgG();
+				} else {
+					$("#grim").attr({
+						src : "../resources/upload2/" + grim
+					});
+					
+					$("#grim").css({
+						display: "inline-block"
+					});
+				}
+				
+				//showImgG();
 				showDiary();
 			}
 		});
@@ -447,7 +456,6 @@ function showDiary() {
 	$("#grimpan").css("display", "none");
 	$(location).attr('href','#insertDiaryDiv');
 }
-
 </script>
 
 <!-- 변경된 사진 & 그림 보여주기 -->
@@ -482,14 +490,14 @@ function showDiary() {
 	}
 	
 	function showImgG(){
-		var myImage = document.getElementById("img");
+		var myImage = document.getElementById("grim");
 		myImage.src = canvas.toDataURL();
 		
-		$("#img").css({
+		$("#grim").css({
 			display: "inline-block"
 		});
 		
-		$("#img").attr("src",myImage.src);
+		$("#grim").attr("src",myImage.src);
 	}
 </script>
 </head>
@@ -542,7 +550,7 @@ border: none;">
 	    </ul>
 	</nav>	
 
-	<div class="content" style="margin-bottom:30px;">
+	<div class="content" style="width:100%;">
 		<hr>
 		<form action="updateDiary.do" method="post" enctype="multipart/form-data" data-ajax="false">
 			<input type="hidden" name="dno" id="dno" value="${d.dno}">
@@ -619,7 +627,7 @@ border: none;">
 						
 						<!-- 그림첨부 버튼 -->
 						<!-- <label for="uploadG"><img alt="사진첨부" src="../resources/img/icon/draw.png" width="40px"></label> -->
-						<input type="hidden" name="dfile" id="dfile" style="display: none;">
+						<input type="text" name="dfile" id="dfile">
 						
 						<!-- 사진첨부 버튼 -->
 						<label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="25px"></label>
@@ -689,9 +697,9 @@ border: none;">
 </div>	<!-- insertDiv -->
 
 <div id="grimpan" style="display: none;">
-	<div data-role="content">
+	<div data-role="content" style="padding: 2px;margin-left: auto;margin-right: auto;">
 		<div>
-			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;"></canvas>
+			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;max-width: 98vw;"></canvas>
 		</div>
 	<script type="text/javascript" src="../resources/js/drawingColor.js?ver=18"></script>
 	

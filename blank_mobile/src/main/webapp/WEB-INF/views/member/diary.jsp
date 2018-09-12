@@ -232,35 +232,7 @@ user-scalable=no">
 							$(li).append(a);
 							$('#list').append(li);	
 						}
-						/* if (d.dphoto !== null) {							
-							var img = $('<img></img>').attr({
-								src: "../resources/upload/" + d.dphoto,
-								width: "100%",
-								height: "100%"					
-							});
-							$(a).append(img, title, content, ddate);
-							$(li).append(a);
-							$('#list').append(li);
-						}else {
-							$(a).append(title, content, ddate);
-							$(li).append(a);
-							$('#list').append(li);					
-						}		            
-						
-						if (d.dfile != null && d.ddphoto != null) {							
-							var img = $('<img></img>').attr({
-								src: "../resources/upload2/" + d.dfile,
-								width: "100%",
-								height: "100%"					
-							});
-							$(a).append(img, title, content, ddate);
-							$(li).append(a);
-							$('#list').append(li);
-						}else {
-							$(a).append(title, content, ddate);
-							$(li).append(a);
-							$('#list').append(li);					
-						}	 */					
+			
 					})
 					$('#list').listview("refresh");
 			}});		

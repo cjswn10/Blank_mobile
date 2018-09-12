@@ -12,7 +12,7 @@
 		user-scalable=no">
 <title>빈칸을 채우다.</title>
 <style type="text/css">
-	
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 </style>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

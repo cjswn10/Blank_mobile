@@ -138,10 +138,6 @@ public class DiaryController {
 		d.setDtype("000");
 		String dtype = d.getDtype();
 
-		if (d.getDfile() != null) {
-			d.setDtype("100");
-		}
-
 		int mno = (Integer) session.getAttribute("mno");
 		int bno = (Integer) session.getAttribute("bno");
 		ModelAndView mav = new ModelAndView();
@@ -188,38 +184,7 @@ public class DiaryController {
 			}
 		}
 
-		/*
-		String orgnameG = uploadG.getOriginalFilename();
-		String dfile = "x";
-
-		if (orgnameG != null && !orgnameG.equals("")) {
-
-			String excG = orgnameG.substring(orgnameG.lastIndexOf(".") + 1, orgnameG.length());
-			dfile = bno + "b" + no + "grim." + excG;
-
-			File saveFile = new File(pathG + "/" + dfile);
-			try {
-				uploadG.transferTo(saveFile);
-			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println(e.getMessage());
-			}
-		}
-
-		if (!dfile.equals("x")) {
-			d.setDfile(dfile);
-			d.setDtype(d.getDtype().substring(0, 2) + "1");
-
-			try {
-				byte[] dataG = uploadG.getBytes();
-				FileOutputStream fosG = new FileOutputStream(pathG + "/" + dfile);
-				fosG.write(dataG);
-				fosG.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		*/
+		System.out.println(d.getDfile());
 		int re = dao.updateDiary(d);
 
 		if (re > 0) {
@@ -228,12 +193,7 @@ public class DiaryController {
 				File file = new File(path + "/" + oldDphoto);
 				file.delete();
 			}
-			/*
-			if (oldDfile != null && !oldDfile.equals(dfile) && !dfile.equals("x")) {
-				File fileG = new File(pathG + "/" + oldDfile);
-				fileG.delete();
-			}
-			 */
+
 		} else {
 			mav.addObject("msg", "UPDATE DIARY ERROR");
 			mav.setViewName("/member/error");

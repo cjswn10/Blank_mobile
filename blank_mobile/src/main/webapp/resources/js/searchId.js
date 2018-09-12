@@ -29,6 +29,7 @@ $("#searchid").hide();
 							data:{"mno":v.mno},
 							success:function(data)
 							{
+								
 								location.href="othersDiary.do?id="+v.id+"&fmno="+v.mno+"";
 								var arr = eval("("+data+")");		
 								$.each(arr,function(i,a){
@@ -61,6 +62,7 @@ $("#searchid").hide();
 											data:{"mno":v.mno},
 											success:function(data)
 											{
+												
 												location.href="othersDiary.do?id="+v.id+"&fmno="+v.mno+"";
 												var arr = eval("("+data+")");		
 												$.each(arr,function(i,a){
