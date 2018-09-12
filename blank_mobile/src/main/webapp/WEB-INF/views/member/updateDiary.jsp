@@ -427,11 +427,11 @@ $(function() {
 				$("#grim").attr({
 					src : "../resources/upload2/" + grim
 				});
+				
 				location.reload();
 				showDiary();
 			}
 		});
-		
 	});
 });
 
