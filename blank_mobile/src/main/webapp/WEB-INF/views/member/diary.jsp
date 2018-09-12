@@ -20,20 +20,14 @@ user-scalable=no">
 	background: #ffffff;
 }
 
-.deleteDiary{
+.book{
 	background-color: orange;
 	padding: 15px;	
 	opacity: 0.8;	
 }
 
-.updateDiary{
-	background-color: blue;
-	padding: 15px;	
-	opacity: 0.8;
-}
-
 .insertDiary{
-	background-color: pink;
+	background-color: blue;
 	padding: 15px;	
 	opacity: 0.8;
 }
@@ -75,8 +69,9 @@ user-scalable=no">
     background-color: #EFE7E6;
     color:#662408;
     font-family: 'Nanum Pen Script', serif;
-	margin-right: 10px;    
+	margin-right: 10px;   
 }
+
 
 </style>
 <title>빈칸을 채우다.</title>
@@ -138,19 +133,52 @@ user-scalable=no">
 						$("#keyword").hide();
 						//$("#hash").html("#"+$("[name='data7'] > v").html()+"   #"+$("[name='data8'] > v").html()+"   #"+$("[name='data9'] > v").html())
 						
-						var p1 = $("<p class='btn btn1'></p>").html("#"+$("[name='data7'] > v").html());
-						var p2 = $("<p class='btn btn1'></p>").html("#"+$("[name='data8'] > v").html());
-						var p3 = $("<p class='btn btn1'></p>").html("#"+$("[name='data9'] > v").html());
 						
-						$(".iljung-date-div").html("");
-						$(".iljung-date-div").append(p1, p2, p3);
+						if($("[name='data7'] > v").html() == undefined || $("[name='data8'] > v").html() == undefined || $("[name='data9'] > v").html() == undefined)
+						{
+							var p4 = $("<p class='btn btn1'></p>").html("현재 작성된 일기가 없습니다.");
+							
+							$(".iljung-date-div").html("");
+							$(".iljung-date-div").append(p4);
+						}
+						else
+						{
+							var p1 = $("<p id='a' class='btn btn1'></p>").html("#"+$("[name='data7'] > v").html());
+							var p2 = $("<p id='b' class='btn btn1'></p>").html("#"+$("[name='data8'] > v").html());
+							var p3 = $("<p id='c' class='btn btn1'></p>").html("#"+$("[name='data9'] > v").html());
+								
+							$(".iljung-date-div").html("");
+							$(".iljung-date-div").append(p1, p2, p3);
+						}
+												
 						
 						//<div class="iljung-date-div"><p class="btn btn1" rel="div2">
 						
+						if($("[name='data7'] > v").html() == 'NA')
+						{
+							$("#a").attr({
+								style:"display:none"
+							})
+						}
+						
+						if($("[name='data8'] > v").html() == 'NA')
+						{
+							$("#b").attr({
+								style:"display:none"
+							})
+						}
+						
+						if($("[name='data9'] > v").html() == 'NA')
+						{
+							$("#c").attr({
+								style:"display:none"
+							})
+						}
 						
 					}
 				})
 		};
+		
 		
 		$(".btitle").change(function(){
 			var btitle = $(".btitle").val();
@@ -335,7 +363,10 @@ user-scalable=no">
 	</div>
 			
 		<div data-role="footer" data-position="fixed">
-			<div onclick="location.href='insertDiary.do'" data-ajax="false" class="insertDiary" style="position:fixed; right: 0; bottom: 0; cursor: pointer;">일기 등록</div>
+			
+			<font color="white"><span onclick="location.href='book.do'" class="book" style="position:fixed; right: 82px; bottom: 0; cursor: pointer;">내 일기장</span></font>
+			<font color="white"><span onclick="location.href='insertDiary.do'" class="insertDiary" style="position:fixed; right: 0px; bottom: 0; cursor: pointer;">일기 등록</span></font>			
+			
 		</div>
 	</div>			
 </body>

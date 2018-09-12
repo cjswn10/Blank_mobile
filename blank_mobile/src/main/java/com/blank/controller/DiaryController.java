@@ -1,3 +1,4 @@
+
 package com.blank.controller;
 
 import java.io.File;
@@ -544,5 +545,4 @@ public class DiaryController {
 	public void diary() {
 		
 	}
-
 }
