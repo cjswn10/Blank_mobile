@@ -100,7 +100,13 @@ span{
 		var ddate = $('<span style="font-size: 17px;"></span>').html("${d.ddate}")
 		var dweather = $('<span style="font-size: 17px;"></span>').html("${d.dweather}")
 		var dtitle = $('<p style="font-size: 20px;font-weight: bold;"></p>').html("${d.dtitle}")
+		
 		var content = "${dcontent2}";	
+		
+		//이전 폰트설정
+		$("#con").attr({
+			style : "font-family:${d.dfont};font-size: 20px;"
+		});
 		
 		$('#detailDiary').append(ddate, dweather, dtitle, images, con);		
 
@@ -169,6 +175,7 @@ span{
 			</nav>					
 		<div id="detailDiary" style="padding: 30px"></div>
 			<span id="con">${dcontent2 }</span>
+			
 			<!--------- 푸터 ---------->
 			<div class="footer">
 				<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
