@@ -168,7 +168,39 @@ user-scalable=no">
 						var content = $('<p></p>').html(d.dcontent);				
 						var ddate = $('<p class="ddate" style="font-size: 8px;"></p>').html(d.ddate);
 						
-						if (d.dphoto != null) {							
+						if (d.dphoto != null && d.dfile != null) {
+							var img = $('<img></img>').attr({
+								src: "../resources/upload/" + d.dphoto,
+								width: "100%",
+								height: "100%"					
+							});
+							$(a).append(img, title, content, ddate);
+							$(li).append(a);
+							$('#list').append(li);
+						} else if(d.dphoto != null && d.dfile == null){
+							var img = $('<img></img>').attr({
+								src: "../resources/upload/" + d.dphoto,
+								width: "100%",
+								height: "100%"					
+							});
+							$(a).append(img, title, content, ddate);
+							$(li).append(a);
+							$('#list').append(li);
+						} else if(d.dphoto == null && d.dfile != null){
+							var img = $('<img></img>').attr({
+								src: "../resources/upload2/" + d.dfile,
+								width: "100%",
+								height: "100%"					
+							});
+							$(a).append(img, title, content, ddate);
+							$(li).append(a);
+							$('#list').append(li);
+						} else{
+							$(a).append(title, content, ddate);
+							$(li).append(a);
+							$('#list').append(li);	
+						}
+						/* if (d.dphoto !== null) {							
 							var img = $('<img></img>').attr({
 								src: "../resources/upload/" + d.dphoto,
 								width: "100%",
@@ -183,7 +215,7 @@ user-scalable=no">
 							$('#list').append(li);					
 						}		            
 						
-						if (d.dfile != null) {							
+						if (d.dfile != null && d.ddphoto != null) {							
 							var img = $('<img></img>').attr({
 								src: "../resources/upload2/" + d.dfile,
 								width: "100%",
@@ -196,7 +228,7 @@ user-scalable=no">
 							$(a).append(title, content, ddate);
 							$(li).append(a);
 							$('#list').append(li);					
-						}						
+						}	 */					
 					})
 					$('#list').listview("refresh");
 			}});		
