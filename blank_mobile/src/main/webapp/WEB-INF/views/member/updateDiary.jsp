@@ -349,18 +349,21 @@ $(function() {
 	var oldDfile="${d.dfile}"
 	var oldDphoto="${d.dphoto}"
 	
+	console.log(oldFont);
 	console.log(oldDfile);
-	console.log(oldDphoto);
 	
 	//이전 폰트설정
 	$("#dcontent").attr({
-		style : "font-family:${d.dfont};",
+		style : "font-family:${d.dfont};"
 	});
 	$.each($("#dfont").find("option"), function(i, f) {
 		if($(f).val() == oldFont) {
+			
 			$(this).attr({
 				selected : "selected"
 			})
+			
+			//$(this).selectmenu('refresh');
 		}
 	});
 	
@@ -601,7 +604,7 @@ border: none;">
 				<tr>
 					<td>
 						<select name="dfont" id="dfont" style="width:80%">
-							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script" selected="selected" >Nanum Brush Script</option>
+							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script">Nanum Brush Script</option>
 							<option value="Nanum Gothic Coding" style="font-family:Nanum Gothic Coding">Nanum Gothic Coding</option>
 							<option value="Nanum Myeongjo" style="font-family:Nanum Myeongjo">Nanum Myeongjo</option>
 							<option value="Nanum Pen Script" style="font-family:Nanum Pen Script">Nanum Pen Script</option>
@@ -624,7 +627,7 @@ border: none;">
 						
 						<!-- 그림첨부 버튼 -->
 						<!-- <label for="uploadG"><img alt="사진첨부" src="../resources/img/icon/draw.png" width="40px"></label> -->
-						<input type="text" name="dfile" id="dfile">
+						<input type="hidden" name="dfile" id="dfile" style="display: none;">
 						
 						<!-- 사진첨부 버튼 -->
 						<label for="upload" style="display:inline-block;"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label>
