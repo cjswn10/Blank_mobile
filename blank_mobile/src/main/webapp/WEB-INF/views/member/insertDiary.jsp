@@ -15,13 +15,18 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+$( document ).on( "mobileinit", function() {
+	  $.mobile.ignoreContentEnabled = true;
+});
+</script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <!-- 웹폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gaegu|Gamja+Flower|Jua|Nanum+Brush+Script|Nanum+Gothic+Coding|Nanum+Myeongjo|Nanum+Pen+Script|Source+Sans+Pro|Stylish|Sunflower:300" rel="stylesheet">
 
-<link rel="stylesheet" href="../resources/css/blank.css">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 
@@ -35,6 +40,13 @@
 
 <script type="text/javascript">
 $(function() {
+	
+	setTimeout(function () {
+		
+		 $('html, body').scrollTop(0);
+			
+		},100);
+	
 	$(".today_weather").hide();
 	
 	if($("#cityName").val() == "")
@@ -329,16 +341,15 @@ $(function() {
 			  url: "makeImgFile.do",
 			  data: { "imgbase64": imgUrl, "bno": bno, "dno": dno },
 			  success : function(data) {
-				  var grim = data;
+				  var grim = data + '.png';
 				  console.log(grim);
 				  $("#dfile").val(grim);
 				  showImgG();
-				  alert("다운로드가 완료되었습니다.");
+
 			  }
 		});
 		
 	});
-
 	
 	function showImgG(){
 
@@ -358,6 +369,10 @@ $(function() {
 	
 	
 	//$("#insertDiaryDiv").find("*").attr("data-enhance", "false");
+
+	//$(".footer").find("*").attr("data-enhanced", "true");
+	$(".footer").find("*").attr("data-enhance", "false");
+
 	
 });
 
@@ -379,10 +394,7 @@ function showDiary() {
 
 <!-- 사진 보여주기 -->
 <script>
-
-
 	var sel_file;
-	var sel_fileG;	
 	
 	$(document).ready(function() {
 		$("#upload").on("change", showImg)
@@ -405,9 +417,22 @@ function showDiary() {
 			}
 			reader.readAsDataURL(f);
 		});
+		
+		$("#photo").css({
+			display: "inline-block"
+		});
 	}
 
-
+	function showImgG(){
+		var myImage = document.getElementById("img");
+		myImage.src = canvas.toDataURL();
+		
+		$("#img").css({
+			display: "inline-block"
+		});
+		
+		$("#img").attr("src",myImage.src);
+	}
 
 </script>
 
@@ -421,11 +446,11 @@ function showDiary() {
 	
 	<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 	<h5>회원정보</h5>
-	<a href="pwdCheck.do?id=${id }">Edit</a>
-	<a href="logOut.do?id=${id }">logout</a>
+	<a data-ajax="false" href="pwdCheck.do?id=${id }">Edit</a>
+	<a data-ajax="false" href="logOut.do?id=${id }">logout</a>
 	<br>
 	<h5>고객센터</h5>
-	<a href="qNa.do">Contact</a>
+	<a data-ajax="false" href="qNa.do">Contact</a>
 	<br>
 	<div class="side_icon_set">
 		<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
@@ -436,13 +461,13 @@ function showDiary() {
 
 <div id="wrapper">
 
-	<div class="mainSearchId" id="mainSearchId">
+	<div class="mainSearchId" id="mainSearchId" data-role="footer" style="display:none;background-color:black;">
 		<div class="mainSearchId_inner" id="mainSearchId_inner">
-			<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
-			<span id="btnMove" class="glyphicon glyphicon-search" ></span>
-			<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
+			<input type="text"  data-role="none" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+			<span id="btnMove" class="glyphicon glyphicon-search" style="color:white"></span>
+			<span onclick="closeSearch()" class="glyphicon glyphicon-remove" style="color:white"></span>
 			
-			<div id="searchid"></div>
+			<div id="searchid" style="color:white;"></div>
 		</div>
 	</div>
 
@@ -450,13 +475,13 @@ function showDiary() {
 	<!------ main-menu ------>
 	<nav class="clearfix">
 		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
-	    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
+	    <a data-ajax="false" href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
 	    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
 	    <ul id="main_menu">
-	        <li><a href="book.do">DIARY</a></li>
-	        <li><a href="favorite.do">FAVORITES</a></li>
-	        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
+	        <li><a data-ajax="false" href="book.do">DIARY</a></li>
+	        <li><a data-ajax="false" href="favorite.do">FAVORITES</a></li>
+	        <li style="border: none"><a data-ajax="false" href="myPage.do">MYPAGE</a></li>
 	    </ul>
 	</nav>	
 
@@ -545,11 +570,14 @@ function showDiary() {
 						<input type="file" name="upload" id="upload" style="display: none;">
 					</td>
 				</tr>
-						
+				
+				<!-- 그림, 사진 첨에 띄어주기-->
 				<tr>
 					<td>
 						<!-- 그림 -->
 						<img id="img" width="300" style="display: none">
+						<!-- 사진 -->
+						<img id="photo" width="300" style="display: none">
 						<!-- 글 -->
 						<textarea data-autogrow="false" class="form-control" rows="10" cols="30" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; height: 50%;"></textarea>
 					</td>
@@ -568,20 +596,46 @@ function showDiary() {
 					</td>
 				</tr>
 			</table>
-			
-			
-			
 		</form>
 		
 	</div>
+	
+	<!--------- 푸터 ---------->
+	<div class="footer">
+		<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+		<ul class="list-inline">
+	       <li>
+	           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+	           <br><h5>김영호</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+	           <br><h5>변성인</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+	           <br><h5>성민규</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+	           <br><h5>임연주</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+	           <br><h5>차건우</h5>
+	       </li>
+	    </ul>
+	</div>			
+
 </div>
-</div>
+
+</div> <!-- insertDiv -->
 
 
 <div id="grimpan" style="display: none;">
-	<div data-role="content">
+	<div data-role="content" style="padding: 2px;margin-left: auto;margin-right: auto;">
 		<div>
-			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;"></canvas>
+			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;max-width: 98vw;"></canvas>
 		</div>
 	<script type="text/javascript" src="../resources/js/drawingColor.js?ver=18"></script>
 	
@@ -602,8 +656,6 @@ function showDiary() {
 
 	</div>
 </div>
-
-
 
 </body>
 </html>

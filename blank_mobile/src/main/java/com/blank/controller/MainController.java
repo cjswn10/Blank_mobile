@@ -82,6 +82,9 @@ public class MainController {
 			code.addRCode("library(wordcloud)");
 			code.addRCode("useSejongDic()");
 			code.addRCode("data1=readLines('dailyKeyword.txt')");
+			code.addRCode("data1 <- gsub('<br />','', data1)");
+			code.addRCode("data1 <- gsub('\\r\\n','', data1)");
+			code.addRCode("data1 <- gsub('<br>','', data1)");
 			code.addRCode("data2 <- sapply(data1,extractNoun,USE.NAMES=F)");
 			code.addRCode("data3 <- unlist(data2)");
 			code.addRCode("data3 <- Filter(function(x) {nchar(x) >= 1} ,data3)");
@@ -154,6 +157,9 @@ public class MainController {
 			code.addRCode("library(wordcloud)");
 			code.addRCode("useSejongDic()");
 			code.addRCode("data1=readLines('weeklyKeyword.txt')");
+			code.addRCode("data1 <- gsub('<br />','', data1)");
+			code.addRCode("data1 <- gsub('\\r\\n','', data1)");
+			code.addRCode("data1 <- gsub('<br>','', data1)");
 			code.addRCode("data2 <- sapply(data1,extractNoun,USE.NAMES=F)");
 			code.addRCode("data3 <- unlist(data2)");
 			code.addRCode("data3 <- Filter(function(x) {nchar(x) >= 1} ,data3)");

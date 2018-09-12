@@ -12,6 +12,9 @@ maximum-scale=1.0,
 minimum-scale=1.0,
 user-scalable=no">
 <style type="text/css">
+.ui-page {
+	background: #ffffff;
+}
 
 span{
 	margin-right: 10px;
@@ -56,35 +59,44 @@ span{
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="../resources/css/blank.css?ver=2">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 	$(function () {		
+		
+		 setTimeout(function () {
+				
+			 $('html, body').scrollTop(0);
+				
+			},100);
+		
+		var images = $('<div></div>');
+		
 		if ("${d.dfile}" !== "") {
-			var img = $('<img></img>').attr({
+			var grim = $('<img></img>').attr({
 				src: "../resources/upload2/${d.dfile}",
 				width: "100%",
 				height: "100%"
 			})
-			$('#detailDiary').append(img);	
-			
+			$(images).append(grim);	
 		}
+		
 		if ("${d.dphoto}" !== "") {
-			var img = $('<img></img>').attr({
+			var photo = $('<img></img>').attr({
 				src: "../resources/upload/${d.dphoto}",
 				width: "100%",
 				height: "100%"
 			})
-			$('#detailDiary').append(img);			
+			$(images).append(photo);	
 		}
 		
-		var ddate = $('<span style="font-size: 12px;"></span>').html("${d.ddate}")
-		var dweather = $('<span style="font-size: 12px;"></span>').html("${d.dweather}")
-		var dtitle = $('<p style="font-size: 20px;"></p>').html("${d.dtitle}")
-		var content = "${dcontent2}";			
+		var ddate = $('<span style="font-size: 17px;"></span>').html("${d.ddate}")
+		var dweather = $('<span style="font-size: 17px;"></span>').html("${d.dweather}")
+		var dtitle = $('<p style="font-size: 20px;font-weight: bold;"></p>').html("${d.dtitle}")
+		var content = "${dcontent2}";	
 		
-		$('#detailDiary').append(ddate, dweather, dtitle, con);					
+		$('#detailDiary').append(ddate, dweather, dtitle, images, con);		
 
 		
 		setTimeout(function () {
@@ -94,7 +106,7 @@ span{
 		},10800*1000);
 		
 		$('.deleteDiary').click(function() {
-			re = confirm("정말 삭제하시겠습니다?");
+			re = confirm("정말 삭제하시겠습니까?");
 			if (re == true) {
 				location.href = "deleteDiary.do?dno="+${d.dno }
 			}
@@ -107,10 +119,6 @@ span{
 </script>
 </head>
 <body>
-
-	<div data-role="page">
-		
-				
 		<div data-role="content" style="padding: 0">
 		
 		<!-- side-menu -->
@@ -132,16 +140,15 @@ span{
 
 		<div id="wrapper">	
 	
-			<div class="mainSearchId" id="mainSearchId">
+			<div class="mainSearchId" id="mainSearchId" data-role="footer" style="display:none;background-color:black;">
 				<div class="mainSearchId_inner" id="mainSearchId_inner">
-					<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
-					<span id="btnMove" class="glyphicon glyphicon-search" ></span>
-					<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
+					<input type="text"  data-role="none" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+					<span id="btnMove" class="glyphicon glyphicon-search" style="color:white"></span>
+					<span onclick="closeSearch()" class="glyphicon glyphicon-remove" style="color:white"></span>
 					
-					<div id="searchid"></div>
+					<div id="searchid" style="color:white;"></div>
 				</div>
 			</div>
-			<span id="con">${d.dcontent }</span>
 			<!------ main-menu ------>
 			<nav class="clearfix" style="margin-bottom: 20px">
 				<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
@@ -154,7 +161,8 @@ span{
 			        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
 			    </ul>
 			</nav>					
-		<div id="detailDiary" style="padding: 2px"></div>
+		<div id="detailDiary" style="padding: 30px"></div>
+			<span id="con">${dcontent2 }</span>
 			<!--------- 푸터 ---------->
 			<div class="footer">
 				<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
@@ -182,11 +190,11 @@ span{
 			    </ul>
 			</div>			
 		
-			<font color="white"><span onclick="location.href='updateDiary.do?dno=${d.dno}'" class="updateDiary" style="position:fixed; right: 82px; bottom: 0; cursor: pointer;">일기 수정</span></font>
+			<font color="white"><span data-ajax="false" onclick="location.href='updateDiary.do?dno=${d.dno}'" class="updateDiary" style="position:fixed; right: 82px; bottom: 0; cursor: pointer;">일기 수정</span></font>
 			<font color="white"><span onclick="location.href='deleteDiary.do?dno=${d.dno}'" class="deleteDiary" style="position:fixed; right: 0px; bottom: 0; cursor: pointer;">일기 삭제</span></font>			
 		</div>
 	</div>
-</div>
+
 		
 </body>
 </html>

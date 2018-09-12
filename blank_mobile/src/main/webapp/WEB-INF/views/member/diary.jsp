@@ -16,20 +16,18 @@ user-scalable=no">
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
-.deleteDiary{
+.ui-page {
+	background: #ffffff;
+}
+
+.book{
 	background-color: orange;
 	padding: 15px;	
 	opacity: 0.8;	
 }
 
-.updateDiary{
-	background-color: blue;
-	padding: 15px;	
-	opacity: 0.8;
-}
-
 .insertDiary{
-	background-color: pink;
+	background-color: blue;
 	padding: 15px;	
 	opacity: 0.8;
 }
@@ -71,7 +69,7 @@ user-scalable=no">
     background-color: #EFE7E6;
     color:#662408;
     font-family: 'Nanum Pen Script', serif;
-	margin-right: 10px;    
+	margin-right: 10px;   
 }
 
 
@@ -85,12 +83,19 @@ user-scalable=no">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="../resources/css/blank.css">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
 	 $(function () {	 
+		
+		 setTimeout(function () {
 				
+			 $('html, body').scrollTop(0);
+				
+			},100);
+		
+		 
 		setTimeout(function () {
 			
 			location.href = "logOut.do?id=${id}&autoOut=out";
@@ -128,19 +133,52 @@ user-scalable=no">
 						$("#keyword").hide();
 						//$("#hash").html("#"+$("[name='data7'] > v").html()+"   #"+$("[name='data8'] > v").html()+"   #"+$("[name='data9'] > v").html())
 						
-						var p1 = $("<p class='btn btn1'></p>").html("#"+$("[name='data7'] > v").html());
-						var p2 = $("<p class='btn btn1'></p>").html("#"+$("[name='data8'] > v").html());
-						var p3 = $("<p class='btn btn1'></p>").html("#"+$("[name='data9'] > v").html());
 						
-						$(".iljung-date-div").html("");
-						$(".iljung-date-div").append(p1, p2, p3);
+						if($("[name='data7'] > v").html() == undefined || $("[name='data8'] > v").html() == undefined || $("[name='data9'] > v").html() == undefined)
+						{
+							var p4 = $("<p class='btn btn1'></p>").html("현재 작성된 일기가 없습니다.");
+							
+							$(".iljung-date-div").html("");
+							$(".iljung-date-div").append(p4);
+						}
+						else
+						{
+							var p1 = $("<p id='a' class='btn btn1'></p>").html("#"+$("[name='data7'] > v").html());
+							var p2 = $("<p id='b' class='btn btn1'></p>").html("#"+$("[name='data8'] > v").html());
+							var p3 = $("<p id='c' class='btn btn1'></p>").html("#"+$("[name='data9'] > v").html());
+								
+							$(".iljung-date-div").html("");
+							$(".iljung-date-div").append(p1, p2, p3);
+						}
+												
 						
 						//<div class="iljung-date-div"><p class="btn btn1" rel="div2">
 						
+						if($("[name='data7'] > v").html() == 'NA')
+						{
+							$("#a").attr({
+								style:"display:none"
+							})
+						}
+						
+						if($("[name='data8'] > v").html() == 'NA')
+						{
+							$("#b").attr({
+								style:"display:none"
+							})
+						}
+						
+						if($("[name='data9'] > v").html() == 'NA')
+						{
+							$("#c").attr({
+								style:"display:none"
+							})
+						}
 						
 					}
 				})
 		};
+		
 		
 		$(".btitle").change(function(){
 			var btitle = $(".btitle").val();
@@ -162,7 +200,39 @@ user-scalable=no">
 						var content = $('<p></p>').html(d.dcontent);				
 						var ddate = $('<p class="ddate" style="font-size: 8px;"></p>').html(d.ddate);
 						
-						if (d.dphoto != null) {							
+						if (d.dphoto != null && d.dfile != null) {
+							var img = $('<img></img>').attr({
+								src: "../resources/upload/" + d.dphoto,
+								width: "100%",
+								height: "100%"					
+							});
+							$(a).append(img, title, content, ddate);
+							$(li).append(a);
+							$('#list').append(li);
+						} else if(d.dphoto != null && d.dfile == null){
+							var img = $('<img></img>').attr({
+								src: "../resources/upload/" + d.dphoto,
+								width: "100%",
+								height: "100%"					
+							});
+							$(a).append(img, title, content, ddate);
+							$(li).append(a);
+							$('#list').append(li);
+						} else if(d.dphoto == null && d.dfile != null){
+							var img = $('<img></img>').attr({
+								src: "../resources/upload2/" + d.dfile,
+								width: "100%",
+								height: "100%"					
+							});
+							$(a).append(img, title, content, ddate);
+							$(li).append(a);
+							$('#list').append(li);
+						} else{
+							$(a).append(title, content, ddate);
+							$(li).append(a);
+							$('#list').append(li);	
+						}
+						/* if (d.dphoto !== null) {							
 							var img = $('<img></img>').attr({
 								src: "../resources/upload/" + d.dphoto,
 								width: "100%",
@@ -177,7 +247,7 @@ user-scalable=no">
 							$('#list').append(li);					
 						}		            
 						
-						if (d.dfile != null) {							
+						if (d.dfile != null && d.ddphoto != null) {							
 							var img = $('<img></img>').attr({
 								src: "../resources/upload2/" + d.dfile,
 								width: "100%",
@@ -190,7 +260,7 @@ user-scalable=no">
 							$(a).append(title, content, ddate);
 							$(li).append(a);
 							$('#list').append(li);					
-						}						
+						}	 */					
 					})
 					$('#list').listview("refresh");
 			}});		
@@ -223,10 +293,10 @@ user-scalable=no">
 		
 		<div id="wrapper">	
 	
-			<div class="mainSearchId" id="mainSearchId">
+			<div class="mainSearchId" id="mainSearchId" data-role="content" style="display:none;">
 				<div class="mainSearchId_inner" id="mainSearchId_inner">
-					<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
-					<span id="btnMove" class="glyphicon glyphicon-search" ></span>
+					<input type="text" data-role="none" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+					<span id="btnMove" class="glyphicon glyphicon-search"></span>
 					<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
 					
 					<div id="searchid"></div>
@@ -249,7 +319,7 @@ user-scalable=no">
 			
 			<!----------- 내용 -------------->		
 
-		<div data-role="content" style="padding: 0">
+		<div data-role="content" style="padding: 0;margin-bottom: 30px;overflow:hidden;">
 
 			<div>
 				<span id="keyword"></span>
@@ -293,7 +363,10 @@ user-scalable=no">
 	</div>
 			
 		<div data-role="footer" data-position="fixed">
-			<div onclick="location.href='insertDiary.do'" data-ajax="false" class="insertDiary" style="position:fixed; right: 0; bottom: 0; cursor: pointer;">일기 등록</div>
+			
+			<font color="white"><span onclick="location.href='book.do'" class="book" style="position:fixed; right: 82px; bottom: 0; cursor: pointer;">내 일기장</span></font>
+			<font color="white"><span onclick="location.href='insertDiary.do'" class="insertDiary" style="position:fixed; right: 0px; bottom: 0; cursor: pointer;">일기 등록</span></font>			
+			
 		</div>
 	</div>			
 </body>

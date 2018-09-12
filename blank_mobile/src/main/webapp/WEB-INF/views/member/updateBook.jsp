@@ -81,7 +81,7 @@
 
 
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=1">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js?ver=6" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">

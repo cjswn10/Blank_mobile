@@ -121,7 +121,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=17">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js?ver=7" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
@@ -265,7 +265,7 @@
 
 	<div class="mainSearchId" id="mainSearchId" >
 		<div class="mainSearchId_inner" id="mainSearchId_inner">
-			<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
+			<input type="text"  name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
 			<span id="btnMove" class="glyphicon glyphicon-search" ></span>
 			<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
 			

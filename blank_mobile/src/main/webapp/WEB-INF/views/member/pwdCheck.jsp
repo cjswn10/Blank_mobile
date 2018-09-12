@@ -35,12 +35,19 @@
 
 	#d
 	{
+		
 		font-family: 'Nanum Pen Script', serif;
 		font-size:20px;
+		heigth:30%;
 		position: relative;
 		top: 20px;
 	}
 
+	.f
+	{
+		position: relative;
+		top:30px;
+	}
 
 	
 </style>
@@ -49,7 +56,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=1">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js?ver=2" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
@@ -125,7 +132,7 @@
 	      
 			</div>
 			
-			<div id="d"><font color="red">${msg }</font></div>
+			<span id="d"><font color="red">${msg }</font></span>
 			
 			
 				<form action="pwdCheck.do" method="post" class="f">

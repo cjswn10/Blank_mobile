@@ -33,11 +33,6 @@ ul{
 {
 	font-size: 30px;
 }
-#list
-{
-	width: 100%;
-	height: 100%;
-}
 
 @media screen and (min-width: 576px) {	
 	#list {
@@ -54,7 +49,7 @@ ul{
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<link rel="stylesheet" href="../resources/css/blank.css?ver=2">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
 <script type="text/javascript">
