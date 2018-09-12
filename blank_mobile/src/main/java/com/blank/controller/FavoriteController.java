@@ -75,6 +75,7 @@ public class FavoriteController {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 		str = mapper.writeValueAsString(dao.list2(map));
+		System.out.println(str);
 		}catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());

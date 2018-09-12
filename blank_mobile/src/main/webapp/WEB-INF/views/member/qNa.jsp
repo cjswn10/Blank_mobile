@@ -20,9 +20,13 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=TJJZXTuJHDxAWrWZPEdS&submodules=geocoder"></script>
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=6">
 <script type="text/javascript" src="../resources/js/menu.js?ver=2" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+</style>
+
 <script type="text/javascript">
 	$(function() {
 		setTimeout(function () {
@@ -93,6 +97,7 @@
  					<h3>Tel</h3>
 					<h5>(010)-7706-2878</h5>
 	 			</div>
+	 			<br>
  				<div class="col-md-6">
  					<h3>STAFF</h3>
  					<h5>비트밀당조</h5><br>
