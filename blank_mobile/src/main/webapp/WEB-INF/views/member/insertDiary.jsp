@@ -336,34 +336,16 @@ $(function() {
 			  url: "makeImgFile.do",
 			  data: { "imgbase64": imgUrl, "bno": bno, "dno": dno },
 			  success : function(data) {
-				  var grim = data;
+				  var grim = data + '.png';
 				  console.log(grim);
 				  $("#dfile").val(grim);
-				  showImg();
+				  showImgG();
 				  showDiary();
 			  }
 		});
 		
 	});
 
-	
-	function showImg(){
-
-
-		var myImage = document.getElementById("img");
-		myImage.src = canvas.toDataURL();
-		
-		$("#img").css({
-			display: "inline-block"
-		});
-		
-		$("#img").attr("src",myImage.src);
-
-	}
-	
-	
-	
-	
 	//$("#insertDiaryDiv").find("*").attr("data-enhance", "false");
 	
 });
@@ -386,10 +368,7 @@ function showDiary() {
 
 <!-- 사진 보여주기 -->
 <script>
-
-
 	var sel_file;
-	var sel_fileG;	
 	
 	$(document).ready(function() {
 		$("#upload").on("change", showImg)
@@ -412,9 +391,22 @@ function showDiary() {
 			}
 			reader.readAsDataURL(f);
 		});
+		
+		$("#photo").css({
+			display: "inline-block"
+		});
 	}
 
-
+	function showImgG(){
+		var myImage = document.getElementById("img");
+		myImage.src = canvas.toDataURL();
+		
+		$("#img").css({
+			display: "inline-block"
+		});
+		
+		$("#img").attr("src",myImage.src);
+	}
 
 </script>
 
@@ -557,6 +549,8 @@ function showDiary() {
 					<td>
 						<!-- 그림 -->
 						<img id="img" width="300" style="display: none">
+						<!-- 사진 -->
+						<img id="photo" width="300" style="display: none">
 						<!-- 글 -->
 						<textarea data-autogrow="false" class="form-control" rows="10" cols="30" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; height: 50%;"></textarea>
 					</td>

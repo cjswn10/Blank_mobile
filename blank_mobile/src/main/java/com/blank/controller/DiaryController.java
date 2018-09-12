@@ -36,7 +36,7 @@ public class DiaryController {
 		this.dao = dao;
 	}
 
-	// �뜝�럥�맶�뜝�럥堉⑴뼨�먯삕濚밸Ŧ�뵰占쎄뎡�뜝�럥�맶�뜝�럥吏쀥뜝�럩援�??
+	// 占쎈쐻占쎈뼩疫뀐옙繹먮씮�굲占쎈쐻占쎈짗占쎌굲??
 	@RequestMapping("/member/mainDetailDiary.do")
 	public ModelAndView mainDetailDiary(int dno) {
 		Map map = new HashMap();
@@ -46,7 +46,7 @@ public class DiaryController {
 		return mav;
 	}
 
-	// �뜝�럥�맶�뜝�럥堉⑴뼨�먯삕濚밸Ŧ�뵰占쎄뎡�뜝�럥�맶�뜝�럥吏쀥뜝�럩援�??
+	// 占쎈쐻占쎈뼩疫뀐옙繹먮씮�굲占쎈쐻占쎈짗占쎌굲??
 	@RequestMapping("/member/detailFavoriteDiary.do")
 	public ModelAndView detailFavoriteDiary(int dno) {
 		Map map = new HashMap();
@@ -153,11 +153,10 @@ public class DiaryController {
 
 		d.setDphoto(oldDphoto);
 		d.setDfile(oldDfile);
-		/*
+		
 		String dcontent = request.getParameter("dcontent");
 		dcontent = dcontent.replace("\r\n", "<br />");
 		d.setDcontent(dcontent);
-		*/
 		/*
 		String content = dao.detailDiary(map).getDcontent();
 		content = content.replace("<br>", "\r\n");
@@ -266,6 +265,7 @@ public class DiaryController {
 		String content = dao.detailDiary(map).getDcontent();
 		content = content.replace("\r\n", "<br>");			
 		mav.addObject("dcontent2", content);
+		
 		return mav;
 	}
 	
@@ -330,7 +330,7 @@ public class DiaryController {
 	@ResponseBody
 	public String weather2(HttpSession session,HttpServletRequest request,String cityName)
 	{
-		//System.out.println(cityName);
+		System.out.println(cityName);
 		String weather2 = "";
 
 		try {
@@ -343,10 +343,10 @@ public class DiaryController {
 			code.clear();
 	        
 	        code.addRCode("setwd('c:/r_temp')");
-			code.addRCode("data3 = read.csv('weather2.csv')");
-			code.addRCode("data4 = data.frame(data3)");
-			code.addRCode("weather2 = subset(data4,city=='"+cityName+"')");
-			code.addRCode("city = as.character(weather2[1,1])");
+		     	code.addRCode("data3 = read.csv('weather2.csv')");
+		    	code.addRCode("data4 = data.frame(data3)");
+		    	code.addRCode("weather2 = subset(data4,city=='"+cityName+"')");
+		    	code.addRCode("city = as.character(weather2[1,1])");
 	        code.addRCode("img2 = as.character(weather2[1,2])");
 	        code.addRCode("tmef2 = as.character(weather2[1,3])");
 	        
@@ -383,7 +383,7 @@ public class DiaryController {
 
 		mav.addObject("todays", todays);
 		
-		//dno�깮�꽦 �썑 �쟾�떖
+		//dno생성 후 전달
 		int dno = dao.diaryNextNo();
 		mav.addObject("dno", dno);
 		
@@ -392,13 +392,18 @@ public class DiaryController {
 
 	@RequestMapping(value = "/member/insertDiary.do", method = RequestMethod.POST)
 	public ModelAndView diaryInsertSubmit(DiaryVo d, HttpServletRequest request, HttpSession session) {
-		
 		int mno = (Integer) session.getAttribute("mno");
 		int bno = (Integer) session.getAttribute("bno");
 		int dno = d.getDno();
+
+		ModelAndView mav = new ModelAndView("redirect:/member/diary.do?mno=" + mno + "&bno=" + bno);
 		//int no = dao.diaryNextNo();
 		//d.setDno(no);
-
+		/*
+		String dcontent2 = request.getParameter("dcontent");
+		dcontent2 = dcontent2.replace("\r\n", "<br />");
+		mav.addObject("dcontent2", dcontent2);
+		*/
 		d.setDtype("000");
 		d.setDphoto("");
 
@@ -407,15 +412,10 @@ public class DiaryController {
 
 		String ser_id = request.getParameter("ser_id");
 		Boolean success = false;
-		ModelAndView view = new ModelAndView();
 
 		String orgname = upload.getOriginalFilename();
 		String dphoto = "x";
-		/*
-		String dcontent = request.getParameter("dcontent");
-		dcontent = dcontent.replace("\r\n", "<br />");
-		d.setDcontent(dcontent);
-		*/
+		
 		if (orgname != null && !orgname.equals("")) {
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
 
@@ -459,7 +459,6 @@ public class DiaryController {
 		map.put("bno", d.getBno());
 
 		System.out.println(d.getDfile());
-		ModelAndView mav = new ModelAndView("redirect:/member/diary.do?mno=" + mno + "&bno=" + bno);
 
 		int re = dao.insertDiary(map);
 		if (re < 1) {
@@ -500,7 +499,7 @@ public class DiaryController {
 			code.addRCode("data <- gsub('[ㄱ-ㅎ]','', data)");
 			code.addRCode("data <- gsub('[0-9]','', data)");
 			code.addRCode("data <- gsub('<br />','', data)");
-			code.addRCode("data <- gsub('<br>','', data)");
+      code.addRCode("data <- gsub('<br>','', data)");
 			code.addRCode("data <- gsub('\r\n','', data)");
 			code.addRCode("data1 <- sapply(data,extractNoun,USE.NAMES=F)");
 			code.addRCode("data2 <- unlist(data1)");

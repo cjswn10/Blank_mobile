@@ -89,7 +89,7 @@ span{
 		var ddate = $('<span style="font-size: 12px;"></span>').html("${d.ddate}")
 		var dweather = $('<span style="font-size: 12px;"></span>').html("${d.dweather}")
 		var dtitle = $('<p style="font-size: 20px;"></p>').html("${d.dtitle}")
-		var content = "${dcontent2}";			
+		var content = "${dcontent2}";	
 		
 		$('#detailDiary').append(ddate, dweather, dtitle, con);					
 
@@ -116,8 +116,6 @@ span{
 <body>
 
 	<div data-role="page">
-		
-				
 		<div data-role="content" style="padding: 0">
 		
 		<!-- side-menu -->
