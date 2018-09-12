@@ -101,7 +101,7 @@ span{
 		},10800*1000);
 		
 		$('.deleteDiary').click(function() {
-			re = confirm("정말 삭제하시겠습니다?");
+			re = confirm("정말 삭제하시겠습니까?");
 			if (re == true) {
 				location.href = "deleteDiary.do?dno="+${d.dno }
 			}

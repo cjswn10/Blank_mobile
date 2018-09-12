@@ -82,14 +82,14 @@ public class MainController {
 			code.addRCode("library(wordcloud)");
 			code.addRCode("useSejongDic()");
 			code.addRCode("data1=readLines('dailyKeyword.txt')");
+			code.addRCode("data1 <- gsub('<br />','', data1)");
+			code.addRCode("data1 <- gsub('\\r\\n','', data1)");
+			code.addRCode("data1 <- gsub('<br>','', data1)");
 			code.addRCode("data2 <- sapply(data1,extractNoun,USE.NAMES=F)");
 			code.addRCode("data3 <- unlist(data2)");
 			code.addRCode("data3 <- Filter(function(x) {nchar(x) >= 1} ,data3)");
 			code.addRCode("data3=gsub('[0-9]','',data3)");
 			code.addRCode("data3=gsub('[¤¡-¤¾]','',data3)");
-			code.addRCode("data <- gsub('<br />','', data)");
-			code.addRCode("data <- gsub('\r\n','', data)");
-			code.addRCode("data <- gsub('<br>','', data)");
 			code.addRCode("write(unlist(data3),'dailyKeyword2.txt')");
 			code.addRCode("data4 <- read.table('dailyKeyword2.txt')");
 			code.addRCode("wordcount = table(data4)");
@@ -157,6 +157,9 @@ public class MainController {
 			code.addRCode("library(wordcloud)");
 			code.addRCode("useSejongDic()");
 			code.addRCode("data1=readLines('weeklyKeyword.txt')");
+			code.addRCode("data1 <- gsub('<br />','', data1)");
+			code.addRCode("data1 <- gsub('\\r\\n','', data1)");
+			code.addRCode("data1 <- gsub('<br>','', data1)");
 			code.addRCode("data2 <- sapply(data1,extractNoun,USE.NAMES=F)");
 			code.addRCode("data3 <- unlist(data2)");
 			code.addRCode("data3 <- Filter(function(x) {nchar(x) >= 1} ,data3)");

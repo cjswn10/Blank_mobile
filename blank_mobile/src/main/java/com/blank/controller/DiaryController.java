@@ -36,7 +36,7 @@ public class DiaryController {
 		this.dao = dao;
 	}
 
-	// 占쎈쐻占쎈뼩疫뀐옙繹먮씮�굲占쎈쐻占쎈짗占쎌굲??
+	// �뜝�럥�맶�뜝�럥堉⑴뼨�먯삕濚밸Ŧ�뵰占쎄뎡�뜝�럥�맶�뜝�럥吏쀥뜝�럩援�??
 	@RequestMapping("/member/mainDetailDiary.do")
 	public ModelAndView mainDetailDiary(int dno) {
 		Map map = new HashMap();
@@ -46,7 +46,7 @@ public class DiaryController {
 		return mav;
 	}
 
-	// 占쎈쐻占쎈뼩疫뀐옙繹먮씮�굲占쎈쐻占쎈짗占쎌굲??
+	// �뜝�럥�맶�뜝�럥堉⑴뼨�먯삕濚밸Ŧ�뵰占쎄뎡�뜝�럥�맶�뜝�럥吏쀥뜝�럩援�??
 	@RequestMapping("/member/detailFavoriteDiary.do")
 	public ModelAndView detailFavoriteDiary(int dno) {
 		Map map = new HashMap();
@@ -153,10 +153,11 @@ public class DiaryController {
 
 		d.setDphoto(oldDphoto);
 		d.setDfile(oldDfile);
-		
+		/*
 		String dcontent = request.getParameter("dcontent");
 		dcontent = dcontent.replace("\r\n", "<br />");
 		d.setDcontent(dcontent);
+		*/
 		/*
 		String content = dao.detailDiary(map).getDcontent();
 		content = content.replace("<br>", "\r\n");
@@ -329,7 +330,7 @@ public class DiaryController {
 	@ResponseBody
 	public String weather2(HttpSession session,HttpServletRequest request,String cityName)
 	{
-		System.out.println(cityName);
+		//System.out.println(cityName);
 		String weather2 = "";
 
 		try {
@@ -382,7 +383,7 @@ public class DiaryController {
 
 		mav.addObject("todays", todays);
 		
-		//dno생성 후 전달
+		//dno�깮�꽦 �썑 �쟾�떖
 		int dno = dao.diaryNextNo();
 		mav.addObject("dno", dno);
 		
@@ -410,11 +411,11 @@ public class DiaryController {
 
 		String orgname = upload.getOriginalFilename();
 		String dphoto = "x";
-
+		/*
 		String dcontent = request.getParameter("dcontent");
 		dcontent = dcontent.replace("\r\n", "<br />");
 		d.setDcontent(dcontent);
-		
+		*/
 		if (orgname != null && !orgname.equals("")) {
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
 
@@ -499,6 +500,7 @@ public class DiaryController {
 			code.addRCode("data <- gsub('[ㄱ-ㅎ]','', data)");
 			code.addRCode("data <- gsub('[0-9]','', data)");
 			code.addRCode("data <- gsub('<br />','', data)");
+			code.addRCode("data <- gsub('<br>','', data)");
 			code.addRCode("data <- gsub('\r\n','', data)");
 			code.addRCode("data1 <- sapply(data,extractNoun,USE.NAMES=F)");
 			code.addRCode("data2 <- unlist(data1)");
