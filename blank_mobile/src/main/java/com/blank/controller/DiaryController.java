@@ -1,3 +1,4 @@
+
 package com.blank.controller;
 
 import java.io.File;
@@ -113,13 +114,17 @@ public class DiaryController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("d", dao.detailDiary(map));
-
+		
+		//날짜 엔터보이게
+		String content = dao.detailDiary(map).getDcontent();
+		content = content.replace("\r\n", "<br>");			
+		mav.addObject("dcontent2", content);
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
 		Calendar today = Calendar.getInstance();
-		
 		String todays = sdf.format(today.getTime());
-	        
+	    
 		mav.addObject("todays", todays);
 			
 		return mav;
@@ -137,10 +142,6 @@ public class DiaryController {
 			d.setDtype("100");
 		}
 
-		if (d.getDcontent() != null) {
-			d.setDtype(d.getDtype().substring(0, 1) + "1" + d.getDtype().substring(2));
-		}
-
 		int mno = (Integer) session.getAttribute("mno");
 		int bno = (Integer) session.getAttribute("bno");
 		ModelAndView mav = new ModelAndView();
@@ -154,27 +155,13 @@ public class DiaryController {
 		d.setDphoto(oldDphoto);
 		d.setDfile(oldDfile);
 		
-		String dcontent = request.getParameter("dcontent");
-		dcontent = dcontent.replace("\r\n", "<br />");
-		d.setDcontent(dcontent);
-		/*
-		String content = dao.detailDiary(map).getDcontent();
-		content = content.replace("<br>", "\r\n");
-		d.setDcontent(content);
-		*/
 		String path = request.getRealPath("resources/upload");
-		String pathG = request.getRealPath("resources/upload2");
-
 		MultipartFile upload = d.getUpload();
-		MultipartFile uploadG = d.getUploadG();
-
-			
 		
 		String orgname = upload.getOriginalFilename();
 		String dphoto = "x";
 
 		if (orgname != null && !orgname.equals("")) {
-
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
 			dphoto = bno + "b" + no + "." + exc;
 
@@ -185,7 +172,6 @@ public class DiaryController {
 				// TODO: handle exception
 				System.out.println(e.getMessage());
 			}
-
 		}
 
 		if (!dphoto.equals("x")) {
@@ -202,7 +188,7 @@ public class DiaryController {
 			}
 		}
 
-
+		/*
 		String orgnameG = uploadG.getOriginalFilename();
 		String dfile = "x";
 
@@ -233,7 +219,7 @@ public class DiaryController {
 				e.printStackTrace();
 			}
 		}
-		
+		*/
 		int re = dao.updateDiary(d);
 
 		if (re > 0) {
@@ -242,11 +228,12 @@ public class DiaryController {
 				File file = new File(path + "/" + oldDphoto);
 				file.delete();
 			}
+			/*
 			if (oldDfile != null && !oldDfile.equals(dfile) && !dfile.equals("x")) {
 				File fileG = new File(pathG + "/" + oldDfile);
 				fileG.delete();
 			}
-
+			 */
 		} else {
 			mav.addObject("msg", "UPDATE DIARY ERROR");
 			mav.setViewName("/member/error");
@@ -265,6 +252,7 @@ public class DiaryController {
 		String content = dao.detailDiary(map).getDcontent();
 		content = content.replace("\r\n", "<br>");			
 		mav.addObject("dcontent2", content);
+		
 		return mav;
 	}
 	
@@ -391,13 +379,12 @@ public class DiaryController {
 
 	@RequestMapping(value = "/member/insertDiary.do", method = RequestMethod.POST)
 	public ModelAndView diaryInsertSubmit(DiaryVo d, HttpServletRequest request, HttpSession session) {
-		
 		int mno = (Integer) session.getAttribute("mno");
 		int bno = (Integer) session.getAttribute("bno");
 		int dno = d.getDno();
-		//int no = dao.diaryNextNo();
-		//d.setDno(no);
 
+		ModelAndView mav = new ModelAndView("redirect:/member/diary.do?mno=" + mno + "&bno=" + bno);
+		
 		d.setDtype("000");
 		d.setDphoto("");
 
@@ -406,14 +393,9 @@ public class DiaryController {
 
 		String ser_id = request.getParameter("ser_id");
 		Boolean success = false;
-		ModelAndView view = new ModelAndView();
 
 		String orgname = upload.getOriginalFilename();
 		String dphoto = "x";
-
-		String dcontent = request.getParameter("dcontent");
-		dcontent = dcontent.replace("\r\n", "<br />");
-		d.setDcontent(dcontent);
 		
 		if (orgname != null && !orgname.equals("")) {
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
@@ -429,6 +411,7 @@ public class DiaryController {
 			}
 
 		}
+		
 		if (!dphoto.equals("x")) {
 			d.setDphoto(dphoto);
 			d.setDtype(d.getDtype().substring(0, 2) + "1");
@@ -458,7 +441,6 @@ public class DiaryController {
 		map.put("bno", d.getBno());
 
 		System.out.println(d.getDfile());
-		ModelAndView mav = new ModelAndView("redirect:/member/diary.do?mno=" + mno + "&bno=" + bno);
 
 		int re = dao.insertDiary(map);
 		if (re < 1) {
@@ -546,6 +528,7 @@ public class DiaryController {
 		session.setAttribute("bno", bno);
 		session.setAttribute("mno", mno);
 
+		
 		String str = "";
 		ObjectMapper mapper = new ObjectMapper();
 		try {
@@ -562,5 +545,4 @@ public class DiaryController {
 	public void diary() {
 		
 	}
-
 }

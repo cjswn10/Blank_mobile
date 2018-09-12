@@ -15,8 +15,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+$( document ).on( "mobileinit", function() {
+	  $.mobile.ignoreContentEnabled = true;
+});
+</script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <!-- 웹폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gaegu|Gamja+Flower|Jua|Nanum+Brush+Script|Nanum+Gothic+Coding|Nanum+Myeongjo|Nanum+Pen+Script|Source+Sans+Pro|Stylish|Sunflower:300" rel="stylesheet">
@@ -336,18 +341,17 @@ $(function() {
 			  url: "makeImgFile.do",
 			  data: { "imgbase64": imgUrl, "bno": bno, "dno": dno },
 			  success : function(data) {
-				  var grim = data;
+				  var grim = data + '.png';
 				  console.log(grim);
 				  $("#dfile").val(grim);
-				  showImg();
-				  showDiary();
+				  showImgG();
+
 			  }
 		});
 		
 	});
-
 	
-	function showImg(){
+	function showImgG(){
 
 
 		var myImage = document.getElementById("img");
@@ -365,6 +369,10 @@ $(function() {
 	
 	
 	//$("#insertDiaryDiv").find("*").attr("data-enhance", "false");
+
+	//$(".footer").find("*").attr("data-enhanced", "true");
+	$(".footer").find("*").attr("data-enhance", "false");
+
 	
 });
 
@@ -386,10 +394,7 @@ function showDiary() {
 
 <!-- 사진 보여주기 -->
 <script>
-
-
 	var sel_file;
-	var sel_fileG;	
 	
 	$(document).ready(function() {
 		$("#upload").on("change", showImg)
@@ -412,9 +417,22 @@ function showDiary() {
 			}
 			reader.readAsDataURL(f);
 		});
+		
+		$("#photo").css({
+			display: "inline-block"
+		});
 	}
 
-
+	function showImgG(){
+		var myImage = document.getElementById("img");
+		myImage.src = canvas.toDataURL();
+		
+		$("#img").css({
+			display: "inline-block"
+		});
+		
+		$("#img").attr("src",myImage.src);
+	}
 
 </script>
 
@@ -520,7 +538,6 @@ function showDiary() {
 				</tr>
 				<tr>
 					<td>
-						<label for="dfont">글씨체</label>
 						<select name="dfont" id="dfont" style="width:80%">
 							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script">Nanum Brush Script</option>
 							<option value="Nanum Gothic Coding" style="font-family:Nanum Gothic Coding">Nanum Gothic Coding</option>
@@ -552,11 +569,14 @@ function showDiary() {
 						<input type="file" name="upload" id="upload" style="display: none;">
 					</td>
 				</tr>
-						
+				
+				<!-- 그림, 사진 첨에 띄어주기-->
 				<tr>
 					<td>
 						<!-- 그림 -->
 						<img id="img" width="300" style="display: none">
+						<!-- 사진 -->
+						<img id="photo" width="300" style="display: none">
 						<!-- 글 -->
 						<textarea data-autogrow="false" class="form-control" rows="10" cols="30" name="dcontent" id="dcontent" style="font-family: Nanum Brush Script; height: 50%;"></textarea>
 					</td>
@@ -575,20 +595,46 @@ function showDiary() {
 					</td>
 				</tr>
 			</table>
-			
-			
-			
 		</form>
 		
 	</div>
+	
+	<!--------- 푸터 ---------->
+	<div class="footer">
+		<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+		<ul class="list-inline">
+	       <li>
+	           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+	           <br><h5>김영호</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+	           <br><h5>변성인</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+	           <br><h5>성민규</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+	           <br><h5>임연주</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+	           <br><h5>차건우</h5>
+	       </li>
+	    </ul>
+	</div>			
+
 </div>
-</div>
+
+</div> <!-- insertDiv -->
 
 
 <div id="grimpan" style="display: none;">
-	<div data-role="content">
+	<div data-role="content" style="padding: 2px;margin-left: auto;margin-right: auto;">
 		<div>
-			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;"></canvas>
+			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;max-width: 98vw;"></canvas>
 		</div>
 	<script type="text/javascript" src="../resources/js/drawingColor.js?ver=18"></script>
 	
@@ -599,7 +645,7 @@ function showDiary() {
 
 		<button data-inline='true' style='margin:0px auto;' id="delete"><img src="../resources/img/icon/newpage.png" width="15px"></button>
 		<button data-inline='true' style='margin:0px auto;' id="prev"><img src="../resources/img/icon/prev.png" width="15px"></button>
-		<a id="download"><button data-inline='true' style='margin:0px auto;' id="btnShowGrim"><img src="../resources/img/icon/download.png" width="15px"></button></a>
+		<a id="download"><button data-inline='true' style='margin:0px auto;'><img src="../resources/img/icon/download.png" width="15px"></button></a>
 		<a href="#" onclick="showDiary()" data-ajax="false"><button data-inline='true' style='margin:0px auto;' id="btnOk"><img src="../resources/img/icon/exit.png" width="15px"></button></a>
 	
 	
@@ -609,8 +655,6 @@ function showDiary() {
 
 	</div>
 </div>
-
-
 
 </body>
 </html>

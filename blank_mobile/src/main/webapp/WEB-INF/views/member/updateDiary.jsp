@@ -13,25 +13,30 @@
 		user-scalable=no">
 		
 <title>빈칸을 채우다.</title>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gaegu|Gamja+Flower|Jua|Nanum+Brush+Script|Nanum+Gothic+Coding|Nanum+Myeongjo|Nanum+Pen+Script|Source+Sans+Pro|Stylish|Sunflower:300" rel="stylesheet">
 
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 <link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js?ver=2" ></script>
-<script src="//code.jquery.com/jquery-3.2.1.js"></script>
 <script type="text/javascript" src="../resources/js/searchId.js" ></script>
-<style type="text/css">
-table label {
-	display: inline-block;
-	width: 15%;
-}
 
+<style type="text/css">
 #dcontent {
 	width: 100%; 
 	height: 50%;
 }
+
+.ui-page {
+	background: #ffffff;
+}
+
 </style>
 
 
@@ -322,33 +327,6 @@ $(function() {
 						else if(dweathers == "흐리고 가끔 비"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB20.png"})}
 						else if(dweathers == "흐리고 한때 비"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB20.png"})}
 						
-						/*
-						if(dweathers == '맑음'){$("#tmef_img").attr({src:'https://ssl.pstatic.net/static/weather/images/w_icon/w_s1.gif'})}
-						else if(dweathers == '구름조금'){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s2.gif"})}
-						else if(dweathers == "흐림"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s3.gif"})}
-						else if(dweathers == "비"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s4.gif"})}
-						else if(dweathers == "눈"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s5.gif"})}
-						else if(dweathers == "소나기"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s7.gif"})}
-						else if(dweathers == "구름많음"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s21.gif"})}
-						else if(dweathers == "소낙 눈"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s8.gif"})}
-						else if(dweathers == "진눈깨비"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s6.gif"})}
-						else if(dweathers == "흐려짐"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s11.gif"})}
-						else if(dweathers == "흐려져 뇌우"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s12.gif"})}
-						else if(dweathers == "흐려져 비"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s13.gif"})}
-						else if(dweathers == "흐려져 눈"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s14.gif"})}
-						else if(dweathers == "흐려져 진눈깨비"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s15.gif"})}
-						else if(dweathers == "흐린 후 갬"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s16.gif"})}
-						else if(dweathers == "뇌우 후 갬"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s17.gif"})}
-						else if(dweathers == "비 후 갬"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s18.gif"})}
-						else if(dweathers == "눈 후 갬"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s19.gif"})}
-						else if(dweathers == "진눈깨비 후 갬"){$("#tmef_img").attr({"src":"https://ssl.pstatic.net/static/weather/images/w_icon/w_s20.gif"})}
-						else if(dweathers == "천둥번개"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB14.png"})}
-						else if(dweathers == "안개"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB15.png"})}
-						else if(dweathers == "황사"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB16.png"})}
-						else if(dweathers == "박무"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB21.png"})}
-						else if(dweathers == "박무"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB22.png"})}
-						else if(dweathers == "박무"){$("#tmef_img").attr({"src":"http://www.kma.go.kr/images/icon/NW/NB23.png"})}
-						*/
 					}
 	
 	$("#btnAdd").click(function(){
@@ -374,9 +352,6 @@ $(function() {
 	console.log(oldDfile);
 	console.log(oldDphoto);
 	
-	
-	$('#dcontent').text("${d.dcontent}");
-	
 	//이전 폰트설정
 	$("#dcontent").attr({
 		style : "font-family:${d.dfont};",
@@ -393,10 +368,9 @@ $(function() {
 	$.each($(".secret"), function(i, s) {
 		
 		if($(s).val() == oldSecret) {
-			$(this).attr({
-				checked : "checked"
-			})
+			$(this).attr("checked",true).checkboxradio("refresh");
 		}
+		
 	});	
 	
 	//선택한 폰트 적용
@@ -414,7 +388,6 @@ $(function() {
 	
 	//이전 그림이 있으면 보여주기
 	if(oldDfile != "") {
-		console.log("그림있따!!")
 		$("#grim").css({
 			display: "inline-block"
 		});
@@ -422,72 +395,108 @@ $(function() {
 		$("#grim").attr({
 			src : "../resources/upload2/" + oldDfile
 		})
+		
+		
 	}
 	
 	//이전 사진이 있으면 보여주기
 	if(oldDphoto != "") {
 		console.log("사진있따!!")
+		$("#photo").css({
+			display: "inline-block"
+		});
+		
 		$("#photo").attr({
 			src : "../resources/upload/" + oldDphoto
 		})
 	}
 	
-	//$("#tmef_img").attr({"src":$("[name='img'] > v").html()})
-	
-	
+	$("#download").click(function() {
+		var imgUrl = document.getElementById('canvas').toDataURL();
+		var bno = ${d.bno}
+		var dno = ${d.dno}
+		
+		/* 그림을 이미지파일로 서버에 저장하고 이름 가져오기*/
+		$.ajax({
+			url: "makeImgFile.do",
+			data: { "imgbase64": imgUrl, "bno": bno, "dno": dno },
+			success : function(data) {
+				var grim = data + '.png';
+				console.log(grim + "업데이트");
+				$("#dfile").val(grim);
+				$("#grim").attr({
+					src : "../resources/upload2/" + grim
+				});
+				location.reload();
+				showDiary();
+			}
+		});
+		
+	});
 });
-// 그림판 띄어주는 창
-var openG;
 
-function openGrimpan() {
-	
-	var popupX = (window.screen.width /2) - (600 / 2);
-	// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
-
-	var popupY= (window.screen.height /2) - (680 / 2);
-	// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
-	
-	window.name = "insertDiary";
-	openG = window.open("grimpan.do","grimpan",'status=no, height=700, width=840, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+// 그림판 보여주기
+function showGrimpan() {
+	$("#grimpan").css("display", "block");
+	$("#insertDiaryDiv").css("display", "none");
+	$(location).attr('href','#grimpan');
 }
 
-
+function showDiary() {
+	$("#insertDiaryDiv").css("display", "block");
+	$("#grimpan").css("display", "none");
+	$(location).attr('href','#insertDiaryDiv');
+}
 
 </script>
 
+<!-- 변경된 사진 & 그림 보여주기 -->
 <script>
-	var sel_fileG;
+	var sel_file;
 	
-	<!-- 그림 보여주기 -->
 	$(document).ready(function() {
-		$("#uploadG").on("change", showImgG)
+		$("#upload").on("change", showImg)
 	});
 	
-	function showImgG(e) {
+	function showImg(e) {
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
-		
+	
 		filesArr.forEach(function(f) {
-			if(!f.type.match("image.*")) {
+			if (!f.type.match("image.*")) {
 				alert("확장자 오류");
 				return;
 			}
-			
-			sel_fileG = f;
+	
+			sel_file = f;
 			var reader = new FileReader();
 			reader.onload = function(e) {
-				$("#grim").css({
-					display: "inline-block"
-				});
-				
-				$("#grim").attr("src", e.target.result);
+				$("#photo").attr("src", e.target.result);
 			}
 			reader.readAsDataURL(f);
 		});
+		
+		$("#photo").css({
+			display: "inline-block"
+		});
+	}
+	
+	function showImgG(){
+		var myImage = document.getElementById("img");
+		myImage.src = canvas.toDataURL();
+		
+		$("#img").css({
+			display: "inline-block"
+		});
+		
+		$("#img").attr("src",myImage.src);
 	}
 </script>
 </head>
 <body>
+
+<div id="insertDiaryDiv">
+<!-- side-menu -->
 <section id="mySidenav" class="sidenav">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 	
@@ -535,7 +544,7 @@ border: none;">
 
 	<div class="content" style="margin-bottom:30px;">
 		<hr>
-		<form action="updateDiary.do" method="post" enctype="multipart/form-data">
+		<form action="updateDiary.do" method="post" enctype="multipart/form-data" data-ajax="false">
 			<input type="hidden" name="dno" id="dno" value="${d.dno}">
 	
 			<table style="width:100%;">
@@ -565,66 +574,26 @@ border: none;">
 						<span id="tmef_info"></span>
 						</div>
 						<div class="today_weather" style="display: inline-block; width:65%">
-
-				<!--  
-						<div class="city_weather">
-							<select id="citySelect" style="width:70%">
-									<option>지역</option>
-									<option>서울</option>
-									<option>인천</option>
-									<option>수원</option>
-									<option>독도</option>
-									<option>춘천</option>
-									<option>백령도</option>
-									<option>강릉</option>
-									<option>울진</option>
-									<option>청주</option>
-									<option>안동</option>
-									<option>대전</option>
-									<option>홍성</option>
-									<option>전주</option>
-									<option>대구</option>
-									<option>울산</option>
-									<option>포항</option>
-									<option>부산</option>
-									<option>창원</option>
-									<option>광주</option>
-									<option>목포</option>
-									<option>여수</option>
-									<option>흑산도</option>
-									<option>제주</option>
-								</select>
 								
-								-->
-								
-								<input type="hidden" name="cityName" id="cityName">
-								<input type="hidden" id="day" value="${d.ddate }">
-								<input type="hidden" id="date">
-								<input type="hidden" id="today_date" value="${todays }">
-								<input type="hidden" id="year">
-								<input type="hidden" id="month">
-								<input type="hidden" name="dno" id="dno" value="${d.dno }">
-								<input type="hidden" id="tes" value="${d.dweather }">
-								<input type="hidden" name="select_day" id="select_day">
-								<span id="weather"></span>
-								<span id="weather2"></span>
-								<input type="hidden" id="x" name="latitude">
-								<input type="hidden" id="y" name="longitude">
-								
+						<input type="hidden" name="cityName" id="cityName">
+						<input type="hidden" id="day" value="${d.ddate }">
+						<input type="hidden" id="date">
+						<input type="hidden" id="today_date" value="${todays }">
+						<input type="hidden" id="year">
+						<input type="hidden" id="month">
+						<input type="hidden" id="tes" value="${d.dweather }">
+						<input type="hidden" name="select_day" id="select_day">
+						<span id="weather"></span>
+						<span id="weather2"></span>
+						<input type="hidden" id="x" name="latitude">
+						<input type="hidden" id="y" name="longitude">
+							
 						</div>
-						
-						
-					</div>
-			
-
-
-
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-						<label for="dfont">글씨체</label>
 						<select name="dfont" id="dfont" style="width:80%">
 							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script" selected="selected" >Nanum Brush Script</option>
 							<option value="Nanum Gothic Coding" style="font-family:Nanum Gothic Coding">Nanum Gothic Coding</option>
@@ -645,13 +614,14 @@ border: none;">
 				<tr>
 					<td>
 						<!-- 그림판 버튼 -->
-						<button type="button" onclick="openGrimpan()"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button>
-		
-						<label for="uploadG"><img alt="사진첨부" src="../resources/img/icon/draw.png" width="40px"></label>
-						<input type="file" name="uploadG" id="uploadG" style="display: none;">
+						<a href="#" onclick="showGrimpan()" data-ajax="false"><button type="button" data-inline='true' data-ajax="false"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button></a>
 						
-						<!-- 사진첨부 버튼  그림버튼으로 통합 -->
-						<!-- <label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="25px"></label> -->
+						<!-- 그림첨부 버튼 -->
+						<!-- <label for="uploadG"><img alt="사진첨부" src="../resources/img/icon/draw.png" width="40px"></label> -->
+						<input type="hidden" name="dfile" id="dfile" style="display: none;">
+						
+						<!-- 사진첨부 버튼 -->
+						<label for="upload" style="display:inline-block;"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label>
 						<input type="file" name="upload" id="upload" style="display: none;">
 					</td>
 				</tr>
@@ -661,26 +631,34 @@ border: none;">
 					<td>
 						<!-- 그림 -->
 						<img id="grim" width="300" style="display: none;">
+						<!-- 사진 -->
+						<img id="photo" width="300" style="display: none;">
 						<!-- 글 -->
-						<textarea rows="8" class="form-control" name="dcontent" id="dcontent" style="font-family: ${d.dfont};">${d.dcontent }</textarea>
+						<textarea data-autogrow="false" class="form-control" rows="10" cols="30" name="dcontent" id="dcontent" style="font-family: ${d.dfont};">${d.dcontent }</textarea>
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-						<input type="radio" name="secret" class="secret" value=1> 나만보기
-						<input type="radio" name="secret" class="secret" value=0> 전체공개<br>
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<input type="radio" name="secret" class="secret" value=1 id="private"><label for="private">나만보기</label>
+							<input type="radio" name="secret" class="secret" value=0 id="public"><label for="public">전체공개</label>
+						</fieldset>
 					</td>
 				</tr>
 				
+				<tr>
+					<td>
+						<button id="btnAdd" type="submit">수정</button>
+					</td>
+				</tr>
 			</table>
-			<button id="btnAdd" type="submit">수정</button>
 		</form>
+		
 	</div>
-
 	
 	<!-- 푸터 -->
-	<footer class="footer">
+	<footer class="footer" id="footer">
 		<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
 		<ul class="list-inline">
 	       <li>
@@ -705,6 +683,33 @@ border: none;">
 	       </li>
 	    </ul>
 	</footer>
+	
+</div>	
+</div>	<!-- insertDiv -->
+
+<div id="grimpan" style="display: none;">
+	<div data-role="content">
+		<div>
+			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;"></canvas>
+		</div>
+	<script type="text/javascript" src="../resources/js/drawingColor.js?ver=18"></script>
+	
+	<input type="hidden" id="selectColor">
+	<input type="color" id="myColor" onchange="cg_color(this.value)">
+	
+	Size:<input type="range" min="1" max="5" id="Lwidth" value="1" onchange="cg_line(this.value)">
+
+		<button data-inline='true' style='margin:0px auto;' id="delete"><img src="../resources/img/icon/newpage.png" width="15px"></button>
+		<button data-inline='true' style='margin:0px auto;' id="prev"><img src="../resources/img/icon/prev.png" width="15px"></button>
+		<a id="download"><button data-inline='true' style='margin:0px auto;' id="btnShowGrim"><img src="../resources/img/icon/download.png" width="15px"></button></a>
+		<a href="#" onclick="showDiary()" data-ajax="false"><button data-inline='true' style='margin:0px auto;' id="btnOk"><img src="../resources/img/icon/exit.png" width="15px"></button></a>
+	
+	<img id="myImage">
+
+	<script src="../resources/js/draw.js?ver=4"></script>
+
+	</div>
 </div>
+
 </body>
 </html>
