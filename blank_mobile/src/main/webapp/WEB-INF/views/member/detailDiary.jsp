@@ -16,6 +16,12 @@ user-scalable=no">
 	background: #ffffff;
 }
 
+.listDiary{
+	background-color: green;
+	padding: 15px;	
+	opacity: 0.8;	
+}
+
 span{
 	margin-right: 10px;
 }
@@ -190,6 +196,8 @@ span{
 			    </ul>
 			</div>			
 		
+
+			<font color="white"><span data-ajax="false" onclick="history.back()" class="listDiary" style="position:fixed; right: 164px; bottom: 0; cursor: pointer;">일기 목록</span></font>
 			<font color="white"><span data-ajax="false" onclick="location.href='updateDiary.do?dno=${d.dno}'" class="updateDiary" style="position:fixed; right: 82px; bottom: 0; cursor: pointer;">일기 수정</span></font>
 			<font color="white"><span onclick="location.href='deleteDiary.do?dno=${d.dno}'" class="deleteDiary" style="position:fixed; right: 0px; bottom: 0; cursor: pointer;">일기 삭제</span></font>			
 		</div>
