@@ -52,6 +52,7 @@ public class GrimpanController {
 			ImageIO.write(image, "png", outputfile); // 파일생성
 			
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			throw e;
 		}
 		

@@ -1,3 +1,4 @@
+
 package com.blank.controller;
 
 import java.io.File;
@@ -113,13 +114,17 @@ public class DiaryController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("d", dao.detailDiary(map));
-
+		
+		//날짜 엔터보이게
+		String content = dao.detailDiary(map).getDcontent();
+		content = content.replace("\r\n", "<br>");			
+		mav.addObject("dcontent2", content);
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
 		Calendar today = Calendar.getInstance();
-		
 		String todays = sdf.format(today.getTime());
-	        
+	    
 		mav.addObject("todays", todays);
 			
 		return mav;
@@ -137,10 +142,6 @@ public class DiaryController {
 			d.setDtype("100");
 		}
 
-		if (d.getDcontent() != null) {
-			d.setDtype(d.getDtype().substring(0, 1) + "1" + d.getDtype().substring(2));
-		}
-
 		int mno = (Integer) session.getAttribute("mno");
 		int bno = (Integer) session.getAttribute("bno");
 		ModelAndView mav = new ModelAndView();
@@ -154,27 +155,13 @@ public class DiaryController {
 		d.setDphoto(oldDphoto);
 		d.setDfile(oldDfile);
 		
-		String dcontent = request.getParameter("dcontent");
-		dcontent = dcontent.replace("\r\n", "<br />");
-		d.setDcontent(dcontent);
-		/*
-		String content = dao.detailDiary(map).getDcontent();
-		content = content.replace("<br>", "\r\n");
-		d.setDcontent(content);
-		*/
 		String path = request.getRealPath("resources/upload");
-		String pathG = request.getRealPath("resources/upload2");
-
 		MultipartFile upload = d.getUpload();
-		MultipartFile uploadG = d.getUploadG();
-
-			
 		
 		String orgname = upload.getOriginalFilename();
 		String dphoto = "x";
 
 		if (orgname != null && !orgname.equals("")) {
-
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
 			dphoto = bno + "b" + no + "." + exc;
 
@@ -185,7 +172,6 @@ public class DiaryController {
 				// TODO: handle exception
 				System.out.println(e.getMessage());
 			}
-
 		}
 
 		if (!dphoto.equals("x")) {
@@ -202,7 +188,7 @@ public class DiaryController {
 			}
 		}
 
-
+		/*
 		String orgnameG = uploadG.getOriginalFilename();
 		String dfile = "x";
 
@@ -233,7 +219,7 @@ public class DiaryController {
 				e.printStackTrace();
 			}
 		}
-		
+		*/
 		int re = dao.updateDiary(d);
 
 		if (re > 0) {
@@ -242,11 +228,12 @@ public class DiaryController {
 				File file = new File(path + "/" + oldDphoto);
 				file.delete();
 			}
+			/*
 			if (oldDfile != null && !oldDfile.equals(dfile) && !dfile.equals("x")) {
 				File fileG = new File(pathG + "/" + oldDfile);
 				fileG.delete();
 			}
-
+			 */
 		} else {
 			mav.addObject("msg", "UPDATE DIARY ERROR");
 			mav.setViewName("/member/error");
@@ -343,10 +330,10 @@ public class DiaryController {
 			code.clear();
 	        
 	        code.addRCode("setwd('c:/r_temp')");
-		     	code.addRCode("data3 = read.csv('weather2.csv')");
-		    	code.addRCode("data4 = data.frame(data3)");
-		    	code.addRCode("weather2 = subset(data4,city=='"+cityName+"')");
-		    	code.addRCode("city = as.character(weather2[1,1])");
+			code.addRCode("data3 = read.csv('weather2.csv')");
+			code.addRCode("data4 = data.frame(data3)");
+			code.addRCode("weather2 = subset(data4,city=='"+cityName+"')");
+			code.addRCode("city = as.character(weather2[1,1])");
 	        code.addRCode("img2 = as.character(weather2[1,2])");
 	        code.addRCode("tmef2 = as.character(weather2[1,3])");
 	        
@@ -397,13 +384,7 @@ public class DiaryController {
 		int dno = d.getDno();
 
 		ModelAndView mav = new ModelAndView("redirect:/member/diary.do?mno=" + mno + "&bno=" + bno);
-		//int no = dao.diaryNextNo();
-		//d.setDno(no);
-		/*
-		String dcontent2 = request.getParameter("dcontent");
-		dcontent2 = dcontent2.replace("\r\n", "<br />");
-		mav.addObject("dcontent2", dcontent2);
-		*/
+		
 		d.setDtype("000");
 		d.setDphoto("");
 
@@ -430,6 +411,7 @@ public class DiaryController {
 			}
 
 		}
+		
 		if (!dphoto.equals("x")) {
 			d.setDphoto(dphoto);
 			d.setDtype(d.getDtype().substring(0, 2) + "1");
@@ -499,7 +481,6 @@ public class DiaryController {
 			code.addRCode("data <- gsub('[ㄱ-ㅎ]','', data)");
 			code.addRCode("data <- gsub('[0-9]','', data)");
 			code.addRCode("data <- gsub('<br />','', data)");
-      code.addRCode("data <- gsub('<br>','', data)");
 			code.addRCode("data <- gsub('\r\n','', data)");
 			code.addRCode("data1 <- sapply(data,extractNoun,USE.NAMES=F)");
 			code.addRCode("data2 <- unlist(data1)");
@@ -547,6 +528,7 @@ public class DiaryController {
 		session.setAttribute("bno", bno);
 		session.setAttribute("mno", mno);
 
+		
 		String str = "";
 		ObjectMapper mapper = new ObjectMapper();
 		try {
@@ -563,5 +545,4 @@ public class DiaryController {
 	public void diary() {
 		
 	}
-
 }
