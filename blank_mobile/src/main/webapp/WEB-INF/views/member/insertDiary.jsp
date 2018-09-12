@@ -538,7 +538,6 @@ function showDiary() {
 				</tr>
 				<tr>
 					<td>
-						<label for="dfont">글씨체</label>
 						<select name="dfont" id="dfont" style="width:80%">
 							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script">Nanum Brush Script</option>
 							<option value="Nanum Gothic Coding" style="font-family:Nanum Gothic Coding">Nanum Gothic Coding</option>

@@ -594,7 +594,6 @@ border: none;">
 				
 				<tr>
 					<td>
-						<label for="dfont">글씨체</label>
 						<select name="dfont" id="dfont" style="width:80%">
 							<option value="Nanum Brush Script" style="font-family: Nanum Brush Script" selected="selected" >Nanum Brush Script</option>
 							<option value="Nanum Gothic Coding" style="font-family:Nanum Gothic Coding">Nanum Gothic Coding</option>
@@ -615,14 +614,14 @@ border: none;">
 				<tr>
 					<td>
 						<!-- 그림판 버튼 -->
-						<button type="button" onclick="showGrimpan()" data-ajax="false"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button>
+						<a href="#" onclick="showGrimpan()" data-ajax="false"><button type="button" data-inline='true' data-ajax="false"><img src="../resources/img/icon/pencil.png" alt="그리기" width="16px">그림판</button></a>
 						
 						<!-- 그림첨부 버튼 -->
 						<!-- <label for="uploadG"><img alt="사진첨부" src="../resources/img/icon/draw.png" width="40px"></label> -->
 						<input type="hidden" name="dfile" id="dfile" style="display: none;">
 						
 						<!-- 사진첨부 버튼 -->
-						<label for="upload"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="25px"></label>
+						<label for="upload" style="display:inline-block;"><img alt="사진첨부" src="../resources/img/icon/picture.png" width="40px"></label>
 						<input type="file" name="upload" id="upload" style="display: none;">
 					</td>
 				</tr>
