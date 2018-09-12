@@ -343,10 +343,10 @@ public class DiaryController {
 			code.clear();
 	        
 	        code.addRCode("setwd('c:/r_temp')");
-			code.addRCode("data3 = read.csv('weather2.csv')");
-			code.addRCode("data4 = data.frame(data3)");
-			code.addRCode("weather2 = subset(data4,city=='"+cityName+"')");
-			code.addRCode("city = as.character(weather2[1,1])");
+		     	code.addRCode("data3 = read.csv('weather2.csv')");
+		    	code.addRCode("data4 = data.frame(data3)");
+		    	code.addRCode("weather2 = subset(data4,city=='"+cityName+"')");
+		    	code.addRCode("city = as.character(weather2[1,1])");
 	        code.addRCode("img2 = as.character(weather2[1,2])");
 	        code.addRCode("tmef2 = as.character(weather2[1,3])");
 	        
@@ -499,6 +499,7 @@ public class DiaryController {
 			code.addRCode("data <- gsub('[ㄱ-ㅎ]','', data)");
 			code.addRCode("data <- gsub('[0-9]','', data)");
 			code.addRCode("data <- gsub('<br />','', data)");
+      code.addRCode("data <- gsub('<br>','', data)");
 			code.addRCode("data <- gsub('\r\n','', data)");
 			code.addRCode("data1 <- sapply(data,extractNoun,USE.NAMES=F)");
 			code.addRCode("data2 <- unlist(data1)");
