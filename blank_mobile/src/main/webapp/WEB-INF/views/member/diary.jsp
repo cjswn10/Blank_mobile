@@ -16,6 +16,10 @@ user-scalable=no">
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
+.ui-page {
+	background: #ffffff;
+}
+
 .deleteDiary{
 	background-color: orange;
 	padding: 15px;	
@@ -165,7 +169,7 @@ user-scalable=no">
 						$(li).attr("idx",idx);									
 						var a = $('<a data-ajax="false" href=detailDiary.do?dno='+d.dno+'></a>');	
 						var title = $('<span></span>').html(d.dtitle);
-						var content = $('<p></p>').html(d.dcontent2);				
+						var content = $('<p></p>').html(d.dcontent);				
 						var ddate = $('<p class="ddate" style="font-size: 8px;"></p>').html(d.ddate);
 						
 						if (d.dphoto != null && d.dfile != null) {

@@ -15,8 +15,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+$( document ).on( "mobileinit", function() {
+	  $.mobile.ignoreContentEnabled = true;
+});
+</script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <!-- 웹폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gaegu|Gamja+Flower|Jua|Nanum+Brush+Script|Nanum+Gothic+Coding|Nanum+Myeongjo|Nanum+Pen+Script|Source+Sans+Pro|Stylish|Sunflower:300" rel="stylesheet">
@@ -346,7 +351,8 @@ $(function() {
 		
 	});
 
-	//$("#insertDiaryDiv").find("*").attr("data-enhance", "false");
+	//$(".footer").find("*").attr("data-enhanced", "true");
+	$(".footer").find("*").attr("data-enhance", "false");
 	
 });
 
@@ -544,7 +550,8 @@ function showDiary() {
 						<input type="file" name="upload" id="upload" style="display: none;">
 					</td>
 				</tr>
-						
+				
+				<!-- 그림, 사진 첨에 띄어주기-->
 				<tr>
 					<td>
 						<!-- 그림 -->
@@ -569,20 +576,46 @@ function showDiary() {
 					</td>
 				</tr>
 			</table>
-			
-			
-			
 		</form>
 		
 	</div>
+	
+	<!--------- 푸터 ---------->
+	<div class="footer">
+		<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>
+		<ul class="list-inline">
+	       <li>
+	           <img alt="" src="../resources/img/ho.jpg" class="btn-social btn-outline">
+	           <br><h5>김영호</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/adult.jpg" class="btn-social btn-outline">
+	           <br><h5>변성인</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/min.jpg" class="btn-social btn-outline">
+	           <br><h5>성민규</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/lim.jpg" class="btn-social btn-outline">
+	           <br><h5>임연주</h5>
+	       </li>
+	       <li>
+	           <img alt="" src="../resources/img/cha.jpg" class="btn-social btn-outline">
+	           <br><h5>차건우</h5>
+	       </li>
+	    </ul>
+	</div>			
+
 </div>
-</div>
+
+</div> <!-- insertDiv -->
 
 
 <div id="grimpan" style="display: none;">
-	<div data-role="content">
+	<div data-role="content" style="padding: 2px;margin-left: auto;margin-right: auto;">
 		<div>
-			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;"></canvas>
+			<canvas id="canvas" width="400px" height="400px" style="display:inline-block;border: 1px black solid;max-width: 98vw;"></canvas>
 		</div>
 	<script type="text/javascript" src="../resources/js/drawingColor.js?ver=18"></script>
 	
@@ -603,8 +636,6 @@ function showDiary() {
 
 	</div>
 </div>
-
-
 
 </body>
 </html>
