@@ -264,8 +264,8 @@ $(function() {
 						area = "09680";
 					}
 					
-					$.ajax({url:"http://203.236.209.106:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
-					$.ajax({url:"http://203.236.209.106:4997/weather2.do",success:function(data){}})
+					$.ajax({url:"http://203.236.209.112:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
+					$.ajax({url:"http://203.236.209.112:4997/weather2.do",success:function(data){}})
 					
 					$("#cityb").hide();
 					$("#cityc").show();

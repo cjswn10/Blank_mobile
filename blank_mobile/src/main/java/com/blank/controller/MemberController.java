@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,7 @@ public class MemberController {
 		this.dao = dao;
 	}
 
-	//�����Ʈ�ѷ��� ���ڵ��� �� �ǳ� ���ڽ��ϴ�.
+	//占쏙옙占쏙옙占싣�占싼뤄옙占쏙옙 占쏙옙占쌘듸옙占쏙옙 占쏙옙 占실놂옙 占쏙옙占쌘쏙옙占싹댐옙.
 
 	//myPage
 	@RequestMapping(value="/member/myPage.do")
@@ -43,7 +44,7 @@ public class MemberController {
 	}
 	
 
-	//����ã��
+	//占쏙옙占쏙옙찾占쏙옙
 	@RequestMapping(value="search.do")
 	public ModelAndView search() {
 			
@@ -53,7 +54,7 @@ public class MemberController {
 	
 
 
-	//idã�� form
+	//id찾占쏙옙 form
 	@RequestMapping(value="searchIdPage.do")
 	public ModelAndView searchId() {
 				
@@ -61,7 +62,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//pwdã�� form
+	//pwd찾占쏙옙 form
 	@RequestMapping(value="searchPwdPage.do")
 	public ModelAndView searchPwd() {
 					
@@ -69,7 +70,7 @@ public class MemberController {
 		return mav;
 	}
 
-	//idã��
+	//id찾占쏙옙
 	@RequestMapping(value="searchId.do")
 	@ResponseBody
 	public String searchId(String name,String phone)
@@ -90,7 +91,7 @@ public class MemberController {
 		return str;
 	}
 	
-	//pwdã��
+	//pwd찾占쏙옙
 	@RequestMapping(value="searchPwd.do")
 	@ResponseBody
 	public String searchPwd(String id,String phone)
@@ -191,7 +192,7 @@ public class MemberController {
 		
 		
 		/**
-		 * �α׾ƿ� �� rImg ���� ����
+		 * 占싸그아울옙 占쏙옙 rImg 占쏙옙占쏙옙 占쏙옙占쏙옙
 		 */
 		String FilePath = request.getRealPath("/resources/rImg");
 		File FileList = new File(FilePath);
@@ -201,7 +202,7 @@ public class MemberController {
 		for(int i = 0; i < fileList.length; i++){
 		  String FileName = fileList[i];
 		  
-		  //�̸��� RPlot�� �� ���ϵ� ����
+		  //占싱몌옙占쏙옙 RPlot占쏙옙 占쏙옙載� 占쏙옙占싹듸옙 占쏙옙占쏙옙
 		  if(FileName.contains("RPlot")){
 		    File deleteFile = new File(FilePath + "/" + FileName);
 		    deleteFile.delete();
@@ -235,7 +236,7 @@ public class MemberController {
 	}
 	
 
-	//id �ߺ�Ȯ��
+	//id 占쌩븝옙확占쏙옙
 	@RequestMapping(value="checkId.do")
 	@ResponseBody
 	public String checkId(@RequestParam("id")String id) {
@@ -276,13 +277,18 @@ public class MemberController {
 		map.put("pwd", pwd);
 		
 		Boolean r = dao.login(map);
+		
+		
 		if (r == true) {
-
+				
 			//id, mno  	session
 			session.setAttribute("id", id);
 			session.setAttribute("mno", dao.mno(map));
 			mav.setViewName("redirect:/member/main.do");
+		}else if(r == false) {
+			mav.addObject("result",r);
 		}
+		
 		try {
 			
 			String ip = request.getHeader("X-FORWARDED-FOR");
@@ -331,15 +337,6 @@ public class MemberController {
 		l.setLdate(todays);
 		
 		int re = dao.logRecord(l);
-		if(re > 0)
-		{
-			mav.setViewName("redirect:/member/main.do");
-		}
-		else
-		{
-			mav.addObject("msg", "failed to login");
-			mav.setViewName("error");
-		}
 		
 		session.setMaxInactiveInterval(185*60);
 		
