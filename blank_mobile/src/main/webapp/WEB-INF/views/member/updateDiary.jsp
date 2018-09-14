@@ -27,11 +27,6 @@
 <script type="text/javascript" src="../resources/js/menu.js?ver=2" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js?ver=8" ></script>
 <style type="text/css">
-table label {
-	display: inline-block;
-	width: 15%;
-}
-
 #dcontent {
 	width: 100%; 
 	height: 50%;
@@ -648,16 +643,14 @@ function showDiary() {
 						<textarea data-autogrow="false" class="form-control" rows="10" cols="30" name="dcontent" id="dcontent" style="font-family: ${d.dfont};">${d.dcontent }</textarea>
 					</td>
 				</tr>
-				
 				<tr>
 					<td>
 						<fieldset data-role="controlgroup" data-type="horizontal">
-							<input type="radio" name="secret" class="secret" value=1 id="private"><label for="private">나만보기</label>
-							<input type="radio" name="secret" class="secret" value=0 id="public"><label for="public">전체공개</label>
+							<input type="radio" name="secret" value=1 id="private"><label for="private">나만보기</label>
+							<input type="radio" name="secret" value=0 checked="checked" id="public"><label for="public">전체보기</label>
 						</fieldset>
 					</td>
 				</tr>
-				
 				<tr>
 					<td>
 						<button id="btnAdd" type="submit">수정</button>
