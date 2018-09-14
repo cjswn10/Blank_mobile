@@ -264,8 +264,8 @@ $(function() {
 						area = "09680";
 					}
 					
-					$.ajax({url:"http://203.236.209.112:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
-					$.ajax({url:"http://203.236.209.112:4997/weather2.do",success:function(data){}})
+					$.ajax({url:"http://203.236.209.106:4997/weather.do/"+$("#year").val()+""+$("#month").val()+"/"+area+"",success:function(data){}})
+					$.ajax({url:"http://203.236.209.106:4997/weather2.do",success:function(data){}})
 					
 					$("#cityb").hide();
 					$("#cityc").show();
@@ -436,6 +436,7 @@ $(function() {
 				$("#dfile").val(grim);
 				
 				if(oldDfile != "") {
+					alert(oldDfile)
 					console.log("이전파일 있음---------")
 					showImgG();
 				} else {
@@ -447,7 +448,6 @@ $(function() {
 						display: "inline-block"
 					});
 				}
-
 				showDiary();
 			}
 		});
