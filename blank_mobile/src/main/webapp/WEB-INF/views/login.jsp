@@ -19,14 +19,27 @@
 <!--===============================================================================================-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+var user = navigator.userAgent;
+if(user.toLowerCase().indexOf("mobile") == -1) {
+	console.log("데스크탑")
+   location.href = "http://203.236.209.112:8099/blank/login.do";
+}
+</script>
+<script type="text/javascript">
 	$(function() {
 		
 		if(location.search.substring(location.search.indexOf("&")+1,location.search.lastIndexOf("&")+2) == 'a')
 		{
 			alert("오랫동안 입력이 없어 로그아웃 되었습니다.")
 		}
-
-	})
+		
+		$("#loginBtn").click(function() {
+		 var result = "${result}"
+			if(result == false){
+				confirm("아아디/비밀번호를 확인해주세요");
+			}
+		});
+	});
 	
 </script>
 
@@ -47,19 +60,19 @@
 					<!-- 로그인 입니다 -->
 
 						<div class="wrap-input100 rs1 validate-input" data-validate = "Username is required">
-							<input class="input100" type="text" name="id" placeholder="아이디" autocomplete="off">
+							<input class="input100" type="text" id="id" name="id" placeholder="아이디" autocomplete="off">
 							<span class="label-input100"></span>
 						</div>
 						
 						
 						<div class="wrap-input100 rs2 validate-input" data-validate="Password is required">
-							<input class="input100" type="password" name="pwd" placeholder="비밀번호" autocomplete="off">
+							<input class="input100" type="password" id="pwd" name="pwd" placeholder="비밀번호" autocomplete="off">
 							<span class="label-input100"></span>
 						</div>
 						
 						
 						<div class="container-login100-form-btn">
-							<button class="login100-form-btn" type="submit">
+							<button class="login100-form-btn" type="submit" id="loginBtn">
 								로그인
 							</button>
 						</div>

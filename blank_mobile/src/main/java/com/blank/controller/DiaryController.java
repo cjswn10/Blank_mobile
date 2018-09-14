@@ -226,8 +226,8 @@ public class DiaryController {
 			
 		
 			RCaller caller = new RCaller();
-			//caller.setRscriptExecutable("C:/Program Files/R/R-3.5.1/bin/x64/Rscript.exe");
-			caller.setRscriptExecutable("C:/R-3.5.1/bin/x64/Rscript.exe");
+			caller.setRscriptExecutable("C:/Program Files/R/R-3.5.1/bin/x64/Rscript.exe");
+			//caller.setRscriptExecutable("C:/R-3.5.1/bin/x64/Rscript.exe");
       
 			RCode code = new RCode();
 			code.clear();
@@ -284,8 +284,8 @@ public class DiaryController {
 			
 		
 			RCaller caller = new RCaller();
-			//caller.setRscriptExecutable("C:/Program Files/R/R-3.5.1/bin/x64/Rscript.exe");
-			caller.setRscriptExecutable("C:/R-3.5.1/bin/x64/Rscript.exe");
+			caller.setRscriptExecutable("C:/Program Files/R/R-3.5.1/bin/x64/Rscript.exe");
+			//caller.setRscriptExecutable("C:/R-3.5.1/bin/x64/Rscript.exe");
       
 			RCode code = new RCode();
 			code.clear();
@@ -360,7 +360,6 @@ public class DiaryController {
 		
 		if (orgname != null && !orgname.equals("")) {
 			String exc = orgname.substring(orgname.lastIndexOf(".") + 1, orgname.length());
-
 			dphoto = bno + "b" + dno + "." + exc;
 			File saveFile = new File(path + "/" + dphoto);
 

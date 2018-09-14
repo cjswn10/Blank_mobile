@@ -265,7 +265,7 @@ user-scalable=no">
 		
 		<div id="wrapper">	
 	
-			<div class="mainSearchId" id="mainSearchId" data-role="content" style="display:none;">
+			<div class="mainSearchId" id="mainSearchId" data-role="footer" style="display:none;">
 				<div class="mainSearchId_inner" id="mainSearchId_inner">
 					<input type="text" data-role="none" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
 					<span id="btnMove" class="glyphicon glyphicon-search"></span>
