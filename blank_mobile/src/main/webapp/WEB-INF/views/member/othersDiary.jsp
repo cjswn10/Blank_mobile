@@ -90,7 +90,7 @@ user-scalable=no">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
-<script type="text/javascript" src="../resources/js/searchId.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js?ver=7" ></script>
 <script type="text/javascript">
 
 	$(function () {				
@@ -270,7 +270,7 @@ user-scalable=no">
 					<div id="searchid" style="color:white;"></div>
 				</div>
 			</div>
-			
+			<input type="hidden" id="mno" name="mno" value="${mno }">
 			<!------ main-menu ------>
 			<nav class="clearfix" style="margin-bottom: 20px">
 				<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>

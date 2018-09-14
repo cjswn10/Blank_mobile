@@ -83,7 +83,7 @@
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js?ver=6" ></script>
-<script type="text/javascript" src="../resources/js/searchId.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js?ver=7" ></script>
 <script type="text/javascript">
 	$(function() {
 		
@@ -174,7 +174,7 @@
 
 	    </ul>
 	</nav>
-	
+	<input type="hidden" id="mno" name="mno" value="${mno }">
 	<!----------- 내용 -------------->
 	
 	<div class="containe">

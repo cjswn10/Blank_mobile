@@ -85,7 +85,7 @@ user-scalable=no">
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
-<script type="text/javascript" src="../resources/js/searchId.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js?ver=7" ></script>
 <script type="text/javascript">
 	 $(function () {	 
 		
@@ -288,7 +288,7 @@ user-scalable=no">
 			    </ul>
 			</nav>
 
-			
+			<input type="hidden" id="mno" name="mno" value="${mno }">
 			<!----------- 내용 -------------->		
 
 		<div data-role="content" style="padding: 0;margin-bottom: 30px;overflow:hidden;">

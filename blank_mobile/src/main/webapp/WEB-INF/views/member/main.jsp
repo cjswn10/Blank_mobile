@@ -167,7 +167,7 @@
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=6">
 <script type="text/javascript" src="../resources/js/menu.js?ver=7" ></script>
-<script type="text/javascript" src="../resources/js/searchId.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js?ver=7" ></script>
 <script type="text/javascript">
 $(function () {
 	
@@ -318,7 +318,7 @@ $(function () {
 	})
 	
 	
-	$("#searchid").hide();
+	
 		
 		
 		$(window).scroll(function(){
@@ -364,7 +364,7 @@ $(function () {
 		</div>
 	</section>
 	
-
+	<input type="hidden" id="mno" name="mno" value="${mno }">
 	<div id="wrapper">	
 	
 		<div class="mainSearchId" id="mainSearchId">

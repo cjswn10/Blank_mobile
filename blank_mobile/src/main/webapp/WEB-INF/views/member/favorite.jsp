@@ -52,7 +52,7 @@ ul{
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <link rel="stylesheet" href="../resources/css/blank.css?ver=6">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
-<script type="text/javascript" src="../resources/js/searchId.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js?ver=7" ></script>
 <script type="text/javascript">
 	
 	$(function() {		
@@ -111,7 +111,7 @@ ul{
 				<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 			</div>
 		</section>
-
+		<input type="hidden" id="mno" name="mno" value="${mno }">
 		<div id="wrapper">	
 	
 			<div class="mainSearchId" id="mainSearchId">
