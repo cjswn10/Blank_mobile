@@ -26,7 +26,7 @@
 
 <!-- 웹폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Gaegu|Gamja+Flower|Jua|Nanum+Brush+Script|Nanum+Gothic+Coding|Nanum+Myeongjo|Nanum+Pen+Script|Source+Sans+Pro|Stylish|Sunflower:300" rel="stylesheet">
-<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=7">
 
 
 

@@ -97,11 +97,7 @@ var startX = 0,
 	startY = 0;
 var drawing = false;
 
-
-
-
 function down(e) {
-	
 	drawBackup.push(context.getImageData(0, 0, canvas.width, canvas.height));
 	startX = e.pageX;
 	startY = e.pageY;
@@ -118,11 +114,9 @@ function move(e) {
 	startX = curX;
 	startY = curY;
 	e.preventDefault();
-	
 }
 
 function draw(curX, curY) {
-	
 	drawBackup.push(context.getImageData(0, 0, canvas.width, canvas.height));
 	context.beginPath();
 	context.moveTo(startX, startY);
@@ -138,6 +132,7 @@ function up(e) {
 document.getElementById("delete").addEventListener("click", function(e) {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 }, false);
+
 // 되돌리기
 document.getElementById("prev").addEventListener("click", function(e) {
 	context.putImageData(drawBackup.pop(), 0, 0);

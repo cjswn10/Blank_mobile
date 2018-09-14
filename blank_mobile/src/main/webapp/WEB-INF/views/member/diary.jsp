@@ -83,7 +83,7 @@ user-scalable=no">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=7">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js?ver=7" ></script>
 <script type="text/javascript">
@@ -265,7 +265,7 @@ user-scalable=no">
 		
 		<div id="wrapper">	
 	
-			<div class="mainSearchId" id="mainSearchId" data-role="content" style="display:none;">
+			<div class="mainSearchId" id="mainSearchId" data-role="footer" style="display:none;">
 				<div class="mainSearchId_inner" id="mainSearchId_inner">
 					<input type="text" data-role="none" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
 					<span id="btnMove" class="glyphicon glyphicon-search"></span>

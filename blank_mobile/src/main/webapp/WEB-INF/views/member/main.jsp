@@ -165,9 +165,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
 
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=6">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=7">
 <script type="text/javascript" src="../resources/js/menu.js?ver=7" ></script>
-<script type="text/javascript" src="../resources/js/searchId.js?ver=7" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js?ver=8" ></script>
 <script type="text/javascript">
 $(function () {
 	
