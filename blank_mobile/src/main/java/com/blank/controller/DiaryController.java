@@ -328,8 +328,16 @@ public class DiaryController {
 		Calendar today = Calendar.getInstance();
 		
 		String todays = sdf.format(today.getTime());
+		
+		//오늘 날짜 불러오기
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+
+		Calendar today2 = Calendar.getInstance();
+		
+		String todays2 = sdf2.format(today2.getTime());
 
 		mav.addObject("todays", todays);
+		mav.addObject("todays2", todays2);
 		
 		//dno생성 후 전달
 		int dno = dao.diaryNextNo();
