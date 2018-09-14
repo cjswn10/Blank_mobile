@@ -33,7 +33,6 @@ public class MemberController {
 		this.dao = dao;
 	}
 
-	//占쏙옙占쏙옙占싣�占싼뤄옙占쏙옙 占쏙옙占쌘듸옙占쏙옙 占쏙옙 占실놂옙 占쏙옙占쌘쏙옙占싹댐옙.
 
 	//myPage
 	@RequestMapping(value="/member/myPage.do")
@@ -44,7 +43,7 @@ public class MemberController {
 	}
 	
 
-	//占쏙옙占쏙옙찾占쏙옙
+	//�뜝�룞�삕�뜝�룞�삕李얍뜝�룞�삕
 	@RequestMapping(value="search.do")
 	public ModelAndView search() {
 			
@@ -54,7 +53,7 @@ public class MemberController {
 	
 
 
-	//id찾占쏙옙 form
+	//id李얍뜝�룞�삕 form
 	@RequestMapping(value="searchIdPage.do")
 	public ModelAndView searchId() {
 				
@@ -62,7 +61,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//pwd찾占쏙옙 form
+	//pwd李얍뜝�룞�삕 form
 	@RequestMapping(value="searchPwdPage.do")
 	public ModelAndView searchPwd() {
 					
@@ -70,7 +69,7 @@ public class MemberController {
 		return mav;
 	}
 
-	//id찾占쏙옙
+	//id李얍뜝�룞�삕
 	@RequestMapping(value="searchId.do")
 	@ResponseBody
 	public String searchId(String name,String phone)
@@ -91,7 +90,7 @@ public class MemberController {
 		return str;
 	}
 	
-	//pwd찾占쏙옙
+	//pwd李얍뜝�룞�삕
 	@RequestMapping(value="searchPwd.do")
 	@ResponseBody
 	public String searchPwd(String id,String phone)
@@ -192,7 +191,7 @@ public class MemberController {
 		
 		
 		/**
-		 * 占싸그아울옙 占쏙옙 rImg 占쏙옙占쏙옙 占쏙옙占쏙옙
+		 * �뜝�떥洹몄븘�슱�삕 �뜝�룞�삕 rImg �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 		 */
 		String FilePath = request.getRealPath("/resources/rImg");
 		File FileList = new File(FilePath);
@@ -202,7 +201,7 @@ public class MemberController {
 		for(int i = 0; i < fileList.length; i++){
 		  String FileName = fileList[i];
 		  
-		  //占싱몌옙占쏙옙 RPlot占쏙옙 占쏙옙載� 占쏙옙占싹듸옙 占쏙옙占쏙옙
+		  //�뜝�떛紐뚯삕�뜝�룞�삕 RPlot�뜝�룞�삕 �뜝�룞�삕雍됵옙 �뜝�룞�삕�뜝�떦�벝�삕 �뜝�룞�삕�뜝�룞�삕
 		  if(FileName.contains("RPlot")){
 		    File deleteFile = new File(FilePath + "/" + FileName);
 		    deleteFile.delete();
@@ -236,7 +235,7 @@ public class MemberController {
 	}
 	
 
-	//id 占쌩븝옙확占쏙옙
+	//id �뜝�뙥釉앹삕�솗�뜝�룞�삕
 	@RequestMapping(value="checkId.do")
 	@ResponseBody
 	public String checkId(@RequestParam("id")String id) {
@@ -277,16 +276,16 @@ public class MemberController {
 		map.put("pwd", pwd);
 		
 		Boolean r = dao.login(map);
-		
-		
-		if (r == true) {
-				
+		System.out.println(r);
+
+		if (r) {
 			//id, mno  	session
 			session.setAttribute("id", id);
 			session.setAttribute("mno", dao.mno(map));
+			
 			mav.setViewName("redirect:/member/main.do");
-		}else if(r == false) {
-			mav.addObject("result",r);
+		} else {
+			mav.addObject("result", r);
 		}
 		
 		try {

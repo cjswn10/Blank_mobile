@@ -3,7 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<script type="text/javascript">
+var user = navigator.userAgent;
+if(user.toLowerCase().indexOf("mobile") == -1) {
+	console.log("PC버전으로 이동")
+   location.href = "http://203.236.209.112:8099/blank/login.do";
+}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>빈칸을 채우다.</title>
 	<meta charset="UTF-8">
@@ -18,13 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/login.css">
 <!--===============================================================================================-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-var user = navigator.userAgent;
-if(user.toLowerCase().indexOf("mobile") == -1) {
-	console.log("데스크탑")
-   location.href = "http://203.236.209.112:8099/blank/login.do";
-}
-</script>
+
 <script type="text/javascript">
 	$(function() {
 		
@@ -32,20 +32,23 @@ if(user.toLowerCase().indexOf("mobile") == -1) {
 		{
 			alert("오랫동안 입력이 없어 로그아웃 되었습니다.")
 		}
-		
+		/*
 		$("#loginBtn").click(function() {
-		 var result = "${result}"
-			if(result == false){
+			 var result = $("#result").val();
+			 console.log(result)
+			 alert(result)
+			if(result == "false"){
 				confirm("아아디/비밀번호를 확인해주세요");
 			}
 		});
+		*/
 	});
 	
 </script>
 
 </head>
 <body>
-
+	<input type="hidden" id="result" value="${result }">
 	<div class="limiter">
 		<div class="container-login100">
 		
