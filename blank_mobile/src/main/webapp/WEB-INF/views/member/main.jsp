@@ -248,7 +248,7 @@ $(function () {
 				var dtitle = $("<h5></h5>").html(d.dtitle);
 				var ddate = $("<h5></h5>").html(d.ddate);
 				var dweather = $("<h5></h5>").html(d.dweather);
-				var dcontent = $("<h5 class='modalContent'></h5>").html(d.dcontent);
+				var dcontent = $("<h5 class='modalContent'></h5>").html(d.dcontent)
 				
 				//우선순위 1.그림 2.사진 3.기본이미지 순으로 하나만 보여주기
 				var src = "../resources/upload2/" + d.dfile;
