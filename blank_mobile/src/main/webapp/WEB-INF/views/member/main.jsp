@@ -5,6 +5,13 @@
 <!DOCTYPE>
 <html>
 <head>
+<script type="text/javascript">
+var user = navigator.userAgent;
+if(user.toLowerCase().indexOf("mobile") == -1) {
+	console.log("데스크탑")
+   location.href = "http://203.236.209.112:8099/blank/login.do";
+}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport"
 		content="width=device-width,

@@ -22,7 +22,7 @@
 var user = navigator.userAgent;
 if(user.toLowerCase().indexOf("mobile") == -1) {
 	console.log("데스크탑")
-   location.href = "http://203.236.209.112:8099/blank/login.do";
+   location.href = "http://203.236.209.112:8099/blank/main.do";
 }
 </script>
 <script type="text/javascript">
