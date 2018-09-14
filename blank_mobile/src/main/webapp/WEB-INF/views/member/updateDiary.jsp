@@ -25,9 +25,6 @@
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=7">
 <script type="text/javascript" src="../resources/js/menu.js?ver=2" ></script>
-
-
-<script src="//code.jquery.com/jquery-3.2.1.js"></script>
 <script type="text/javascript" src="../resources/js/searchId.js?ver=8" ></script>
 <style type="text/css">
 table label {
@@ -35,8 +32,6 @@ table label {
 	width: 15%;
 }
 
-
-<style type="text/css">
 #dcontent {
 	width: 100%; 
 	height: 50%;
@@ -389,9 +384,9 @@ $(function() {
 	$("#dfont").change(function() {
 		console.log($(this).val())
 		$("#dcontent").attr({
-			style : "font-family:"+$(this).val(),
-			fontSize: "50px"
+			style : "font-family:"+$(this).val()
 		})
+		
 		
 		$("#dfont").attr({
 			style : "font-family:"+$(this).val()

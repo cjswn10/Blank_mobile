@@ -345,7 +345,7 @@ $(function() {
 				  console.log(grim);
 				  $("#dfile").val(grim);
 				  showImgG();
-
+				  showDiary()
 			  }
 		});
 		
