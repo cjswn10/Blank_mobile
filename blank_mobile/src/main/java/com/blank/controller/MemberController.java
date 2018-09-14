@@ -277,14 +277,19 @@ public class MemberController {
 		map.put("pwd", pwd);
 		
 		Boolean r = dao.login(map);
-
+		
 		if (r == true) {
 				
 			//id, mno  	session
 			session.setAttribute("id", id);
 			session.setAttribute("mno", dao.mno(map));
-			mav.setViewName("redirect:/member/main.do");
-		}else if(r == false) {
+			//mav.setViewName("redirect:/member/main.do");
+			mav.setViewName("redirect:/login.do");
+			mav.addObject("result",r);
+		}
+		else
+		{
+			mav.setViewName("redirect:/login.do");
 			mav.addObject("result",r);
 		}
 		
