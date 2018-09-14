@@ -32,16 +32,19 @@ if(user.toLowerCase().indexOf("mobile") == -1) {
 		{
 			alert("오랫동안 입력이 없어 로그아웃 되었습니다.")
 		}
-		/*
-		$("#loginBtn").click(function() {
-			 var result = $("#result").val();
-			 console.log(result)
-			 alert(result)
-			if(result == "false"){
-				confirm("아아디/비밀번호를 확인해주세요");
-			}
-		});
-		*/
+
+		
+		if(location.search.substring(location.search.indexOf("=")+1,location.search.lastIndexOf("=")+2) == 'f')
+		{
+			alert("아이디/비밀번호를 확인 해주세요.");
+		}
+		
+		if(location.search.substring(location.search.indexOf("=")+1,location.search.lastIndexOf("=")+2) == 't')
+		{
+			alert("환영합니다.")
+			location.href="member/main.do";
+		}
+		
 	});
 	
 </script>
