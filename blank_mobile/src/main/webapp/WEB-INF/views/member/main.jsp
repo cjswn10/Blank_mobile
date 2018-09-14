@@ -170,6 +170,13 @@
 <script type="text/javascript" src="../resources/js/menu.js?ver=7" ></script>
 <script type="text/javascript" src="../resources/js/searchId.js?ver=8" ></script>
 <script type="text/javascript">
+var user = navigator.userAgent;
+if(user.toLowerCase().indexOf("mobile") != -1) {
+	console.log("모바일버전으로 이동")
+   location.href = "http://203.236.209.112:8099/controller/login.do";
+}
+</script>
+<script type="text/javascript">
 $(function () {
 	
 	setTimeout(function () {
