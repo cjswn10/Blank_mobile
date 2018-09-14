@@ -202,7 +202,7 @@ user-scalable=no">
 						
 						if (d.dphoto != null && d.dfile != null) {
 							var img = $('<img></img>').attr({
-								src: "../resources/upload/" + d.dphoto,
+								src: "../resources/upload2/" + d.dfile,
 								width: "100%",
 								height: "100%"					
 							});
