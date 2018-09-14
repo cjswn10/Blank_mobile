@@ -39,7 +39,7 @@ public class FavoriteController {
 		if (re> 0) {
 			mav.addObject("re", re);
 		}else {
-			mav.addObject("msg","¡Ò∞‹√£±‚√ﬂ∞°Ω«∆–");
+			mav.addObject("msg","Ï¶êÍ≤®Ï∞æÍ∏∞Ï∂îÍ∞ÄÏã§Ìå®");
 			mav.setViewName("/member/error");		
 		}		
 		return mav;
@@ -76,7 +76,7 @@ public class FavoriteController {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 		str = mapper.writeValueAsString(dao.list2(map));
-		
+
 		}catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
@@ -99,7 +99,7 @@ public class FavoriteController {
 		int re = dao.delete(map);
 		if(re<1)
 		{
-			mav.addObject("msg", "ªË¡¶«œø¥Ω¿¥œ¥Ÿ");
+			mav.addObject("msg", "ÏÇ≠Ï†úÌïòÏòÄÏäµÎãàÎã§");
 			mav.setViewName("/member/error");
 		}
 		return mav;

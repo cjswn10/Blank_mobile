@@ -16,6 +16,10 @@ user-scalable=no">
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
+.ui-page {
+	background: #ffffff;
+}
+
 .book{
 	background-color: orange;
 	padding: 15px;	
@@ -193,7 +197,7 @@ user-scalable=no">
 						$(li).attr("idx",idx);									
 						var a = $('<a data-ajax="false" href=detailDiary.do?dno='+d.dno+'></a>');	
 						var title = $('<span></span>').html(d.dtitle);
-						var content = $('<p></p>').html(d.dcontent2);				
+						var content = $('<p></p>').html(d.dcontent);				
 						var ddate = $('<p class="ddate" style="font-size: 8px;"></p>').html(d.ddate);
 						
 						if (d.dphoto != null && d.dfile != null) {
@@ -228,35 +232,7 @@ user-scalable=no">
 							$(li).append(a);
 							$('#list').append(li);	
 						}
-						/* if (d.dphoto !== null) {							
-							var img = $('<img></img>').attr({
-								src: "../resources/upload/" + d.dphoto,
-								width: "100%",
-								height: "100%"					
-							});
-							$(a).append(img, title, content, ddate);
-							$(li).append(a);
-							$('#list').append(li);
-						}else {
-							$(a).append(title, content, ddate);
-							$(li).append(a);
-							$('#list').append(li);					
-						}		            
-						
-						if (d.dfile != null && d.ddphoto != null) {							
-							var img = $('<img></img>').attr({
-								src: "../resources/upload2/" + d.dfile,
-								width: "100%",
-								height: "100%"					
-							});
-							$(a).append(img, title, content, ddate);
-							$(li).append(a);
-							$('#list').append(li);
-						}else {
-							$(a).append(title, content, ddate);
-							$(li).append(a);
-							$('#list').append(li);					
-						}	 */					
+			
 					})
 					$('#list').listview("refresh");
 			}});		
