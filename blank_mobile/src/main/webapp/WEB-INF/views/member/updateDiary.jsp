@@ -431,8 +431,6 @@ $(function() {
 				$("#dfile").val(grim);
 				
 				if(oldDfile != "") {
-					alert(oldDfile)
-					console.log("이전파일 있음---------")
 					showImgG();
 				} else {
 					$("#grim").attr({

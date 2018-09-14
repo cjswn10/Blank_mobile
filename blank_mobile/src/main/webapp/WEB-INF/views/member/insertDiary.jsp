@@ -505,7 +505,7 @@ function showDiary() {
 				<tr>
 					<td>
 						<label for="ddate">날&nbsp;&nbsp;&nbsp;짜</label>
-						<input type="date" name="ddate" id="ddate" value="${ddate }" required="required" style="line-height: normal;width: 80%;">
+						<input type="date" name="ddate" id="ddate" required="required" style="line-height: normal;width: 80%;">
 					</td>
 				</tr>
 				<tr>
