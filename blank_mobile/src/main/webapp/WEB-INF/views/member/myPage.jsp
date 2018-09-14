@@ -24,7 +24,7 @@
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js?ver=1" ></script>
-<script type="text/javascript" src="../resources/js/searchId.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js?ver=7" ></script>
 <script type="text/javascript">
 	$(function() {
 		
@@ -84,7 +84,7 @@
 		    </ul>
 		</nav>
 
-	
+	<input type="hidden" id="mno" name="mno" value="${mno }">
 	<div id="content" style="margin-top: 180px">
 		<h2><a href="pwdCheck.do?id=${id }">MANAGE ACCOUNT</a></h2>
 		<br><br>

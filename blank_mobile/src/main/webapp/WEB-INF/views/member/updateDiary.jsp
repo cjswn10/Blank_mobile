@@ -20,8 +20,9 @@
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js?ver=2" ></script>
+
 <script src="//code.jquery.com/jquery-3.2.1.js"></script>
-<script type="text/javascript" src="../resources/js/searchId.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js?ver=8" ></script>
 <style type="text/css">
 table label {
 	display: inline-block;
@@ -532,7 +533,7 @@ border: none;">
 	        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
 	    </ul>
 	</nav>	
-
+	
 	<div class="content" style="margin-bottom:30px;">
 		<hr>
 		<form action="updateDiary.do" method="post" enctype="multipart/form-data">
@@ -606,6 +607,7 @@ border: none;">
 								<input type="hidden" name="dno" id="dno" value="${d.dno }">
 								<input type="hidden" id="tes" value="${d.dweather }">
 								<input type="hidden" name="select_day" id="select_day">
+								<input type="hidden" id="mno" name="mno" value="${mno }">
 								<span id="weather"></span>
 								<span id="weather2"></span>
 								<input type="hidden" id="x" name="latitude">

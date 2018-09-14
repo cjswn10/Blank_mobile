@@ -1,9 +1,13 @@
 $(function() {
 
-$("#searchid").hide();
+	var mno = $("#mno").val();
+	
+	$("#searchid").hide();
 	
 	$("#id").keyup(function() {
 
+		
+		
 		$("#searchid").empty();
 		$.ajax({
 			url:"mainSearchId.do",
@@ -13,6 +17,7 @@ $("#searchid").hide();
 
 				var arr = eval("("+data+")")
 				$.each(arr,function(i,v){
+					
 					var id = $("<span></span>").html(v.id);
 					var br = $("<br>");
 					$("#searchid").append(id,br);
@@ -29,14 +34,19 @@ $("#searchid").hide();
 							data:{"mno":v.mno},
 							success:function(data)
 							{
+								
 								location.href="othersDiary.do?id="+v.id+"&fmno="+v.mno+"";
-								var arr = eval("("+data+")");		
+								var arr = eval("("+data+")");	
+								
 								$.each(arr,function(i,a){
+									
 									if(a.mno == mno )
 									{
 										location.href="othersDiary.do?id="+v.id+"&fno="+a.fno+"&fmno="+v.mno+"";
-									}				
+									}		
+									
 								})
+								
 							}
 						})//ajax
 					})
@@ -64,7 +74,7 @@ $("#searchid").hide();
 												location.href="othersDiary.do?id="+v.id+"&fmno="+v.mno+"";
 												var arr = eval("("+data+")");		
 												$.each(arr,function(i,a){
-													if(a.mno == $("#mno").val() )
+													if(a.mno == mno )
 													{
 														location.href="othersDiary.do?id="+v.id+"&fno="+a.fno+"&fmno="+v.mno+"";
 													}				

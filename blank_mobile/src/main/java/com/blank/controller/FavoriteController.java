@@ -71,10 +71,12 @@ public class FavoriteController {
 		//session.setAttribute("mno", mno);		
 		Map map = new HashMap();
 		map.put("mno", mno);
+		
 		String str = "";
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 		str = mapper.writeValueAsString(dao.list2(map));
+		
 		}catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());

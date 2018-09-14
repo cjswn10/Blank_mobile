@@ -34,7 +34,7 @@
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
-<script type="text/javascript" src="../resources/js/searchId.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js?ver=7" ></script>
 <script type="text/javascript">
 	$(function() {
 		
@@ -118,7 +118,7 @@
 			<hr>
 		
 	</div>
-
+	<input type="hidden" id="mno" name="mno" value="${mno }">
 
 <footer class="footer">
 	<h3>비트와밀당하는 팀 X 빈칸 , 2018</h3>

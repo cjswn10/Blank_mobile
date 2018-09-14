@@ -58,7 +58,7 @@ span{
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
-<script type="text/javascript" src="../resources/js/searchId.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js?ver=7" ></script>
 <script type="text/javascript">
 	$(function () {		
 		
@@ -134,7 +134,7 @@ span{
 				<a href="http://sc.bitcamp.co.kr/index.php?main_page=faq&action=use"><img class="side_icon" alt="B" src="../resources/img/icon/bit.png"></a>
 			</div>
 		</section>
-
+		<input type="hidden" id="mno" name="mno" value="${mno }">
 		<div id="wrapper">	
 	
 			<div class="mainSearchId" id="mainSearchId" data-role="footer" style="display:none;background-color:black;">

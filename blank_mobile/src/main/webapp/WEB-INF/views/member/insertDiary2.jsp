@@ -18,7 +18,7 @@
 <script type="text/javascript" src="../resources/js/drawingColor.js?ver=20"></script>
 <script src="../resources/js/draw.js?ver=6"></script>
 <script type="text/javascript" src="../resources/js/menu.js" ></script>
-<script type="text/javascript" src="../resources/js/searchId.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js?ver=7" ></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

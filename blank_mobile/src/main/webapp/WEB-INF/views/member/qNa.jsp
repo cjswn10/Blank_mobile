@@ -22,7 +22,8 @@
 
 <link rel="stylesheet" href="../resources/css/blank.css?ver=5">
 <script type="text/javascript" src="../resources/js/menu.js?ver=2" ></script>
-<script type="text/javascript" src="../resources/js/searchId.js" ></script>
+<script type="text/javascript" src="../resources/js/searchId.js?ver=7" ></script>
+
 <script type="text/javascript">
 	$(function() {
 		setTimeout(function () {
@@ -30,6 +31,8 @@
 			location.href = "logOut.do?id=${id}&autoOut=out";
 			
 		},10800*1000);
+		
+		
 	})
 </script>
 </head>
@@ -66,6 +69,7 @@
 		</div>
 	</div>
 	
+	<input type="hidden" id="mno" name="mno" value="${mno }">
 		
 	<nav class="clearfix">
 		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
