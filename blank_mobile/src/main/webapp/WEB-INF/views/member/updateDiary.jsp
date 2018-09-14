@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-<link rel="stylesheet" href="../resources/css/blank.css?ver=5">
+<link rel="stylesheet" href="../resources/css/blank.css?ver=7">
 <script type="text/javascript" src="../resources/js/menu.js?ver=2" ></script>
 
 
@@ -520,11 +520,11 @@ function showDiary() {
 	
 	<a href="#"><img class="side_icon" src="../resources/img/icon/person.png">${id }님</a>
 	<h5>회원정보</h5>
-	<a href="pwdCheck.do?id=${id }">Edit</a>
-	<a href="logOut.do?id=${id }">logout</a>
+	<a data-ajax="false"  href="pwdCheck.do?id=${id }">Edit</a>
+	<a data-ajax="false" href="logOut.do?id=${id }">logout</a>
 	<br>
 	<h5>고객센터</h5>
-	<a href="qNa.do">Contact</a>
+	<a data-ajax="false" href="qNa.do">Contact</a>
 	<br>
 	<div class="side_icon_set">
 		<a href="https://github.com/cjswn10/Blank_mobile"><img class="side_icon" alt="G" src="../resources/img/icon/git.png"></a>
@@ -536,9 +536,7 @@ function showDiary() {
 <div id="wrapper">
 	<div class="mainSearchId" id="mainSearchId">
 		<div class="mainSearchId_inner" id="mainSearchId_inner">
-			<input type="text" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; 
-
-border: none;">
+			<input type="text" data-role="none" name="id" id="id" placeholder="검색할 아이디를 입력하세요!" autocomplete="off" style="color:#818181; background-color:#000000; border: none;">
 			<span id="btnMove" class="glyphicon glyphicon-search" ></span>
 			<span onclick="closeSearch()" class="glyphicon glyphicon-remove"></span>
 			
@@ -550,13 +548,13 @@ border: none;">
 	<!------ main-menu ------>
 	<nav class="clearfix">
 		<span id="menu" style="cursor:pointer;" onclick="openMenu()" class="glyphicon glyphicon-menu-hamburger"> </span>
-	    <a href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
+	    <a data-ajax="false" href="main.do"><img src="../resources/img/blank.png" class="logo"></a>
 	    <span style="cursor:pointer;" onclick="openNav()" class="glyphicon glyphicon-user"> </span>
 	    <span style="cursor:pointer;" onclick="openSearch()" class="glyphicon glyphicon-search"></span>
 	    <ul id="main_menu">
-	        <li><a href="book.do">DIARY</a></li>
-	        <li><a href="favorite.do">FAVORITES</a></li>
-	        <li style="border: none"><a href="myPage.do">MYPAGE</a></li>
+	        <li><a data-ajax="false" href="book.do">DIARY</a></li>
+	        <li><a data-ajax="false" href="favorite.do">FAVORITES</a></li>
+	        <li style="border: none"><a data-ajax="false" href="myPage.do">MYPAGE</a></li>
 	    </ul>
 	</nav>	
 

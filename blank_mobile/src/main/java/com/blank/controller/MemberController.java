@@ -276,6 +276,7 @@ public class MemberController {
 		map.put("pwd", pwd);
 		
 		Boolean r = dao.login(map);
+		mav.addObject("ms", r);
 		if (r == true) {
 
 			//id, mno  	session
