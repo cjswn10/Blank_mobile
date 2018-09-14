@@ -160,6 +160,10 @@ $(function() {
 	$("#tmef_img").hide()
 
 	var today = $("#today_date").val();
+	var today2 = $("#today_date2").val();
+	
+	$("#ddate").val(today2);
+
 	var today_year = parseInt(today.substring(0,4));
 	var today_month = parseInt(today.substring(5,6));
 	var today_date = parseInt(today.substring(7,9));
@@ -526,6 +530,7 @@ function showDiary() {
 								<input type="hidden" id="day">
 								<input type="hidden" name="date" id="date">
 								<input type="hidden" id="today_date" value="${todays }">
+								<input type="hidden" id="today_date2" value="${todays2 }">
 								<input type="hidden" name="year" id="year">
 								<input type="hidden" name="month" id="month">
 								<input type="hidden" name="select_day" id="select_day">
