@@ -148,7 +148,9 @@ public class DiaryController {
 		String oldDfile = (dao.detailDiary(map)).getDfile();
 
 		d.setDphoto(oldDphoto);
-		d.setDfile(oldDfile);
+		if(d.getDfile() == null || d.getDfile().equals("")) {
+			d.setDfile(oldDfile);
+		}
 		
 		String path = request.getRealPath("resources/upload");
 		MultipartFile upload = d.getUpload();
@@ -183,7 +185,6 @@ public class DiaryController {
 			}
 		}
 
-		System.out.println(d.getDfile());
 		int re = dao.updateDiary(d);
 
 		if (re > 0) {
