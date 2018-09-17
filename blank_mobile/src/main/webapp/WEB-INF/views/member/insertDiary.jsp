@@ -648,10 +648,10 @@ function showDiary() {
 	
 	Size:<input type="range" min="1" max="5" id="Lwidth" value="1" onchange="cg_line(this.value)">
 
-		<button data-inline='true' style='margin:0px auto;' id="delete"><img src="../resources/img/icon/newpage.png" width="15px"></button>
-		<button data-inline='true' style='margin:0px auto;' id="prev"><img src="../resources/img/icon/prev.png" width="15px"></button>
-		<a id="download"><button data-inline='true' style='margin:0px auto;'><img src="../resources/img/icon/download.png" width="15px"></button></a>
-		<a href="#" onclick="showDiary()" data-ajax="false"><button data-inline='true' style='margin:0px auto;' id="btnOk"><img src="../resources/img/icon/exit.png" width="15px"></button></a>
+		<button data-inline='true' style='margin:0px auto;' id="delete"><img src="../resources/img/icon/newpage1.png" width="15px"></button>
+		<button data-inline='true' style='margin:0px auto;' id="prev"><img src="../resources/img/icon/prev1.png" width="15px"></button>
+		<a id="download"><button data-inline='true' style='margin:0px auto;'><img src="../resources/img/icon/check1.png" width="15px"></button></a>
+		<a href="#" onclick="showDiary()" data-ajax="false"><button data-inline='true' style='margin:0px auto;' id="btnOk"><img src="../resources/img/icon/close1.png" width="15px"></button></a>
 	
 	
 	<img id="myImage">
