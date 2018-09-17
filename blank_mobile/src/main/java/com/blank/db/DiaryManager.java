@@ -64,10 +64,17 @@ public class DiaryManager {
 		return d;
 	}
 	
-	public static int insertDiary(Map map) {
+	synchronized public static int insertDiary(Map map) {
 		int re =  -1;
 		SqlSession session = factory.openSession();
-		re = session.insert("diary.insertDiary", map);
+		int dno = (Integer) map.get("dno");
+		try {
+			re = session.insert("diary.insertDiary", map);
+		} catch (Exception e) {
+			// TODO: handle exception			
+			
+		}
+		
 		session.commit();
 		session.close();
 		return re;

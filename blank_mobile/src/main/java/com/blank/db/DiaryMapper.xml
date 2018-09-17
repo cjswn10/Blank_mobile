@@ -30,9 +30,9 @@
 		select * from diary where dno = #{dno}
 	</select>
 
-	<insert id="insertDiary">
-		insert into diary values(#{dno},#{dtitle}, #{ddate}, #{dweather}, #{dfont}, #{dtype}, #{dfile}, #{dcontent}, #{dphoto}, #{secret}, sysdate, #{mno}, #{bno})
-	</insert>
+	<insert id="insertDiary">      
+		insert into diary values(seq_diary.nextval,#{dtitle}, #{ddate}, #{dweather}, #{dfont}, #{dtype}, #{dfile}, #{dcontent}, #{dphoto}, #{secret}, sysdate, #{mno}, #{bno})
+	</insert>	
 	
 	<select id="diaryNextNo" resultType="java.lang.Integer">
   		select nvl(max(dno),0)+1 from diary
