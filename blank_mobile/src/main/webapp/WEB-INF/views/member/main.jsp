@@ -50,7 +50,9 @@ if(user.toLowerCase().indexOf("mobile") == -1) {
     height: 300px;
     display: inline-block;
     cursor: pointer;
-	margin: 4px;
+    margin : 5px;
+    border: black solid 2px;
+    border-radius: 5px;
 }
 
 .contents{	

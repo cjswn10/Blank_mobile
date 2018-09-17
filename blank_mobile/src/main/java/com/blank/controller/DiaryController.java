@@ -378,7 +378,6 @@ public class DiaryController {
 				// TODO: handle exception
 				System.out.println(e.getMessage());
 			}
-
 		}
 		
 		if (!dphoto.equals("x")) {
